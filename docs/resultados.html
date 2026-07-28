@@ -131,39 +131,72 @@
             </tr>
           </tbody>
         </table>
-        <p><strong>Conclusión:</strong> con IA estratégica, la variante <code>pasa_companero</code> casi no cambia el juego. El estancamiento anterior venía de la IA, no de la regla.</p>
+        <p><strong>Conclusión:</strong> con IA estratégica, la variante <code>pasa_companero</code> casi no cambia el juego — igual que el reglamento formal <strong>v1.1</strong>. El estancamiento anterior venía de la IA, no de la regla.</p>
       </div>
     </section>
 
-    <!-- v0 vs v1 historical -->
+    <!-- Comparación de reglamentos -->
     <section id="historico">
-      <h2>Histórico: v0 vs v1</h2>
-      <p class="section-lead">IA simple · reglas corregidas (Trampa/Marca solo en pasa de turno) · 200 partidos</p>
+      <h2>Histórico: comparación de reglamentos</h2>
+      <p class="section-lead">200 partidos c/u · 2 vs 2 · reglas corregidas (Trampa/Marca solo en pasa de turno) · jul 2026</p>
+
+      <div class="card highlight">
+        <h3>IA estratégica (default)</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Métrica</th>
+              <th class="num">v0</th>
+              <th class="num">v1</th>
+              <th class="num">v1.1</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Reglamento</td><td>Original</td><td>Playtesting</td><td>Pasa al compañero</td></tr>
+            <tr><td>Partidos completados</td><td class="num v0">3,5%</td><td class="num v1">96,5%</td><td class="num v11">97,5%</td></tr>
+            <tr><td>Empates técnicos (&gt;500 turnos)</td><td class="num v0">96,5%</td><td class="num v1">3,5%</td><td class="num v11">2,5%</td></tr>
+            <tr><td>Goles promedio</td><td class="num v0">0,81</td><td class="num v1">4,02</td><td class="num v11">3,98</td></tr>
+            <tr><td>Turnos promedio</td><td class="num v0">484</td><td class="num v1">183</td><td class="num v11">185</td></tr>
+            <tr><td>Penales (2-2)</td><td class="num v0">0,5%</td><td class="num v1">36,5%</td><td class="num v11">32,0%</td></tr>
+            <tr><td>Pase (% acciones)</td><td class="num v0">3,9%</td><td class="num v1">34,7%</td><td class="num v11">35,0%</td></tr>
+            <tr><td>Despeje (% acciones)</td><td class="num v0">0%</td><td class="num v1">28,2%</td><td class="num v11">27,8%</td></tr>
+            <tr><td>Pasa de turno (% acciones)</td><td class="num v0">92,8%</td><td class="num v1">7,6%</td><td class="num v11">7,6%</td></tr>
+            <tr><td>Trampa colocada / partido</td><td class="num v0">1,12</td><td class="num v1">3,65</td><td class="num v11">3,44</td></tr>
+            <tr><td>Marca colocada / partido</td><td class="num v0">2,10</td><td class="num v1">5,90</td><td class="num v11">6,08</td></tr>
+          </tbody>
+        </table>
+        <p><strong>v1.1</strong> extiende v1: si nadie reacciona al pasa de turno, la pelota pasa a un compañero. En números es casi igual a v1.</p>
+        <p><small>Comando: <code>python3 -m simulador compare-reglamentos --partidos 200</code></small></p>
+      </div>
 
       <div class="card">
+        <h3>IA simple (corrida histórica)</h3>
+        <p>Primera generación de simulaciones, antes de la IA estratégica. Sirve para ver por qué v0 parecía irrecuperable y v1 mejoraba pero estancaba ~40%.</p>
         <table>
           <thead><tr><th>Métrica</th><th class="num">v0</th><th class="num">v1</th></tr></thead>
           <tbody>
-            <tr><td>Partidos completados</td><td class="num v0">1%</td><td class="num v1">60%</td></tr>
-            <tr><td>Empates técnicos (&gt;500 turnos)</td><td class="num v0">99%</td><td class="num v1">40%</td></tr>
-            <tr><td>Goles promedio</td><td class="num v0">0,66</td><td class="num v1">3,25</td></tr>
-            <tr><td>Penales</td><td class="num v0">0</td><td class="num v1">22,5%</td></tr>
+            <tr><td>Partidos completados</td><td class="num v0">0,5%</td><td class="num v1">62,5%</td></tr>
+            <tr><td>Empates técnicos (&gt;500 turnos)</td><td class="num v0">99,5%</td><td class="num v1">37,5%</td></tr>
+            <tr><td>Goles promedio</td><td class="num v0">0,66</td><td class="num v1">3,23</td></tr>
+            <tr><td>Turnos promedio</td><td class="num v0">498</td><td class="num v1">301</td></tr>
+            <tr><td>Penales (2-2)</td><td class="num v0">0%</td><td class="num v1">23,5%</td></tr>
+            <tr><td>Trampa / Marca / partido</td><td class="num v0">~1 / ~1</td><td class="num v1">~1 / ~1</td></tr>
           </tbody>
         </table>
       </div>
 
       <div class="card warn">
         <h3>Corrección importante: Trampa/Marca</h3>
-        <p>Una simulación temprana permitía Trampa/Marca "entre pases" (incorrecto). Eso inflaba goles y penales:</p>
+        <p>Una simulación temprana permitía Trampa/Marca "entre pases" (incorrecto). Eso inflaba goles y penales en v1:</p>
         <table>
-          <thead><tr><th></th><th class="num">Lógica incorrecta</th><th class="num">Regla real</th></tr></thead>
+          <thead><tr><th></th><th class="num">Lógica incorrecta</th><th class="num">Regla real (v1)</th></tr></thead>
           <tbody>
-            <tr><td>Completados</td><td class="num">94%</td><td class="num">60%</td></tr>
+            <tr><td>Completados (IA simple)</td><td class="num">94%</td><td class="num">60%</td></tr>
             <tr><td>Goles / partido</td><td class="num">4,06</td><td class="num">3,25</td></tr>
             <tr><td>Marca / partido</td><td class="num">~9,7</td><td class="num">~1,2</td></tr>
           </tbody>
         </table>
-        <p>Con <strong>IA estratégica</strong> y regla correcta, Marca/Trampa vuelven a ~9,5 colocaciones/partido porque la IA sí pasa de turno.</p>
+        <p>Con <strong>IA estratégica</strong> y regla correcta, Marca/Trampa vuelven a ~9,5 colocaciones/partido en v1 porque la IA sí pasa de turno.</p>
       </div>
     </section>
 
@@ -174,16 +207,17 @@
       <div class="card">
         <h3>v0 — no recomendado</h3>
         <ul class="findings">
-          <li>99% de partidos no termina (IA simple).</li>
-          <li>Problema de diseño: pasa de turno puede estancar el juego.</li>
+          <li>~96–99% de partidos no termina (IA estratégica y simple).</li>
+          <li>Con IA estratégica el ataque spamea pasa de turno (~93% acciones) sin acercarse al arco.</li>
+          <li>Sin Reventar ni cambio de ritmo, el juego no cierra.</li>
         </ul>
       </div>
 
       <div class="card highlight">
-        <h3>v1 — viable con IA estratégica</h3>
+        <h3>v1 / v1.1 — viable con IA estratégica</h3>
         <ul class="findings">
-          <li>~97% de partidos termina con ganador.</li>
-          <li>~4 goles/partido, ~183 turnos.</li>
+          <li><strong>v1:</strong> ~97% de partidos termina · ~4 goles/partido · ~183 turnos.</li>
+          <li><strong>v1.1</strong> (pasa al compañero): casi idéntico a v1 (~98% completados, ~4 goles).</li>
           <li>Despeje + robo mueven la pelota constantemente.</li>
           <li>Trampa/Marca relevantes si se usa pasa de turno (~8 cartas del mazo).</li>
         </ul>
@@ -193,8 +227,8 @@
         <h3>Preguntas abiertas</h3>
         <ul class="checklist">
           <li>¿Frecuencia real de acciones en mesa vs simulación?</li>
-          <li>¿Qué pasa si nadie reacciona al pasa de turno? (variante pasa_companero)</li>
-          <li>¿Penales ~36% es demasiado frecuente?</li>
+          <li>¿Penales ~32–36% es demasiado frecuente?</li>
+          <li>¿v1.1 en mesa se siente distinto a v1?</li>
         </ul>
       </div>
     </section>

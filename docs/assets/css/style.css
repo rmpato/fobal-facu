@@ -11,6 +11,7 @@
   --accent-soft: rgba(240, 192, 64, 0.15);
   --v0: #6b8f9e;
   --v1: #4ecb71;
+  --v11: #7eb8e8;
   --warn: #e8924f;
   --radius: 12px;
   --shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
@@ -413,6 +414,10 @@ td.v1 {
   color: var(--v1);
 }
 
+td.v11 {
+  color: var(--v11);
+}
+
 /* Bar charts */
 .bar-chart {
   display: flex;
@@ -506,6 +511,10 @@ td.v1 {
 
 .stat-box .val.v1 {
   color: var(--v1);
+}
+
+.stat-box .val.v11 {
+  color: var(--v11);
 }
 
 .stat-box .unit {
