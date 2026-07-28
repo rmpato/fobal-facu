@@ -30,6 +30,7 @@
         <a href="recomendaciones.html" data-page="recomendaciones.html">Recomendaciones</a>
         <a href="como-funciona.html" data-page="como-funciona.html">Cómo funciona</a>
         <a href="simulador.html" data-page="simulador.html">Simulador</a>
+        <a href="replay.html" data-page="replay.html">Replay</a>
         <a href="crear-reglamento.html" data-page="crear-reglamento.html">Crear reglamento</a>
       </nav>
     </div>
@@ -66,6 +67,11 @@ python3 -m simulador reglamentos show v1</code></pre>
         <h3>Comparar versiones</h3>
         <pre><code>python3 -m simulador compare-reglamentos --partidos 200
 python3 -m simulador compare --partidos 200</code></pre>
+
+        <h3>Ver partido + replay web</h3>
+        <pre><code>python3 -m simulador ver --semilla 42 --pausa 3
+python3 -m simulador ver --semilla 42 --sin-pausa --grabar docs/replays/mi-partido.json</code></pre>
+        <p>Reproducir en el navegador → <a href="replay.html">Replay</a> (GitHub Pages o local con <code>python3 -m http.server</code> en <code>docs/</code>).</p>
       </div>
     </section>
 

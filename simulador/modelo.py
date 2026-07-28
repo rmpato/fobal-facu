@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Callable
 
 from simulador.cartas import Carta
 
@@ -80,9 +80,13 @@ class EstadoPartido:
     log: list[str] = field(default_factory=list)
     cartas_jugadas: dict[str, int] = field(default_factory=dict)
     acciones: dict[str, int] = field(default_factory=dict)
+    ultimas_cartas: list[tuple[str, str]] = field(default_factory=list)
     definido_por_penales: bool = False
+    abortar: bool = False
     config: ConfigSimulacion | None = None
     reglamento: Reglamento | None = None
+    on_evento: Callable[[str], None] | None = field(default=None, repr=False)
+    on_cambio_equipo: Callable[[], None] | None = field(default=None, repr=False)
 
     @property
     def reglas(self) -> str:
@@ -111,9 +115,12 @@ class EstadoPartido:
     def defensores(self) -> list[Jugador]:
         return [j for j in self.jugadores if j.equipo == self.equipo_defensivo]
 
-    def registrar_carta(self, carta: Carta) -> None:
+    def registrar_carta(self, carta: Carta, jugador: Jugador | None = None) -> None:
         clave = carta.value
         self.cartas_jugadas[clave] = self.cartas_jugadas.get(clave, 0) + 1
+        if jugador is not None:
+            self.ultimas_cartas.append((jugador.nombre, clave))
+            self.ultimas_cartas = self.ultimas_cartas[-4:]
 
     def registrar_accion(self, accion: str) -> None:
         self.acciones[accion] = self.acciones.get(accion, 0) + 1
@@ -127,6 +134,9 @@ class EstadoPartido:
             self.pases_en_jugada = 0
             self.offside_activo = {0: False, 1: False}
             self.marca_sobre = {0: None, 1: None}
+            self.log_evento(">> Cambio de equipo: reposicion de manos (hasta 6 cartas)")
+            if self.on_cambio_equipo:
+                self.on_cambio_equipo()
         self.portador_id = nuevo_portador_id
 
     def reset_pases(self) -> None:
@@ -145,3 +155,8 @@ class EstadoPartido:
 
     def log_evento(self, msg: str) -> None:
         self.log.append(msg)
+        if self.on_evento:
+            self.on_evento(msg)
+
+    def jugadores_equipo(self, equipo: int) -> list[Jugador]:
+        return [j for j in self.jugadores if j.equipo == equipo]

@@ -19,6 +19,37 @@ class Carta(str, Enum):
     TRAMPA_OFFSIDE = "Trampa de offside"
 
 
+# Roles para UI (mano del jugador, últimas cartas jugadas)
+CARTAS_OFENSIVAS: frozenset[Carta] = frozenset({Carta.PASE, Carta.DISPARO})
+CARTAS_DEFENSIVAS: frozenset[Carta] = frozenset(
+    {
+        Carta.ROBO_PELOTA,
+        Carta.TRAMPA_OFFSIDE,
+        Carta.MARCA_PERSONAL,
+        Carta.GAMBETEAR,
+        Carta.CORTA_PASE,
+        Carta.TACKLE,
+        Carta.LA_DEJO_PASAR,
+    }
+)
+
+
+def rol_carta(carta: Carta) -> str:
+    """ofensiva | defensiva | neutral"""
+    if carta in CARTAS_OFENSIVAS:
+        return "ofensiva"
+    if carta in CARTAS_DEFENSIVAS:
+        return "defensiva"
+    return "neutral"
+
+
+def carta_por_nombre(nombre: str) -> Carta | None:
+    for carta in Carta:
+        if carta.value == nombre:
+            return carta
+    return None
+
+
 MAZO_V0: dict[Carta, int] = {
     Carta.PASE: 42,
     Carta.CORTA_PASE: 12,

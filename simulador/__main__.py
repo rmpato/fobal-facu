@@ -20,6 +20,8 @@ from simulador.reglamento import (
     formatear_reglamento,
     listar_reglamentos,
 )
+from simulador.espectador import ver_partido
+from simulador.eventos_espectador import VELOCIDADES
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_VARIANTES = ROOT / "configs" / "variantes.json"
@@ -94,6 +96,67 @@ def main() -> None:
     show = reglamentos_sub.add_parser("show", help="Mostrar reglas que aplica un reglamento")
     show.add_argument("id", help="Id del reglamento (p. ej. v1, v1.1)")
 
+    ver = sub.add_parser("ver", help="Ver un partido en vivo (modo espectador)")
+    _add_reglamento_arg(ver, default="v1")
+    ver.add_argument("--jugadores-por-equipo", type=int, default=3, help="Jugadores por equipo")
+    ver.add_argument("--ia", choices=["simple", "estrategica"], default="estrategica")
+    ver.add_argument(
+        "--semilla",
+        type=int,
+        default=None,
+        help="Semilla para reproducir el mismo partido (se imprime si no se pasa)",
+    )
+    ver.add_argument(
+        "--pausa",
+        type=float,
+        default=5.0,
+        help="Segundos entre acciones; Espacio avanza antes",
+    )
+    ver.add_argument(
+        "--grabar",
+        type=Path,
+        default=None,
+        metavar="ARCHIVO",
+        help="Guardar transcripción (.txt) o grabación JSON (.json)",
+    )
+    ver.add_argument(
+        "--exportar-html",
+        action="store_true",
+        help="Con --grabar partido.json, genera replay HTML embebido",
+    )
+    ver.add_argument(
+        "--velocidad",
+        choices=list(VELOCIDADES),
+        default="normal",
+        help="Ritmo del relato: lento/normal/rapido/turbo",
+    )
+    ver.add_argument(
+        "--equipo1",
+        nargs=3,
+        metavar="N",
+        default=None,
+        help="Tres nombres del equipo 1 (requiere --equipo2)",
+    )
+    ver.add_argument(
+        "--equipo2",
+        nargs=3,
+        metavar="N",
+        default=None,
+        help="Tres nombres del equipo 2 (requiere --equipo1)",
+    )
+    ver.add_argument(
+        "--nombres",
+        nargs=6,
+        metavar="N",
+        default=None,
+        help="Seis nombres (default: Facu Pato Manu Colo Ostu Joaco)",
+    )
+    ver.add_argument(
+        "--sin-pausa",
+        action="store_true",
+        help="Sin espera entre líneas (útil para pruebas o generar transcripción)",
+    )
+
     args = parser.parse_args()
 
     if args.comando == "run":
@@ -139,6 +202,31 @@ def main() -> None:
             print(formatear_lista_reglamentos())
         elif args.subcomando == "show":
             print(formatear_reglamento(cargar_reglamento(args.id)))
+
+    elif args.comando == "ver":
+        if args.jugadores_por_equipo < 2:
+            parser.error("Se requieren al menos 2 jugadores por equipo")
+        if args.nombres and len(args.nombres) != args.jugadores_por_equipo * 2:
+            parser.error(
+                f"--nombres requiere exactamente {args.jugadores_por_equipo * 2} nombres"
+            )
+        if args.equipo1 and not args.equipo2:
+            parser.error("--equipo1 requiere --equipo2")
+        if args.equipo2 and not args.equipo1:
+            parser.error("--equipo2 requiere --equipo1")
+        config = _config_desde_args(args)
+        ver_partido(
+            config,
+            semilla=args.semilla,
+            nombres=args.nombres,
+            equipo1=args.equipo1,
+            equipo2=args.equipo2,
+            pausa=args.pausa,
+            grabar=args.grabar,
+            sin_pausa=args.sin_pausa,
+            velocidad=args.velocidad,
+            exportar_html=args.exportar_html,
+        )
 
 
 if __name__ == "__main__":

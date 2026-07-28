@@ -1,1 +1,2 @@
-# Sin dependencias externas — Python 3.11+ stdlib only.
+# Sin dependencias obligatorias — Python 3.11+ stdlib.
+# Opcional para terminal con mas estilos: pip install rich
