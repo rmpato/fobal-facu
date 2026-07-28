@@ -109,13 +109,29 @@ Interpretación y señales de alerta → [como-funciona-simulacion.md](./como-fu
 |------|---------|-------------|
 | `--reglamento` | `v1` | Id (`v0`, `v1`, `v1.1`) o ruta a `.json` |
 | `--partidos` | `100` | Cuántos partidos simular |
-| `--ia` | `estrategica` | `simple` (baseline) o `estrategica` |
+| `--ia` | `estrategica` | Perfil de IA (ver tabla abajo) |
 | `--jugadores-por-equipo` | `2` | Mínimo 2 |
 
-**IA estratégica** (default): usa pasa de turno a propósito, defiende con Trampa/Marca.  
-**IA simple:** casi no pasa de turno → Trampa/Marca no se evalúan bien.
+Documentación completa de IA → **[perfiles-ia.md](./perfiles-ia.md)**.
 
-Para comparaciones justas, usá los mismos `--partidos` e `--ia` entre reglamentos.
+### IA clásica (la del análisis original)
+
+| Flag | Nombre | Uso |
+|------|--------|-----|
+| `--ia estrategica` | **Táctico** | Default. Usado en [resultados-iniciales.md](./resultados-iniciales.md). |
+| `--ia simple` | **Directo** | Baseline histórico; casi no pasa de turno. |
+
+### IA adicional (desde 2026)
+
+También disponibles: `agresiva`, `paciente`, `gambler`, `conservador`, `adaptativo`, `marcador`, `contragolpista`. Nombres en UI y cuándo usar cada uno → [perfiles-ia.md](./perfiles-ia.md).
+
+En modo espectador podés mezclar equipos:
+
+```bash
+python3 -m simulador ver --ia-equipo0 agresiva --ia-equipo1 conservador
+```
+
+Para comparaciones justas entre reglamentos, usá el mismo `--ia` en todas las corridas.
 
 ---
 

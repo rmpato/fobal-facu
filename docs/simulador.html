@@ -91,14 +91,19 @@ python3 -m simulador ver --semilla 42 --sin-pausa --grabar docs/replays/mi-parti
     <section>
       <h2>IA</h2>
       <div class="card">
+        <p><strong>Clásicos</strong> (análisis original del repo): <code>estrategica</code> (Táctico, default) y <code>simple</code> (Directo).</p>
+        <p><strong>Nuevos:</strong> <code>agresiva</code>, <code>paciente</code>, <code>gambler</code>, <code>conservador</code>, <code>adaptativo</code>, <code>marcador</code>, <code>contragolpista</code>.</p>
         <table>
-          <thead><tr><th>Perfil</th><th>Flag</th></tr></thead>
+          <thead><tr><th>Ejemplo</th><th>Flag</th></tr></thead>
           <tbody>
-            <tr><td>Estratégica (default)</td><td><code>--ia estrategica</code></td></tr>
-            <tr><td>Simple (baseline)</td><td><code>--ia simple</code></td></tr>
+            <tr><td>Táctico (default)</td><td><code>--ia estrategica</code></td></tr>
+            <tr><td>Directo (baseline)</td><td><code>--ia simple</code></td></tr>
+            <tr><td>Presionante</td><td><code>--ia agresiva</code></td></tr>
+            <tr><td>Mix en espectador</td><td><code>--ia-equipo0 agresiva --ia-equipo1 conservador</code></td></tr>
           </tbody>
         </table>
-        <p><small>Usá el mismo perfil al comparar reglamentos.</small></p>
+        <p>Documentación completa → <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/perfiles-ia.md">perfiles-ia.md</a></p>
+        <p><small>Usá el mismo perfil al comparar reglamentos en batch.</small></p>
       </div>
     </section>
   </main>

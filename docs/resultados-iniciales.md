@@ -1,7 +1,7 @@
 # Resultados de simulación
 
 Hallazgos de corridas automáticas. Configuración habitual: **2 vs 2**, semillas `0…N-1`.  
-Cómo reproducir → [guia-rapida.md](./guia-rapida.md). Qué probar next → [recomendaciones-diseno.md](./recomendaciones-diseno.md).
+Cómo reproducir → [guia-rapida.md](./guia-rapida.md). Perfiles de IA → [perfiles-ia.md](./perfiles-ia.md). Qué probar next → [recomendaciones-diseno.md](./recomendaciones-diseno.md).
 
 Última actualización: julio 2026.
 

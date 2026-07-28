@@ -37,6 +37,7 @@ from simulador.espectador_ui import (
     slots_mano,
     ULTIMAS_JUGADAS_VISIBLE,
 )
+from simulador.ia import describir_ia_partido
 from simulador.eventos_espectador import (
     VELOCIDADES,
     EventoEspectador,
@@ -568,6 +569,42 @@ class PantallaEspectador(_UIBase):
         self._safe_addstr(win, y, 0, (L_BL + L_H * inner + L_BR)[: sw - 1])
         return y + 1
 
+    def _dibujar_panel_guia(self, win, y: int, sw: int) -> int:
+        inner = max(4, sw - 2)
+        titulo = " ANTICIPO IA "
+        if len(titulo) > inner:
+            titulo = titulo[:inner]
+        top = L_TL + titulo + L_H * max(0, inner - len(titulo)) + L_TR
+        self._safe_addstr(win, y, 0, top[: sw - 1])
+        y += 1
+        for ln in panel_guia(self.estado, ancho=inner):
+            self._safe_addstr(win, y, 0, L_V, curses.A_DIM)
+            contenido = ln[:inner].ljust(inner)
+            if ln.endswith("(bola):"):
+                nombre = ln[: -len("(bola):")].strip()
+                self._colorear_en(win, y, 2, nombre, curses.A_BOLD)
+                self._safe_addstr(
+                    win, y, 2 + len(nombre), " (bola):"[: inner - len(nombre)], curses.A_NORMAL
+                )
+            elif ln.startswith("Reglamento "):
+                self._safe_addstr(win, y, 2, contenido, curses.A_BOLD)
+            elif ln.startswith("IA: "):
+                self._safe_addstr(win, y, 2, contenido, curses.color_pair(PAIR_UI_TITULO))
+            elif ln.startswith(("E1: ", "E2: ")):
+                self._safe_addstr(win, y, 2, contenido, curses.color_pair(PAIR_UI_TITULO))
+            elif ln.startswith(" · "):
+                self._safe_addstr(win, y, 2, contenido, curses.color_pair(PAIR_UI_TITULO))
+            elif ln.startswith((" si ", " def")):
+                self._safe_addstr(win, y, 2, contenido, curses.color_pair(PAIR_UI_DIM))
+            elif ln == "---":
+                self._safe_addstr(win, y, 2, L_H * min(inner, 28), curses.A_DIM)
+            else:
+                self._safe_addstr(win, y, 2, contenido, curses.A_NORMAL)
+            self._safe_addstr(win, y, len(L_V) + inner, L_V, curses.A_DIM)
+            y += 1
+        self._safe_addstr(win, y, 0, (L_BL + L_H * inner + L_BR)[: sw - 1])
+        return y + 1
+
     def _attr_linea_log(self, linea_fmt: str) -> int:
         if linea_fmt.startswith("**") or linea_fmt.startswith("[FIN]"):
             return curses.color_pair(PAIR_UI_GOL) | curses.A_BOLD
@@ -608,7 +645,9 @@ class PantallaEspectador(_UIBase):
         y += 1
         y = self._dibujar_panel_mano(self.side_win, y, sw)
         y += 1
-        self._dibujar_panel_ultimas(self.side_win, y, sw)
+        y = self._dibujar_panel_ultimas(self.side_win, y, sw)
+        y += 1
+        self._dibujar_panel_guia(self.side_win, y, sw)
 
         # Feed de acciones (marco + contenido)
         self.log_win.erase()
@@ -641,8 +680,6 @@ class PantallaEspectador(_UIBase):
                 continue
             fmt = formatear_linea_log(linea)
             line_attr = self._attr_linea_log(fmt)
-            if idx == self._ultimo_log_idx:
-                line_attr |= curses.A_BOLD
             self._safe_addstr(self.log_win, row, 0, L_V, curses.A_DIM)
             self._colorear_en(self.log_win, row, 1, fmt[: inner_w], line_attr)
             row += 1
@@ -775,9 +812,8 @@ class PantallaSimple(_UIBase):
         for idx, ln in log_vis:
             fmt = formatear_linea_log(ln)
             prefix = f"{_ANSI_DORADO}" if fmt.startswith("**") or fmt.startswith("[FIN]") else ""
-            bold = _BOLD if idx == self._ultimo_log_idx else ""
             print(
-                f"{L_V} {bold}{_colorear_nombres(prefix + fmt + _RESET, self.colores, sys.stdout.isatty()):<{ancho_log - 4}} {L_V}"
+                f"{L_V} {_colorear_nombres(prefix + fmt + _RESET, self.colores, sys.stdout.isatty()):<{ancho_log - 4}} {L_V}"
             )
         print(f"{L_BL}{L_H * (ancho_log - 2)}{L_BR}")
         print()
@@ -792,6 +828,8 @@ class PantallaSimple(_UIBase):
         )
         print()
         self._imprimir_caja_raw(f"ULTIMAS x{ULTIMAS_JUGADAS_VISIBLE}", self._ultimas_lineas_ansi(), sw)
+        print()
+        self._imprimir_caja("ANTICIPO IA", panel_guia(self.estado, ancho=sw - 4), sw)
         print()
 
         pausa_show = self.pausa_base_ms / 1000
@@ -922,7 +960,7 @@ def _intro(
     intro = intro_partido(
         semilla,
         reg.id if reg else estado.reglamento_id,
-        estado.config.ia if estado.config else "estrategica",
+        describir_ia_partido(estado.config) if estado.config else "Táctico",
         f"{estado.jugadores_por_equipo} vs {estado.jugadores_por_equipo}",
         eq0,
         eq1,

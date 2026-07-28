@@ -81,12 +81,16 @@ No hay carta “Pasa de turno” ni “Reventar” en el mazo. El portador **eli
 
 ## Perfiles de IA
 
-| Perfil | Comportamiento |
-|--------|----------------|
-| `simple` | Probabilidades fijas; casi no usa pasa de turno |
-| `estrategica` | **Default.** Pasa de turno táctico, evita marcado, defensa activa |
+Hay **nueve perfiles** implementados. Los dos **clásicos** (desde el inicio del proyecto) son:
 
-Usar siempre el mismo perfil al comparar reglamentos.
+| Flag | Nombre UI | Comportamiento |
+|------|-----------|----------------|
+| `simple` | Directo | Baseline; casi no usa pasa de turno |
+| `estrategica` | Táctico | **Default.** Pasa de turno táctico, cadena de pases, defensa activa |
+
+Los demás (`agresiva`, `paciente`, `gambler`, `conservador`, `adaptativo`, `marcador`, `contragolpista`) son estilos adicionales para experimentar. Tabla completa, flags por equipo y modo espectador → **[perfiles-ia.md](./perfiles-ia.md)**.
+
+Usar siempre el mismo perfil al comparar reglamentos. Los números en [resultados-iniciales.md](./resultados-iniciales.md) usan `estrategica` salvo donde se cite `simple`.
 
 ---
 
@@ -139,5 +143,6 @@ Portador elige (IA)
 ## Relacionado
 
 - [guia-rapida.md](./guia-rapida.md) — comandos
+- [perfiles-ia.md](./perfiles-ia.md) — IA clásica y perfiles nuevos
 - [resultados-iniciales.md](./resultados-iniciales.md) — números
 - [reglamentos-guia.md](./reglamentos-guia.md) — crear v1.2 / v2

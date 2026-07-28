@@ -8,6 +8,7 @@ Guía de qué leer según lo que necesites. El README del repo tiene el [quickst
 
 | Objetivo | Documento |
 |----------|-----------|
+| **Elegir / comparar perfiles de IA** | [perfiles-ia.md](./perfiles-ia.md) |
 | **Correr simulaciones ya** | [guia-rapida.md](./guia-rapida.md) |
 | **Ver conclusiones y números** | [resultados-iniciales.md](./resultados-iniciales.md) |
 | **Saber qué cambiar en el juego** | [recomendaciones-diseno.md](./recomendaciones-diseno.md) |

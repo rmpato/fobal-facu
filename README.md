@@ -75,7 +75,8 @@ Reglamento (JSON + MD)  →  Simulador  →  Métricas  →  Comparar versiones
 
 | Documento | Para qué |
 |-----------|----------|
-| [`docs/guia-rapida.md`](docs/guia-rapida.md) | Comandos, reglamentos, IA, variantes |
+| [`docs/guia-rapida.md`](docs/guia-rapida.md) | Comandos, reglamentos, variantes |
+| [`docs/perfiles-ia.md`](docs/perfiles-ia.md) | Perfiles de IA (clásicos y nuevos), `--ia`, espectador |
 | [`docs/resultados-iniciales.md`](docs/resultados-iniciales.md) | Hallazgos de simulación |
 | [`docs/recomendaciones-diseno.md`](docs/recomendaciones-diseno.md) | Análisis y próximos experimentos |
 | [`docs/como-funciona-simulacion.md`](docs/como-funciona-simulacion.md) | Motor, turnos, IA, limitaciones |

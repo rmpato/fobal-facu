@@ -22,9 +22,11 @@ from simulador.reglamento import (
 )
 from simulador.espectador import ver_partido
 from simulador.eventos_espectador import VELOCIDADES
+from simulador.ia import IDS_IA, nombre_ia
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_VARIANTES = ROOT / "configs" / "variantes.json"
+_IA_HELP = ", ".join(f"{i} ({nombre_ia(i)})" for i in IDS_IA)
 
 
 def _config_desde_args(args) -> ConfigSimulacion:
@@ -34,9 +36,35 @@ def _config_desde_args(args) -> ConfigSimulacion:
         "jugadores_por_equipo": args.jugadores_por_equipo,
         "ia": args.ia,
     }
+    if getattr(args, "ia_equipo0", None) is not None:
+        kwargs["ia_equipo0"] = args.ia_equipo0
+    if getattr(args, "ia_equipo1", None) is not None:
+        kwargs["ia_equipo1"] = args.ia_equipo1
     if getattr(args, "pasa_turno_sin_respuesta", None) is not None:
         kwargs["pasa_turno_sin_respuesta"] = args.pasa_turno_sin_respuesta
     return ConfigSimulacion(**kwargs)
+
+
+def _add_ia_args(parser, *, default: str = "estrategica", per_equipo: bool = False) -> None:
+    parser.add_argument(
+        "--ia",
+        choices=list(IDS_IA),
+        default=default,
+        help=f"Perfil de IA: {_IA_HELP}",
+    )
+    if per_equipo:
+        parser.add_argument(
+            "--ia-equipo0",
+            choices=list(IDS_IA),
+            default=None,
+            help="IA solo del equipo 1 (override de --ia)",
+        )
+        parser.add_argument(
+            "--ia-equipo1",
+            choices=list(IDS_IA),
+            default=None,
+            help="IA solo del equipo 2 (override de --ia)",
+        )
 
 
 def _add_reglamento_arg(parser, default: str = "v1") -> None:
@@ -60,7 +88,7 @@ def main() -> None:
     _add_reglamento_arg(run)
     run.add_argument("--partidos", type=int, default=100)
     run.add_argument("--jugadores-por-equipo", type=int, default=2, help="Mínimo 2")
-    run.add_argument("--ia", choices=["simple", "estrategica"], default="estrategica")
+    _add_ia_args(run)
     run.add_argument(
         "--pasa-turno-sin-respuesta",
         choices=["nada", "pasa_companero"],
@@ -72,14 +100,14 @@ def main() -> None:
 
     compare = sub.add_parser("compare", help="Comparar v0 vs v1 (alias histórico)")
     compare.add_argument("--partidos", type=int, default=200)
-    compare.add_argument("--ia", choices=["simple", "estrategica"], default="estrategica")
+    _add_ia_args(compare)
 
     compare_reg = sub.add_parser(
         "compare-reglamentos",
         help="Comparar todos los reglamentos del índice",
     )
     compare_reg.add_argument("--partidos", type=int, default=200)
-    compare_reg.add_argument("--ia", choices=["simple", "estrategica"], default="estrategica")
+    _add_ia_args(compare_reg)
 
     variantes = sub.add_parser("variantes", help="Comparar variantes de reglas desde JSON")
     variantes.add_argument("--partidos", type=int, default=500)
@@ -99,7 +127,7 @@ def main() -> None:
     ver = sub.add_parser("ver", help="Ver un partido en vivo (modo espectador)")
     _add_reglamento_arg(ver, default="v1")
     ver.add_argument("--jugadores-por-equipo", type=int, default=3, help="Jugadores por equipo")
-    ver.add_argument("--ia", choices=["simple", "estrategica"], default="estrategica")
+    _add_ia_args(ver, per_equipo=True)
     ver.add_argument(
         "--semilla",
         type=int,

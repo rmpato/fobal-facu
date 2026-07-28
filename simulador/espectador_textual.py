@@ -5,6 +5,9 @@ from __future__ import annotations
 import threading
 from typing import TYPE_CHECKING, Callable
 
+from simulador.cartas import carta_por_nombre, rol_carta
+from simulador.espectador_log_style import rich_linea_log, rich_placa_linea
+from simulador.espectador_panel_guia import rich_panel_guia
 from simulador.espectador_ui import (
     ULTIMAS_JUGADAS_VISIBLE,
     barra_comandos,
@@ -21,6 +24,8 @@ if TYPE_CHECKING:
     from simulador.espectador import _UIBase
     from simulador.modelo import EstadoPartido
 
+_CARTA_RICH = {"ofensiva": "yellow", "defensiva": "green", "neutral": "white"}
+
 
 def disponible() -> bool:
     try:
@@ -31,45 +36,89 @@ def disponible() -> bool:
         return False
 
 
-def _plain_log(ui: _UIBase) -> str:
-    out: list[str] = []
+def _rich_log(ui: _UIBase) -> object:
+    from rich.console import Group
+    from rich.panel import Panel
+    from rich.text import Text
+
+    lineas: list[object] = []
     if ui._banner_gol:
-        out.append(f"** {ui._banner_gol} **")
-    for idx, ln in ui._ventana_log(24):
+        lineas.append(
+            Panel(
+                Text(ui._banner_gol, style="bold yellow"),
+                title="GOL",
+                border_style="yellow",
+            )
+        )
+    for idx, ln in ui._ventana_log(28):
         if not ln:
-            out.append("")
+            lineas.append(Text(""))
             continue
         fmt = formatear_linea_log(ln)
-        mark = "> " if idx == ui._ultimo_log_idx else ""
-        out.append(mark + fmt)
-    return "\n".join(out) or "…"
+        sep, line = rich_linea_log(
+            ln,
+            fmt,
+            colores=ui.colores,
+        )
+        if sep:
+            lineas.append(sep)
+        lineas.append(line)
+    body = Group(*lineas) if lineas else Text("…", style="dim")
+    return Panel(body, title="Relato del partido", border_style="cyan")
 
 
-def _plain_side(ui: _UIBase) -> str:
+def _rich_sidebar(ui: _UIBase) -> object:
     from simulador.espectador import _cartas_ordenadas
+    from rich.console import Group
+    from rich.panel import Panel
+    from rich.text import Text
 
-    lines = ["[PLACA]", *placa_marcador(ui.estado), ""]
+    placa_lines = [rich_placa_linea(ln, ui.colores) for ln in placa_marcador(ui.estado)]
+    placa = Panel(Group(*placa_lines), title="Placa", border_style="bright_white")
+
     p = ui.estado.portador
     slots = slots_mano(ui.estado)
-    lines.append(f"[MANO/{p.nombre} ({len(p.mano)}/{slots})]")
-    lines.append("G=def  O=atak")
+    mano_lines: list[Text] = []
+    mano_lines.append(Text("G=def  O=atak", style="dim"))
     for num, carta in filas_mano_fijas(_cartas_ordenadas(p.mano), slots):
+        line = Text(f" {num}. ")
         if carta is None:
-            lines.append(f" {num}. ---")
+            line.append("---", style="dim")
         else:
-            mark = ">> " if ui._ultima_carta == (p.nombre, carta.value) else "   "
-            lines.append(f"{mark}{num}. {carta.value}")
-    lines.append("")
-    lines.append(f"[ULTIMAS x{ULTIMAS_JUGADAS_VISIBLE}]")
+            resaltar = ui._ultima_carta == (p.nombre, carta.value)
+            est = _CARTA_RICH.get(rol_carta(carta), "white")
+            if resaltar:
+                est = f"reverse {est}"
+            line.append(carta.value, style=est)
+        mano_lines.append(line)
+    mano = Panel(
+        Group(*mano_lines),
+        title=f"Mano/{p.nombre} ({len(p.mano)}/{slots})",
+        border_style="green",
+    )
+
+    ult_lines: list[Text] = []
     for i, item in enumerate(
-        filas_ultimas_fijas(ui.estado.ultimas_cartas, ULTIMAS_JUGADAS_VISIBLE), start=1
+        filas_ultimas_fijas(ui.estado.ultimas_cartas, ULTIMAS_JUGADAS_VISIBLE),
+        start=1,
     ):
+        line = Text(f" {i}. ")
         if item is None:
-            lines.append(f" {i}. ---")
+            line.append("---", style="dim")
         else:
-            j, c = item
-            lines.append(f" {i}. {j} -> {c}")
-    return "\n".join(lines)
+            jugador, carta_nombre = item
+            line.append(jugador, style="bold cyan")
+            line.append(" → ", style="dim")
+            carta = carta_por_nombre(carta_nombre)
+            if carta:
+                line.append(carta.value, style=_CARTA_RICH.get(rol_carta(carta), "white"))
+            else:
+                line.append(carta_nombre)
+        ult_lines.append(line)
+    ult = Panel(Group(*ult_lines), title=f"Ultimas x{ULTIMAS_JUGADAS_VISIBLE}", border_style="blue")
+    guia = rich_panel_guia(ui.estado, ui.colores)
+
+    return Group(placa, mano, ult, guia)
 
 
 def run_partido(
@@ -85,7 +134,7 @@ def run_partido(
     comando: str,
 ) -> None:
     from textual.app import App, ComposeResult
-    from textual.containers import Horizontal, Vertical
+    from textual.containers import Horizontal, Vertical, ScrollableContainer
     from textual.widgets import Footer, Header, Static
 
     wait = threading.Event()
@@ -104,15 +153,31 @@ def run_partido(
 
         CSS = """
         Screen { background: #0a1612; }
-        #log { width: 2fr; height: 1fr; background: #122820; border: solid #2a4a3a; padding: 1; }
-        #side { width: 1fr; height: 1fr; background: #122820; border: solid #2a4a3a; padding: 1; }
+        #logpane {
+            width: 2fr;
+            height: 1fr;
+            background: #0d1a15;
+            border: tall #2a4a3a;
+            padding: 0 1;
+        }
+        #sidebar {
+            width: 1fr;
+            height: 1fr;
+            background: #0d1a15;
+            border: tall #2a4a3a;
+            padding: 0 1;
+        }
+        #log { height: 1fr; }
+        #side { height: 1fr; }
+        Header { background: #122820; color: #f0c040; }
+        Footer { background: #122820; }
         """
 
         def compose(self) -> ComposeResult:
             yield Header(show_clock=False)
             yield Horizontal(
-                Static(id="log", markup=False),
-                Vertical(Static(id="side", markup=False), id="sidebar"),
+                ScrollableContainer(Static(id="log"), id="logpane"),
+                ScrollableContainer(Static(id="side"), id="sidebar"),
             )
             yield Footer()
 
@@ -121,8 +186,8 @@ def run_partido(
 
         def _refresh(self) -> None:
             u = ui_holder[0]
-            self.query_one("#log", Static).update(_plain_log(u))
-            self.query_one("#side", Static).update(_plain_side(u))
+            self.query_one("#log", Static).update(_rich_log(u))
+            self.query_one("#side", Static).update(_rich_sidebar(u))
             pausa = u.pausa_base_ms / 1000
             cmds = barra_comandos(pausa, auto=u.auto_pausa, velocidad=u.velocidad)
             self.sub_title = f"#{semilla} | {cmds[0].strip()}"
@@ -171,8 +236,7 @@ def run_partido(
             self._refresh()
 
         def action_toggle_pause(self) -> None:
-            u = ui_holder[0]
-            u.auto_pausa = not u.auto_pausa
+            ui_holder[0].auto_pausa = not ui_holder[0].auto_pausa
             self._refresh()
 
         def action_skip_moment(self) -> None:

@@ -39,7 +39,7 @@
     <div class="page-hero">
       <p class="breadcrumb"><a href="index.html">Inicio</a> / Cómo funciona la simulación</p>
       <h1>⚙️ Cómo funciona la simulación</h1>
-      <p class="lead">Qué hace el motor automático, qué decisiones toma la IA y cómo leer los números. No reemplaza jugar en mesa — sirve para comparar reglas.</p>
+      <p class="lead">Qué hace el motor automático, qué decisiones toma la IA y cómo leer los números. Perfiles de IA → <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/perfiles-ia.md">perfiles-ia.md</a>. No reemplaza jugar en mesa — sirve para comparar reglas.</p>
     </div>
 
     <section>
@@ -107,27 +107,32 @@
 
     <section>
       <h2>Perfiles de IA</h2>
+      <p class="section-lead">Dos perfiles <strong>clásicos</strong> (Directo / Táctico) + siete estilos nuevos. Detalle → <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/perfiles-ia.md">perfiles-ia.md</a></p>
       <div class="compare-grid">
         <div class="card">
-          <h3>Simple</h3>
+          <h3>Directo <small>(clásico)</small></h3>
           <p><code>--ia simple</code></p>
           <ul class="findings">
             <li>Decisiones mayormente aleatorias</li>
             <li>Casi no usa pasa de turno</li>
-            <li>Trampa/Marca casi no aparecen</li>
-            <li>Útil como baseline</li>
+            <li>Baseline del análisis histórico</li>
           </ul>
         </div>
         <div class="card highlight">
-          <h3>Estratégica (default)</h3>
+          <h3>Táctico <small>(clásico, default)</small></h3>
           <p><code>--ia estrategica</code></p>
           <ul class="findings">
-            <li>Dispara con cadena de pases armada</li>
-            <li>Usa pasa de turno a propósito (~8% acciones)</li>
+            <li>Cadena de pases antes de disparar</li>
+            <li>Pasa de turno a propósito</li>
             <li>Defensa activa con Trampa/Marca</li>
-            <li>Evita pasar al jugador marcado</li>
+            <li>Usado en resultados-iniciales.md</li>
           </ul>
         </div>
+      </div>
+      <div class="card" style="margin-top:1rem">
+        <h3>Otros perfiles</h3>
+        <p>Presionante, Posicional, Arriesgado, Conservador, Adaptativo, Marcador, Contragolpista — ver <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/perfiles-ia.md">perfiles-ia.md</a>.</p>
+        <p>Modo espectador: <code>python3 -m simulador ver --ia-equipo0 agresiva --ia-equipo1 paciente</code></p>
       </div>
     </section>
 

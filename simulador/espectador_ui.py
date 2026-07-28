@@ -132,11 +132,16 @@ def filas_ultimas_fijas(
     return filas
 
 
-def barra_comandos(pausa_seg: float, *, auto: bool = True, velocidad: str = "normal") -> list[str]:
+def barra_comandos(
+    pausa_seg: float,
+    *,
+    auto: bool = True,
+    velocidad: str = "normal",
+) -> list[str]:
     auto_txt = "ON" if auto else "OFF"
     return [
         f" [ESP] avanzar [Q] salir [+/-] vel [P] auto:{auto_txt} [{velocidad}] {pausa_seg:.1f}s ",
-        " [F] salto a momento  [^v] scroll relato  ",
+        " [F] salto  [^v] scroll  ",
         " " + "-" * 48,
     ]
 

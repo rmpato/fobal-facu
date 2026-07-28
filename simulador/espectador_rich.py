@@ -5,6 +5,8 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Any
 
 from simulador.cartas import Carta, carta_por_nombre, rol_carta
+from simulador.espectador_log_style import rich_linea_log, rich_placa_linea
+from simulador.espectador_panel_guia import rich_panel_guia
 from simulador.espectador_teclas import leer_tecla
 from simulador.espectador_ui import (
     ULTIMAS_JUGADAS_VISIBLE,
@@ -103,41 +105,44 @@ class PantallaRich:
         from rich.console import Group
         from rich.text import Text
 
-        lines: list[Any] = []
+        lineas: list[Any] = []
         if self._b._banner_gol:
-            lines.append(Text(f" ** {self._b._banner_gol} ** ", style="bold yellow"))
-        for idx, ln in self._b._ventana_log(22):
+            lineas.append(
+                Panel(
+                    Text(self._b._banner_gol, style="bold yellow"),
+                    title="GOL",
+                    border_style="yellow",
+                )
+            )
+        for idx, ln in self._b._ventana_log(24):
             if not ln:
-                lines.append("")
+                lineas.append(Text(""))
                 continue
             fmt = formatear_linea_log(ln)
-            if fmt.startswith("**") or fmt.startswith("[FIN]"):
-                t = _texto_nombres(fmt, self._b.colores)
-                t.stylize("bold yellow")
-            elif fmt.startswith(">>"):
-                t = _texto_nombres(fmt, self._b.colores)
-                t.stylize("bold cyan")
-            else:
-                t = _texto_nombres(fmt, self._b.colores)
-                if idx == self._b._ultimo_log_idx:
-                    t.stylize("bold")
-            lines.append(t)
-        body = Group(*lines) if lines else Text("…", style="dim")
-        return Panel(body, title="Relato del partido", border_style="cyan")
+            sep, line = rich_linea_log(
+                ln,
+                fmt,
+                colores=self._b.colores,
+            )
+            if sep:
+                lineas.append(sep)
+            lineas.append(line)
+        body = Group(*lineas) if lineas else Text("…", style="dim")
+        return Panel(body, title="Relato del partido", border_style="bright_cyan")
 
     def _render_sidebar(self) -> Any:
         from rich.panel import Panel
         from rich.console import Group
         from rich.text import Text
 
-        placa = Panel(
-            "\n".join(placa_marcador(self._b.estado)),
-            title="Placa",
-            border_style="white",
-        )
+        placa_lines = [
+            rich_placa_linea(ln, self._b.colores) for ln in placa_marcador(self._b.estado)
+        ]
+        placa = Panel(Group(*placa_lines), title="Placa", border_style="bright_white")
+
         portador = self._b.estado.portador.nombre
         slots = slots_mano(self._b.estado)
-        mano_lines: list[Text] = []
+        mano_lines: list[Any] = [Text("G=def  O=atak", style="dim")]
         from simulador.espectador import _cartas_ordenadas
 
         for num, carta in filas_mano_fijas(_cartas_ordenadas(self._b.estado.portador.mano), slots):
@@ -153,11 +158,12 @@ class PantallaRich:
                 line.append(_texto_carta(carta, resaltar=resaltar))
             mano_lines.append(line)
         mano = Panel(
-            Group(Text("G=def  O=atak", style="dim"), *mano_lines),
+            Group(*mano_lines),
             title=f"Mano/{portador} ({len(self._b.estado.portador.mano)}/{slots})",
             border_style="green",
         )
-        ult_lines: list[Text] = []
+
+        ult_lines: list[Any] = []
         for i, item in enumerate(
             filas_ultimas_fijas(self._b.estado.ultimas_cartas, ULTIMAS_JUGADAS_VISIBLE),
             start=1,
@@ -167,11 +173,11 @@ class PantallaRich:
                 line.append("---", style="dim")
             else:
                 jugador, carta_nombre = item
-                line.append(_texto_nombres(jugador, self._b.colores))
-                line.append(" -> ")
+                line.append_text(_texto_nombres(jugador, self._b.colores))
+                line.append(" → ", style="dim")
                 carta = carta_por_nombre(carta_nombre)
                 if carta:
-                    line.append(_texto_carta(carta))
+                    line.append_text(_texto_carta(carta))
                 else:
                     line.append(carta_nombre)
             ult_lines.append(line)
@@ -180,7 +186,8 @@ class PantallaRich:
             title=f"Ultimas x{ULTIMAS_JUGADAS_VISIBLE}",
             border_style="blue",
         )
-        return Group(placa, mano, ult)
+        guia = rich_panel_guia(self._b.estado, self._b.colores)
+        return Group(placa, mano, ult, guia)
 
     def _render(self) -> Any:
         from rich.layout import Layout
@@ -190,14 +197,18 @@ class PantallaRich:
         reg_id = reg.id if reg else self._b.estado.reglamento_id
         header = Panel(
             "\n".join(banner_titulo(reg_id, self._b.semilla, 78)[1:2]),
-            title=f"FOBAL FACU | {reg_id.upper()} | #{self._b.semilla}",
-            border_style="cyan",
+            title=f"⚽ FOBAL FACU | {reg_id.upper()} | #{self._b.semilla}",
+            border_style="bright_cyan",
         )
         pausa_show = self._b.pausa_base_ms / 1000
         footer_txt = "\n".join(
-            barra_comandos(pausa_show, auto=self._b.auto_pausa, velocidad=self._b.velocidad)
+            barra_comandos(
+                pausa_show,
+                auto=self._b.auto_pausa,
+                velocidad=self._b.velocidad,
+            )
         )
-        footer = Panel(footer_txt, border_style="dim")
+        footer = Panel(footer_txt, border_style="dim green")
         layout = Layout()
         layout.split_column(
             Layout(header, size=5),

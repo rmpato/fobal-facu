@@ -7,6 +7,8 @@ from dataclasses import dataclass, field, fields
 from pathlib import Path
 from typing import TYPE_CHECKING
 
+from simulador.ia import IDS_IA
+
 if TYPE_CHECKING:
     from simulador.reglamento import Reglamento
 
@@ -15,7 +17,9 @@ if TYPE_CHECKING:
 class ConfigSimulacion:
     reglamento: str = "v1"
     jugadores_por_equipo: int = 2
-    ia: str = "estrategica"  # simple | estrategica
+    ia: str = "estrategica"
+    ia_equipo0: str | None = None
+    ia_equipo1: str | None = None
     limite_turnos: int = 500
     prob_falta: float | None = None  # None = usar valor del reglamento
     nombre_variante: str = "default"
@@ -44,11 +48,19 @@ class ConfigSimulacion:
             self._reglamento_resuelto = reg
         return self._reglamento_resuelto
 
+    def ia_de_equipo(self, equipo: int) -> str:
+        if equipo == 0 and self.ia_equipo0:
+            return self.ia_equipo0
+        if equipo == 1 and self.ia_equipo1:
+            return self.ia_equipo1
+        return self.ia
+
     def __post_init__(self) -> None:
         if self.jugadores_por_equipo < 2:
             raise ValueError("Se requieren al menos 2 jugadores por equipo")
-        if self.ia not in ("simple", "estrategica"):
-            raise ValueError("ia debe ser simple o estrategica")
+        for ia_id in (self.ia, self.ia_equipo0, self.ia_equipo1):
+            if ia_id is not None and ia_id not in IDS_IA:
+                raise ValueError(f"ia debe ser una de: {', '.join(IDS_IA)}")
         if self.pasa_turno_sin_respuesta is not None and self.pasa_turno_sin_respuesta not in (
             "nada",
             "pasa_companero",
@@ -82,6 +94,10 @@ class ConfigSimulacion:
             "limite_turnos": self.limite_turnos,
             "nombre_variante": self.nombre_variante,
         }
+        if self.ia_equipo0 is not None:
+            d["ia_equipo0"] = self.ia_equipo0
+        if self.ia_equipo1 is not None:
+            d["ia_equipo1"] = self.ia_equipo1
         if self.pasa_turno_sin_respuesta is not None:
             d["pasa_turno_sin_respuesta"] = self.pasa_turno_sin_respuesta
         if self.prob_falta is not None:
