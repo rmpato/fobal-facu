@@ -34,6 +34,7 @@ El sitio está en la carpeta `docs/` (`index.html` + assets).
 | `index.html` | Inicio, reglas confirmadas, resumen reciente |
 | `reglas.html` | Reglamentos v0/v1, mazos, dados |
 | `resultados.html` | IA estratégica, acciones %, variantes, histórico |
+| `como-funciona.html` | Motor, IA, dados, métricas, limitaciones |
 | `simulador.html` | Comandos CLI, perfiles IA, variantes JSON |
 
 Los `.md` del repo siguen disponibles como links directos (ej. `resultados-iniciales.md`).

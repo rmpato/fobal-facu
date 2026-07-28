@@ -12,7 +12,8 @@ Las **reglas y cartas están en español (Argentina)**; el código y esta intro 
 | [`docs/proceso.md`](docs/proceso.md) | Cómo usamos la simulación para iterar |
 | [`docs/ambiguedades.md`](docs/ambiguedades.md) | Reglas poco claras y supuestos del motor |
 | [`docs/resultados-iniciales.md`](docs/resultados-iniciales.md) | Hallazgos de simulación, métricas, impacto de reglas |
-| [`docs/index.html`](docs/index.html) | **Sitio web** para GitHub Pages (reglas + resultados) |
+| [`docs/como-funciona-simulacion.md`](docs/como-funciona-simulacion.md) | Cómo funciona el motor de simulación |
+| [`docs/index.html`](docs/index.html) | **Sitio web** para GitHub Pages |
 | [`simulador/`](simulador/) | Motor Python (v0 y v1) + IA simple |
 
 ## Requisitos
@@ -52,7 +53,7 @@ Hay una página estática en [`docs/index.html`](docs/index.html) con reglas, ma
 
 Instrucciones completas: [`docs/GITHUB_PAGES.md`](docs/GITHUB_PAGES.md).
 
-Páginas: [Inicio](docs/index.html) · [Reglas](docs/reglas.html) · [Resultados](docs/resultados.html) · [Simulador](docs/simulador.html)
+Páginas: [Inicio](docs/index.html) · [Reglas](docs/reglas.html) · [Resultados](docs/resultados.html) · [Cómo funciona](docs/como-funciona.html) · [Simulador](docs/simulador.html)
 
 URL: `https://rmpato.github.io/fobal-facu/`
 

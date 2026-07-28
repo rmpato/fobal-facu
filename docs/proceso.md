@@ -63,7 +63,7 @@ Archivo [`configs/variantes.json`](../configs/variantes.json):
 
 ## Supuestos del simulador
 
-Ver [ambiguedades.md](./ambiguedades.md). Cada supuesto es configurable vía JSON o flags CLI.
+Ver [ambiguedades.md](./ambiguedades.md). Explicación del motor: [como-funciona-simulacion.md](./como-funciona-simulacion.md) · [como-funciona.html](./como-funciona.html).
 
 ## Métricas que reportamos
 
