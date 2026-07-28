@@ -64,7 +64,7 @@ python3 -m simulador compare-reglamentos --partidos 200</code></pre>
       <a class="nav-card" href="resultados.html">
         <div class="icon">📊</div>
         <h3>Resultados</h3>
-        <p>Conclusiones: v0 vs v1, acciones, Trampa/Marca, penales.</p>
+        <p>Conclusiones: v0, v1, v1.1 — acciones, Trampa/Marca, penales.</p>
       </a>
       <a class="nav-card" href="recomendaciones.html">
         <div class="icon">💡</div>
@@ -96,7 +96,8 @@ python3 -m simulador compare-reglamentos --partidos 200</code></pre>
           <tbody>
             <tr><td>Equipos</td><td>Mínimo <strong>2 jugadores por equipo</strong></td></tr>
             <tr><td>Marcador 2-2</td><td>Penales <strong>inmediatos</strong></td></tr>
-            <tr><td>Trampa / Marca personal</td><td>Solo cuando el ataque <strong>pasa de turno</strong></td></tr>
+            <tr><td>Trampa / Marca personal</td><td>Solo cuando el ataque <strong>pasa de turno</strong> (decisión, no carta)</td></tr>
+            <tr><td>Pasa de turno / Reventar</td><td>Decisiones del jugador — <strong>no</strong> son cartas del mazo</td></tr>
             <tr><td>Reventarla</td><td>Cada equipo elige quién tira el dado (no el que reventó)</td></tr>
           </tbody>
         </table>
@@ -110,7 +111,7 @@ python3 -m simulador compare-reglamentos --partidos 200</code></pre>
         <div class="stat-box">
           <div class="label">Partidos completados</div>
           <div class="values"><span class="val v1">96,5%</span></div>
-          <div class="unit">antes con IA simple: 60%</div>
+          <div class="unit">antes con IA simple: 62,5%</div>
         </div>
         <div class="stat-box">
           <div class="label">Goles promedio</div>
@@ -124,7 +125,7 @@ python3 -m simulador compare-reglamentos --partidos 200</code></pre>
         <div class="stat-box">
           <div class="label">Pasa de turno</div>
           <div class="values"><span class="val v1">7,6%</span></div>
-          <div class="unit">de todas las acciones</div>
+          <div class="unit">decisión, no carta · % acciones</div>
         </div>
       </div>
       <p><a href="resultados.html">Ver análisis completo →</a></p>
@@ -135,8 +136,7 @@ python3 -m simulador compare-reglamentos --partidos 200</code></pre>
       <div class="card">
         <ul class="checklist">
           <li>¿La frecuencia de pase / despeje / robo se parece a la simulación?</li>
-          <li>¿2-2 → penales pasa ~1 de cada 3 partidos?</li>
-          <li>¿Qué pasa si nadie reacciona al pasa de turno?</li>
+          <li>¿Penales ~32–36% es demasiado frecuente? (v1.1 un poco menos que v1)</li>
         </ul>
       </div>
     </section>
@@ -146,7 +146,7 @@ python3 -m simulador compare-reglamentos --partidos 200</code></pre>
     <p>Fobal Facu · Simulador de cartas de fútbol</p>
     <p>
       <a id="repo-link" href="https://github.com/rmpato/fobal-facu">Ver código en GitHub</a>
-      <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/guia-rapida.md">Guía rápida</a>
+      · <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/guia-rapida.md">Guía rápida</a>
       · <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/resultados-iniciales.md">Resultados (MD)</a>
     </p>
   </footer>

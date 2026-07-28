@@ -22,11 +22,20 @@ La pelota siempre la tiene un jugador específico de la ofensiva. Solo ese jugad
 
 ### Acciones ofensivas
 
-| Acción | Descripción |
-|--------|-------------|
-| **Patear al arco** | Jugar `Disparo al arco` → fase de disparo |
-| **Pasar la pelota** | Jugar `Pase` → la pelota y el turno pasan a un compañero |
-| **Ceder el turno / Pasa de turno** | Retener la pelota sin jugar carta de pase ni patear |
+> **Pasa de turno** y **Reventar la pelota** (v1) son **decisiones del jugador**, no cartas del mazo. No hace falta tener una carta en la mano para hacerlas — igual que en v1 con el despeje.
+
+#### Con carta
+
+| Acción | Carta | Descripción |
+|--------|-------|-------------|
+| **Patear al arco** | `Disparo al arco` | Fase de disparo |
+| **Pasar la pelota** | `Pase` | La pelota y el turno pasan a un compañero |
+
+#### Decisiones (sin carta)
+
+| Decisión | Descripción |
+|----------|-------------|
+| **Ceder el turno / Pasa de turno** | Retener la pelota sin jugar `Pase` ni `Disparo al arco`. Habilitada por regla, no por una carta. |
 
 ### Reacciones defensivas
 

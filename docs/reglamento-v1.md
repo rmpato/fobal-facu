@@ -26,12 +26,21 @@ La pelota siempre la tiene un jugador específico de la ofensiva. Solo ese jugad
 
 ### Acciones ofensivas
 
-| Acción | Descripción |
-|--------|-------------|
-| **Patear al arco** | Jugar `Disparo al arco` → fase de disparo |
-| **Pasar la pelota** | Jugar `Pase` → la pelota y el turno pasan a un compañero |
-| **Pasa de turno** | Retener la pelota sin pasar ni disparar (como v0) |
-| **Reventar la pelota** | Despeje (ver sección abajo) |
+> **Pasa de turno** y **Reventar la pelota** son **decisiones del jugador**, no cartas del mazo. No necesitás una carta en la mano para hacerlas.
+
+#### Con carta
+
+| Acción | Carta | Descripción |
+|--------|-------|-------------|
+| **Patear al arco** | `Disparo al arco` | Fase de disparo |
+| **Pasar la pelota** | `Pase` | La pelota y el turno pasan a un compañero |
+
+#### Decisiones (sin carta)
+
+| Decisión | Descripción |
+|----------|-------------|
+| **Pasa de turno** | Retener la pelota sin pasar ni disparar (como v0). Habilitada por regla. |
+| **Reventar la pelota** | Despeje — ver sección abajo |
 
 ### Reacciones defensivas
 
@@ -42,7 +51,7 @@ La pelota siempre la tiene un jugador específico de la ofensiva. Solo ese jugad
 
 > `Trampa de offside` y `Marca personal` **solo** se juegan cuando el ataque pasa de turno, no en respuesta a un pase.
 
-> **Importante:** la defensa solo puede reaccionar con **una carta por carta jugada del ataque**. Si hay un pase, solo se puede responder una carta en todo el equipo hasta que el ataque juegue otra carta.
+> **Importante:** la defensa solo puede reaccionar con **una carta por acción del ataque** (carta jugada o decisión como pasa de turno / reventar). Tras un pase, una sola respuesta defensiva en todo el equipo hasta la próxima acción ofensiva.
 
 ### Contra-respuesta ofensiva
 
@@ -63,6 +72,8 @@ Si la defensa robó la pelota y la ofensiva no respondió con otra carta, el jug
 | **Pase** | El jugador que tiene la pelota se la pasa a un compañero |
 | **Disparo al arco** | Activa la fase de disparo al arco |
 | **Gambetear** | Si la defensa juega `Robo pelota`, el portador elude y conserva la pelota |
+
+> `Gambetear` es carta; **pasa de turno** y **reventar** no lo son — figuran arriba como decisiones.
 
 ### Defensivas
 

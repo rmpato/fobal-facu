@@ -23,7 +23,7 @@ Cada propuesta debería probarse como reglamento nuevo y compararse con `compare
 
 | Aspecto | Evidencia |
 |---------|-----------|
-| Partidos que cierran | ~96,5% completados con IA estratégica (vs 60% IA simple) |
+| Partidos que cierran | ~96,5% completados con IA estratégica (vs ~62,5% IA simple en v1) |
 | Ritmo goleador | ~4 goles/partido, ~183 turnos — razonable para cartas |
 | Robo + Gambetear | Loop claro: pase → robo → gambetear (~15% + contra-respuesta frecuente) |
 | Reventar la pelota | ~28% de acciones; resuelve deadlocks cuando no hay Pase |

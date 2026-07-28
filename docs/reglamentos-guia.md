@@ -79,7 +79,7 @@ python -m simulador compare-reglamentos --partidos 200
 | `partido` | Jugadores mínimos, mano inicial, goles para ganar, penales en 2-2 |
 | `reposicion` | `cambio_equipo` (v1) o `mano_vacia` (v0) |
 | `disparo.rebote_palo` | Rebote y palo en disparos |
-| `acciones_ofensivas` | Acciones que la IA puede elegir |
+| `acciones_ofensivas` | Incluye **decisiones sin carta** (`pasa_turno`, `reventar`) y acciones con carta (`pase`, `disparo`). No son tipos de carta del mazo. |
 | `reacciones.pase` / `pasa_turno` | Cartas defensivas y contras |
 | `reglas.*` | Comportamiento fino (faltas, pasa sin respuesta, etc.) |
 | `motor_perfil` | `v0` o `v1`: motor de turno subyacente hasta que v2 sea 100 % declarativo |

@@ -38,7 +38,7 @@
     <div class="page-hero">
       <p class="breadcrumb"><a href="index.html">Inicio</a> / Reglas</p>
       <h1>📋 Reglas y mazos</h1>
-      <p class="lead">Versión actual: <strong>v1</strong> (iteración post playtesting). v0 es la versión original para comparar.</p>
+      <p class="lead">Reglamentos implementados: <strong>v0</strong> · <strong>v1</strong> (actual) · <strong>v1.1</strong> (pasa al compañero). Reglas de mesa + mazos.</p>
     </div>
 
     <section>
@@ -46,6 +46,7 @@
       <div class="tabs-group">
         <div class="tabs">
           <button class="tab-btn active" data-tab="panel-v1">v1 — Actual</button>
+          <button class="tab-btn" data-tab="panel-v11">v1.1</button>
           <button class="tab-btn" data-tab="panel-v0">v0 — Original</button>
         </div>
 
@@ -55,13 +56,14 @@
             <p>Partido al mejor de 5 goles. Marcador <strong>2-2</strong> → penales inmediatos.</p>
 
             <h3>Acciones ofensivas</h3>
+            <p><small><strong>Pasa de turno</strong> y <strong>Reventar</strong> son decisiones del jugador — no cartas del mazo.</small></p>
             <table>
-              <thead><tr><th>Acción</th><th>Descripción</th></tr></thead>
+              <thead><tr><th>Acción</th><th>¿Carta?</th><th>Descripción</th></tr></thead>
               <tbody>
-                <tr><td><strong>Patear al arco</strong></td><td><em>Disparo al arco</em> → dados vs arquero</td></tr>
-                <tr><td><strong>Pasar</strong></td><td><em>Pase</em> a un compañero</td></tr>
-                <tr><td><strong>Pasa de turno</strong></td><td>Retener la pelota sin pasar ni disparar</td></tr>
-                <tr><td><strong>Reventar</strong></td><td>Despeje — duelo de dados</td></tr>
+                <tr><td><strong>Patear al arco</strong></td><td><em>Disparo al arco</em></td><td>Dados vs arquero</td></tr>
+                <tr><td><strong>Pasar</strong></td><td><em>Pase</em></td><td>A un compañero</td></tr>
+                <tr><td><strong>Pasa de turno</strong></td><td>—</td><td>Decisión: retener la pelota sin pasar ni disparar</td></tr>
+                <tr><td><strong>Reventar</strong></td><td>—</td><td>Decisión: despeje — duelo de dados</td></tr>
               </tbody>
             </table>
 
@@ -73,7 +75,7 @@
                 <tr><td>Pasó de turno</td><td><em>Trampa de offside</em>, <em>Marca personal</em></td></tr>
               </tbody>
             </table>
-            <p><small>Una sola carta defensiva por carta ofensiva.</small></p>
+            <p><small>Una sola carta defensiva por <strong>acción del ataque</strong> (carta o decisión).</small></p>
 
             <h3>Disparo al arco 🎲</h3>
             <p>Pateador y arquero tiran un dado cada uno. Más pases en la jugada = más chances de gol.</p>
@@ -100,9 +102,23 @@
 
         <div id="panel-v0" class="tab-panel">
           <div class="card">
+            <h3>Objetivo</h3>
+            <p>Partido al mejor de 5 goles. Marcador <strong>2-2</strong> → penales inmediatos.</p>
+
+            <h3>Acciones ofensivas</h3>
+            <p><small><strong>Pasa de turno</strong> es una decisión del jugador — no hay carta en el mazo.</small></p>
+            <table>
+              <thead><tr><th>Acción</th><th>¿Carta?</th><th>Descripción</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Patear al arco</strong></td><td><em>Disparo al arco</em></td><td>Dados vs arquero</td></tr>
+                <tr><td><strong>Pasar</strong></td><td><em>Pase</em></td><td>A un compañero</td></tr>
+                <tr><td><strong>Pasa de turno</strong></td><td>—</td><td>Decisión: retener la pelota sin pasar ni disparar</td></tr>
+              </tbody>
+            </table>
+
             <h3>Diferencias clave vs v1</h3>
             <ul class="findings">
-              <li><em>Ceder el turno</em> en lugar de reventar</li>
+              <li><strong>Pasa de turno</strong> (decisión, no carta) en lugar de reventar</li>
               <li><em>Corta pase</em> + <em>Tackle</em> en lugar de <em>Robo pelota</em></li>
               <li><em>La dejo pasar</em> contra corte de pase</li>
               <li>Reposición al quedarse sin cartas (no al cambiar de equipo)</li>
@@ -117,8 +133,18 @@
             </table>
           </div>
         </div>
+
+        <div id="panel-v11" class="tab-panel">
+          <div class="card">
+            <h3>v1.1 — Pasa al compañero</h3>
+            <p>Extiende <strong>v1</strong>. Mismo mazo y mismas cartas.</p>
+            <p><strong>Único cambio:</strong> si el atacante <strong>pasa de turno</strong> (decisión, sin carta) y la defensa no juega Trampa ni Marca, la pelota pasa a un compañero del mismo equipo.</p>
+            <p>En simulación es casi igual a v1 → ver <a href="resultados.html#historico">comparación de reglamentos</a>.</p>
+            <p><small>Texto: <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v1.1.md">reglamento-v1.1.md</a></small></p>
+          </div>
+        </div>
       </div>
-      <p><small>Texto completo: <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v1.md">reglamento-v1.md</a> · <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v0.md">reglamento-v0.md</a></small></p>
+      <p><small>Texto completo: <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v1.md">reglamento-v1.md</a> · <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v1.1.md">reglamento-v1.1.md</a> · <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v0.md">reglamento-v0.md</a></small></p>
     </section>
 
     <section>

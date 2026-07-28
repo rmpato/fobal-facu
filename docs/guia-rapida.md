@@ -65,7 +65,7 @@ python3 -m simulador variantes --partidos 500
 
 **Diferencias clave:**
 
-- **v0** — Corta pase, Tackle, La dejo pasar, ceder el turno; reposición cuando la mano queda vacía.
+- **v0** — Corta pase, Tackle, La dejo pasar, **pasa de turno** (decisión, no carta); reposición cuando la mano queda vacía.
 - **v1** — Robo pelota, Reventar la pelota, rebote/palo en disparos; Trampa/Marca solo en pasa de turno; reposición al cambiar de equipo.
 - **v1.1** — Igual que v1, pero pasa de turno sin respuesta defensiva → la pelota pasa a un compañero.
 

@@ -3,7 +3,7 @@
   "nombre": "Reglamento original",
   "version": "0.0",
   "documento": "docs/reglamento-v0.md",
-  "descripcion": "Versión inicial antes del playtesting. Corta pase, Tackle, ceder el turno, La dejo pasar.",
+  "descripcion": "Versión inicial antes del playtesting. Corta pase, Tackle, pasa de turno (decisión, no carta), La dejo pasar.",
   "mazo": {
     "Pase": 42,
     "Corta pase": 12,

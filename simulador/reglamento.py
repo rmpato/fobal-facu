@@ -9,6 +9,12 @@ from typing import Any
 
 from simulador.cartas import Carta, construir_mazo
 
+DECISIONES_SIN_CARTA = frozenset({"pasa_turno", "reventar"})
+ETIQUETAS_DECISION = {
+    "pasa_turno": "pasa de turno (decisión, sin carta)",
+    "reventar": "reventar / despeje (decisión, sin carta)",
+}
+
 ROOT = Path(__file__).resolve().parent.parent
 REGLAMENTOS_DIR = ROOT / "reglamentos"
 
@@ -60,6 +66,13 @@ class Reglamento:
 
     def resumen_reglas(self) -> list[str]:
         """Lista legible de reglas que el simulador aplica."""
+        con_carta = [a for a in self.acciones_ofensivas if a not in DECISIONES_SIN_CARTA]
+        sin_carta = [a for a in self.acciones_ofensivas if a in DECISIONES_SIN_CARTA]
+        if self.reventar_habilitado and "reventar" not in sin_carta:
+            sin_carta.append("reventar")
+        elif not self.reventar_habilitado and "reventar" in sin_carta:
+            sin_carta = [a for a in sin_carta if a != "reventar"]
+
         lineas = [
             f"Documento: {self.documento or '(sin documento)'}",
             f"Mazo: {sum(self.mazo.values())} cartas ({len(self.mazo)} tipos)",
@@ -67,12 +80,12 @@ class Reglamento:
             f"Penales si marcador {list(self.penales_si_marcador)}",
             f"Reposición: {self.reposicion}",
             f"Disparo rebote/palo: {'sí' if self.rebote_palo else 'no'}",
-            f"Acciones ofensivas: {', '.join(self.acciones_ofensivas)}",
+            f"Acciones con carta: {', '.join(con_carta) or 'ninguna'}",
+            f"Decisiones sin carta: {', '.join(sin_carta) or 'ninguna'}",
             f"Defensa al pase: {_nombres_cartas(self.reacciones_pase.cartas) or 'ninguna'}",
             f"Defensa al pasa de turno: {_nombres_cartas(self.reacciones_pasa_turno.cartas) or 'ninguna'}",
             f"Tackle en pasa de turno: {'sí' if self.reacciones_pasa_turno.permitir_tackle else 'no'}",
-            f"Reventar: {'sí' if self.reventar_habilitado else 'no'}",
-            f"Trampa/marca solo en pasa de turno: {'sí' if self.trampa_marca_solo_en_pasa_turno else 'no'}",
+            f"Trampa/marca solo cuando ataque pasa de turno (decisión): {'sí' if self.trampa_marca_solo_en_pasa_turno else 'no'}",
             f"Una reacción defensiva por acción: {'sí' if self.una_reaccion_defensiva_por_accion else 'no'}",
             f"Pasa de turno sin respuesta: {self.pasa_turno_sin_respuesta}",
             f"Prob. falta oportunista/turno: {self.prob_falta_por_turno:.0%}",

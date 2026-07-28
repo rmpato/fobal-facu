@@ -11,7 +11,7 @@ Cómo reproducir → [guia-rapida.md](./guia-rapida.md). Qué probar next → [r
 
 | | v0 | v1 (IA simple) | v1 (IA estratégica) |
 |---|-----|----------------|---------------------|
-| **Partidos completados** | ~1% | 60% | **96,5%** |
+| **Partidos completados** | ~1% | 62,5% | **96,5%** |
 | **Goles / partido** | 0,66 | 3,25 | **4,02** |
 | **Empates técnicos** | 99% | 40% | **3,5%** |
 | **Penales (2-2)** | 0% | 22,5% | **36,5%** |
@@ -200,7 +200,7 @@ Corridas con `--ia estrategica` (default) y comando `python3 -m simulador varian
 
 | Métrica | IA simple (antes) | IA estratégica |
 |---------|-------------------|----------------|
-| Partidos completados | 60% | **96,5%** |
+| Partidos completados | 62,5% | **96,5%** |
 | Empates técnicos | 40% | **3,5%** |
 | Goles promedio | 3,25 | **4,02** |
 | Turnos promedio | 304 | **183** |

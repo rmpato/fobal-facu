@@ -44,14 +44,14 @@
     <!-- IA estratégica -->
     <section id="ia-estrategica">
       <span class="tag new">Nuevo · jul 2026</span>
-      <h2>IA estratégica (v1)</h2>
-      <p class="section-lead">200 partidos · usa pasa de turno a propósito · defensa activa con Trampa/Marca</p>
+      <h2>IA estratégica vs simple (v1)</h2>
+      <p class="section-lead">200 partidos · v1 · la estratégica usa la decisión pasa de turno a propósito</p>
 
       <div class="compare-grid">
         <div class="stat-box">
           <div class="label">Completados</div>
-          <div class="values"><span class="val v0">60%</span><span class="val v1">96,5%</span></div>
-          <div class="unit">simple → estratégica</div>
+          <div class="values"><span class="val v0">62,5%</span><span class="val v1">96,5%</span></div>
+          <div class="unit">IA simple → estratégica</div>
         </div>
         <div class="stat-box">
           <div class="label">Goles / partido</div>
@@ -72,14 +72,14 @@
         <table>
           <thead><tr><th>Carta / evento</th><th class="num">IA simple</th><th class="num">IA estratégica</th></tr></thead>
           <tbody>
-            <tr><td>Pasa de turno / partido</td><td class="num v0">~1,2</td><td class="num better">16,3</td></tr>
+            <tr><td>Pasa de turno (decisión) / partido</td><td class="num v0">~1,2</td><td class="num better">16,3</td></tr>
             <tr><td>Trampa colocada</td><td class="num v0">~0,9</td><td class="num better">3,65</td></tr>
             <tr><td>Marca colocada</td><td class="num v0">~1,2</td><td class="num better">5,90</td></tr>
             <tr><td>Offside efectivo</td><td class="num">—</td><td class="num">3,08</td></tr>
             <tr><td>Marca efectiva al pase</td><td class="num">—</td><td class="num">4,04</td></tr>
           </tbody>
         </table>
-        <p><small>Las 8 cartas de Trampa+Marca se usan ~9,5 veces por partido (colocadas). Antes casi no aparecían porque la IA casi nunca pasaba de turno.</small></p>
+        <p><small>Trampa y Marca son cartas; pasa de turno no. Las 8 cartas de Trampa+Marca se colocan ~9,5 veces/partido con IA estratégica porque el ataque pasa de turno ~16 veces.</small></p>
       </div>
     </section>
 
@@ -93,7 +93,7 @@
         <span class="legend-despeje">Despeje 28,2%</span>
         <span class="legend-robo">Robo 15,5%</span>
         <span class="legend-disparo">Disparo 8,4%</span>
-        <span class="legend-pasat">Pasa turno 7,6%</span>
+        <span class="legend-pasat">Pasa turno (decisión) 7,6%</span>
         <span class="legend-falta">Falta 5,5%</span>
       </div>
 
@@ -103,7 +103,7 @@
           <div class="bar-row"><span class="bar-label">Despeje</span><div class="bar-track"><div class="bar-fill" style="width:28.2%;background:linear-gradient(90deg,#3a7ab0,#5a9fd4)"></div></div><span class="bar-value">28,2%</span></div>
           <div class="bar-row"><span class="bar-label">Robo</span><div class="bar-track"><div class="bar-fill gold" style="width:15.5%"></div></div><span class="bar-value">15,5%</span></div>
           <div class="bar-row"><span class="bar-label">Disparo</span><div class="bar-track"><div class="bar-fill gold" style="width:8.4%"></div></div><span class="bar-value">8,4%</span></div>
-          <div class="bar-row"><span class="bar-label">Pasa de turno</span><div class="bar-track"><div class="bar-fill" style="width:7.6%;background:linear-gradient(90deg,#8a5ab0,#b07ad4)"></div></div><span class="bar-value">7,6%</span></div>
+          <div class="bar-row"><span class="bar-label">Pasa de turno <small>(decisión)</small></span><div class="bar-track"><div class="bar-fill" style="width:7.6%;background:linear-gradient(90deg,#8a5ab0,#b07ad4)"></div></div><span class="bar-value">7,6%</span></div>
           <div class="bar-row"><span class="bar-label">Falta</span><div class="bar-track"><div class="bar-fill v0" style="width:5.5%"></div></div><span class="bar-value">5,5%</span></div>
         </div>
         <p><strong>Para playtesting:</strong> en un partido real, contá cuántas veces pasa cada cosa y compará con esta tabla.</p>
@@ -160,7 +160,7 @@
             <tr><td>Penales (2-2)</td><td class="num v0">0,5%</td><td class="num v1">36,5%</td><td class="num v11">32,0%</td></tr>
             <tr><td>Pase (% acciones)</td><td class="num v0">3,9%</td><td class="num v1">34,7%</td><td class="num v11">35,0%</td></tr>
             <tr><td>Despeje (% acciones)</td><td class="num v0">0%</td><td class="num v1">28,2%</td><td class="num v11">27,8%</td></tr>
-            <tr><td>Pasa de turno (% acciones)</td><td class="num v0">92,8%</td><td class="num v1">7,6%</td><td class="num v11">7,6%</td></tr>
+            <tr><td>Pasa de turno — decisión (% acciones)</td><td class="num v0">92,8%</td><td class="num v1">7,6%</td><td class="num v11">7,6%</td></tr>
             <tr><td>Trampa colocada / partido</td><td class="num v0">1,12</td><td class="num v1">3,65</td><td class="num v11">3,44</td></tr>
             <tr><td>Marca colocada / partido</td><td class="num v0">2,10</td><td class="num v1">5,90</td><td class="num v11">6,08</td></tr>
           </tbody>
@@ -191,12 +191,12 @@
         <table>
           <thead><tr><th></th><th class="num">Lógica incorrecta</th><th class="num">Regla real (v1)</th></tr></thead>
           <tbody>
-            <tr><td>Completados (IA simple)</td><td class="num">94%</td><td class="num">60%</td></tr>
+            <tr><td>Completados (IA simple, v1)</td><td class="num">94%</td><td class="num">62,5%</td></tr>
             <tr><td>Goles / partido</td><td class="num">4,06</td><td class="num">3,25</td></tr>
             <tr><td>Marca / partido</td><td class="num">~9,7</td><td class="num">~1,2</td></tr>
           </tbody>
         </table>
-        <p>Con <strong>IA estratégica</strong> y regla correcta, Marca/Trampa vuelven a ~9,5 colocaciones/partido en v1 porque la IA sí pasa de turno.</p>
+        <p>Con <strong>IA estratégica</strong> y regla correcta, Marca/Trampa vuelven a ~9,5 colocaciones/partido en v1 porque la IA usa la decisión pasa de turno.</p>
       </div>
     </section>
 
@@ -219,7 +219,7 @@
           <li><strong>v1:</strong> ~97% de partidos termina · ~4 goles/partido · ~183 turnos.</li>
           <li><strong>v1.1</strong> (pasa al compañero): casi idéntico a v1 (~98% completados, ~4 goles).</li>
           <li>Despeje + robo mueven la pelota constantemente.</li>
-          <li>Trampa/Marca relevantes si se usa pasa de turno (~8 cartas del mazo).</li>
+          <li>Trampa/Marca (cartas) se activan cuando el ataque elige <strong>pasa de turno</strong> — decisión, no carta.</li>
         </ul>
       </div>
 

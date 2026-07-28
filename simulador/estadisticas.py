@@ -8,6 +8,10 @@ from simulador.config import ConfigSimulacion
 from simulador.motor import jugar_partido
 
 ACCIONES_REPORTE = ("pase", "disparo", "robo", "despeje", "pasa_turno", "falta")
+ETIQUETAS_ACCION = {
+    "pasa_turno": "pasa de turno (decisión)",
+    "despeje": "reventar / despeje (decisión)",
+}
 ACCIONES_TRAMPA = ("trampa_colocada", "marca_colocada", "offside_efectivo", "marca_efectiva")
 
 
@@ -134,7 +138,8 @@ def formatear_reporte(res: ResultadosSimulacion) -> str:
     for accion in ACCIONES_REPORTE:
         n = res.acciones.get(accion, 0)
         por_partido = n / res.partidos if res.partidos else 0
-        lineas.append(f"  {accion}: {pct[accion]:5.1f}%  ({por_partido:.2f}/partido)")
+        etiqueta = ETIQUETAS_ACCION.get(accion, accion)
+        lineas.append(f"  {etiqueta}: {pct[accion]:5.1f}%  ({por_partido:.2f}/partido)")
 
     trampa_total = sum(res.acciones.get(a, 0) for a in ACCIONES_TRAMPA)
     if trampa_total:

@@ -23,6 +23,12 @@ Reglas confirmadas en playtesting y supuestos que aún faltan cerrar.
 - Cada equipo **elige** quién tira — **cualquier jugador**, salvo el que reventó la pelota.
 - El simulador elige al azar entre los compañeros del reventor (equipo atacante) y cualquier defensor (equipo rival).
 
+### Pasa de turno — no es una carta
+
+- **Pasa de turno** (v0: ceder el turno) es una **decisión** del portador: retener la pelota sin jugar `Pase` ni `Disparo al arco`.
+- No existe carta “Pasa de turno” en el mazo. La regla **habilita** la acción, igual que **Reventar la pelota** en v1.
+- Trampa de offside y Marca personal solo se juegan cuando la defensa **reacciona** a esa decisión.
+
 ## Objetivo del partido
 
 **Texto:** "Partido al mejor de 5 goles, si empatan 2-2 va a penales."

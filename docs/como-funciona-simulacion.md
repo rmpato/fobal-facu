@@ -41,14 +41,22 @@ Parámetros de corrida → [guia-rapida.md](./guia-rapida.md#opciones-útiles). 
 
 ## Acciones que modela el motor
 
-### Ofensivas
+### Con carta en mano
 
-| Acción | v0 | v1 |
-|--------|----|----|
-| Pase | ✓ | ✓ |
-| Disparo al arco | ✓ | ✓ |
-| Pasa de turno | ✓ | ✓ |
-| Reventar / despeje | — | ✓ |
+| Acción | Carta |
+|--------|-------|
+| **Pase** | `Pase` |
+| **Disparo al arco** | `Disparo al arco` |
+| **Gambetear** | `Gambetear` (contra-respuesta) |
+
+### Decisiones sin carta (habilitadas por regla)
+
+| Decisión | v0 | v1 |
+|----------|----|----|
+| **Pasa de turno** | ✓ | ✓ |
+| **Reventar / despeje** | — | ✓ |
+
+No hay carta “Pasa de turno” ni “Reventar” en el mazo. El portador **elige** esas acciones, como dice el reglamento en mesa.
 
 ### Defensivas (como reacción)
 

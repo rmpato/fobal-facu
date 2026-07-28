@@ -60,7 +60,7 @@
         <div class="flow-steps">
           <div class="flow-step"><span class="flow-num">1</span><div><strong>Setup</strong><br>Mazo barajado, 6 cartas por jugador, sorteo de pelota inicial.</div></div>
           <div class="flow-arrow">↓</div>
-          <div class="flow-step"><span class="flow-num">2</span><div><strong>Turno</strong><br>El portador elige: pase, disparo, pasa de turno o despeje (v1). La defensa reacciona.</div></div>
+          <div class="flow-step"><span class="flow-num">2</span><div><strong>Turno</strong><br>El portador juega carta (pase, disparo) o toma una <strong>decisión</strong> (pasa de turno, reventar en v1). La defensa reacciona.</div></div>
           <div class="flow-arrow">↓</div>
           <div class="flow-step"><span class="flow-num">3</span><div><strong>¿Fin?</strong><br>≥3 goles → gana alguien. 2-2 → penales. &gt;500 turnos → empate técnico.</div></div>
           <div class="flow-arrow">↓</div>
@@ -78,9 +78,9 @@
     │
     ├─ Disparo al arco → 🎲 vs arquero → ¿gol?
     │
-    ├─ Reventar → 🎲 duelo (elige quién tira, no el reventor)
+    ├─ Reventar (decisión, sin carta) → 🎲 duelo
     │
-    ├─ Pasa de turno → defensa: Trampa / Marca personal
+    ├─ Pasa de turno (decisión, sin carta) → defensa: Trampa / Marca
     │
     └─ Pase → ¿trampa offside activa? → pierde pelota
               → ¿marca al receptor? → pierde pelota
@@ -134,11 +134,11 @@
       <h2>Métricas que registra</h2>
       <div class="card">
         <h3>Acciones (para comparar con mesa)</h3>
-        <p>Pase · Disparo · Robo · Despeje · Pasa de turno · Falta</p>
+        <p>Pase · Disparo · Robo · Reventar (decisión) · Pasa de turno (decisión) · Falta</p>
         <p>Ver distribución actual en <a href="resultados.html">Resultados</a>.</p>
 
         <h3>Trampa / Marca</h3>
-        <p>Colocadas (al pasa de turno) y efectivas (offside o marca al pase siguiente).</p>
+        <p>Colocadas cuando la defensa reacciona al <strong>pasa de turno</strong> (decisión del atacante).</p>
 
         <h3>Partido</h3>
         <p>Goles, turnos, penales, cartas jugadas, empates técnicos (&gt;500 turnos).</p>
@@ -152,8 +152,8 @@
         <table>
           <thead><tr><th>Variante</th><th>Efecto</th></tr></thead>
           <tbody>
-            <tr><td><code>baseline</code></td><td>Pasa de turno sin respuesta → pelota queda igual</td></tr>
-            <tr><td><code>pasa_companero</code></td><td>Sin respuesta → pelota pasa a un compañero</td></tr>
+            <tr><td><code>baseline</code> (= reglamento <strong>v1</strong>)</td><td>Pasa de turno sin respuesta → pelota queda igual</td></tr>
+            <tr><td><code>pasa_companero</code> (= reglamento <strong>v1.1</strong>)</td><td>Sin respuesta → pelota pasa a un compañero</td></tr>
           </tbody>
         </table>
         <p><a href="simulador.html">Ver comandos para correr variantes →</a></p>
