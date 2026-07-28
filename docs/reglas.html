@@ -3,6 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base id="site-base" href="./">
+  <script>
+    (function () {
+      var el = document.getElementById("site-base");
+      if (location.hostname.endsWith("github.io")) {
+        var repo = location.pathname.split("/").filter(Boolean)[0];
+        if (repo) el.href = "/" + repo + "/";
+      }
+    })();
+  </script>
   <title>Reglas — Fobal Facu</title>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -106,7 +116,7 @@
           </div>
         </div>
       </div>
-      <p><small>Texto completo: <a href="reglamento-v1.md">reglamento-v1.md</a> · <a href="reglamento-v0.md">reglamento-v0.md</a></small></p>
+      <p><small>Texto completo: <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v1.md">reglamento-v1.md</a> · <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v0.md">reglamento-v0.md</a></small></p>
     </section>
 
     <section>

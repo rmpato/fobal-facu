@@ -3,6 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base id="site-base" href="./">
+  <script>
+    (function () {
+      var el = document.getElementById("site-base");
+      if (location.hostname.endsWith("github.io")) {
+        var repo = location.pathname.split("/").filter(Boolean)[0];
+        if (repo) el.href = "/" + repo + "/";
+      }
+    })();
+  </script>
   <meta name="description" content="Fobal Facu — juego de cartas de fútbol. Reglas, simulación y playtesting.">
   <title>Fobal Facu — Inicio</title>
   <link rel="stylesheet" href="assets/css/style.css">
@@ -113,8 +123,8 @@
     <p>Fobal Facu · Simulador de cartas de fútbol</p>
     <p>
       <a id="repo-link" href="https://github.com/rmpato/fobal-facu">Ver código en GitHub</a>
-      · <a href="resultados-iniciales.md">Resultados (MD)</a>
-      · <a href="ambiguedades.md">Ambigüedades</a>
+      · <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/resultados-iniciales.md">Resultados (MD)</a>
+      · <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/ambiguedades.md">Ambigüedades</a>
     </p>
   </footer>
   <script src="assets/js/main.js"></script>
