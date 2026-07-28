@@ -970,6 +970,79 @@ def _run_curses(
     _mostrar_final(ui, estado, semilla=semilla, comando=comando)
 
 
+def _run_rich(
+    estado: EstadoPartido,
+    config: ConfigSimulacion,
+    *,
+    semilla: int,
+    nombres_por_equipo: tuple[list[str], list[str]],
+    colores: dict[str, int],
+    pausa: float,
+    comando: str,
+    transcript: _Transcript,
+    grabacion: _Grabacion | None,
+    velocidad: str,
+) -> None:
+    from simulador.espectador_rich import envolver
+
+    ui = _UIBase(
+        estado,
+        semilla=semilla,
+        pausa_seg=pausa,
+        comando_repetir=comando,
+        transcript=transcript,
+        grabacion=grabacion,
+        colores=colores,
+        velocidad=velocidad,
+    )
+    pantalla = envolver(ui)
+    try:
+        _intro(ui, estado, semilla, nombres_por_equipo, comando)
+        if not ui.abortar:
+            _correr_con_ui(ui, estado, config)
+        _mostrar_final(ui, estado, semilla=semilla, comando=comando)
+    finally:
+        pantalla.close()
+
+
+def _run_textual(
+    estado: EstadoPartido,
+    config: ConfigSimulacion,
+    *,
+    semilla: int,
+    nombres_por_equipo: tuple[list[str], list[str]],
+    colores: dict[str, int],
+    pausa: float,
+    comando: str,
+    transcript: _Transcript,
+    grabacion: _Grabacion | None,
+    velocidad: str,
+) -> None:
+    from simulador.espectador_textual import run_partido
+
+    ui = _UIBase(
+        estado,
+        semilla=semilla,
+        pausa_seg=pausa,
+        comando_repetir=comando,
+        transcript=transcript,
+        grabacion=grabacion,
+        colores=colores,
+        velocidad=velocidad,
+    )
+    run_partido(
+        ui,
+        estado,
+        config,
+        intro_fn=_intro,
+        correr_fn=_correr_con_ui,
+        final_fn=_mostrar_final,
+        semilla=semilla,
+        nombres_equipos=nombres_por_equipo,
+        comando=comando,
+    )
+
+
 def ver_partido(
     config: ConfigSimulacion,
     *,
@@ -982,7 +1055,11 @@ def ver_partido(
     sin_pausa: bool = False,
     velocidad: str = "normal",
     exportar_html: bool = False,
+    ui: str = "auto",
 ) -> EstadoPartido:
+    from simulador.espectador_backend import resolver_ui, validar_ui
+
+    backend = validar_ui(resolver_ui(ui))
     estado, semilla_usada, nombres_equipos, colores = preparar_partido(
         config,
         semilla=semilla,
@@ -1017,26 +1094,25 @@ def ver_partido(
     transcript.iniciar()
     transcript.escribir(comando)
 
-    usar_curses = sys.stdin.isatty() and sys.stdout.isatty() and "dumb" not in (
-        __import__("os").environ.get("TERM", "")
+    kwargs_ui = dict(
+        semilla=semilla_usada,
+        nombres_por_equipo=nombres_equipos,
+        colores=colores,
+        pausa=pausa_ui,
+        comando=comando,
+        transcript=transcript,
+        grabacion=grabacion,
+        velocidad=velocidad_efectiva,
     )
 
-    if usar_curses:
-        curses.wrapper(
-            _run_curses,
-            estado,
-            config,
-            semilla=semilla_usada,
-            nombres_por_equipo=nombres_equipos,
-            colores=colores,
-            pausa=pausa_ui,
-            comando=comando,
-            transcript=transcript,
-            grabacion=grabacion,
-            velocidad=velocidad_efectiva,
-        )
+    if backend == "curses":
+        curses.wrapper(_run_curses, estado, config, **kwargs_ui)
+    elif backend == "rich":
+        _run_rich(estado, config, **kwargs_ui)
+    elif backend == "textual":
+        _run_textual(estado, config, **kwargs_ui)
     else:
-        ui = PantallaSimple(
+        ui_obj = PantallaSimple(
             estado,
             semilla=semilla_usada,
             pausa_seg=pausa_ui,
@@ -1046,10 +1122,10 @@ def ver_partido(
             colores=colores,
             velocidad=velocidad_efectiva,
         )
-        _intro(ui, estado, semilla_usada, nombres_equipos, comando)
-        if not ui.abortar:
-            _correr_con_ui(ui, estado, config)
-        _mostrar_final(ui, estado, semilla=semilla_usada, comando=comando)
+        _intro(ui_obj, estado, semilla_usada, nombres_equipos, comando)
+        if not ui_obj.abortar:
+            _correr_con_ui(ui_obj, estado, config)
+        _mostrar_final(ui_obj, estado, semilla=semilla_usada, comando=comando)
 
     html_path = grabacion.finalizar(estado) if grabacion else None
     if grabar and grabar.suffix.lower() != ".json":

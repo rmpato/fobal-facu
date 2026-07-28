@@ -1,2 +1,5 @@
 # Sin dependencias obligatorias — Python 3.11+ stdlib.
-# Opcional para terminal con mas estilos: pip install rich
+#
+# Opcional (terminal mas linda en `simulador ver`):
+#   pip install rich      # paneles y colores (--ui rich o auto)
+#   pip install textual   # TUI completa (--ui textual o auto; tiene prioridad)

@@ -156,6 +156,12 @@ def main() -> None:
         action="store_true",
         help="Sin espera entre líneas (útil para pruebas o generar transcripción)",
     )
+    ver.add_argument(
+        "--ui",
+        choices=["auto", "textual", "rich", "curses", "simple"],
+        default="auto",
+        help="Backend de terminal: auto elige textual>rich>curses (default: auto)",
+    )
 
     args = parser.parse_args()
 
@@ -226,6 +232,7 @@ def main() -> None:
             sin_pausa=args.sin_pausa,
             velocidad=args.velocidad,
             exportar_html=args.exportar_html,
+            ui=args.ui,
         )
 
 
