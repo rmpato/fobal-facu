@@ -34,7 +34,7 @@ def ia_accion_simple(estado: EstadoPartido, portador: Jugador, es_receptor: bool
         if random.random() < prob_disparo:
             return "disparo"
 
-    if estado.reglas == "v1":
+    if estado.reglamento and estado.reglamento.reventar_habilitado:
         if Carta.PASE not in mano:
             return "reventar"
         if random.random() < 0.10:
@@ -81,7 +81,7 @@ def ia_accion_estrategica(estado: EstadoPartido, portador: Jugador, es_receptor:
         if random.random() < prob_disparo:
             return "disparo"
 
-    if estado.reglas == "v1":
+    if estado.reglamento and estado.reglamento.reventar_habilitado:
         if Carta.PASE not in mano:
             return "reventar"
 
@@ -134,7 +134,7 @@ def _defensa_base(estado: EstadoPartido, contexto: str, agresividad: float):
                 candidatos.append((d, Carta.TRAMPA_OFFSIDE))
             if d.tiene(Carta.MARCA_PERSONAL) and random.random() < 0.40 * agresividad:
                 candidatos.append((d, Carta.MARCA_PERSONAL))
-            if estado.reglas == "v0" and d.tiene(Carta.TACKLE) and random.random() < 0.45 * agresividad:
+            if estado.reglamento and estado.reglamento.motor_perfil == "v0" and d.tiene(Carta.TACKLE) and random.random() < 0.45 * agresividad:
                 candidatos.append((d, Carta.TACKLE))
         if candidatos:
             return random.choice(candidatos)
@@ -143,9 +143,9 @@ def _defensa_base(estado: EstadoPartido, contexto: str, agresividad: float):
     if contexto == "pase":
         candidatos = []
         for d in defensores:
-            if estado.reglas == "v0" and d.tiene(Carta.CORTA_PASE) and random.random() < 0.35 * agresividad:
+            if estado.reglamento and estado.reglamento.motor_perfil == "v0" and d.tiene(Carta.CORTA_PASE) and random.random() < 0.35 * agresividad:
                 candidatos.append((d, Carta.CORTA_PASE))
-            elif estado.reglas == "v1" and d.tiene(Carta.ROBO_PELOTA) and random.random() < 0.42 * agresividad:
+            elif estado.reglamento and estado.reglamento.motor_perfil == "v1" and d.tiene(Carta.ROBO_PELOTA) and random.random() < 0.42 * agresividad:
                 candidatos.append((d, Carta.ROBO_PELOTA))
         return random.choice(candidatos) if candidatos else (None, None)
 

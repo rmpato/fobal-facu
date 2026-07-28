@@ -27,6 +27,7 @@
         <a href="index.html" data-page="index.html">Inicio</a>
         <a href="reglas.html" data-page="reglas.html">Reglas</a>
         <a href="resultados.html" data-page="resultados.html">Resultados</a>
+        <a href="recomendaciones.html" data-page="recomendaciones.html">Recomendaciones</a>
         <a href="como-funciona.html" data-page="como-funciona.html">Cómo funciona</a>
         <a href="simulador.html" data-page="simulador.html">Simulador</a>
       </nav>
@@ -37,87 +38,65 @@
     <div class="page-hero">
       <p class="breadcrumb"><a href="index.html">Inicio</a> / Simulador</p>
       <h1>💻 Simulador</h1>
-      <p class="lead">Correr partidos automáticos desde la terminal para probar cambios de reglas antes de jugar en mesa.</p>
+      <p class="lead">Comandos esenciales. Documentación completa en el repo: <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/guia-rapida.md">guia-rapida.md</a>.</p>
     </div>
 
     <section>
-      <h2>Requisitos</h2>
+      <h2>Instalación</h2>
       <div class="card">
-        <p>Python 3.11+ · solo biblioteca estándar · repo en GitHub:</p>
         <pre><code>git clone https://github.com/rmpato/fobal-facu.git
-cd fobal-facu</code></pre>
+cd fobal-facu
+python3 --version   # 3.11+</code></pre>
       </div>
     </section>
 
     <section>
-      <h2>Comandos básicos</h2>
+      <h2>Comandos esenciales</h2>
       <div class="card">
-        <h3>100 partidos v1 (IA estratégica — default)</h3>
-        <pre><code>python3 -m simulador run --reglas v1 --partidos 100</code></pre>
+        <h3>Correr partidos</h3>
+        <pre><code>python3 -m simulador run --reglamento v1 --partidos 200
+python3 -m simulador run --reglamento v1 --partidos 1 --verbose</code></pre>
 
-        <h3>Ver un partido turno a turno</h3>
-        <pre><code>python3 -m simulador run --reglas v1 --partidos 1 --verbose</code></pre>
+        <h3>Reglamentos</h3>
+        <pre><code>python3 -m simulador reglamentos list
+python3 -m simulador reglamentos show v1</code></pre>
 
-        <h3>Comparar v0 vs v1</h3>
-        <pre><code>python3 -m simulador compare --partidos 200</code></pre>
-
-        <h3>IA simple (comportamiento viejo)</h3>
-        <pre><code>python3 -m simulador run --reglas v1 --partidos 100 --ia simple</code></pre>
+        <h3>Comparar versiones</h3>
+        <pre><code>python3 -m simulador compare-reglamentos --partidos 200
+python3 -m simulador compare --partidos 200</code></pre>
       </div>
     </section>
 
     <section>
-      <h2>Variantes de reglas</h2>
-      <p class="section-lead">Probar reglas alternativas sin tocar código — archivo <code>configs/variantes.json</code></p>
-
-      <div class="card">
-        <h3>Comparar variantes (500 partidos c/u)</h3>
-        <pre><code>python3 -m simulador variantes --partidos 500</code></pre>
-
-        <table>
-          <thead><tr><th>Variante</th><th>Comportamiento</th></tr></thead>
-          <tbody>
-            <tr><td><code>baseline</code></td><td>Si nadie reacciona al pasa de turno → pelota queda en el mismo jugador</td></tr>
-            <tr><td><code>pasa_companero</code></td><td>Sin respuesta defensiva → pelota pasa a un compañero</td></tr>
-          </tbody>
-        </table>
-
-        <h3>Una variante puntual</h3>
-        <pre><code>python3 -m simulador run --reglas v1 --partidos 200 \
-  --pasa-turno-sin-respuesta pasa_companero</code></pre>
-      </div>
-    </section>
-
-    <section>
-      <h2>Qué mira el reporte</h2>
+      <h2>Qué mirar en el reporte</h2>
       <div class="card">
         <ul class="findings">
-          <li><strong>Acciones (%):</strong> pase, disparo, robo, despeje, pasa de turno, falta</li>
-          <li><strong>Trampa / Marca:</strong> colocadas y efectivas</li>
-          <li>Completados vs empates técnicos (&gt;500 turnos)</li>
-          <li>Goles promedio y % penales</li>
-          <li>Cartas jugadas por partido</li>
+          <li><strong>Reglas aplicadas</strong> — qué interpretó el motor</li>
+          <li><strong>Completados</strong> vs empates técnicos (&gt;500 turnos)</li>
+          <li><strong>Acciones %</strong> — pase, despeje, robo, disparo, pasa turno, falta</li>
+          <li>Goles promedio · % penales · cartas jugadas</li>
         </ul>
-        <p>Compará esos % con lo que pasa en mesa → <a href="resultados.html">ver resultados</a> · <a href="como-funciona.html">cómo funciona la simulación</a>.</p>
+        <p>Conclusiones documentadas → <a href="resultados.html">resultados</a> · <a href="recomendaciones.html">recomendaciones</a>.</p>
       </div>
     </section>
 
     <section>
-      <h2>Perfiles de IA</h2>
+      <h2>IA</h2>
       <div class="card">
         <table>
-          <thead><tr><th>Perfil</th><th>Flag</th><th>Descripción</th></tr></thead>
+          <thead><tr><th>Perfil</th><th>Flag</th></tr></thead>
           <tbody>
-            <tr><td>Estratégica</td><td><code>--ia estrategica</code></td><td>Default. Pasa de turno para armar jugada; defensa usa Trampa/Marca</td></tr>
-            <tr><td>Simple</td><td><code>--ia simple</code></td><td>Decisiones aleatorias básicas (para comparar)</td></tr>
+            <tr><td>Estratégica (default)</td><td><code>--ia estrategica</code></td></tr>
+            <tr><td>Simple (baseline)</td><td><code>--ia simple</code></td></tr>
           </tbody>
         </table>
+        <p><small>Usá el mismo perfil al comparar reglamentos.</small></p>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p><a href="index.html">← Inicio</a> · <a id="repo-link" href="https://github.com/rmpato/fobal-facu">GitHub</a> · <a href="GITHUB_PAGES.md">Publicar sitio</a></p>
+    <p><a href="index.html">← Inicio</a> · <a id="repo-link" href="https://github.com/rmpato/fobal-facu">GitHub</a> · <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/guia-rapida.md">Guía rápida (MD)</a></p>
   </footer>
   <script src="assets/js/main.js"></script>
 </body>

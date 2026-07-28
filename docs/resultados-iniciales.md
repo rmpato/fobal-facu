@@ -1,40 +1,53 @@
 # Resultados de simulación
 
-Hallazgos de corridas automáticas con IA simple.  
-Configuración fija: **2 vs 2**, mínimo 2 jugadores por equipo, semillas determinísticas (`0…N-1`).
+Hallazgos de corridas automáticas. Configuración habitual: **2 vs 2**, semillas `0…N-1`.  
+Cómo reproducir → [guia-rapida.md](./guia-rapida.md). Qué probar next → [recomendaciones-diseno.md](./recomendaciones-diseno.md).
 
 Última actualización: julio 2026.
 
 ---
 
+## Resumen ejecutivo
+
+| | v0 | v1 (IA simple) | v1 (IA estratégica) |
+|---|-----|----------------|---------------------|
+| **Partidos completados** | ~1% | 60% | **96,5%** |
+| **Goles / partido** | 0,66 | 3,25 | **4,02** |
+| **Empates técnicos** | 99% | 40% | **3,5%** |
+| **Penales (2-2)** | 0% | 22,5% | **36,5%** |
+
+**Conclusiones:**
+
+1. **v0 no cierra** — casi todos los partidos superan 500 turnos; el pasa de turno sin respuesta estanca.
+2. **v1 es jugable** — con IA estratégica (default) los partidos terminan y hay ~4 goles/partido.
+3. **Trampa/Marca** solo importan si el ataque pasa de turno (~16×/partido con IA estratégica vs ~1× con IA simple).
+4. **Variante v1.1** (pasa al compañero) casi no cambia números vs v1 baseline.
+5. **Perfil de juego v1:** pase 35%, despeje 28%, robo 16%, disparo 8%, pasa turno 8%, falta 6%.
+
+---
+
 ## Reglas confirmadas en el motor
 
-Estas aclaraciones del grupo ya están implementadas:
-
-| Regla | Comportamiento en el simulador |
-|-------|-------------------------------|
+| Regla | Comportamiento |
+|-------|----------------|
 | Equipos | Mínimo 2 jugadores por equipo |
-| Marcador 2-2 | Penales **inmediatos** (no se sigue jugando) |
-| Trampa de offside / Marca personal | Solo cuando el ataque **pasa de turno**, no en respuesta a un pase |
+| Marcador 2-2 | Penales inmediatos |
+| Trampa / Marca | Solo cuando el ataque **pasa de turno** |
 
-Ver detalle en [ambiguedades.md](./ambiguedades.md).
+Detalle y supuestos pendientes → [ambiguedades.md](./ambiguedades.md).
 
 ---
 
 ## Metodología
 
 ```bash
-python3 -m simulador compare          # 200 partidos v0 + 200 v1
-python3 -m simulador run --reglas v0 --partidos 200
-python3 -m simulador run --reglas v1 --partidos 200
-python3 -m simulador run --reglas v1 --partidos 1 --verbose   # log turno a turno
+python3 -m simulador compare-reglamentos --partidos 200
+python3 -m simulador run --reglamento v1 --partidos 200
+python3 -m simulador run --reglamento v1 --partidos 1 --verbose
 ```
 
-**IA actual:** decisiones probabilísticas (pasa, dispara, pasa de turno, reventar; defensa roba/corta/marca/trampa). No modela estrategia humana avanzada.
-
-**Empate técnico:** partido que supera **500 turnos** sin definirse → se corta y se registra como estancamiento posible.
-
-**Partido completado:** victoria por goles (≥3) o por penales tras 2-2.
+- **Empate técnico:** >500 turnos sin ganador → señal de estancamiento.
+- **Partido completado:** ≥3 goles o penales tras 2-2.
 
 ---
 
@@ -162,12 +175,11 @@ Antes de la aclaración, v1 permitía jugar **Trampa de offside** y **Marca pers
 
 ---
 
-## Limitaciones de la simulación
+## Limitaciones
 
-- IA simple; no negocia, no blefea, no conserva cartas clave.
-- Supuestos restantes documentados en [ambiguedades.md](./ambiguedades.md).
-- Los números son **comparativos** (v0 vs v1, regla vieja vs corregida), no predicción exacta de partidas reales.
-- Conviene re-correr tras cada cambio de reglas: `python3 -m simulador compare`.
+- La IA no blefea ni juega como humanos expertos.
+- Números **comparativos** entre reglamentos, no predicción exacta de mesa.
+- Re-correr tras cambios: `python3 -m simulador compare-reglamentos`.
 
 ---
 
@@ -223,12 +235,4 @@ Si nadie reacciona al pasa de turno, la pelota pasa a un compañero.
 
 **Conclusión:** la variante `pasa_companero` apenas cambia el balance vs `nada` con IA estratégica. El estancamiento de v1 se debía más a la IA que a la regla.
 
----
-
-## Próximos pasos sugeridos
-
-- [x] IA que use **pasa de turno** de forma intencional → medir Trampa/Marca
-- [x] Registrar % de acciones: pase / disparo / robo / despeje / pasa de turno
-- [x] Probar variantes de regla (`python3 -m simulador variantes`)
-- [ ] Validar % de acciones en mesa vs simulación
-- [ ] Probar variantes de regla para destrabar v0
+Próximos experimentos → [recomendaciones-diseno.md](./recomendaciones-diseno.md).

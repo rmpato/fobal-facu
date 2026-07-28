@@ -1,0 +1,22 @@
+{
+  "reglamentos": [
+    {
+      "id": "v0",
+      "archivo": "v0.json",
+      "nombre": "Reglamento original",
+      "documento": "docs/reglamento-v0.md"
+    },
+    {
+      "id": "v1",
+      "archivo": "v1.json",
+      "nombre": "Iteración 1 (playtesting)",
+      "documento": "docs/reglamento-v1.md"
+    },
+    {
+      "id": "v1.1",
+      "archivo": "v1.1.json",
+      "nombre": "Iteración 1.1 — pasa al compañero",
+      "documento": "docs/reglamento-v1.1.md"
+    }
+  ]
+}

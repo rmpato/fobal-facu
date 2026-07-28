@@ -28,6 +28,7 @@
         <a href="index.html" data-page="index.html">Inicio</a>
         <a href="reglas.html" data-page="reglas.html">Reglas</a>
         <a href="resultados.html" data-page="resultados.html">Resultados</a>
+        <a href="recomendaciones.html" data-page="recomendaciones.html">Recomendaciones</a>
         <a href="como-funciona.html" data-page="como-funciona.html">Cómo funciona</a>
         <a href="simulador.html" data-page="simulador.html">Simulador</a>
       </nav>
@@ -38,36 +39,52 @@
     <div class="hero">
       <h1>Fobal Facu</h1>
       <p class="subtitle">
-        Juego de cartas de fútbol — reglas, mazos y simulación automática para iterar el diseño entre partidas con amigos.
+        Simulador de partidos de cartas — correr miles de partidos, comparar reglamentos y ver conclusiones antes de jugar en mesa.
       </p>
       <div class="badges">
-        <span class="badge"><strong>2 vs 2</strong> mínimo</span>
-        <span class="badge"><strong>2-2</strong> → penales</span>
-        <span class="badge">Reglas <strong>v1</strong></span>
-        <span class="badge">Actualizado <strong>jul 2026</strong></span>
+        <span class="badge"><strong>python3 -m simulador run</strong></span>
+        <span class="badge">Reglamento <strong>v1</strong></span>
+        <span class="badge"><strong>~97%</strong> partidos completados</span>
       </div>
     </div>
 
+    <section id="quickstart">
+      <h2>Empezar rápido</h2>
+      <div class="card highlight">
+        <pre><code>git clone https://github.com/rmpato/fobal-facu.git
+cd fobal-facu
+python3 -m simulador reglamentos list
+python3 -m simulador run --reglamento v1 --partidos 200
+python3 -m simulador compare-reglamentos --partidos 200</code></pre>
+        <p>Guía completa en el repo: <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/guia-rapida.md">guia-rapida.md</a></p>
+      </div>
+    </section>
+
     <div class="nav-cards">
-      <a class="nav-card" href="reglas.html">
-        <div class="icon">📋</div>
-        <h3>Reglas y mazos</h3>
-        <p>Reglamento v0 y v1, cartas, dados en disparo y despeje.</p>
-      </a>
       <a class="nav-card" href="resultados.html">
         <div class="icon">📊</div>
-        <h3>Resultados de simulación</h3>
-        <p>IA estratégica, acciones por partido, Trampa/Marca, variantes de reglas.</p>
+        <h3>Resultados</h3>
+        <p>Conclusiones: v0 vs v1, acciones, Trampa/Marca, penales.</p>
       </a>
-      <a class="nav-card" href="como-funciona.html">
-        <div class="icon">⚙️</div>
-        <h3>Cómo funciona la simulación</h3>
-        <p>Motor, IA, dados, métricas y limitaciones del simulador.</p>
+      <a class="nav-card" href="recomendaciones.html">
+        <div class="icon">💡</div>
+        <h3>Recomendaciones</h3>
+        <p>Mazo, cartas nuevas, reglas trabadas, qué probar en v1.2.</p>
       </a>
       <a class="nav-card" href="simulador.html">
         <div class="icon">💻</div>
-        <h3>Cómo correr el simulador</h3>
-        <p>Comandos, variantes configurables y qué comparar en mesa.</p>
+        <h3>Simulador</h3>
+        <p>Comandos para correr y comparar reglamentos.</p>
+      </a>
+      <a class="nav-card" href="reglas.html">
+        <div class="icon">📋</div>
+        <h3>Reglas de mesa</h3>
+        <p>Reglamento v0 y v1 para jugar con amigos.</p>
+      </a>
+      <a class="nav-card" href="como-funciona.html">
+        <div class="icon">⚙️</div>
+        <h3>Cómo funciona</h3>
+        <p>Motor, IA, métricas y limitaciones.</p>
       </a>
     </div>
 
@@ -129,8 +146,8 @@
     <p>Fobal Facu · Simulador de cartas de fútbol</p>
     <p>
       <a id="repo-link" href="https://github.com/rmpato/fobal-facu">Ver código en GitHub</a>
+      <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/guia-rapida.md">Guía rápida</a>
       · <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/resultados-iniciales.md">Resultados (MD)</a>
-      · <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/ambiguedades.md">Ambigüedades</a>
     </p>
   </footer>
   <script src="assets/js/main.js"></script>

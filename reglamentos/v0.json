@@ -1,0 +1,52 @@
+{
+  "id": "v0",
+  "nombre": "Reglamento original",
+  "version": "0.0",
+  "documento": "docs/reglamento-v0.md",
+  "descripcion": "Versión inicial antes del playtesting. Corta pase, Tackle, ceder el turno, La dejo pasar.",
+  "mazo": {
+    "Pase": 42,
+    "Corta pase": 12,
+    "Tackle": 12,
+    "Disparo al arco": 12,
+    "Falta": 7,
+    "Gambetear": 8,
+    "La dejo pasar": 7,
+    "Marca personal": 5,
+    "Trampa de offside": 3
+  },
+  "partido": {
+    "jugadores_minimo_por_equipo": 2,
+    "mano_inicial": 6,
+    "goles_para_ganar": 3,
+    "penales_si_marcador": [2, 2]
+  },
+  "reposicion": "mano_vacia",
+  "disparo": {
+    "rebote_palo": false
+  },
+  "acciones_ofensivas": ["pase", "disparo", "pasa_turno"],
+  "reacciones": {
+    "pase": {
+      "cartas": ["Corta pase"],
+      "contra": {
+        "Corta pase": "La dejo pasar"
+      }
+    },
+    "pasa_turno": {
+      "cartas": ["Tackle", "Trampa de offside", "Marca personal"],
+      "contra": {
+        "Tackle": "Gambetear"
+      },
+      "permitir_tackle": true
+    }
+  },
+  "reglas": {
+    "trampa_marca_solo_en_pasa_turno": true,
+    "una_reaccion_defensiva_por_accion": false,
+    "pasa_turno_sin_respuesta": "nada",
+    "prob_falta_por_turno": 0.08,
+    "reventar_habilitado": false
+  },
+  "motor_perfil": "v0"
+}

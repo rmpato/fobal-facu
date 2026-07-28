@@ -13,7 +13,7 @@ ACCIONES_TRAMPA = ("trampa_colocada", "marca_colocada", "offside_efectivo", "mar
 
 @dataclass
 class ResultadosSimulacion:
-    reglas: str
+    reglamento: str
     partidos: int
     config: ConfigSimulacion | None = None
     victorias: list[int] = field(default_factory=lambda: [0, 0])
@@ -24,6 +24,11 @@ class ResultadosSimulacion:
     barajadas_total: int = 0
     cartas_jugadas: dict[str, int] = field(default_factory=dict)
     acciones: dict[str, int] = field(default_factory=dict)
+
+    @property
+    def reglas(self) -> str:
+        """Alias histórico."""
+        return self.reglamento
 
     @property
     def turnos_promedio(self) -> float:
@@ -46,17 +51,19 @@ class ResultadosSimulacion:
 
 def simular_lote(
     reglas: str = "v1",
+    reglamento: str | None = None,
     partidos: int = 100,
     jugadores_por_equipo: int = 2,
     verbose: bool = False,
     config: ConfigSimulacion | None = None,
 ) -> ResultadosSimulacion:
     if config is None:
-        config = ConfigSimulacion(reglas=reglas, jugadores_por_equipo=jugadores_por_equipo)
-    else:
-        reglas = config.reglas
-
-    res = ResultadosSimulacion(reglas=reglas, partidos=partidos, config=config)
+        config = ConfigSimulacion(
+            reglamento=reglamento or reglas,
+            jugadores_por_equipo=jugadores_por_equipo,
+        )
+    reglamento_id = config.reglamento
+    res = ResultadosSimulacion(reglamento=reglamento_id, partidos=partidos, config=config)
 
     for i in range(partidos):
         estado = jugar_partido(config=config, semilla=i, verbose=verbose)
@@ -92,23 +99,37 @@ def simular_variantes(
 
 
 def formatear_reporte(res: ResultadosSimulacion) -> str:
-    titulo = f"=== Simulación {res.reglas.upper()} ({res.partidos} partidos)"
+    reg = res.config.reglamento_resuelto if res.config else None
+    titulo = f"=== Simulación · reglamento {res.reglamento}"
+    if reg:
+        titulo += f" · {reg.nombre}"
+    titulo += f" ({res.partidos} partidos)"
     if res.config:
         titulo += f" · {res.config.nombre_variante} · ia={res.config.ia}"
     titulo += " ==="
 
-    lineas = [
-        titulo,
-        f"Victorias equipo 0: {res.victorias[0]} ({100 * res.victorias[0] / res.partidos:.1f}%)",
-        f"Victorias equipo 1: {res.victorias[1]} ({100 * res.victorias[1] / res.partidos:.1f}%)",
-        f"Empates técnicos (>{res.limite_turnos} turnos): {res.empates_tecnicos}",
-        f"Partidos definidos por penales: {res.penales}",
-        f"Turnos promedio: {res.turnos_promedio:.1f}",
-        f"Goles promedio: {res.goles_promedio:.2f}",
-        f"Barajadas de descarte (total): {res.barajadas_total}",
-        "",
-        "Acciones (% del total):",
-    ]
+    lineas = [titulo]
+    if reg:
+        if reg.documento:
+            lineas.append(f"Documento: {reg.documento}")
+        lineas.extend(["Reglas aplicadas:"])
+        for item in reg.resumen_reglas()[1:]:  # omitir doc duplicado
+            lineas.append(f"  · {item}")
+        lineas.append("")
+
+    lineas.extend(
+        [
+            f"Victorias equipo 0: {res.victorias[0]} ({100 * res.victorias[0] / res.partidos:.1f}%)",
+            f"Victorias equipo 1: {res.victorias[1]} ({100 * res.victorias[1] / res.partidos:.1f}%)",
+            f"Empates técnicos (>{res.limite_turnos} turnos): {res.empates_tecnicos}",
+            f"Partidos definidos por penales: {res.penales}",
+            f"Turnos promedio: {res.turnos_promedio:.1f}",
+            f"Goles promedio: {res.goles_promedio:.2f}",
+            f"Barajadas de descarte (total): {res.barajadas_total}",
+            "",
+            "Acciones (% del total):",
+        ]
+    )
     pct = res.pct_acciones()
     for accion in ACCIONES_REPORTE:
         n = res.acciones.get(accion, 0)
@@ -145,6 +166,27 @@ def formatear_comparacion_variantes(resultados: list[ResultadosSimulacion]) -> s
         nombre = res.config.nombre_variante if res.config else "?"
         lineas.append(
             f"{nombre:<18} {pct_compl:6.1f}% {res.goles_promedio:6.2f} {res.turnos_promedio:7.1f} "
+            f"{100 * res.penales / res.partidos:4.1f}% {pct['pase']:5.1f}% {pct['pasa_turno']:6.1f}% {trampa:7.2f}"
+        )
+    return "\n".join(lineas)
+
+
+def formatear_comparacion_reglamentos(resultados: list[ResultadosSimulacion]) -> str:
+    lineas = ["=== Comparación de reglamentos ===", ""]
+    header = (
+        f"{'Reglamento':<10} {'Compl.':>7} {'Goles':>6} {'Turnos':>7} "
+        f"{'Pen.':>5} {'Pase%':>6} {'PasaT%':>7} {'Trampa':>7}"
+    )
+    lineas.append(header)
+    lineas.append("-" * len(header))
+
+    for res in resultados:
+        completados = res.partidos - res.empates_tecnicos
+        pct_compl = 100 * completados / res.partidos if res.partidos else 0
+        pct = res.pct_acciones()
+        trampa = res.acciones.get("trampa_colocada", 0) / res.partidos
+        lineas.append(
+            f"{res.reglamento:<10} {pct_compl:6.1f}% {res.goles_promedio:6.2f} {res.turnos_promedio:7.1f} "
             f"{100 * res.penales / res.partidos:4.1f}% {pct['pase']:5.1f}% {pct['pasa_turno']:6.1f}% {trampa:7.2f}"
         )
     return "\n".join(lineas)

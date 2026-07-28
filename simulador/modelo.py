@@ -9,6 +9,7 @@ from simulador.cartas import Carta
 
 if TYPE_CHECKING:
     from simulador.config import ConfigSimulacion
+    from simulador.reglamento import Reglamento
 
 
 @dataclass
@@ -42,23 +43,28 @@ class Jugador:
 @dataclass
 class Marcador:
     goles: list[int] = field(default_factory=lambda: [0, 0])
+    goles_para_ganar: int = 3
+    penales_si_marcador: tuple[int, int] = (2, 2)
 
     def anota(self, equipo: int) -> None:
         self.goles[equipo] += 1
 
+    def es_empate_penales(self) -> bool:
+        return tuple(self.goles) == self.penales_si_marcador
+
     def es_empate_2_2(self) -> bool:
-        return self.goles == [2, 2]
+        return self.es_empate_penales()
 
     def hay_ganador(self) -> int | None:
         for i, g in enumerate(self.goles):
-            if g >= 3:
+            if g >= self.goles_para_ganar:
                 return i
         return None
 
 
 @dataclass
 class EstadoPartido:
-    reglas: str
+    reglamento_id: str
     jugadores_por_equipo: int
     jugadores: list[Jugador]
     mazo: list[Carta]
@@ -76,6 +82,13 @@ class EstadoPartido:
     acciones: dict[str, int] = field(default_factory=dict)
     definido_por_penales: bool = False
     config: ConfigSimulacion | None = None
+    reglamento: Reglamento | None = None
+
+    @property
+    def reglas(self) -> str:
+        if self.reglamento:
+            return self.reglamento.motor_perfil
+        return self.reglamento_id
 
     @property
     def portador(self) -> Jugador:

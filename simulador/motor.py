@@ -6,8 +6,6 @@ import random
 from typing import Callable
 
 from simulador.cartas import (
-    MAZO_V0,
-    MAZO_V1,
     Carta,
     construir_mazo,
     tabla_para_pases,
@@ -19,36 +17,45 @@ LIMITE_TURNOS = 500
 MANO_INICIAL = 6
 
 
+def _mano_inicial(config: ConfigSimulacion) -> int:
+    return config.reglamento_resuelto.mano_inicial
+
+
 def crear_partido(
     config: ConfigSimulacion | None = None,
     *,
     reglas: str | None = None,
+    reglamento: str | None = None,
     jugadores_por_equipo: int | None = None,
     semilla: int | None = None,
 ) -> EstadoPartido:
     if config is None:
         config = ConfigSimulacion(
-            reglas=reglas or "v1",
+            reglamento=reglamento or reglas or "v1",
             jugadores_por_equipo=jugadores_por_equipo or 2,
         )
-    elif reglas is not None or jugadores_por_equipo is not None:
+    elif reglas is not None or reglamento is not None or jugadores_por_equipo is not None:
         data = config.to_dict()
-        if reglas is not None:
-            data["reglas"] = reglas
+        if reglamento is not None:
+            data["reglamento"] = reglamento
+        elif reglas is not None:
+            data["reglamento"] = reglas
         if jugadores_por_equipo is not None:
             data["jugadores_por_equipo"] = jugadores_por_equipo
         config = ConfigSimulacion.from_dict(data)
 
-    if config.jugadores_por_equipo < 2:
-        raise ValueError("Se requieren al menos 2 jugadores por equipo")
+    reg = config.reglamento_resuelto
+    if config.jugadores_por_equipo < reg.jugadores_minimo_por_equipo:
+        raise ValueError(
+            f"Se requieren al menos {reg.jugadores_minimo_por_equipo} jugadores por equipo"
+        )
     if semilla is not None:
         random.seed(semilla)
 
-    reglas = config.reglas
     jugadores_por_equipo = config.jugadores_por_equipo
-    mazo_config = MAZO_V0 if reglas == "v0" else MAZO_V1
-    mazo = construir_mazo(mazo_config)
+    mazo = reg.construir_mazo()
     random.shuffle(mazo)
+    mano_inicial = reg.mano_inicial
 
     jugadores: list[Jugador] = []
     jid = 0
@@ -58,20 +65,26 @@ def crear_partido(
             jid += 1
 
     for j in jugadores:
-        for _ in range(MANO_INICIAL):
+        for _ in range(mano_inicial):
             if mazo:
                 j.mano.append(mazo.pop())
 
     equipo_inicio = random.randint(0, 1)
     portador_id = random.choice([j.id for j in jugadores if j.equipo == equipo_inicio])
+    marcador = Marcador(
+        goles_para_ganar=reg.goles_para_ganar,
+        penales_si_marcador=reg.penales_si_marcador,
+    )
     return EstadoPartido(
-        reglas=reglas,
+        reglamento_id=reg.id,
         jugadores_por_equipo=jugadores_por_equipo,
         jugadores=jugadores,
         mazo=mazo,
         descarte=[],
         portador_id=portador_id,
+        marcador=marcador,
         config=config,
+        reglamento=reg,
     )
 
 
@@ -301,12 +314,18 @@ def _resolver_pasa_de_turno(
         _robo_pelota(estado, defensor)
         return
 
-    if not hubo_respuesta and estado.config and estado.config.pasa_turno_sin_respuesta == "pasa_companero":
-        companeros = estado.companeros(portador)
-        if companeros:
-            siguiente = random.choice(companeros)
-            estado.log_evento(f"  Sin respuesta: la pelota pasa a {siguiente.nombre}")
-            _transferir_pelota(estado, siguiente, incrementar_pase=False, limpiar_trampas=False)
+    if not hubo_respuesta:
+        sin_respuesta = "nada"
+        if estado.reglamento:
+            sin_respuesta = estado.reglamento.pasa_turno_sin_respuesta
+        elif estado.config and estado.config.pasa_turno_sin_respuesta:
+            sin_respuesta = estado.config.pasa_turno_sin_respuesta
+        if sin_respuesta == "pasa_companero":
+            companeros = estado.companeros(portador)
+            if companeros:
+                siguiente = random.choice(companeros)
+                estado.log_evento(f"  Sin respuesta: la pelota pasa a {siguiente.nombre}")
+                _transferir_pelota(estado, siguiente, incrementar_pase=False, limpiar_trampas=False)
 
 
 # --- v0 ---
@@ -319,24 +338,40 @@ def turno_v0(estado: EstadoPartido, elegir_accion: Callable, elegir_defensa: Cal
     # Falta oportunista
     todos = estado.jugadores[:]
     random.shuffle(todos)
-    if _intentar_falta(estado, todos, probabilidad=estado.config.prob_falta if estado.config else 0.08):
+    if _intentar_falta(
+        estado,
+        todos,
+        probabilidad=estado.reglamento.prob_falta_por_turno if estado.reglamento else 0.08,
+    ):
         return
 
     if accion == "disparo":
         if portador.tiene(Carta.DISPARO):
-            _disparo_al_arco(estado, rebote_palo=False)
+            rebote = estado.reglamento.rebote_palo if estado.reglamento else False
+            _disparo_al_arco(estado, rebote_palo=rebote)
         return
 
     if accion == "pasa_turno":
-        _resolver_pasa_de_turno(estado, portador, elegir_defensa, permitir_tackle=True)
+        permitir_tackle = (
+            estado.reglamento.reacciones_pasa_turno.permitir_tackle
+            if estado.reglamento
+            else True
+        )
+        _resolver_pasa_de_turno(estado, portador, elegir_defensa, permitir_tackle=permitir_tackle)
         return
 
     # Pase
     if not portador.tiene(Carta.PASE):
+        rebote = estado.reglamento.rebote_palo if estado.reglamento else False
         if portador.tiene(Carta.DISPARO):
-            _disparo_al_arco(estado, rebote_palo=False)
+            _disparo_al_arco(estado, rebote_palo=rebote)
         else:
-            _resolver_pasa_de_turno(estado, portador, elegir_defensa, permitir_tackle=True)
+            permitir_tackle = (
+                estado.reglamento.reacciones_pasa_turno.permitir_tackle
+                if estado.reglamento
+                else True
+            )
+            _resolver_pasa_de_turno(estado, portador, elegir_defensa, permitir_tackle=permitir_tackle)
         return
 
     if estado.offside_activo.get(estado.equipo_defensivo):
@@ -393,28 +428,40 @@ def turno_v1(estado: EstadoPartido, elegir_accion: Callable, elegir_defensa: Cal
 
     todos = estado.jugadores[:]
     random.shuffle(todos)
-    if _intentar_falta(estado, todos, probabilidad=estado.config.prob_falta if estado.config else 0.08):
+    if _intentar_falta(
+        estado,
+        todos,
+        probabilidad=estado.reglamento.prob_falta_por_turno if estado.reglamento else 0.08,
+    ):
         return
 
     accion = elegir_accion(estado, portador)
 
+    rebote = estado.reglamento.rebote_palo if estado.reglamento else True
+    reventar = estado.reglamento.reventar_habilitado if estado.reglamento else True
+
     if accion == "disparo":
         if portador.tiene(Carta.DISPARO):
-            _disparo_al_arco(estado, rebote_palo=True)
+            _disparo_al_arco(estado, rebote_palo=rebote)
         return
 
-    if accion == "reventar":
+    if accion == "reventar" and reventar:
         _duelo_reventar(estado, portador)
         return
 
     if accion == "pasa_turno":
-        _resolver_pasa_de_turno(estado, portador, elegir_defensa, permitir_tackle=False)
+        permitir_tackle = (
+            estado.reglamento.reacciones_pasa_turno.permitir_tackle
+            if estado.reglamento
+            else False
+        )
+        _resolver_pasa_de_turno(estado, portador, elegir_defensa, permitir_tackle=permitir_tackle)
         return
 
     if not portador.tiene(Carta.PASE):
         if portador.tiene(Carta.DISPARO):
-            _disparo_al_arco(estado, rebote_palo=True)
-        else:
+            _disparo_al_arco(estado, rebote_palo=rebote)
+        elif reventar:
             _duelo_reventar(estado, portador)
         return
 
@@ -462,6 +509,7 @@ def turno_v1(estado: EstadoPartido, elegir_accion: Callable, elegir_defensa: Cal
 
 def jugar_partido(
     reglas: str = "v1",
+    reglamento: str | None = None,
     jugadores_por_equipo: int = 2,
     semilla: int | None = None,
     verbose: bool = False,
@@ -472,11 +520,14 @@ def jugar_partido(
     from simulador.ia import crear_ia
 
     if config is None:
-        config = ConfigSimulacion(reglas=reglas, jugadores_por_equipo=jugadores_por_equipo)
+        config = ConfigSimulacion(
+            reglamento=reglamento or reglas,
+            jugadores_por_equipo=jugadores_por_equipo,
+        )
     else:
-        reglas = config.reglas
         jugadores_por_equipo = config.jugadores_por_equipo
 
+    reg = config.reglamento_resuelto
     estado = crear_partido(config, semilla=semilla)
     if elegir_accion is None or elegir_defensa is None:
         accion_fn, defensa_fn = crear_ia(config)
@@ -485,12 +536,12 @@ def jugar_partido(
     else:
         accion_fn, defensa_fn = elegir_accion, elegir_defensa
 
-    turno_fn = turno_v0 if reglas == "v0" else turno_v1
+    turno_fn = turno_v0 if reg.motor_perfil == "v0" else turno_v1
     limite = config.limite_turnos
 
     if verbose:
         estado.log_evento(
-            f"Inicio {reglas} [{config.nombre_variante}, ia={config.ia}]: "
+            f"Inicio reglamento={reg.id} ({reg.nombre}) [{config.nombre_variante}, ia={config.ia}]: "
             f"{jugadores_por_equipo}v{jugadores_por_equipo}, portador={estado.portador.nombre}"
         )
 
@@ -499,11 +550,15 @@ def jugar_partido(
         if ganador is not None:
             estado.log_evento(f"Fin: gana equipo {ganador} {estado.marcador.goles}")
             break
-        if estado.marcador.es_empate_2_2():
-            ganador_penales = resolver_penales(estado, rebote_palo=(reglas == "v1"))
+        if estado.marcador.es_empate_penales():
+            ganador_penales = resolver_penales(estado, rebote_palo=reg.rebote_palo)
             estado.definido_por_penales = True
             estado.log_evento(f"Fin en penales: gana equipo {ganador_penales}")
-            estado.marcador.goles = [3 if ganador_penales == 0 else 2, 3 if ganador_penales == 1 else 2]
+            g0, g1 = reg.penales_si_marcador
+            estado.marcador.goles = [
+                reg.goles_para_ganar if ganador_penales == 0 else g0,
+                reg.goles_para_ganar if ganador_penales == 1 else g1,
+            ]
             break
 
         estado.turnos += 1
@@ -514,7 +569,7 @@ def jugar_partido(
             )
         turno_fn(estado, accion_fn, defensa_fn)
 
-        if reglas == "v0":
+        if reg.reposicion == "mano_vacia":
             for j in estado.jugadores:
                 estado.reposicion_v0_mano_vacia(j)
 

@@ -1,17 +1,7 @@
 # Cómo funciona la simulación
 
-Este documento explica qué hace el motor automático, paso a paso, para que se pueda interpretar los resultados y compararlos con partidas reales.
-
-## Objetivo
-
-Simular muchos partidos de **Fobal Facu** sin jugar a mano, para detectar:
-
-- Partidos que no terminan o duran demasiado
-- Cartas dominantes o inútiles
-- Efecto de cambios de reglas (variantes)
-- Distribución de acciones (pase, robo, despeje, etc.)
-
-No reemplaza el playtesting humano: la IA es una aproximación. Los números sirven para **comparar** versiones de reglas entre sí.
+Qué hace el motor por dentro: turnos, IA, métricas y limitaciones.  
+Para correr simulaciones → [guia-rapida.md](./guia-rapida.md). Para conclusiones → [resultados-iniciales.md](./resultados-iniciales.md).
 
 ---
 
@@ -19,46 +9,33 @@ No reemplaza el playtesting humano: la IA es una aproximación. Los números sir
 
 ```
 simulador/
-├── cartas.py       → tipos de carta y mazos v0/v1
-├── config.py       → configuración y variantes (JSON)
-├── modelo.py       → jugadores, marcador, estado del partido
-├── motor.py        → reglas del juego (turnos, pases, goles, penales)
+├── cartas.py       → tipos de carta y tablas de disparo
+├── reglamento.py   → carga reglamentos JSON
+├── config.py       → configuración y variantes
+├── modelo.py       → jugadores, marcador, estado
+├── motor.py        → reglas (turnos, pases, goles, penales)
 ├── ia.py           → decisiones ofensivas y defensivas
-├── estadisticas.py → agregar resultados de muchos partidos
-└── __main__.py     → comandos de terminal (run, compare, variantes)
+├── estadisticas.py → agregar resultados
+└── __main__.py     → CLI
+
+reglamentos/        → v0.json, v1.json, v1.1.json, …
 ```
 
-Cada **partido** es independiente. Se usa una semilla numérica (`0, 1, 2…`) para que las corridas sean reproducibles.
-
----
-
-## Configuración de una corrida
-
-| Parámetro | Default | Descripción |
-|-----------|---------|-------------|
-| `reglas` | `v1` | `v0` o `v1` |
-| `jugadores_por_equipo` | `2` | Mínimo 2 |
-| `ia` | `estrategica` | `simple` o `estrategica` |
-| `pasa_turno_sin_respuesta` | `nada` | `nada` o `pasa_companero` (variante) |
-| `limite_turnos` | `500` | Si se supera → empate técnico |
-| `prob_falta` | `0.08` | Probabilidad de que alguien juegue `Falta` en un turno |
-
-Las variantes se pueden definir en [`configs/variantes.json`](../configs/variantes.json).
+Cada partido usa semilla `0…N-1` → corridas reproducibles.
 
 ---
 
 ## Ciclo de un partido
 
-1. **Setup:** se baraja el mazo, cada jugador recibe 6 cartas, un equipo inicia con la pelota.
-2. **Bucle de turnos** (hasta ganador, 2-2→penales, o límite de turnos):
-   - ¿Hay ganador (≥3 goles)? → fin
-   - ¿Marcador 2-2? → penales → fin
-   - El portador de la pelota elige una acción (IA)
-   - La defensa puede reaccionar según la acción
-   - Se actualiza posesión, marcador, cartas en mano
-   - v0: repone mano si un jugador queda en 0 cartas
-   - v1: repone al cambiar de equipo
-3. **Fin:** se registran goles, turnos, acciones y cartas jugadas.
+1. **Setup:** baraja mazo, 6 cartas por jugador, sorteo de posesión inicial.
+2. **Bucle** hasta ganador, 2-2→penales, o 500 turnos:
+   - Portador elige acción (IA)
+   - Defensa reacciona según reglamento
+   - Actualiza posesión, marcador, manos
+   - Reposición según reglamento (`mano_vacia` en v0, `cambio_equipo` en v1)
+3. **Fin:** registra goles, turnos, acciones, cartas.
+
+Parámetros de corrida → [guia-rapida.md](./guia-rapida.md#opciones-útiles). Reglamentos → [reglamentos-guia.md](./reglamentos-guia.md).
 
 ---
 
@@ -66,148 +43,93 @@ Las variantes se pueden definir en [`configs/variantes.json`](../configs/variant
 
 ### Ofensivas
 
-| Acción | v0 | v1 | Efecto en sim |
-|--------|----|----|---------------|
-| **Pase** | ✓ | ✓ | Pasa a compañero; puede ser robado/cortado |
-| **Disparo al arco** | ✓ | ✓ | Dados pateador vs arquero; tabla según pases en la jugada |
-| **Pasa de turno** | ✓ | ✓ | Defensa puede Trampa/Marca (v0 también Tackle) |
-| **Reventar / despeje** | — | ✓ | Duelo de dados entre un jugador de cada equipo |
+| Acción | v0 | v1 |
+|--------|----|----|
+| Pase | ✓ | ✓ |
+| Disparo al arco | ✓ | ✓ |
+| Pasa de turno | ✓ | ✓ |
+| Reventar / despeje | — | ✓ |
 
 ### Defensivas (como reacción)
 
 | Trigger | v0 | v1 |
 |---------|----|----|
-| Pase | `Corta pase` | `Robo pelota` |
-| Pasa de turno | `Tackle`, `Trampa`, `Marca` | `Trampa`, `Marca` |
+| Pase | Corta pase | Robo pelota |
+| Pasa de turno | Tackle, Trampa, Marca | Trampa, Marca |
 
 ### Contra-respuestas
 
-- v0: `La dejo pasar` vs corte; `Gambetear` vs tackle
-- v1: `Gambetear` vs robo
+- v0: La dejo pasar vs corte; Gambetear vs tackle
+- v1: Gambetear vs robo
 
-### Dados 🎲
+### Dados
 
-- **Disparo:** cada uno tira 1d6; rangos de gol/atajada según pases acumulados en la jugada
-- **Reventarla:** un jugador de cada equipo tira 1d6 (no el que reventó); gana el más alto
-- **Penales:** misma lógica que disparo con 0 pases en la jugada
-- v1: **rebote** (gol y atajada a la vez) y **palo** (mismo número) → se repite el tiro
+- **Disparo:** 1d6 cada uno; tabla según pases en la jugada
+- **Reventarla:** 1d6 por equipo (no tira el reventor)
+- **Penales:** como disparo con 0 pases
+- v1: rebote y palo → se repite el tiro
 
 ---
 
 ## Perfiles de IA
 
-### Simple (`--ia simple`)
+| Perfil | Comportamiento |
+|--------|----------------|
+| `simple` | Probabilidades fijas; casi no usa pasa de turno |
+| `estrategica` | **Default.** Pasa de turno táctico, evita marcado, defensa activa |
 
-Decisiones mayormente aleatorias con probabilidades fijas. Útil como baseline; **casi no usa pasa de turno**, por lo que Trampa/Marca rara vez aparecen.
-
-### Estratégica (`--ia estrategica`, default)
-
-Aproximación a decisiones más humanas:
-
-**Ataque:**
-
-- Dispara más cuando hay varios pases acumulados (mejor tabla de gol)
-- Usa **pasa de turno** para armar jugada o provocar Trampa/Marca (~8–45% según contexto)
-- Al pasar, evita compañero marcado si puede
-
-**Defensa:**
-
-- Más agresiva con Trampa/Marca cuando el rival pasa de turno
-- Roba/corta pases con probabilidad moderada
+Usar siempre el mismo perfil al comparar reglamentos.
 
 ---
 
 ## Métricas registradas
 
-### Por partido
+**Por partido:** goles, turnos, penales, acciones (`pase`, `disparo`, `robo`, `despeje`, `pasa_turno`, `falta`), trampa/marca, cartas jugadas.
 
-- Goles, turnos, si hubo penales
-- Contador de **acciones:** `pase`, `disparo`, `robo`, `despeje`, `pasa_turno`, `falta`
-- Eventos de trampa/marca: colocadas y efectivas
-- Cartas jugadas (por tipo)
-
-### Agregadas (lote de N partidos)
-
-- % victorias, empates técnicos, penales
-- Goles y turnos promedio
-- **Distribución de acciones en %** (para comparar con mesa)
-- Cartas por partido
+**Agregadas:** % victorias, empates técnicos, promedios, distribución de acciones.
 
 ---
 
-## Variantes de reglas
+## Cómo interpretar resultados
 
-Permiten probar reglas alternativas sin cambiar código.
+| Señal | Posible lectura |
+|-------|-----------------|
+| Muchos empates técnicos (>500 turnos) | Reglas o IA que estancan |
+| Una carta domina (>40/partido) | Posible desbalance |
+| Trampa/Marca ~0 con IA simple | La IA no pasa de turno |
+| Penales muy frecuentes | Muchos partidos a 2-2 |
 
-**Ejemplo:** `pasa_turno_sin_respuesta`
-
-| Valor | Comportamiento |
-|-------|----------------|
-| `nada` | Si nadie reacciona al pasa de turno, la pelota queda en el mismo jugador |
-| `pasa_companero` | Sin respuesta defensiva → la pelota pasa a un compañero al azar |
-
-Correr comparación:
-
-```bash
-python3 -m simulador variantes --partidos 500
-```
+Análisis de diseño → [recomendaciones-diseno.md](./recomendaciones-diseno.md).
 
 ---
 
 ## Supuestos y limitaciones
 
-### Supuestos documentados
+Reglas confirmadas y pendientes → [ambiguedades.md](./ambiguedades.md).
 
-Ver [ambiguedades.md](./ambiguedades.md). Los principales:
+**No modela (todavía):** bluff, charla, coordinación de equipo, decisiones óptimas, tiempo real.
 
-- 2-2 → penales inmediatos
-- Trampa/Marca solo en pasa de turno
-- Reventarla: elige quién tira el dado (no el reventor)
-- Falta: cualquier jugador, probabilidad fija por turno
-
-### Lo que NO modela (todavía)
-
-- Negociación, bluff, charla en mesa
-- Decisiones óptimas (la IA no “piensa” como un humano experto)
-- Tiempo real, fatiga, emociones
-- Estrategia de equipo coordinada
-- Cambios de mazo mid-partido
-
-### Cómo interpretar resultados
-
-| Señal | Posible lectura |
-|-------|-----------------|
-| Muchos empates técnicos (>500 turnos) | Reglas o IA que estancan el juego |
-| Una carta domina (>40/partido) | Posible desbalance |
-| Trampa/Marca ~0 con IA simple | La IA no pasa de turno → no evalúa esas cartas |
-| Penales muy frecuentes | Muchos partidos llegan a 2-2 |
+Los números son **comparativos entre reglamentos**, no predicción exacta de mesa.
 
 ---
 
-## Flujo resumido (un turno v1)
+## Un turno v1 (resumen)
 
 ```
-Portador elige acción (IA)
-    │
-    ├─ Falta (prob. global)? → reset pases, fin turno
-    │
-    ├─ Disparo → dados → gol? → marcador / saque arquero
-    │
-    ├─ Reventar → duelo dados → nuevo portador
-    │
-    ├─ Pasa de turno → defensa: Trampa / Marca / (v0: Tackle)
-    │       └─ sin respuesta → (variante) pasa a compañero o nada
-    │
-    └─ Pase → ¿offside/trampa activa? → robo
-              → ¿marca al receptor? → robo
-              → defensa: Robo → ¿Gambetear? → pase ok o robo
-              → pase completado → nuevo portador
+Portador elige (IA)
+  ├─ Falta (prob.) → reset pases
+  ├─ Disparo → dados → gol o saque arquero
+  ├─ Reventar → duelo dados → nuevo portador
+  ├─ Pasa de turno → Trampa / Marca / (v0: Tackle)
+  └─ Pase → offside/marca activa → robo
+            → defensa Robo → Gambetear? → pase o robo
+            → pase completado
 ```
 
 ---
 
 ## Relacionado
 
-- [proceso.md](./proceso.md) — cómo usamos la simulación para iterar
-- [resultados-iniciales.md](./resultados-iniciales.md) — números de corridas
-- [simulador.html](./simulador.html) — comandos para correr localmente
+- [guia-rapida.md](./guia-rapida.md) — comandos
+- [resultados-iniciales.md](./resultados-iniciales.md) — números
+- [reglamentos-guia.md](./reglamentos-guia.md) — crear v1.2 / v2

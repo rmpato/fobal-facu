@@ -1,0 +1,48 @@
+{
+  "id": "v1",
+  "nombre": "Iteración 1 (playtesting)",
+  "version": "1.0",
+  "documento": "docs/reglamento-v1.md",
+  "descripcion": "Robo pelota unificado, reventar la pelota, reposición al cambiar de equipo, rebote/palo en disparos.",
+  "mazo": {
+    "Pase": 42,
+    "Robo pelota": 24,
+    "Disparo al arco": 12,
+    "Falta": 7,
+    "Gambetear": 15,
+    "Marca personal": 5,
+    "Trampa de offside": 3
+  },
+  "partido": {
+    "jugadores_minimo_por_equipo": 2,
+    "mano_inicial": 6,
+    "goles_para_ganar": 3,
+    "penales_si_marcador": [2, 2]
+  },
+  "reposicion": "cambio_equipo",
+  "disparo": {
+    "rebote_palo": true
+  },
+  "acciones_ofensivas": ["pase", "disparo", "pasa_turno", "reventar"],
+  "reacciones": {
+    "pase": {
+      "cartas": ["Robo pelota"],
+      "contra": {
+        "Robo pelota": "Gambetear"
+      }
+    },
+    "pasa_turno": {
+      "cartas": ["Trampa de offside", "Marca personal"],
+      "contra": {},
+      "permitir_tackle": false
+    }
+  },
+  "reglas": {
+    "trampa_marca_solo_en_pasa_turno": true,
+    "una_reaccion_defensiva_por_accion": true,
+    "pasa_turno_sin_respuesta": "nada",
+    "prob_falta_por_turno": 0.08,
+    "reventar_habilitado": true
+  },
+  "motor_perfil": "v1"
+}

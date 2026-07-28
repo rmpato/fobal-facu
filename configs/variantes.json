@@ -1,6 +1,6 @@
 {
   "base": {
-    "reglas": "v1",
+    "reglamento": "v1",
     "jugadores_por_equipo": 2,
     "ia": "estrategica",
     "limite_turnos": 500
