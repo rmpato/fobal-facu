@@ -19,54 +19,65 @@ Jugar partidos repetidos de forma automática para detectar:
 | **v0** | [reglamento-v0.md](./reglamento-v0.md) | Pase-heavy, `Corta pase`, `Tackle`, `La dejo pasar` |
 | **v1** | [reglamento-v1.md](./reglamento-v1.md) | `Robo pelota` unifica robo, **Reventarla**, **Pasa de turno** |
 
-Los cambios principales de v0 → v1:
+## Resultados
 
-1. **Ceder el turno / Pasa de turno** → en v1 también existe **Reventar la pelota** (duelo de dados)
-2. **Corta pase + Tackle** → **Robo pelota** (solo contra pases)
-3. **La dejo pasar** eliminada; solo **Gambetear** contra robo
-4. Reposición: de "mano vacía" a "al cambiar de equipo"
-5. Una sola reacción defensiva por carta ofensiva
-6. Rebote y palo en disparos al arco
-7. **Trampa de offside / Marca personal:** solo cuando el ataque pasa de turno (confirmado en playtesting)
+Los hallazgos de cada corrida se documentan en [resultados-iniciales.md](./resultados-iniciales.md), el [sitio web](./index.html) ([resultados.html](./resultados.html)) y GitHub Pages.
 
 ## Cómo correr simulaciones
 
 ```bash
-# Instalar dependencias (solo stdlib; ver requirements.txt)
-python -m venv .venv && source .venv/bin/activate
+# 100 partidos v1 con IA estratégica (default)
+python3 -m simulador run --reglas v1 --partidos 100
 
-# 100 partidos con reglas v1, 2 vs 2
-python -m simulador run --reglas v1 --partidos 100 --jugadores-por-equipo 2
+# IA simple (comportamiento anterior)
+python3 -m simulador run --reglas v1 --partidos 100 --ia simple
+
+# Variante: si nadie reacciona al pasa de turno → pelota al compañero
+python3 -m simulador run --reglas v1 --partidos 100 --pasa-turno-sin-respuesta pasa_companero
+
+# Comparar variantes desde configs/variantes.json (500 partidos c/u)
+python3 -m simulador variantes --partidos 500
 
 # Comparar v0 vs v1
-python -m simulador run --reglas v0 --partidos 500 --jugadores-por-equipo 2
-python -m simulador run --reglas v1 --partidos 500 --jugadores-por-equipo 2
+python3 -m simulador compare --partidos 200
 
 # Ver registro detallado de un partido
-python -m simulador run --reglas v1 --partidos 1 --verbose
+python3 -m simulador run --reglas v1 --partidos 1 --verbose
 ```
 
-## Resultados
+## IA
 
-Los hallazgos de cada corrida se documentan en [resultados-iniciales.md](./resultados-iniciales.md) y en el [sitio web](./index.html) (GitHub Pages).
+| Perfil | Descripción |
+|--------|-------------|
+| `simple` | Decisiones probabilísticas fijas (baseline inicial) |
+| `estrategica` | **Default.** Usa pasa de turno para armar jugada, evita pasar al marcado, defensa activa con Trampa/Marca |
+
+## Variantes de reglas
+
+Archivo [`configs/variantes.json`](../configs/variantes.json):
+
+| Variante | `pasa_turno_sin_respuesta` |
+|----------|---------------------------|
+| `baseline` | `nada` — pelota queda en el mismo jugador |
+| `pasa_companero` | `pasa_companero` — pasa a un compañero si la defensa no reacciona |
 
 ## Supuestos del simulador
 
-Algunas reglas no están 100% definidas en el PDF. El motor implementa supuestos documentados en [ambiguedades.md](./ambiguedades.md). Cada supuesto es configurable para probar variantes.
+Ver [ambiguedades.md](./ambiguedades.md). Cada supuesto es configurable vía JSON o flags CLI.
 
 ## Métricas que reportamos
 
 - Goles por partido y duración (turnos)
+- **Acciones (%):** pase, disparo, robo, despeje, pasa de turno, falta
+- Trampa/Marca: colocadas y efectivas
 - Frecuencia de cada carta jugada
 - % de partidos que van a penales
-- % de posesiones que terminan en disparo / pase / robo / despeje
-- Veces que se barajó el descarte (fin de mazo)
-- Partidos que exceden límite de turnos (posible loop)
+- Partidos que exceden límite de turnos
 
 ## Próximos pasos
 
-- [ ] Validar supuestos con el grupo de playtesting
-- [ ] Discutir estancamiento de **ceder el turno** en v0 (ver [resultados-iniciales.md](./resultados-iniciales.md))
-- [ ] Agregar estrategias de IA más humanas (conservar `Falta`, marcar delanteros, etc.)
+- [x] IA estratégica con pasa de turno intencional
+- [x] Métricas por acción
+- [x] Variantes configurables
+- [ ] Validar % de acciones en mesa vs simulación
 - [ ] Modo interactivo para humanos vs bots
-- [ ] Dashboard de comparación v0 vs v1

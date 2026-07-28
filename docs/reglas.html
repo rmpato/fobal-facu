@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reglas — Fobal Facu</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="index.html">
+        <span class="logo-icon">⚽</span>
+        <span>Fobal Facu</span>
+      </a>
+      <nav>
+        <a href="index.html" data-page="index.html">Inicio</a>
+        <a href="reglas.html" data-page="reglas.html">Reglas</a>
+        <a href="resultados.html" data-page="resultados.html">Resultados</a>
+        <a href="simulador.html" data-page="simulador.html">Simulador</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-hero">
+      <p class="breadcrumb"><a href="index.html">Inicio</a> / Reglas</p>
+      <h1>📋 Reglas y mazos</h1>
+      <p class="lead">Versión actual: <strong>v1</strong> (iteración post playtesting). v0 es la versión original para comparar.</p>
+    </div>
+
+    <section>
+      <h2>Reglamentos</h2>
+      <div class="tabs-group">
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="panel-v1">v1 — Actual</button>
+          <button class="tab-btn" data-tab="panel-v0">v0 — Original</button>
+        </div>
+
+        <div id="panel-v1" class="tab-panel active">
+          <div class="card">
+            <h3>Objetivo</h3>
+            <p>Partido al mejor de 5 goles. Marcador <strong>2-2</strong> → penales inmediatos.</p>
+
+            <h3>Acciones ofensivas</h3>
+            <table>
+              <thead><tr><th>Acción</th><th>Descripción</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Patear al arco</strong></td><td><em>Disparo al arco</em> → dados vs arquero</td></tr>
+                <tr><td><strong>Pasar</strong></td><td><em>Pase</em> a un compañero</td></tr>
+                <tr><td><strong>Pasa de turno</strong></td><td>Retener la pelota sin pasar ni disparar</td></tr>
+                <tr><td><strong>Reventar</strong></td><td>Despeje — duelo de dados</td></tr>
+              </tbody>
+            </table>
+
+            <h3>Reacciones defensivas</h3>
+            <table>
+              <thead><tr><th>Si el ataque…</th><th>Defensa puede…</th></tr></thead>
+              <tbody>
+                <tr><td>Pasó</td><td><em>Robo pelota</em> (anulable con <em>Gambetear</em>)</td></tr>
+                <tr><td>Pasó de turno</td><td><em>Trampa de offside</em>, <em>Marca personal</em></td></tr>
+              </tbody>
+            </table>
+            <p><small>Una sola carta defensiva por carta ofensiva.</small></p>
+
+            <h3>Disparo al arco 🎲</h3>
+            <p>Pateador y arquero tiran un dado cada uno. Más pases en la jugada = más chances de gol.</p>
+            <table>
+              <thead><tr><th>Pases</th><th>Gol con</th><th>Ataja con</th></tr></thead>
+              <tbody>
+                <tr><td>0</td><td>1</td><td>2–6</td></tr>
+                <tr><td>1</td><td>1–2</td><td>3–6</td></tr>
+                <tr><td>2</td><td>1–3</td><td>4–6</td></tr>
+                <tr><td>3</td><td>1–4</td><td>5–6</td></tr>
+                <tr><td>4+</td><td>1–5</td><td>6</td></tr>
+              </tbody>
+            </table>
+            <p><small><strong>Rebote:</strong> gol y atajada a la vez → se repite. <strong>Palo:</strong> mismo número → se repite.</small></p>
+
+            <h3>Reventarla 🎲</h3>
+            <ol>
+              <li>Cada equipo <strong>elige</strong> quién tira — cualquier jugador, <strong>excepto</strong> el que reventó.</li>
+              <li>El dado más alto gana la pelota.</li>
+              <li>Si gana el mismo equipo, cuenta como un pase completado.</li>
+            </ol>
+          </div>
+        </div>
+
+        <div id="panel-v0" class="tab-panel">
+          <div class="card">
+            <h3>Diferencias clave vs v1</h3>
+            <ul class="findings">
+              <li><em>Ceder el turno</em> en lugar de reventar</li>
+              <li><em>Corta pase</em> + <em>Tackle</em> en lugar de <em>Robo pelota</em></li>
+              <li><em>La dejo pasar</em> contra corte de pase</li>
+              <li>Reposición al quedarse sin cartas (no al cambiar de equipo)</li>
+            </ul>
+            <h3>Reacciones defensivas</h3>
+            <table>
+              <thead><tr><th>Si el ataque…</th><th>Defensa puede…</th></tr></thead>
+              <tbody>
+                <tr><td>Pasó</td><td><em>Corta pase</em> (anulable con <em>La dejo pasar</em>)</td></tr>
+                <tr><td>Pasó de turno</td><td><em>Tackle</em>, <em>Trampa</em>, <em>Marca personal</em></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <p><small>Texto completo: <a href="reglamento-v1.md">reglamento-v1.md</a> · <a href="reglamento-v0.md">reglamento-v0.md</a></small></p>
+    </section>
+
+    <section>
+      <h2>🃏 Mazos</h2>
+      <div class="tabs-group">
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="mazo-v1">Mazo v1 (108)</button>
+          <button class="tab-btn" data-tab="mazo-v0">Mazo v0 (108)</button>
+        </div>
+        <div id="mazo-v1" class="tab-panel active">
+          <div class="deck-grid card">
+            <div class="deck-item"><span>Pase</span><span class="count">×42</span></div>
+            <div class="deck-item"><span>Robo pelota</span><span class="count">×24</span></div>
+            <div class="deck-item"><span>Disparo al arco</span><span class="count">×12</span></div>
+            <div class="deck-item"><span>Gambetear</span><span class="count">×15</span></div>
+            <div class="deck-item"><span>Falta</span><span class="count">×7</span></div>
+            <div class="deck-item"><span>Marca personal</span><span class="count">×5</span></div>
+            <div class="deck-item"><span>Trampa de offside</span><span class="count">×3</span></div>
+          </div>
+        </div>
+        <div id="mazo-v0" class="tab-panel">
+          <div class="deck-grid card">
+            <div class="deck-item"><span>Pase</span><span class="count">×42</span></div>
+            <div class="deck-item"><span>Corta pase</span><span class="count">×12</span></div>
+            <div class="deck-item"><span>Tackle</span><span class="count">×12</span></div>
+            <div class="deck-item"><span>Disparo al arco</span><span class="count">×12</span></div>
+            <div class="deck-item"><span>Gambetear</span><span class="count">×8</span></div>
+            <div class="deck-item"><span>La dejo pasar</span><span class="count">×7</span></div>
+            <div class="deck-item"><span>Falta</span><span class="count">×7</span></div>
+            <div class="deck-item"><span>Marca personal</span><span class="count">×5</span></div>
+            <div class="deck-item"><span>Trampa de offside</span><span class="count">×3</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p><a href="index.html">← Inicio</a> · <a id="repo-link" href="https://github.com/rmpato/fobal-facu">GitHub</a></p>
+  </footer>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

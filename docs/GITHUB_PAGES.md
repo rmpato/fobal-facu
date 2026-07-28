@@ -29,14 +29,12 @@ El sitio está en la carpeta `docs/` (`index.html` + assets).
 
 ## Contenido del sitio
 
-| Sección | Qué muestra |
-|---------|-------------|
-| Reglas confirmadas | 2 vs 2, 2-2 → penales, Trampa/Marca |
-| Reglamentos | Pestañas v0 / v1 |
-| Mazos | Composición de cada mazo |
-| Resultados | Gráficos y tablas de simulación |
-| Hallazgos | v0 estancado, v1 dinámico, preguntas abiertas |
-| Simulador | Comandos para correr localmente |
+| Página | Qué muestra |
+|--------|-------------|
+| `index.html` | Inicio, reglas confirmadas, resumen reciente |
+| `reglas.html` | Reglamentos v0/v1, mazos, dados |
+| `resultados.html` | IA estratégica, acciones %, variantes, histórico |
+| `simulador.html` | Comandos CLI, perfiles IA, variantes JSON |
 
 Los `.md` del repo siguen disponibles como links directos (ej. `resultados-iniciales.md`).
 
@@ -44,7 +42,7 @@ Los `.md` del repo siguen disponibles como links directos (ej. `resultados-inici
 
 1. Corré simulaciones: `python3 -m simulador compare`
 2. Actualizá `docs/resultados-iniciales.md`
-3. Actualizá los números en `docs/index.html` (sección `#resultados`)
+3. Actualizá los números en `docs/resultados.html` (y opcionalmente `index.html`)
 4. Commit + push → GitHub Pages se actualiza solo
 
 ## Notas

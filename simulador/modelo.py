@@ -3,8 +3,12 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from typing import TYPE_CHECKING
 
 from simulador.cartas import Carta
+
+if TYPE_CHECKING:
+    from simulador.config import ConfigSimulacion
 
 
 @dataclass
@@ -69,7 +73,9 @@ class EstadoPartido:
     marcador: Marcador = field(default_factory=Marcador)
     log: list[str] = field(default_factory=list)
     cartas_jugadas: dict[str, int] = field(default_factory=dict)
+    acciones: dict[str, int] = field(default_factory=dict)
     definido_por_penales: bool = False
+    config: ConfigSimulacion | None = None
 
     @property
     def portador(self) -> Jugador:
@@ -95,6 +101,9 @@ class EstadoPartido:
     def registrar_carta(self, carta: Carta) -> None:
         clave = carta.value
         self.cartas_jugadas[clave] = self.cartas_jugadas.get(clave, 0) + 1
+
+    def registrar_accion(self, accion: str) -> None:
+        self.acciones[accion] = self.acciones.get(accion, 0) + 1
 
     def descartar(self, carta: Carta) -> None:
         self.descarte.append(carta)

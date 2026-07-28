@@ -96,10 +96,10 @@ Cada vez que se roba la pelota o hay falta, el contador de pases vuelve a cero.
 
 Cuando un jugador con la pelota no tiene opciones de pase (o cuando quiera) puede decir **"La reviento"** o **"La despejo"**:
 
-1. Un jugador de **cada equipo** tira un dado (no puede tirar el mismo que dijo "la reviento").
+1. Cada equipo **elige** quién tira el dado — puede ser **cualquier jugador del equipo**, excepto el que dijo "la reviento" / reventó la pelota.
 2. El número más alto se queda con la pelota.
 3. Si la conserva el mismo equipo que reventó, cuenta como **un pase completado**.
-4. La pelota la conserva el jugador ganador del duelo de dados.
+4. La pelota la conserva el **jugador que tiró el dado y ganó** el duelo.
 
 ## Penales
 

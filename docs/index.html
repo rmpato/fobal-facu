@@ -3,23 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Fobal Facu — juego de cartas de fútbol. Reglas, mazos y resultados de simulación.">
-  <title>Fobal Facu — Reglas y Simulación</title>
+  <meta name="description" content="Fobal Facu — juego de cartas de fútbol. Reglas, simulación y playtesting.">
+  <title>Fobal Facu — Inicio</title>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
   <header class="site-header">
     <div class="header-inner">
-      <a class="logo" href="#">
+      <a class="logo" href="index.html">
         <span class="logo-icon">⚽</span>
         <span>Fobal Facu</span>
       </a>
       <nav>
-        <a href="#reglas">Reglas</a>
-        <a href="#mazos">Mazos</a>
-        <a href="#resultados">Resultados</a>
-        <a href="#hallazgos">Hallazgos</a>
-        <a href="#simulador">Simulador</a>
+        <a href="index.html" data-page="index.html">Inicio</a>
+        <a href="reglas.html" data-page="reglas.html">Reglas</a>
+        <a href="resultados.html" data-page="resultados.html">Resultados</a>
+        <a href="simulador.html" data-page="simulador.html">Simulador</a>
       </nav>
     </div>
   </header>
@@ -28,356 +27,84 @@
     <div class="hero">
       <h1>Fobal Facu</h1>
       <p class="subtitle">
-        Juego de cartas de fútbol — reglas, mazos y resultados de simulación automática
-        para iterar el diseño entre partidas.
+        Juego de cartas de fútbol — reglas, mazos y simulación automática para iterar el diseño entre partidas con amigos.
       </p>
       <div class="badges">
         <span class="badge"><strong>2 vs 2</strong> mínimo</span>
         <span class="badge"><strong>2-2</strong> → penales</span>
+        <span class="badge">Reglas <strong>v1</strong></span>
         <span class="badge">Actualizado <strong>jul 2026</strong></span>
       </div>
     </div>
 
-    <!-- Reglas confirmadas -->
+    <div class="nav-cards">
+      <a class="nav-card" href="reglas.html">
+        <div class="icon">📋</div>
+        <h3>Reglas y mazos</h3>
+        <p>Reglamento v0 y v1, cartas, dados en disparo y despeje.</p>
+      </a>
+      <a class="nav-card" href="resultados.html">
+        <div class="icon">📊</div>
+        <h3>Resultados de simulación</h3>
+        <p>IA estratégica, acciones por partido, Trampa/Marca, variantes de reglas.</p>
+      </a>
+      <a class="nav-card" href="simulador.html">
+        <div class="icon">💻</div>
+        <h3>Cómo correr el simulador</h3>
+        <p>Comandos, variantes configurables y qué comparar en mesa.</p>
+      </a>
+    </div>
+
     <section id="confirmado">
       <h2>✅ Reglas confirmadas</h2>
       <div class="card highlight">
         <table>
-          <thead>
-            <tr><th>Regla</th><th>Comportamiento</th></tr>
-          </thead>
+          <thead><tr><th>Regla</th><th>Comportamiento</th></tr></thead>
           <tbody>
-            <tr>
-              <td>Equipos</td>
-              <td>Mínimo <strong>2 jugadores por equipo</strong></td>
-            </tr>
-            <tr>
-              <td>Marcador 2-2</td>
-              <td>Penales <strong>inmediatos</strong> — no se sigue jugando</td>
-            </tr>
-            <tr>
-              <td>Trampa de offside / Marca personal</td>
-              <td>Solo cuando el ataque <strong>pasa de turno</strong>, no en respuesta a un pase</td>
-            </tr>
+            <tr><td>Equipos</td><td>Mínimo <strong>2 jugadores por equipo</strong></td></tr>
+            <tr><td>Marcador 2-2</td><td>Penales <strong>inmediatos</strong></td></tr>
+            <tr><td>Trampa / Marca personal</td><td>Solo cuando el ataque <strong>pasa de turno</strong></td></tr>
+            <tr><td>Reventarla</td><td>Cada equipo elige quién tira el dado (no el que reventó)</td></tr>
           </tbody>
         </table>
       </div>
     </section>
 
-    <!-- Reglamentos -->
-    <section id="reglas">
-      <h2>📋 Reglamentos</h2>
-      <div class="tabs-group">
-        <div class="tabs">
-          <button class="tab-btn active" data-tab="panel-v1">v1 — Iteración 1 (actual)</button>
-          <button class="tab-btn" data-tab="panel-v0">v0 — Original</button>
-        </div>
-
-        <div id="panel-v1" class="tab-panel active">
-          <div class="card">
-            <h3>Objetivo</h3>
-            <p>Partido al mejor de 5 goles. Si el marcador llega a <strong>2-2</strong>, va inmediatamente a penales.</p>
-
-            <h3>Acciones ofensivas</h3>
-            <table>
-              <thead><tr><th>Acción</th><th>Descripción</th></tr></thead>
-              <tbody>
-                <tr><td><strong>Patear al arco</strong></td><td>Jugar <em>Disparo al arco</em> → fase de disparo con dados</td></tr>
-                <tr><td><strong>Pasar la pelota</strong></td><td>Jugar <em>Pase</em> → la pelota pasa a un compañero</td></tr>
-                <tr><td><strong>Pasa de turno</strong></td><td>Retener la pelota sin pasar ni disparar</td></tr>
-                <tr><td><strong>Reventar la pelota</strong></td><td>Despeje — duelo de dados entre un jugador de cada equipo</td></tr>
-              </tbody>
-            </table>
-
-            <h3>Reacciones defensivas</h3>
-            <table>
-              <thead><tr><th>Si el ataque…</th><th>La defensa puede…</th></tr></thead>
-              <tbody>
-                <tr><td>Pasó la pelota</td><td><em>Robo pelota</em> (anulable con <em>Gambetear</em>)</td></tr>
-                <tr><td>Pasó de turno</td><td><em>Trampa de offside</em>, <em>Marca personal</em></td></tr>
-              </tbody>
-            </table>
-            <p><small>Una sola carta defensiva por carta ofensiva jugada.</small></p>
-
-            <h3>Disparo al arco</h3>
-            <table>
-              <thead><tr><th>Pases en la jugada</th><th>Gol con</th><th>Ataja con</th></tr></thead>
-              <tbody>
-                <tr><td>0</td><td>1</td><td>2–6</td></tr>
-                <tr><td>1</td><td>1–2</td><td>3–6</td></tr>
-                <tr><td>2</td><td>1–3</td><td>4–6</td></tr>
-                <tr><td>3</td><td>1–4</td><td>5–6</td></tr>
-                <tr><td>4+</td><td>1–5</td><td>6</td></tr>
-              </tbody>
-            </table>
-            <p><small>Rebote: gol y atajada a la vez → se repite. Palo: mismo número en ambos dados → se repite.</small></p>
-
-            <h3>Reventarla</h3>
-            <ol>
-              <li>Un jugador de cada equipo tira un dado (no el que dijo "la reviento").</li>
-              <li>El más alto se queda con la pelota.</li>
-              <li>Si gana el mismo equipo, cuenta como un pase completado.</li>
-            </ol>
-          </div>
-        </div>
-
-        <div id="panel-v0" class="tab-panel">
-          <div class="card">
-            <h3>Objetivo</h3>
-            <p>Partido al mejor de 5 goles. Si el marcador llega a <strong>2-2</strong>, va inmediatamente a penales.</p>
-
-            <h3>Acciones ofensivas</h3>
-            <table>
-              <thead><tr><th>Acción</th><th>Descripción</th></tr></thead>
-              <tbody>
-                <tr><td><strong>Patear al arco</strong></td><td><em>Disparo al arco</em></td></tr>
-                <tr><td><strong>Pasar la pelota</strong></td><td><em>Pase</em> a un compañero</td></tr>
-                <tr><td><strong>Ceder / Pasa de turno</strong></td><td>Retener la pelota sin pasar ni patear</td></tr>
-              </tbody>
-            </table>
-
-            <h3>Reacciones defensivas</h3>
-            <table>
-              <thead><tr><th>Si el ataque…</th><th>La defensa puede…</th></tr></thead>
-              <tbody>
-                <tr><td>Pasó la pelota</td><td><em>Corta pase</em> (anulable con <em>La dejo pasar</em>)</td></tr>
-                <tr><td>Pasó de turno</td><td><em>Tackle</em>, <em>Trampa de offside</em>, <em>Marca personal</em></td></tr>
-              </tbody>
-            </table>
-            <p><small><em>Tackle</em> anulable con <em>Gambetear</em>.</small></p>
-
-            <h3>Reposición</h3>
-            <p>Cuando un jugador se queda en <strong>0 cartas</strong>, repone mano completa de 6.</p>
-          </div>
-        </div>
-      </div>
-      <p><small>Reglamentos completos en el repo: <a href="reglamento-v1.md">reglamento-v1.md</a> · <a href="reglamento-v0.md">reglamento-v0.md</a></small></p>
-    </section>
-
-    <!-- Mazos -->
-    <section id="mazos">
-      <h2>🃏 Mazos</h2>
-      <div class="tabs-group">
-        <div class="tabs">
-          <button class="tab-btn active" data-tab="mazo-v1">Mazo v1</button>
-          <button class="tab-btn" data-tab="mazo-v0">Mazo v0</button>
-        </div>
-        <div id="mazo-v1" class="tab-panel active">
-          <div class="deck-grid card">
-            <div class="deck-item"><span>Pase</span><span class="count">×42</span></div>
-            <div class="deck-item"><span>Robo pelota</span><span class="count">×24</span></div>
-            <div class="deck-item"><span>Disparo al arco</span><span class="count">×12</span></div>
-            <div class="deck-item"><span>Gambetear</span><span class="count">×15</span></div>
-            <div class="deck-item"><span>Falta</span><span class="count">×7</span></div>
-            <div class="deck-item"><span>Marca personal</span><span class="count">×5</span></div>
-            <div class="deck-item"><span>Trampa de offside</span><span class="count">×3</span></div>
-            <div class="deck-item"><span><strong>Total</strong></span><span class="count">108</span></div>
-          </div>
-        </div>
-        <div id="mazo-v0" class="tab-panel">
-          <div class="deck-grid card">
-            <div class="deck-item"><span>Pase</span><span class="count">×42</span></div>
-            <div class="deck-item"><span>Corta pase</span><span class="count">×12</span></div>
-            <div class="deck-item"><span>Tackle</span><span class="count">×12</span></div>
-            <div class="deck-item"><span>Disparo al arco</span><span class="count">×12</span></div>
-            <div class="deck-item"><span>Gambetear</span><span class="count">×8</span></div>
-            <div class="deck-item"><span>La dejo pasar</span><span class="count">×7</span></div>
-            <div class="deck-item"><span>Falta</span><span class="count">×7</span></div>
-            <div class="deck-item"><span>Marca personal</span><span class="count">×5</span></div>
-            <div class="deck-item"><span>Trampa de offside</span><span class="count">×3</span></div>
-            <div class="deck-item"><span><strong>Total</strong></span><span class="count">108</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Resultados -->
-    <section id="resultados">
-      <h2>📊 Resultados de simulación</h2>
-      <p>200 partidos por versión · 2 vs 2 · IA simple · reglas actuales confirmadas.</p>
-
+    <section>
+      <h2>📈 Lo más reciente (simulación v1)</h2>
+      <p class="section-lead">200 partidos · 2 vs 2 · IA estratégica · jul 2026</p>
       <div class="compare-grid">
         <div class="stat-box">
           <div class="label">Partidos completados</div>
-          <div class="values">
-            <span class="val v0">1%</span>
-            <span class="val v1">60%</span>
-          </div>
-          <div class="unit">v0 vs v1</div>
+          <div class="values"><span class="val v1">96,5%</span></div>
+          <div class="unit">antes con IA simple: 60%</div>
         </div>
         <div class="stat-box">
           <div class="label">Goles promedio</div>
-          <div class="values">
-            <span class="val v0">0,66</span>
-            <span class="val v1">3,25</span>
-          </div>
+          <div class="values"><span class="val v1">4,02</span></div>
         </div>
         <div class="stat-box">
-          <div class="label">Turnos promedio</div>
-          <div class="values">
-            <span class="val v0">496</span>
-            <span class="val v1">304</span>
-          </div>
+          <div class="label">Trampa + Marca / partido</div>
+          <div class="values"><span class="val v1">~9,5</span></div>
+          <div class="unit">colocadas (antes ~2)</div>
         </div>
         <div class="stat-box">
-          <div class="label">Penales (2-2)</div>
-          <div class="values">
-            <span class="val v0">0%</span>
-            <span class="val v1">22,5%</span>
-          </div>
+          <div class="label">Pasa de turno</div>
+          <div class="values"><span class="val v1">7,6%</span></div>
+          <div class="unit">de todas las acciones</div>
         </div>
       </div>
-
-      <div class="card">
-        <h3>Comparación visual</h3>
-        <div class="bar-chart">
-          <div class="bar-row">
-            <span class="bar-label">Completados v0</span>
-            <div class="bar-track"><div class="bar-fill v0" style="width: 1%"></div></div>
-            <span class="bar-value">1%</span>
-          </div>
-          <div class="bar-row">
-            <span class="bar-label">Completados v1</span>
-            <div class="bar-track"><div class="bar-fill v1" style="width: 60%"></div></div>
-            <span class="bar-value">60%</span>
-          </div>
-          <div class="bar-row">
-            <span class="bar-label">Estancados v0</span>
-            <div class="bar-track"><div class="bar-fill v0" style="width: 99%"></div></div>
-            <span class="bar-value">99%</span>
-          </div>
-          <div class="bar-row">
-            <span class="bar-label">Estancados v1</span>
-            <div class="bar-track"><div class="bar-fill v1" style="width: 40%"></div></div>
-            <span class="bar-value">40%</span>
-          </div>
-          <div class="bar-row">
-            <span class="bar-label">Penales v1</span>
-            <div class="bar-track"><div class="bar-fill gold" style="width: 22.5%"></div></div>
-            <span class="bar-value">22,5%</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>Tabla completa</h3>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr><th>Métrica</th><th class="num">v0</th><th class="num">v1</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Partidos completados</td><td class="num v0">2 (1%)</td><td class="num v1">120 (60%)</td></tr>
-              <tr><td>Empates técnicos (&gt;500 turnos)</td><td class="num v0">198 (99%)</td><td class="num v1">80 (40%)</td></tr>
-              <tr><td>Victorias eq. 0 / eq. 1</td><td class="num v0">1 / 1</td><td class="num v1">65 / 55</td></tr>
-              <tr><td>Goles promedio</td><td class="num v0">0,66</td><td class="num v1">3,25</td></tr>
-              <tr><td>Turnos promedio</td><td class="num v0">495,5</td><td class="num v1">303,9</td></tr>
-              <tr><td>Penales</td><td class="num v0">0</td><td class="num v1">45 (22,5%)</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="card warn">
-        <h3>⚠️ Impacto: corregir Trampa / Marca (solo pasa de turno)</h3>
-        <p>La simulación anterior permitía jugar Trampa y Marca "entre pases" — eso <strong>inflaba</strong> los números de v1.</p>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr><th>Métrica</th><th>v1 (lógica vieja)</th><th>v1 (corregida)</th><th>Δ</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Completados</td><td class="num">94%</td><td class="num">60%</td><td class="num">−36 pp</td></tr>
-              <tr><td>Goles / partido</td><td class="num">4,06</td><td class="num">3,25</td><td class="num">−0,81</td></tr>
-              <tr><td>Penales</td><td class="num">41%</td><td class="num">22,5%</td><td class="num">−18,5 pp</td></tr>
-              <tr><td>Marca / partido</td><td class="num">~9,7</td><td class="num">~1,2</td><td class="num">−87%</td></tr>
-              <tr><td>Trampa / partido</td><td class="num">~5,8</td><td class="num">~0,9</td><td class="num">−84%</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>Cartas más jugadas (por partido)</h3>
-        <div class="tabs-group">
-          <div class="tabs">
-            <button class="tab-btn active" data-tab="cartas-v1">v1</button>
-            <button class="tab-btn" data-tab="cartas-v0">v0</button>
-          </div>
-          <div id="cartas-v1" class="tab-panel active">
-            <div class="bar-chart">
-              <div class="bar-row"><span class="bar-label">Pase</span><div class="bar-track"><div class="bar-fill v1" style="width: 100%"></div></div><span class="bar-value">55,4</span></div>
-              <div class="bar-row"><span class="bar-label">Robo pelota</span><div class="bar-track"><div class="bar-fill v1" style="width: 46%"></div></div><span class="bar-value">25,4</span></div>
-              <div class="bar-row"><span class="bar-label">Disparo al arco</span><div class="bar-track"><div class="bar-fill v1" style="width: 28%"></div></div><span class="bar-value">15,3</span></div>
-              <div class="bar-row"><span class="bar-label">Gambetear</span><div class="bar-track"><div class="bar-fill v1" style="width: 17%"></div></div><span class="bar-value">9,6</span></div>
-              <div class="bar-row"><span class="bar-label">Falta</span><div class="bar-track"><div class="bar-fill v1" style="width: 16%"></div></div><span class="bar-value">9,1</span></div>
-              <div class="bar-row"><span class="bar-label">Marca personal</span><div class="bar-track"><div class="bar-fill gold" style="width: 2%"></div></div><span class="bar-value">1,2</span></div>
-              <div class="bar-row"><span class="bar-label">Trampa offside</span><div class="bar-track"><div class="bar-fill gold" style="width: 2%"></div></div><span class="bar-value">0,9</span></div>
-            </div>
-          </div>
-          <div id="cartas-v0" class="tab-panel">
-            <div class="bar-chart">
-              <div class="bar-row"><span class="bar-label">Pase</span><div class="bar-track"><div class="bar-fill v0" style="width: 100%"></div></div><span class="bar-value">17,5</span></div>
-              <div class="bar-row"><span class="bar-label">Disparo al arco</span><div class="bar-track"><div class="bar-fill v0" style="width: 29%"></div></div><span class="bar-value">5,1</span></div>
-              <div class="bar-row"><span class="bar-label">Corta pase</span><div class="bar-track"><div class="bar-fill v0" style="width: 25%"></div></div><span class="bar-value">4,3</span></div>
-              <div class="bar-row"><span class="bar-label">Tackle</span><div class="bar-track"><div class="bar-fill v0" style="width: 22%"></div></div><span class="bar-value">3,9</span></div>
-              <div class="bar-row"><span class="bar-label">Falta</span><div class="bar-track"><div class="bar-fill v0" style="width: 21%"></div></div><span class="bar-value">3,7</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <p><a href="resultados.html">Ver análisis completo →</a></p>
     </section>
 
-    <!-- Hallazgos -->
-    <section id="hallazgos">
-      <h2>🔍 Hallazgos</h2>
-
+    <section>
+      <h2>❓ Para validar en mesa</h2>
       <div class="card">
-        <h3>v0 — se estanca</h3>
-        <ul class="findings">
-          <li>99% de partidos supera 500 turnos sin definirse.</li>
-          <li>Promedio de 0,66 goles — casi nunca llega a 2-2 ni a penales.</li>
-          <li><strong>Pasa de turno</strong> deja la pelota en el mismo jugador si la defensa no reacciona → posible bucle.</li>
-        </ul>
-        <p><strong>Para discutir:</strong> ¿el turno pasa a un compañero si nadie reacciona? ¿Límite de cedidas seguidas?</p>
-      </div>
-
-      <div class="card highlight">
-        <h3>v1 — más dinámico</h3>
-        <ul class="findings">
-          <li>60% de partidos termina con ganador; ~3,2 goles por partido.</li>
-          <li><em>Reventar la pelota</em> y <em>Robo pelota</em> destraban el juego vs v0.</li>
-          <li>Balance razonable: 32,5% vs 27,5% victorias.</li>
-          <li>40% aún se estanca — ver si pasa en mesa o es la IA.</li>
-          <li>Trampa/Marca casi no se usan (~1× por partido) — cartas situacionales.</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>Preguntas abiertas</h3>
         <ul class="checklist">
+          <li>¿La frecuencia de pase / despeje / robo se parece a la simulación?</li>
+          <li>¿2-2 → penales pasa ~1 de cada 3 partidos?</li>
           <li>¿Qué pasa si nadie reacciona al pasa de turno?</li>
-          <li>¿Con qué frecuencia usan pasa de turno en mesa?</li>
-          <li>¿3 goles cierran el partido además del 2-2?</li>
-          <li>¿El 40% de partidos colgados en v1 pasa con humanos?</li>
         </ul>
-      </div>
-    </section>
-
-    <!-- Simulador -->
-    <section id="simulador">
-      <h2>💻 Simulador</h2>
-      <div class="card">
-        <p>Podés correr partidos automáticos desde el repo clonado:</p>
-        <pre><code># Comparar v0 vs v1 (200 partidos c/u)
-python3 -m simulador compare
-
-# Solo v1
-python3 -m simulador run --reglas v1 --partidos 100
-
-# Ver un partido turno a turno
-python3 -m simulador run --reglas v1 --partidos 1 --verbose</code></pre>
-        <p>Requisito: Python 3.11+ (solo biblioteca estándar).</p>
       </div>
     </section>
   </main>
@@ -385,24 +112,11 @@ python3 -m simulador run --reglas v1 --partidos 1 --verbose</code></pre>
   <footer class="site-footer">
     <p>Fobal Facu · Simulador de cartas de fútbol</p>
     <p>
-      <a id="repo-link" href="https://github.com/">Ver código en GitHub</a>
-      ·
-      <a href="resultados-iniciales.md">Resultados (MD)</a>
-      ·
-      <a href="ambiguedades.md">Ambigüedades</a>
+      <a id="repo-link" href="https://github.com/rmpato/fobal-facu">Ver código en GitHub</a>
+      · <a href="resultados-iniciales.md">Resultados (MD)</a>
+      · <a href="ambiguedades.md">Ambigüedades</a>
     </p>
   </footer>
-
   <script src="assets/js/main.js"></script>
-  <script>
-    const repoLink = document.getElementById("repo-link");
-    const host = window.location.hostname;
-    if (host.endsWith(".github.io")) {
-      const user = host.replace(".github.io", "");
-      const parts = window.location.pathname.split("/").filter(Boolean);
-      const repo = parts[0] || `${user}.github.io`;
-      repoLink.href = `https://github.com/${user}/${repo}`;
-    }
-  </script>
 </body>
 </html>

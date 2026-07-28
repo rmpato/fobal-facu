@@ -31,7 +31,14 @@ python -m simulador run --reglas v1 --partidos 100
 python -m simulador run --reglas v0 --partidos 100
 
 # Comparar ambas versiones
-python -m simulador compare
+python3 -m simulador compare
+
+# Comparar variantes de reglas (500 partidos c/u)
+python3 -m simulador variantes --partidos 500
+
+# IA simple vs estratégica
+python3 -m simulador run --reglas v1 --partidos 100 --ia simple
+python3 -m simulador run --reglas v1 --partidos 100 --ia estrategica
 
 # Ver un partido turno a turno
 python -m simulador run --reglas v1 --partidos 1 --verbose
@@ -45,7 +52,18 @@ Hay una página estática en [`docs/index.html`](docs/index.html) con reglas, ma
 
 Instrucciones completas: [`docs/GITHUB_PAGES.md`](docs/GITHUB_PAGES.md).
 
-URL final: `https://TU_USUARIO.github.io/fobal-facu/`
+Páginas: [Inicio](docs/index.html) · [Reglas](docs/reglas.html) · [Resultados](docs/resultados.html) · [Simulador](docs/simulador.html)
+
+URL: `https://rmpato.github.io/fobal-facu/`
+
+### Páginas del sitio
+
+| Página | Contenido |
+|--------|-----------|
+| [`index.html`](docs/index.html) | Inicio, reglas confirmadas, resumen |
+| [`reglas.html`](docs/reglas.html) | Reglamentos v0/v1, mazos, dados |
+| [`resultados.html`](docs/resultados.html) | Simulaciones, acciones, variantes |
+| [`simulador.html`](docs/simulador.html) | Comandos para correr localmente |
 
 ## Versiones del juego
 

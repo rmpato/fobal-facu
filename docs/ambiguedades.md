@@ -18,6 +18,11 @@ Reglas confirmadas en playtesting y supuestos que aún faltan cerrar.
 - **No** se juegan en respuesta a un pase.
 - Una vez colocadas, surten efecto en el **próximo pase** del ataque (offside o marca al receptor).
 
+### Reventarla — quién tira el dado
+
+- Cada equipo **elige** quién tira — **cualquier jugador**, salvo el que reventó la pelota.
+- El simulador elige al azar entre los compañeros del reventor (equipo atacante) y cualquier defensor (equipo rival).
+
 ## Objetivo del partido
 
 **Texto:** "Partido al mejor de 5 goles, si empatan 2-2 va a penales."
@@ -53,11 +58,7 @@ Reglas confirmadas en playtesting y supuestos que aún faltan cerrar.
 
 ## Reventarla (v1)
 
-**Supuesto:**
-
-- Solo si el portador **no tiene** carta `Pase` en mano, **o** el bot elige despejar estratégicamente.
-- El portador **no** tira el dado; otro jugador de su equipo sí.
-- Empate en dados → se repite el duelo.
+Ver regla confirmada arriba. El motor elige tiradores al azar entre los jugadores elegibles (equivalente a una elección libre en mesa).
 
 ## Reposición v1
 

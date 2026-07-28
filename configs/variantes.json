@@ -1,0 +1,18 @@
+{
+  "base": {
+    "reglas": "v1",
+    "jugadores_por_equipo": 2,
+    "ia": "estrategica",
+    "limite_turnos": 500
+  },
+  "variantes": [
+    {
+      "nombre_variante": "baseline",
+      "pasa_turno_sin_respuesta": "nada"
+    },
+    {
+      "nombre_variante": "pasa_companero",
+      "pasa_turno_sin_respuesta": "pasa_companero"
+    }
+  ]
+}

@@ -180,9 +180,55 @@ Antes de la aclaración, v1 permitía jugar **Trampa de offside** y **Marca pers
 
 ---
 
+## IA estratégica + variantes (jul 2026)
+
+Corridas con `--ia estrategica` (default) y comando `python3 -m simulador variantes --partidos 200`.
+
+### v1 · IA estratégica (200 partidos)
+
+| Métrica | IA simple (antes) | IA estratégica |
+|---------|-------------------|----------------|
+| Partidos completados | 60% | **96,5%** |
+| Empates técnicos | 40% | **3,5%** |
+| Goles promedio | 3,25 | **4,02** |
+| Turnos promedio | 304 | **183** |
+| Penales | 22,5% | **36,5%** |
+| Pasa de turno / partido | ~1,2 | **16,3** |
+| Trampa colocada / partido | ~0,9 | **3,65** |
+| Marca colocada / partido | ~1,2 | **5,90** |
+
+### Distribución de acciones (v1, IA estratégica)
+
+| Acción | % del total |
+|--------|-------------|
+| Pase | 34,7% |
+| Despeje | 28,2% |
+| Robo | 15,5% |
+| Disparo | 8,4% |
+| Pasa de turno | 7,6% |
+| Falta | 5,5% |
+
+> **Para playtesting:** anotar en mesa cuántas veces ocurre cada acción por partido y comparar con esta tabla.
+
+### Variante `pasa_companero` (200 partidos)
+
+Si nadie reacciona al pasa de turno, la pelota pasa a un compañero.
+
+| Métrica | baseline | pasa_companero |
+|---------|----------|----------------|
+| Completados | 96,5% | 97,5% |
+| Goles promedio | 4,02 | 3,98 |
+| Turnos promedio | 183 | 185 |
+| Penales | 36,5% | 32,0% |
+
+**Conclusión:** la variante `pasa_companero` apenas cambia el balance vs `nada` con IA estratégica. El estancamiento de v1 se debía más a la IA que a la regla.
+
+---
+
 ## Próximos pasos sugeridos
 
-- [ ] IA que use **pasa de turno** de forma intencional → medir Trampa/Marca
-- [ ] Registrar % de acciones: pase / disparo / robo / despeje / pasa de turno
+- [x] IA que use **pasa de turno** de forma intencional → medir Trampa/Marca
+- [x] Registrar % de acciones: pase / disparo / robo / despeje / pasa de turno
+- [x] Probar variantes de regla (`python3 -m simulador variantes`)
+- [ ] Validar % de acciones en mesa vs simulación
 - [ ] Probar variantes de regla para destrabar v0
-- [ ] Correr lotes de 500–1000 partidos cuando la IA mejore
