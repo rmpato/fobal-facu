@@ -10,6 +10,7 @@ Guía de qué leer según lo que necesites. El README del repo tiene el [quickst
 |----------|-----------|
 | **Elegir / comparar perfiles de IA** | [perfiles-ia.md](./perfiles-ia.md) |
 | **Correr simulaciones ya** | [guia-rapida.md](./guia-rapida.md) |
+| **Comparar v1 vs v2 (3v3 / 4v4)** | [comparacion-v1-v2-formatos.md](./comparacion-v1-v2-formatos.md) · [resultados.html](./resultados.html#compare-formatos) |
 | **Ver conclusiones y números** | [resultados-iniciales.md](./resultados-iniciales.md) |
 | **Saber qué cambiar en el juego** | [recomendaciones-diseno.md](./recomendaciones-diseno.md) |
 | **Entender el motor por dentro** | [como-funciona-simulacion.md](./como-funciona-simulacion.md) |
