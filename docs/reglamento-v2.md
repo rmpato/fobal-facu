@@ -52,4 +52,6 @@ python3 -m simulador run --reglamento v2 --partidos 200 --ia estrategica
 python3 -m simulador compare-reglamentos --partidos 200 --ia estrategica
 ```
 
+Simulaciones batch: **3 vs 3** por defecto (`--jugadores-por-equipo 3`).
+
 Especificación JSON: [`reglamentos/v2.json`](../reglamentos/v2.json).

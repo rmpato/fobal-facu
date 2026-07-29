@@ -16,7 +16,7 @@ if TYPE_CHECKING:
 @dataclass
 class ConfigSimulacion:
     reglamento: str = "v1"
-    jugadores_por_equipo: int = 2
+    jugadores_por_equipo: int = 3
     ia: str = "estrategica"
     ia_equipo0: str | None = None
     ia_equipo1: str | None = None

@@ -54,7 +54,7 @@ Para crear uno nuevo: copiá [`reglamentos/_plantilla.json`](reglamentos/_planti
 | **Qué probar next** (mazo, cartas, reglas trabadas) | [`docs/recomendaciones-diseno.md`](docs/recomendaciones-diseno.md) |
 | **Reglas para jugar en mesa** | [`docs/reglamento-v1.md`](docs/reglamento-v1.md) (actual) · [`docs/reglamento-v0.md`](docs/reglamento-v0.md) (original) |
 
-**Resumen en una frase:** v0 estanca (~95% partidos sin terminar); v1 funciona bien con IA estratégica (~97% completados); **v2** cierra todos los partidos, acorta duración y activa Trampa/Marca al pase.
+**Resumen en una frase:** v0 estanca en 3v3 (~74% empates técnicos); v1 cierra ~99% con IA estratégica; **v2** cierra todos los partidos, acorta duración y activa Trampa/Marca al pase. Simulaciones batch: **3 vs 3** por defecto.
 
 ---
 

@@ -57,7 +57,7 @@ def simular_lote(
     reglas: str = "v1",
     reglamento: str | None = None,
     partidos: int = 100,
-    jugadores_por_equipo: int = 2,
+    jugadores_por_equipo: int = 3,
     verbose: bool = False,
     config: ConfigSimulacion | None = None,
 ) -> ResultadosSimulacion:
@@ -109,7 +109,10 @@ def formatear_reporte(res: ResultadosSimulacion) -> str:
         titulo += f" · {reg.nombre}"
     titulo += f" ({res.partidos} partidos)"
     if res.config:
-        titulo += f" · {res.config.nombre_variante} · ia={res.config.ia}"
+        titulo += (
+            f" · {res.config.jugadores_por_equipo}v{res.config.jugadores_por_equipo}"
+            f" · {res.config.nombre_variante} · ia={res.config.ia}"
+        )
     titulo += " ==="
 
     lineas = [titulo]
@@ -158,7 +161,12 @@ def formatear_reporte(res: ResultadosSimulacion) -> str:
 
 
 def formatear_comparacion_variantes(resultados: list[ResultadosSimulacion]) -> str:
-    lineas = ["=== Comparación de variantes ===", ""]
+    jpe = resultados[0].config.jugadores_por_equipo if resultados and resultados[0].config else 3
+    lineas = [
+        "=== Comparación de variantes ===",
+        f"({jpe} vs {jpe} · {resultados[0].partidos if resultados else 0} partidos c/u)",
+        "",
+    ]
     header = f"{'Variante':<18} {'Compl.':>7} {'Goles':>6} {'Turnos':>7} {'Pen.':>5} {'Pase%':>6} {'PasaT%':>7} {'Trampa':>7}"
     lineas.append(header)
     lineas.append("-" * len(header))
@@ -177,7 +185,12 @@ def formatear_comparacion_variantes(resultados: list[ResultadosSimulacion]) -> s
 
 
 def formatear_comparacion_reglamentos(resultados: list[ResultadosSimulacion]) -> str:
-    lineas = ["=== Comparación de reglamentos ===", ""]
+    jpe = resultados[0].config.jugadores_por_equipo if resultados and resultados[0].config else 3
+    lineas = [
+        "=== Comparación de reglamentos ===",
+        f"({jpe} vs {jpe} · {resultados[0].partidos if resultados else 0} partidos c/u)",
+        "",
+    ]
     header = (
         f"{'Reglamento':<10} {'Compl.':>7} {'Goles':>6} {'Turnos':>7} "
         f"{'Pen.':>5} {'Pase%':>6} {'PasaT%':>7} {'Trampa':>7}"

@@ -50,7 +50,7 @@ def crear_partido(
     if config is None:
         config = ConfigSimulacion(
             reglamento=reglamento or reglas or "v1",
-            jugadores_por_equipo=jugadores_por_equipo or 2,
+            jugadores_por_equipo=jugadores_por_equipo or 3,
         )
     elif reglas is not None or reglamento is not None or jugadores_por_equipo is not None:
         data = config.to_dict()
@@ -629,7 +629,7 @@ def turno_v1(estado: EstadoPartido, elegir_accion: Callable, elegir_defensa: Cal
 def jugar_partido(
     reglas: str = "v1",
     reglamento: str | None = None,
-    jugadores_por_equipo: int = 2,
+    jugadores_por_equipo: int = 3,
     semilla: int | None = None,
     verbose: bool = False,
     config: ConfigSimulacion | None = None,

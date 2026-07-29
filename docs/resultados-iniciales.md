@@ -1,6 +1,6 @@
 # Resultados de simulación
 
-Hallazgos de corridas automáticas. Configuración habitual: **2 vs 2**, semillas `0…N-1`.  
+Hallazgos de corridas automáticas. Configuración habitual: **3 vs 3**, semillas `0…N-1`, IA estratégica.
 Cómo reproducir → [guia-rapida.md](./guia-rapida.md). Perfiles de IA → [perfiles-ia.md](./perfiles-ia.md). Qué probar next → [recomendaciones-diseno.md](./recomendaciones-diseno.md).
 
 Última actualización: julio 2026.
@@ -9,21 +9,21 @@ Cómo reproducir → [guia-rapida.md](./guia-rapida.md). Perfiles de IA → [per
 
 ## Resumen ejecutivo
 
-| | v0 | v1 (IA simple) | v1 (IA estratégica) |
+| | v0 (3v3) | v1 simple (3v3) | v1 estratégica (3v3) |
 |---|-----|----------------|---------------------|
-| **Partidos completados** | ~1% | 62,5% | **96,5%** |
-| **Goles / partido** | 0,66 | 3,25 | **4,02** |
-| **Empates técnicos** | 99% | 40% | **3,5%** |
-| **Penales (2-2)** | 0% | 22,5% | **36,5%** |
+| **Partidos completados** | ~26% | 99,5% | **99,0%** |
+| **Goles / partido** | 1,89 | 4,08 | **4,03** |
+| **Empates técnicos** | 74% | 0,5% | **1,0%** |
+| **Penales (2-2)** | 8,5% | 35,5% | **35,0%** |
 
 **Conclusiones:**
 
-1. **v0 no cierra** — casi todos los partidos superan 500 turnos; el pasa de turno sin respuesta estanca.
-2. **v1 es jugable** — con IA estratégica (default) los partidos terminan y hay ~4 goles/partido.
-3. **Trampa/Marca** solo importan si el ataque pasa de turno (~16×/partido con IA estratégica vs ~1× con IA simple).
+1. **v0 no cierra bien** — ~74% empates técnicos en 3v3 (mejor que 2v2, pero sigue mal).
+2. **v1 es jugable** — ~99% completados con IA estratégica; ~4 goles/partido.
+3. **Trampa/Marca en v1** — ~12 colocaciones/partido (3v3); la estratégica usa más pasa de turno que la simple.
 4. **Variante v1.1** (pasa al compañero) casi no cambia números vs v1 baseline.
-5. **v2** (sin pasa turno, trampa al pase): 100% completados, ~146 turnos, más pase y Trampa/Marca.
-6. **Perfil de juego v1:** pase 35%, despeje 28%, robo 16%, disparo 8%, pasa turno 8%, falta 6%.
+5. **v2** (sin pasa turno, trampa al pase): 100% completados, ~151 turnos, más pase y Trampa/Marca (~19 colocaciones/partido).
+6. **Perfil de juego v1 (3v3):** pase 40%, despeje 16%, robo 19%, disparo 9%, pasa turno 9%, falta 7%.
 
 ---
 
@@ -197,42 +197,42 @@ Antes de la aclaración, v1 permitía jugar **Trampa de offside** y **Marca pers
 
 Corridas con `--ia estrategica` (default) y comando `python3 -m simulador variantes --partidos 200`.
 
-### v1 · IA estratégica (200 partidos)
+### v1 · IA estratégica (200 partidos · 3 vs 3)
 
-| Métrica | IA simple (antes) | IA estratégica |
-|---------|-------------------|----------------|
-| Partidos completados | 62,5% | **96,5%** |
-| Empates técnicos | 40% | **3,5%** |
-| Goles promedio | 3,25 | **4,02** |
-| Turnos promedio | 304 | **183** |
-| Penales | 22,5% | **36,5%** |
-| Pasa de turno / partido | ~1,2 | **16,3** |
-| Trampa colocada / partido | ~0,9 | **3,65** |
-| Marca colocada / partido | ~1,2 | **5,90** |
+| Métrica | IA simple (3v3) | IA estratégica (3v3) |
+|---------|-----------------|----------------------|
+| Partidos completados | 99,5% | **99,0%** |
+| Empates técnicos | 0,5% | **1,0%** |
+| Goles promedio | 4,08 | **4,03** |
+| Turnos promedio | 180 | **179** |
+| Penales | 35,5% | **35,0%** |
+| Pasa de turno / partido | ~8 | **19** |
+| Trampa colocada / partido | ~1,8 | **4,38** |
+| Marca colocada / partido | ~3,0 | **7,49** |
 
-### Distribución de acciones (v1, IA estratégica)
+### Distribución de acciones (v1, 3 vs 3, IA estratégica)
 
 | Acción | % del total |
 |--------|-------------|
-| Pase | 34,7% |
-| Despeje | 28,2% |
-| Robo | 15,5% |
-| Disparo | 8,4% |
-| Pasa de turno | 7,6% |
-| Falta | 5,5% |
+| Pase | 40,3% |
+| Robo | 19,1% |
+| Despeje | 15,8% |
+| Disparo | 8,6% |
+| Pasa de turno | 8,8% |
+| Falta | 7,4% |
 
 > **Para playtesting:** anotar en mesa cuántas veces ocurre cada acción por partido y comparar con esta tabla.
 
-### Variante `pasa_companero` (200 partidos)
+### Variante `pasa_companero` (200 partidos · 3 vs 3)
 
 Si nadie reacciona al pasa de turno, la pelota pasa a un compañero.
 
 | Métrica | baseline | pasa_companero |
 |---------|----------|----------------|
-| Completados | 96,5% | 97,5% |
-| Goles promedio | 4,02 | 3,98 |
-| Turnos promedio | 183 | 185 |
-| Penales | 36,5% | 32,0% |
+| Completados | 99,0% | 99,0% |
+| Goles promedio | 4,03 | 4,01 |
+| Turnos promedio | 179 | 169 |
+| Penales | 35,0% | 35,5% |
 
 **Conclusión:** la variante `pasa_companero` apenas cambia el balance vs `nada` con IA estratégica. El estancamiento de v1 se debía más a la IA que a la regla.
 
@@ -240,40 +240,42 @@ Próximos experimentos → [recomendaciones-diseno.md](./recomendaciones-diseno.
 
 ---
 
-## Reglamento v2 (jul 2026)
+## Reglamento v2 (jul 2026 · 3 vs 3)
 
 Corridas con `--ia estrategica` y `python3 -m simulador compare-reglamentos --partidos 200`.
 
 Cambios vs v1: sin pasa de turno; Trampa/Marca al reaccionar a un pase; robo ↔ gambetear encadenables.
 
-### Comparación rápida
+### Comparación rápida (3 vs 3)
 
 | Reglamento | Compl. | Goles | Turnos | Pen. | Pase% | PasaT% | Trampa |
 |------------|--------|-------|--------|------|-------|--------|--------|
-| v0 | 5,0% | 0,91 | 477,7 | 0,5% | 4,2% | 92,3% | 1,24 |
-| v1 | 96,5% | 4,02 | 183,3 | 36,5% | 34,7% | 7,6% | 3,65 |
-| v1.1 | 97,5% | 3,98 | 184,9 | 32,0% | 35,0% | 7,6% | 3,44 |
-| **v2** | **100%** | **4,11** | **145,9** | **38,0%** | **42,2%** | **0%** | **5,42** |
+| v0 | 26,0% | 1,89 | 392,1 | 8,5% | 8,2% | 84,9% | 1,94 |
+| v1 | 99,0% | 4,03 | 179,0 | 35,0% | 40,3% | 8,8% | 4,38 |
+| v1.1 | 99,0% | 4,01 | 168,9 | 35,5% | 40,4% | 8,8% | 4,09 |
+| **v2** | **100%** | **3,85** | **151,3** | **24,0%** | **44,6%** | **0%** | **7,15** |
 
-### Distribución de acciones (v2, IA estratégica)
+### Distribución de acciones (v2, 3 vs 3, IA estratégica)
 
 | Acción | % del total |
 |--------|-------------|
-| Pase | 42,2% |
-| Despeje | 23,7% |
-| Robo | 17,7% |
-| Disparo | 9,7% |
-| Falta | 6,7% |
+| Pase | 44,6% |
+| Robo | 22,4% |
+| Despeje | 16,3% |
+| Disparo | 8,8% |
+| Falta | 8,0% |
 | Pasa de turno | 0% |
 
-### Trampa / Marca (v2)
+### Trampa / Marca (v2 · 3 vs 3)
 
 | Evento | Por partido |
 |--------|-------------|
-| Trampa colocada | 5,42 |
-| Marca colocada | 8,85 |
-| Offside efectivo | 3,19 |
+| Trampa colocada | 7,15 |
+| Marca colocada | 11,95 |
+| Offside efectivo | 4,67 |
 
-**Conclusión:** v2 cierra todos los partidos, acorta la duración (~21% menos turnos), sube pase y uso de Trampa/Marca (reactivas al pase). Balance simétrico (49,5% / 50,5% victorias). Candidato fuerte para playtesting en mesa.
+**Conclusión:** v2 cierra todos los partidos, acorta la duración (~15% menos turnos que v1 en 3v3), sube pase y uso de Trampa/Marca (reactivas al pase). Menos penales que v1 (~24% vs ~35%). Balance 48% / 52% victorias.
 
 Reglas → [reglamento-v2.md](./reglamento-v2.md). Sitio → [resultados.html](./resultados.html#compare-cli).
+
+> Corridas anteriores en **2 vs 2** quedaron obsoletas; el simulador usa **3 vs 3** por defecto desde jul 2026.

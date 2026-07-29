@@ -111,7 +111,7 @@ Interpretación y señales de alerta → [como-funciona-simulacion.md](./como-fu
 | `--reglamento` | `v1` | Id (`v0`, `v1`, `v1.1`) o ruta a `.json` |
 | `--partidos` | `100` | Cuántos partidos simular |
 | `--ia` | `estrategica` | Perfil de IA (ver tabla abajo) |
-| `--jugadores-por-equipo` | `2` | Mínimo 2 |
+| `--jugadores-por-equipo` | `3` | Mínimo 2 (simulaciones batch usan 3 vs 3) |
 
 Documentación completa de IA → **[perfiles-ia.md](./perfiles-ia.md)**.
 

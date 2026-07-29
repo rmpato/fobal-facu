@@ -87,7 +87,7 @@ def main() -> None:
     run = sub.add_parser("run", help="Correr simulaciones en lote")
     _add_reglamento_arg(run)
     run.add_argument("--partidos", type=int, default=100)
-    run.add_argument("--jugadores-por-equipo", type=int, default=2, help="Mínimo 2")
+    run.add_argument("--jugadores-por-equipo", type=int, default=3, help="Mínimo 2 (default: 3)")
     _add_ia_args(run)
     run.add_argument(
         "--pasa-turno-sin-respuesta",
@@ -100,6 +100,7 @@ def main() -> None:
 
     compare = sub.add_parser("compare", help="Comparar v0 vs v1 (alias histórico)")
     compare.add_argument("--partidos", type=int, default=200)
+    compare.add_argument("--jugadores-por-equipo", type=int, default=3, help="Jugadores por equipo (default: 3)")
     _add_ia_args(compare)
 
     compare_reg = sub.add_parser(
@@ -107,6 +108,7 @@ def main() -> None:
         help="Comparar todos los reglamentos del índice",
     )
     compare_reg.add_argument("--partidos", type=int, default=200)
+    compare_reg.add_argument("--jugadores-por-equipo", type=int, default=3, help="Jugadores por equipo (default: 3)")
     _add_ia_args(compare_reg)
 
     variantes = sub.add_parser("variantes", help="Comparar variantes de reglas desde JSON")
@@ -206,14 +208,23 @@ def main() -> None:
 
     elif args.comando == "compare":
         for reg_id in ("v0", "v1"):
-            config = ConfigSimulacion(reglamento=reg_id, ia=args.ia)
+            config = ConfigSimulacion(
+                reglamento=reg_id,
+                ia=args.ia,
+                jugadores_por_equipo=args.jugadores_por_equipo,
+            )
             res = simular_lote(partidos=args.partidos, config=config)
             print(formatear_reporte(res))
             print()
 
     elif args.comando == "compare-reglamentos":
         configs = [
-            ConfigSimulacion(reglamento=e["id"], ia=args.ia) for e in listar_reglamentos()
+            ConfigSimulacion(
+                reglamento=e["id"],
+                ia=args.ia,
+                jugadores_por_equipo=args.jugadores_por_equipo,
+            )
+            for e in listar_reglamentos()
         ]
         resultados = simular_variantes(configs, partidos=args.partidos)
         print(formatear_comparacion_reglamentos(resultados))

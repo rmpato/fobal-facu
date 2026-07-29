@@ -40,14 +40,14 @@
     <div class="page-hero">
       <p class="breadcrumb"><a href="index.html">Inicio</a> / Resultados</p>
       <h1>📊 Resultados de simulación</h1>
-      <p class="lead">Partidos automáticos 2 vs 2. Usá estas tablas para comparar con lo que pasa en mesa.</p>
+      <p class="lead">Partidos automáticos 3 vs 3. Usá estas tablas para comparar con lo que pasa en mesa.</p>
     </div>
 
     <!-- Comparación rápida (CLI) -->
     <section id="compare-cli">
       <span class="tag new">Nuevo · v2 · jul 2026</span>
       <h2>Comparación de reglamentos</h2>
-      <p class="section-lead">200 partidos c/u · 2 vs 2 · IA estratégica · <code>compare-reglamentos</code></p>
+      <p class="section-lead">200 partidos c/u · 3 vs 3 · IA estratégica · <code>compare-reglamentos</code></p>
 
       <div class="card highlight">
         <table>
@@ -66,47 +66,47 @@
           <tbody>
             <tr>
               <td><strong>v0</strong> — original</td>
-              <td class="num v0">5,0%</td>
-              <td class="num v0">0,91</td>
-              <td class="num v0">477,7</td>
-              <td class="num v0">0,5%</td>
-              <td class="num v0">4,2%</td>
-              <td class="num v0">92,3%</td>
-              <td class="num v0">1,24</td>
+              <td class="num v0">26,0%</td>
+              <td class="num v0">1,89</td>
+              <td class="num v0">392,1</td>
+              <td class="num v0">8,5%</td>
+              <td class="num v0">8,2%</td>
+              <td class="num v0">84,9%</td>
+              <td class="num v0">1,94</td>
             </tr>
             <tr>
               <td><strong>v1</strong> — playtesting</td>
-              <td class="num v1">96,5%</td>
-              <td class="num v1">4,02</td>
-              <td class="num v1">183,3</td>
-              <td class="num v1">36,5%</td>
-              <td class="num v1">34,7%</td>
-              <td class="num v1">7,6%</td>
-              <td class="num v1">3,65</td>
+              <td class="num v1">99,0%</td>
+              <td class="num v1">4,03</td>
+              <td class="num v1">179,0</td>
+              <td class="num v1">35,0%</td>
+              <td class="num v1">40,3%</td>
+              <td class="num v1">8,8%</td>
+              <td class="num v1">4,38</td>
             </tr>
             <tr>
               <td><strong>v1.1</strong> — pasa al compañero</td>
-              <td class="num v11">97,5%</td>
-              <td class="num v11">3,98</td>
-              <td class="num v11">184,9</td>
-              <td class="num v11">32,0%</td>
-              <td class="num v11">35,0%</td>
-              <td class="num v11">7,6%</td>
-              <td class="num v11">3,44</td>
+              <td class="num v11">99,0%</td>
+              <td class="num v11">4,01</td>
+              <td class="num v11">168,9</td>
+              <td class="num v11">35,5%</td>
+              <td class="num v11">40,4%</td>
+              <td class="num v11">8,8%</td>
+              <td class="num v11">4,09</td>
             </tr>
             <tr>
               <td><strong>v2</strong> — sin pasa turno · trampa al pase</td>
               <td class="num v2 better">100%</td>
-              <td class="num v2">4,11</td>
-              <td class="num v2 better">145,9</td>
-              <td class="num v2">38,0%</td>
-              <td class="num v2">42,2%</td>
+              <td class="num v2">3,85</td>
+              <td class="num v2 better">151,3</td>
+              <td class="num v2">24,0%</td>
+              <td class="num v2">44,6%</td>
               <td class="num v2">0%</td>
-              <td class="num v2 better">5,42</td>
+              <td class="num v2 better">7,15</td>
             </tr>
           </tbody>
         </table>
-        <p><strong>v2</strong> elimina pasa de turno, permite Trampa/Marca al reaccionar a un pase, y encadena robo ↔ gambetear. Partidos más cortos (~21% menos turnos que v1) con más pases y más uso de Trampa/Marca.</p>
+        <p><strong>v2</strong> elimina pasa de turno, permite Trampa/Marca al reaccionar a un pase, y encadena robo ↔ gambetear. Partidos más cortos (~15% menos turnos que v1 en 3v3) con más pase y más Trampa/Marca (~19 colocaciones/partido).</p>
         <p><small>Comando: <code>python3 -m simulador compare-reglamentos --partidos 200 --ia estrategica</code> · Reglas: <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v2.md">reglamento-v2.md</a></small></p>
       </div>
     </section>
@@ -114,101 +114,100 @@
     <!-- IA estratégica -->
     <section id="ia-estrategica">
       <span class="tag new">Nuevo · jul 2026</span>
-      <h2>IA estratégica vs simple (v1)</h2>
-      <p class="section-lead">200 partidos · v1 · la estratégica usa la decisión pasa de turno a propósito</p>
+      <h2>IA estratégica vs simple (v1 · 3 vs 3)</h2>
+      <p class="section-lead">200 partidos · v1 · 3 vs 3 · la estratégica usa más pasa de turno y Trampa/Marca</p>
 
       <div class="compare-grid">
         <div class="stat-box">
           <div class="label">Completados</div>
-          <div class="values"><span class="val v0">62,5%</span><span class="val v1">96,5%</span></div>
+          <div class="values"><span class="val v0">99,5%</span><span class="val v1">99,0%</span></div>
           <div class="unit">IA simple → estratégica</div>
         </div>
         <div class="stat-box">
           <div class="label">Goles / partido</div>
-          <div class="values"><span class="val v0">3,25</span><span class="val v1">4,02</span></div>
+          <div class="values"><span class="val v0">4,08</span><span class="val v1">4,03</span></div>
         </div>
         <div class="stat-box">
           <div class="label">Turnos / partido</div>
-          <div class="values"><span class="val v0">304</span><span class="val v1">183</span></div>
+          <div class="values"><span class="val v0">180</span><span class="val v1">179</span></div>
         </div>
         <div class="stat-box">
           <div class="label">Penales (2-2)</div>
-          <div class="values"><span class="val v1">36,5%</span></div>
+          <div class="values"><span class="val v1">35,0%</span></div>
         </div>
       </div>
 
       <div class="card highlight">
-        <h3>Trampa y Marca — ahora sí se evalúan</h3>
+        <h3>Trampa y Marca — más uso con IA estratégica</h3>
         <table>
           <thead><tr><th>Carta / evento</th><th class="num">IA simple</th><th class="num">IA estratégica</th></tr></thead>
           <tbody>
-            <tr><td>Pasa de turno (decisión) / partido</td><td class="num v0">~1,2</td><td class="num better">16,3</td></tr>
-            <tr><td>Trampa colocada</td><td class="num v0">~0,9</td><td class="num better">3,65</td></tr>
-            <tr><td>Marca colocada</td><td class="num v0">~1,2</td><td class="num better">5,90</td></tr>
-            <tr><td>Offside efectivo</td><td class="num">—</td><td class="num">3,08</td></tr>
-            <tr><td>Marca efectiva al pase</td><td class="num">—</td><td class="num">4,04</td></tr>
+            <tr><td>Pasa de turno (decisión) / partido</td><td class="num v0">~8</td><td class="num better">19</td></tr>
+            <tr><td>Trampa colocada</td><td class="num v0">~1,8</td><td class="num better">4,38</td></tr>
+            <tr><td>Marca colocada</td><td class="num v0">~3,0</td><td class="num better">7,49</td></tr>
+            <tr><td>Offside efectivo</td><td class="num">~1,4</td><td class="num">3,61</td></tr>
           </tbody>
         </table>
-        <p><small>Trampa y Marca son cartas; pasa de turno no. Las 8 cartas de Trampa+Marca se colocan ~9,5 veces/partido con IA estratégica porque el ataque pasa de turno ~16 veces.</small></p>
+        <p><small>En 3 vs 3 ambas IAs cierran casi todos los partidos. La diferencia está en cuánto se evalúan Trampa/Marca (vía pasa de turno en v1).</small></p>
       </div>
     </section>
 
     <!-- Acciones v2 -->
     <section id="acciones-v2">
       <h2>Distribución de acciones — v2</h2>
-      <p class="section-lead">Porcentaje sobre el total de acciones · v2 · IA estratégica · 200 partidos</p>
+      <p class="section-lead">Porcentaje sobre el total de acciones · v2 · 3 vs 3 · IA estratégica · 200 partidos</p>
 
       <div class="action-legend">
-        <span class="legend-pase">Pase 42,2%</span>
-        <span class="legend-despeje">Despeje 23,7%</span>
-        <span class="legend-robo">Robo 17,7%</span>
-        <span class="legend-disparo">Disparo 9,7%</span>
-        <span class="legend-falta">Falta 6,7%</span>
+        <span class="legend-pase">Pase 44,6%</span>
+        <span class="legend-robo">Robo 22,4%</span>
+        <span class="legend-despeje">Despeje 16,3%</span>
+        <span class="legend-disparo">Disparo 8,8%</span>
+        <span class="legend-falta">Falta 8,0%</span>
       </div>
 
       <div class="card">
         <div class="bar-chart">
-          <div class="bar-row"><span class="bar-label">Pase</span><div class="bar-track"><div class="bar-fill v2" style="width:42.2%"></div></div><span class="bar-value">42,2%</span></div>
-          <div class="bar-row"><span class="bar-label">Despeje</span><div class="bar-track"><div class="bar-fill" style="width:23.7%;background:linear-gradient(90deg,#3a7ab0,#5a9fd4)"></div></div><span class="bar-value">23,7%</span></div>
-          <div class="bar-row"><span class="bar-label">Robo</span><div class="bar-track"><div class="bar-fill gold" style="width:17.7%"></div></div><span class="bar-value">17,7%</span></div>
-          <div class="bar-row"><span class="bar-label">Disparo</span><div class="bar-track"><div class="bar-fill gold" style="width:9.7%"></div></div><span class="bar-value">9,7%</span></div>
-          <div class="bar-row"><span class="bar-label">Falta</span><div class="bar-track"><div class="bar-fill v0" style="width:6.7%"></div></div><span class="bar-value">6,7%</span></div>
+          <div class="bar-row"><span class="bar-label">Pase</span><div class="bar-track"><div class="bar-fill v2" style="width:44.6%"></div></div><span class="bar-value">44,6%</span></div>
+          <div class="bar-row"><span class="bar-label">Robo</span><div class="bar-track"><div class="bar-fill gold" style="width:22.4%"></div></div><span class="bar-value">22,4%</span></div>
+          <div class="bar-row"><span class="bar-label">Despeje</span><div class="bar-track"><div class="bar-fill" style="width:16.3%;background:linear-gradient(90deg,#3a7ab0,#5a9fd4)"></div></div><span class="bar-value">16,3%</span></div>
+          <div class="bar-row"><span class="bar-label">Disparo</span><div class="bar-track"><div class="bar-fill gold" style="width:8.8%"></div></div><span class="bar-value">8,8%</span></div>
+          <div class="bar-row"><span class="bar-label">Falta</span><div class="bar-track"><div class="bar-fill v0" style="width:8.0%"></div></div><span class="bar-value">8,0%</span></div>
           <div class="bar-row"><span class="bar-label">Pasa de turno <small>(decisión)</small></span><div class="bar-track"><div class="bar-fill" style="width:0%;background:linear-gradient(90deg,#8a5ab0,#b07ad4)"></div></div><span class="bar-value">0%</span></div>
         </div>
         <table>
           <thead><tr><th>Trampa / Marca (v2)</th><th class="num">Por partido</th></tr></thead>
           <tbody>
-            <tr><td>Trampa colocada</td><td class="num v2">5,42</td></tr>
-            <tr><td>Marca colocada</td><td class="num v2">8,85</td></tr>
-            <tr><td>Offside efectivo</td><td class="num">3,19</td></tr>
+            <tr><td>Trampa colocada</td><td class="num v2">7,15</td></tr>
+            <tr><td>Marca colocada</td><td class="num v2">11,95</td></tr>
+            <tr><td>Offside efectivo</td><td class="num">4,67</td></tr>
           </tbody>
         </table>
-        <p><strong>vs v1:</strong> más pase (+7,5 pp), menos despeje (−4,5 pp), sin pasa de turno, Trampa/Marca ~49% más frecuentes (reactivas al pase, no a la decisión).</p>
+        <p><strong>vs v1 (3v3):</strong> más pase (+4 pp), más robo (+3 pp), sin pasa de turno, Trampa/Marca ~60% más frecuentes (reactivas al pase).</p>
       </div>
     </section>
 
     <!-- Acciones -->
     <section id="acciones">
       <h2>Distribución de acciones</h2>
-      <p class="section-lead">Porcentaje sobre el total de acciones registradas · v1 · IA estratégica · 200 partidos</p>
+      <p class="section-lead">Porcentaje sobre el total de acciones registradas · v1 · 3 vs 3 · IA estratégica · 200 partidos</p>
 
       <div class="action-legend">
-        <span class="legend-pase">Pase 34,7%</span>
-        <span class="legend-despeje">Despeje 28,2%</span>
-        <span class="legend-robo">Robo 15,5%</span>
-        <span class="legend-disparo">Disparo 8,4%</span>
-        <span class="legend-pasat">Pasa turno (decisión) 7,6%</span>
-        <span class="legend-falta">Falta 5,5%</span>
+        <span class="legend-pase">Pase 40,3%</span>
+        <span class="legend-robo">Robo 19,1%</span>
+        <span class="legend-despeje">Despeje 15,8%</span>
+        <span class="legend-disparo">Disparo 8,6%</span>
+        <span class="legend-pasat">Pasa turno (decisión) 8,8%</span>
+        <span class="legend-falta">Falta 7,4%</span>
       </div>
 
       <div class="card">
         <div class="bar-chart">
-          <div class="bar-row"><span class="bar-label">Pase</span><div class="bar-track"><div class="bar-fill v1" style="width:34.7%"></div></div><span class="bar-value">34,7%</span></div>
-          <div class="bar-row"><span class="bar-label">Despeje</span><div class="bar-track"><div class="bar-fill" style="width:28.2%;background:linear-gradient(90deg,#3a7ab0,#5a9fd4)"></div></div><span class="bar-value">28,2%</span></div>
-          <div class="bar-row"><span class="bar-label">Robo</span><div class="bar-track"><div class="bar-fill gold" style="width:15.5%"></div></div><span class="bar-value">15,5%</span></div>
-          <div class="bar-row"><span class="bar-label">Disparo</span><div class="bar-track"><div class="bar-fill gold" style="width:8.4%"></div></div><span class="bar-value">8,4%</span></div>
-          <div class="bar-row"><span class="bar-label">Pasa de turno <small>(decisión)</small></span><div class="bar-track"><div class="bar-fill" style="width:7.6%;background:linear-gradient(90deg,#8a5ab0,#b07ad4)"></div></div><span class="bar-value">7,6%</span></div>
-          <div class="bar-row"><span class="bar-label">Falta</span><div class="bar-track"><div class="bar-fill v0" style="width:5.5%"></div></div><span class="bar-value">5,5%</span></div>
+          <div class="bar-row"><span class="bar-label">Pase</span><div class="bar-track"><div class="bar-fill v1" style="width:40.3%"></div></div><span class="bar-value">40,3%</span></div>
+          <div class="bar-row"><span class="bar-label">Robo</span><div class="bar-track"><div class="bar-fill gold" style="width:19.1%"></div></div><span class="bar-value">19,1%</span></div>
+          <div class="bar-row"><span class="bar-label">Despeje</span><div class="bar-track"><div class="bar-fill" style="width:15.8%;background:linear-gradient(90deg,#3a7ab0,#5a9fd4)"></div></div><span class="bar-value">15,8%</span></div>
+          <div class="bar-row"><span class="bar-label">Disparo</span><div class="bar-track"><div class="bar-fill gold" style="width:8.6%"></div></div><span class="bar-value">8,6%</span></div>
+          <div class="bar-row"><span class="bar-label">Pasa de turno <small>(decisión)</small></span><div class="bar-track"><div class="bar-fill" style="width:8.8%;background:linear-gradient(90deg,#8a5ab0,#b07ad4)"></div></div><span class="bar-value">8,8%</span></div>
+          <div class="bar-row"><span class="bar-label">Falta</span><div class="bar-track"><div class="bar-fill v0" style="width:7.4%"></div></div><span class="bar-value">7,4%</span></div>
         </div>
         <p><strong>Para playtesting:</strong> en un partido real, contá cuántas veces pasa cada cosa y compará con esta tabla.</p>
       </div>
@@ -217,7 +216,7 @@
     <!-- Variantes -->
     <section id="variantes">
       <h2>Variantes de regla</h2>
-      <p class="section-lead">¿Qué pasa si nadie reacciona al pasa de turno? · 200 partidos c/u · IA estratégica</p>
+      <p class="section-lead">¿Qué pasa si nadie reacciona al pasa de turno? · 200 partidos c/u · 3 vs 3 · IA estratégica</p>
 
       <div class="card">
         <table>
@@ -227,22 +226,22 @@
           <tbody>
             <tr>
               <td><strong>baseline</strong> — pelota queda igual</td>
-              <td class="num">96,5%</td><td class="num">4,02</td><td class="num">183</td><td class="num">36,5%</td><td class="num">34,7%</td><td class="num">7,6%</td>
+              <td class="num">99,0%</td><td class="num">4,03</td><td class="num">179</td><td class="num">35,0%</td><td class="num">40,3%</td><td class="num">8,8%</td>
             </tr>
             <tr>
               <td><strong>pasa_companero</strong> — pasa al compañero</td>
-              <td class="num">97,5%</td><td class="num">3,98</td><td class="num">185</td><td class="num">32,0%</td><td class="num">35,0%</td><td class="num">7,6%</td>
+              <td class="num">99,0%</td><td class="num">4,01</td><td class="num">169</td><td class="num">35,5%</td><td class="num">40,4%</td><td class="num">8,8%</td>
             </tr>
           </tbody>
         </table>
-        <p><strong>Conclusión:</strong> con IA estratégica, la variante <code>pasa_companero</code> casi no cambia el juego — igual que el reglamento formal <strong>v1.1</strong>. El estancamiento anterior venía de la IA, no de la regla.</p>
+        <p><strong>Conclusión:</strong> en 3 vs 3, <code>pasa_companero</code> acorta un poco el partido (~10 turnos) pero el balance es similar. Reglamento formal: <strong>v1.1</strong>.</p>
       </div>
     </section>
 
     <!-- Comparación de reglamentos -->
     <section id="historico">
       <h2>Histórico: comparación de reglamentos</h2>
-      <p class="section-lead">200 partidos c/u · 2 vs 2 · IA estratégica · jul 2026</p>
+      <p class="section-lead">200 partidos c/u · 3 vs 3 · IA estratégica · jul 2026</p>
 
       <div class="card highlight">
         <h3>IA estratégica (default)</h3>
@@ -258,20 +257,20 @@
           </thead>
           <tbody>
             <tr><td>Reglamento</td><td>Original</td><td>Playtesting</td><td>Pasa al compañero</td><td>Sin pasa turno</td></tr>
-            <tr><td>Partidos completados</td><td class="num v0">5,0%</td><td class="num v1">96,5%</td><td class="num v11">97,5%</td><td class="num v2 better">100%</td></tr>
-            <tr><td>Empates técnicos (&gt;500 turnos)</td><td class="num v0">95,0%</td><td class="num v1">3,5%</td><td class="num v11">2,5%</td><td class="num v2 better">0%</td></tr>
-            <tr><td>Goles promedio</td><td class="num v0">0,91</td><td class="num v1">4,02</td><td class="num v11">3,98</td><td class="num v2">4,11</td></tr>
-            <tr><td>Turnos promedio</td><td class="num v0">478</td><td class="num v1">183</td><td class="num v11">185</td><td class="num v2 better">146</td></tr>
-            <tr><td>Penales (2-2)</td><td class="num v0">0,5%</td><td class="num v1">36,5%</td><td class="num v11">32,0%</td><td class="num v2">38,0%</td></tr>
-            <tr><td>Pase (% acciones)</td><td class="num v0">4,2%</td><td class="num v1">34,7%</td><td class="num v11">35,0%</td><td class="num v2">42,2%</td></tr>
-            <tr><td>Despeje (% acciones)</td><td class="num v0">0%</td><td class="num v1">28,2%</td><td class="num v11">27,8%</td><td class="num v2">23,7%</td></tr>
-            <tr><td>Pasa de turno — decisión (% acciones)</td><td class="num v0">92,3%</td><td class="num v1">7,6%</td><td class="num v11">7,6%</td><td class="num v2">0%</td></tr>
-            <tr><td>Trampa colocada / partido</td><td class="num v0">1,24</td><td class="num v1">3,65</td><td class="num v11">3,44</td><td class="num v2 better">5,42</td></tr>
-            <tr><td>Marca colocada / partido</td><td class="num v0">2,15</td><td class="num v1">5,90</td><td class="num v11">6,08</td><td class="num v2 better">8,85</td></tr>
+            <tr><td>Partidos completados</td><td class="num v0">26,0%</td><td class="num v1">99,0%</td><td class="num v11">99,0%</td><td class="num v2 better">100%</td></tr>
+            <tr><td>Empates técnicos (&gt;500 turnos)</td><td class="num v0">74,0%</td><td class="num v1">1,0%</td><td class="num v11">1,0%</td><td class="num v2 better">0%</td></tr>
+            <tr><td>Goles promedio</td><td class="num v0">1,89</td><td class="num v1">4,03</td><td class="num v11">4,01</td><td class="num v2">3,85</td></tr>
+            <tr><td>Turnos promedio</td><td class="num v0">392</td><td class="num v1">179</td><td class="num v11">169</td><td class="num v2 better">151</td></tr>
+            <tr><td>Penales (2-2)</td><td class="num v0">8,5%</td><td class="num v1">35,0%</td><td class="num v11">35,5%</td><td class="num v2">24,0%</td></tr>
+            <tr><td>Pase (% acciones)</td><td class="num v0">8,2%</td><td class="num v1">40,3%</td><td class="num v11">40,4%</td><td class="num v2">44,6%</td></tr>
+            <tr><td>Despeje (% acciones)</td><td class="num v0">0%</td><td class="num v1">15,8%</td><td class="num v11">15,6%</td><td class="num v2">16,3%</td></tr>
+            <tr><td>Pasa de turno — decisión (% acciones)</td><td class="num v0">84,9%</td><td class="num v1">8,8%</td><td class="num v11">8,8%</td><td class="num v2">0%</td></tr>
+            <tr><td>Trampa colocada / partido</td><td class="num v0">1,94</td><td class="num v1">4,38</td><td class="num v11">4,09</td><td class="num v2 better">7,15</td></tr>
+            <tr><td>Marca colocada / partido</td><td class="num v0">3,23</td><td class="num v1">7,49</td><td class="num v11">7,28</td><td class="num v2 better">11,95</td></tr>
           </tbody>
         </table>
         <p><strong>v1.1</strong> extiende v1: si nadie reacciona al pasa de turno, la pelota pasa a un compañero. En números es casi igual a v1.</p>
-        <p><strong>v2</strong> cambia el loop de juego: sin pasa de turno, Trampa/Marca al pase, robo/gambetear encadenables. Balance 49,5% / 50,5% victorias.</p>
+        <p><strong>v2</strong> cambia el loop de juego: sin pasa de turno, Trampa/Marca al pase, robo/gambetear encadenables. Balance 48% / 52% victorias. Menos penales que v1 (~24% vs ~35%).</p>
         <p><small>Comando: <code>python3 -m simulador compare-reglamentos --partidos 200</code></small></p>
       </div>
 
@@ -302,7 +301,7 @@
             <tr><td>Marca / partido</td><td class="num">~9,7</td><td class="num">~1,2</td></tr>
           </tbody>
         </table>
-        <p>Con <strong>IA estratégica</strong> y regla correcta, Marca/Trampa vuelven a ~9,5 colocaciones/partido en v1 porque la IA usa la decisión pasa de turno.</p>
+        <p>Con <strong>IA estratégica</strong> y regla correcta en 3 vs 3, Marca/Trampa suman ~12 colocaciones/partido en v1 (vía pasa de turno).</p>
       </div>
     </section>
 
@@ -313,8 +312,8 @@
       <div class="card">
         <h3>v0 — no recomendado</h3>
         <ul class="findings">
-          <li>~96–99% de partidos no termina (IA estratégica y simple).</li>
-          <li>Con IA estratégica el ataque spamea pasa de turno (~93% acciones) sin acercarse al arco.</li>
+          <li>~74% de partidos no termina en 3 vs 3 (vs ~95% en 2v2 histórico).</li>
+          <li>Con IA estratégica el ataque spamea pasa de turno (~85% acciones) sin acercarse al arco.</li>
           <li>Sin Reventar ni cambio de ritmo, el juego no cierra.</li>
         </ul>
       </div>
@@ -322,9 +321,9 @@
       <div class="card highlight">
         <h3>v2 — candidato a playtesting (jul 2026)</h3>
         <ul class="findings">
-          <li><strong>100%</strong> de partidos termina · <strong>0</strong> empates técnicos · ~146 turnos (−21% vs v1).</li>
-          <li>~4,1 goles/partido · balance simétrico (49,5% / 50,5%).</li>
-          <li>Trampa/Marca reactivas al <strong>pase</strong> (~14 colocaciones/partido vs ~9,5 en v1).</li>
+          <li><strong>100%</strong> de partidos termina · <strong>0</strong> empates técnicos · ~151 turnos (−15% vs v1 en 3v3).</li>
+          <li>~3,9 goles/partido · balance 48% / 52% victorias.</li>
+          <li>Trampa/Marca reactivas al <strong>pase</strong> (~19 colocaciones/partido vs ~12 en v1).</li>
           <li>Sin pasa de turno: el ritmo viene de pase, robo encadenado y reventar.</li>
         </ul>
         <p><a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v2.md">Reglas v2 (MD)</a> · <a href="reglas.html">Reglas en el sitio</a></p>
@@ -333,8 +332,8 @@
       <div class="card highlight">
         <h3>v1 / v1.1 — viable con IA estratégica</h3>
         <ul class="findings">
-          <li><strong>v1:</strong> ~97% de partidos termina · ~4 goles/partido · ~183 turnos.</li>
-          <li><strong>v1.1</strong> (pasa al compañero): casi idéntico a v1 (~98% completados, ~4 goles).</li>
+          <li><strong>v1:</strong> ~99% de partidos termina · ~4 goles/partido · ~179 turnos.</li>
+          <li><strong>v1.1</strong> (pasa al compañero): casi idéntico a v1 (~99% completados, ~169 turnos).</li>
           <li>Despeje + robo mueven la pelota constantemente.</li>
           <li>Trampa/Marca (cartas) se activan cuando el ataque elige <strong>pasa de turno</strong> — decisión, no carta.</li>
         </ul>
@@ -345,7 +344,7 @@
         <ul class="checklist">
           <li>¿Frecuencia real de acciones en mesa vs simulación?</li>
           <li>¿v1.1 o v2 en mesa se siente mejor que v1?</li>
-          <li>¿Penales ~32–38% es demasiado frecuente?</li>
+          <li>¿Penales ~24–35% es demasiado frecuente?</li>
         </ul>
       </div>
     </section>
