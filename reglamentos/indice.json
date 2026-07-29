@@ -17,6 +17,12 @@
       "archivo": "v1.1.json",
       "nombre": "Iteración 1.1 — pasa al compañero",
       "documento": "docs/reglamento-v1.1.md"
+    },
+    {
+      "id": "v2",
+      "archivo": "v2.json",
+      "nombre": "Iteración 2 (playtesting)",
+      "documento": "docs/reglamento-v2.md"
     }
   ]
 }

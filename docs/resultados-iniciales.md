@@ -22,7 +22,8 @@ Cómo reproducir → [guia-rapida.md](./guia-rapida.md). Perfiles de IA → [per
 2. **v1 es jugable** — con IA estratégica (default) los partidos terminan y hay ~4 goles/partido.
 3. **Trampa/Marca** solo importan si el ataque pasa de turno (~16×/partido con IA estratégica vs ~1× con IA simple).
 4. **Variante v1.1** (pasa al compañero) casi no cambia números vs v1 baseline.
-5. **Perfil de juego v1:** pase 35%, despeje 28%, robo 16%, disparo 8%, pasa turno 8%, falta 6%.
+5. **v2** (sin pasa turno, trampa al pase): 100% completados, ~146 turnos, más pase y Trampa/Marca.
+6. **Perfil de juego v1:** pase 35%, despeje 28%, robo 16%, disparo 8%, pasa turno 8%, falta 6%.
 
 ---
 
@@ -236,3 +237,43 @@ Si nadie reacciona al pasa de turno, la pelota pasa a un compañero.
 **Conclusión:** la variante `pasa_companero` apenas cambia el balance vs `nada` con IA estratégica. El estancamiento de v1 se debía más a la IA que a la regla.
 
 Próximos experimentos → [recomendaciones-diseno.md](./recomendaciones-diseno.md).
+
+---
+
+## Reglamento v2 (jul 2026)
+
+Corridas con `--ia estrategica` y `python3 -m simulador compare-reglamentos --partidos 200`.
+
+Cambios vs v1: sin pasa de turno; Trampa/Marca al reaccionar a un pase; robo ↔ gambetear encadenables.
+
+### Comparación rápida
+
+| Reglamento | Compl. | Goles | Turnos | Pen. | Pase% | PasaT% | Trampa |
+|------------|--------|-------|--------|------|-------|--------|--------|
+| v0 | 5,0% | 0,91 | 477,7 | 0,5% | 4,2% | 92,3% | 1,24 |
+| v1 | 96,5% | 4,02 | 183,3 | 36,5% | 34,7% | 7,6% | 3,65 |
+| v1.1 | 97,5% | 3,98 | 184,9 | 32,0% | 35,0% | 7,6% | 3,44 |
+| **v2** | **100%** | **4,11** | **145,9** | **38,0%** | **42,2%** | **0%** | **5,42** |
+
+### Distribución de acciones (v2, IA estratégica)
+
+| Acción | % del total |
+|--------|-------------|
+| Pase | 42,2% |
+| Despeje | 23,7% |
+| Robo | 17,7% |
+| Disparo | 9,7% |
+| Falta | 6,7% |
+| Pasa de turno | 0% |
+
+### Trampa / Marca (v2)
+
+| Evento | Por partido |
+|--------|-------------|
+| Trampa colocada | 5,42 |
+| Marca colocada | 8,85 |
+| Offside efectivo | 3,19 |
+
+**Conclusión:** v2 cierra todos los partidos, acorta la duración (~21% menos turnos), sube pase y uso de Trampa/Marca (reactivas al pase). Balance simétrico (49,5% / 50,5% victorias). Candidato fuerte para playtesting en mesa.
+
+Reglas → [reglamento-v2.md](./reglamento-v2.md). Sitio → [resultados.html](./resultados.html#compare-cli).

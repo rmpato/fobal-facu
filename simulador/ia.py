@@ -200,6 +200,7 @@ def pesos_ataque(
     reg = estado.reglamento
     pases = estado.pases_en_jugada
     opciones: list[tuple[str, float, str]] = []
+    permite_pasa_turno = not reg or reg.accion_ofensiva_permitida("pasa_turno")
 
     if Carta.DISPARO in mano:
         opciones.append(("disparo", _prob_disparo(estado, ia_id), f"cadena {pases}"))
@@ -210,16 +211,18 @@ def pesos_ataque(
         else:
             opciones.append(("pase", _prob_pase_base(ia_id), "sigue jugada"))
             opciones.append(("reventar", _prob_reventar(ia_id, pases), "despeje"))
-            opciones.append(
-                ("pasa turno", _prob_pasa_turno(estado, portador, ia_id), "trampa/marca")
-            )
+            if permite_pasa_turno:
+                opciones.append(
+                    ("pasa turno", _prob_pasa_turno(estado, portador, ia_id), "trampa/marca")
+                )
     else:
         if Carta.PASE in mano:
             pase_p = 0.72 if ia_id == "simple" else _prob_pase_base(ia_id)
             opciones.append(("pase", pase_p, "mantiene"))
-        pt = _prob_pasa_turno(estado, portador, ia_id)
-        if pt > 0:
-            opciones.append(("pasa turno", pt, "armar trampa"))
+        if permite_pasa_turno:
+            pt = _prob_pasa_turno(estado, portador, ia_id)
+            if pt > 0:
+                opciones.append(("pasa turno", pt, "armar trampa"))
         if Carta.DISPARO in mano and ia_id in ("estrategica", "gambler", "agresiva"):
             extra = _prob_disparo(estado, ia_id)
             opciones.append(("disparo", extra, f"cadena {pases}"))
@@ -249,16 +252,19 @@ def _accion_ofensiva(
 
     mano = portador.mano
     pases = estado.pases_en_jugada
+    reg = estado.reglamento
+    permite_pasa_turno = not reg or reg.accion_ofensiva_permitida("pasa_turno")
 
     if Carta.DISPARO in mano and random.random() < _prob_disparo(estado, ia_id):
         return "disparo"
 
-    if estado.reglamento and estado.reglamento.reventar_habilitado:
+    if reg and reg.reventar_habilitado:
         if Carta.PASE not in mano:
             return "reventar"
-        pt = _prob_pasa_turno(estado, portador, ia_id)
-        if random.random() < pt:
-            return "pasa_turno"
+        if permite_pasa_turno:
+            pt = _prob_pasa_turno(estado, portador, ia_id)
+            if random.random() < pt:
+                return "pasa_turno"
         if random.random() < _prob_reventar(ia_id, pases):
             return "reventar"
         if Carta.PASE in mano:
@@ -270,11 +276,13 @@ def _accion_ofensiva(
         return "pase"
     if Carta.DISPARO in mano and random.random() < _prob_disparo(estado, ia_id):
         return "disparo"
-    if random.random() < pt:
+    if permite_pasa_turno and random.random() < pt:
         return "pasa_turno"
     if Carta.PASE in mano:
         return "pase"
-    return "pasa_turno"
+    if reg and reg.reventar_habilitado:
+        return "reventar"
+    return "pasa_turno" if permite_pasa_turno else "reventar"
 
 
 def _defensa_base(
@@ -307,21 +315,25 @@ def _defensa_base(
 
     if contexto == "pase":
         candidatos = []
+        cartas_pase = (
+            estado.reglamento.reacciones_pase.cartas
+            if estado.reglamento
+            else [Carta.ROBO_PELOTA]
+        )
         for d in defensores:
-            if (
-                estado.reglamento
-                and estado.reglamento.motor_perfil == "v0"
-                and d.tiene(Carta.CORTA_PASE)
-                and random.random() < 0.35 * agresividad
-            ):
-                candidatos.append((d, Carta.CORTA_PASE))
-            elif (
-                estado.reglamento
-                and estado.reglamento.motor_perfil == "v1"
-                and d.tiene(Carta.ROBO_PELOTA)
-                and random.random() < 0.42 * agresividad
-            ):
-                candidatos.append((d, Carta.ROBO_PELOTA))
+            for carta in cartas_pase:
+                if not d.tiene(carta):
+                    continue
+                if carta == Carta.CORTA_PASE and estado.reglamento and estado.reglamento.motor_perfil == "v0":
+                    prob = 0.35 * agresividad
+                elif carta == Carta.ROBO_PELOTA:
+                    prob = 0.42 * agresividad
+                elif carta in (Carta.TRAMPA_OFFSIDE, Carta.MARCA_PERSONAL):
+                    prob = 0.35 * agresividad
+                else:
+                    prob = 0.30 * agresividad
+                if random.random() < prob:
+                    candidatos.append((d, carta))
         return random.choice(candidatos) if candidatos else (None, None)
 
     return None, None

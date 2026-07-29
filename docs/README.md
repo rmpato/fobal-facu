@@ -36,6 +36,7 @@ Guía de qué leer según lo que necesites. El README del repo tiene el [quickst
 | `v0` | Reglamento original | [reglamento-v0.md](./reglamento-v0.md) | [v0.json](../reglamentos/v0.json) |
 | `v1` | Iteración 1 (playtesting) | [reglamento-v1.md](./reglamento-v1.md) | [v1.json](../reglamentos/v1.json) |
 | `v1.1` | Pasa al compañero *(extiende v1)* | [reglamento-v1.1.md](./reglamento-v1.1.md) | [v1.1.json](../reglamentos/v1.1.json) |
+| `v2` | Iteración 2 (playtesting) | [reglamento-v2.md](./reglamento-v2.md) | [v2.json](../reglamentos/v2.json) |
 
 `v1` es el default del simulador. `v1.1` solo cambia qué pasa si nadie reacciona al pasa de turno.
 

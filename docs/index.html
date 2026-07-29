@@ -45,8 +45,8 @@
       </p>
       <div class="badges">
         <span class="badge"><strong>python3 -m simulador run</strong></span>
-        <span class="badge">Reglamento <strong>v1</strong></span>
-        <span class="badge"><strong>~97%</strong> partidos completados</span>
+        <span class="badge">Reglamento <strong>v2</strong> en simulación</span>
+        <span class="badge"><strong>100%</strong> partidos completados (v2)</span>
       </div>
     </div>
 
@@ -66,7 +66,7 @@ python3 -m simulador compare-reglamentos --partidos 200</code></pre>
       <a class="nav-card" href="resultados.html">
         <div class="icon">📊</div>
         <h3>Resultados</h3>
-        <p>Conclusiones: v0, v1, v1.1 — acciones, Trampa/Marca, penales.</p>
+        <p>Conclusiones: v0, v1, v1.1, <strong>v2</strong> — acciones, Trampa/Marca, penales.</p>
       </a>
       <a class="nav-card" href="recomendaciones.html">
         <div class="icon">💡</div>
@@ -103,7 +103,7 @@ python3 -m simulador compare-reglamentos --partidos 200</code></pre>
           <tbody>
             <tr><td>Equipos</td><td>Mínimo <strong>2 jugadores por equipo</strong></td></tr>
             <tr><td>Marcador 2-2</td><td>Penales <strong>inmediatos</strong></td></tr>
-            <tr><td>Trampa / Marca personal</td><td>Solo cuando el ataque <strong>pasa de turno</strong> (decisión, no carta)</td></tr>
+            <tr><td>Trampa / Marca personal</td><td>Solo cuando el ataque <strong>pasa de turno</strong> (v1) · al <strong>pase</strong> en v2</td></tr>
             <tr><td>Pasa de turno / Reventar</td><td>Decisiones del jugador — <strong>no</strong> son cartas del mazo</td></tr>
             <tr><td>Reventarla</td><td>Cada equipo elige quién tira el dado (no el que reventó)</td></tr>
           </tbody>
@@ -112,30 +112,30 @@ python3 -m simulador compare-reglamentos --partidos 200</code></pre>
     </section>
 
     <section>
-      <h2>📈 Lo más reciente (simulación v1)</h2>
+      <h2>📈 Lo más reciente (v2 vs v1)</h2>
       <p class="section-lead">200 partidos · 2 vs 2 · IA estratégica · jul 2026</p>
       <div class="compare-grid">
         <div class="stat-box">
           <div class="label">Partidos completados</div>
-          <div class="values"><span class="val v1">96,5%</span></div>
-          <div class="unit">antes con IA simple: 62,5%</div>
+          <div class="values"><span class="val v1">96,5%</span><span class="val v2">100%</span></div>
+          <div class="unit">v1 → v2</div>
         </div>
         <div class="stat-box">
-          <div class="label">Goles promedio</div>
-          <div class="values"><span class="val v1">4,02</span></div>
+          <div class="label">Turnos promedio</div>
+          <div class="values"><span class="val v1">183</span><span class="val v2">146</span></div>
         </div>
         <div class="stat-box">
           <div class="label">Trampa + Marca / partido</div>
-          <div class="values"><span class="val v1">~9,5</span></div>
-          <div class="unit">colocadas (antes ~2)</div>
+          <div class="values"><span class="val v1">~9,5</span><span class="val v2">~14,3</span></div>
+          <div class="unit">colocadas (v2: al pase)</div>
         </div>
         <div class="stat-box">
           <div class="label">Pasa de turno</div>
-          <div class="values"><span class="val v1">7,6%</span></div>
-          <div class="unit">decisión, no carta · % acciones</div>
+          <div class="values"><span class="val v1">7,6%</span><span class="val v2">0%</span></div>
+          <div class="unit">decisión · v2 eliminada</div>
         </div>
       </div>
-      <p><a href="resultados.html">Ver análisis completo →</a></p>
+      <p><a href="resultados.html#compare-cli">Ver comparación completa →</a></p>
     </section>
 
     <section>

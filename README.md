@@ -35,6 +35,7 @@ Estos son los que el simulador puede correr hoy (`reglamentos/indice.json`):
 | **`v0`** | Reglamento original | — | [reglamento-v0.md](docs/reglamento-v0.md) | [v0.json](reglamentos/v0.json) |
 | **`v1`** | Iteración 1 (playtesting) | Robo unificado, Reventar, rebote/palo, reposición al cambio de equipo | [reglamento-v1.md](docs/reglamento-v1.md) | [v1.json](reglamentos/v1.json) |
 | **`v1.1`** | Pasa al compañero | Extiende **v1**: si nadie reacciona al pasa de turno → pelota a un compañero | [reglamento-v1.1.md](docs/reglamento-v1.1.md) | [v1.1.json](reglamentos/v1.1.json) |
+| **`v2`** | Iteración 2 (playtesting) | Sin pasa de turno; trampa/marca al pase; reacciones encadenables | [reglamento-v2.md](docs/reglamento-v2.md) | [v2.json](reglamentos/v2.json) |
 
 ```bash
 python3 -m simulador run --reglamento v1 --partidos 200   # default actual

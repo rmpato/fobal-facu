@@ -54,7 +54,13 @@ class Reglamento:
     pasa_turno_sin_respuesta: str = "nada"
     prob_falta_por_turno: float = 0.08
     reventar_habilitado: bool = True
+    reacciones_encadenables: bool = False
     motor_perfil: str = "v1"
+
+    def accion_ofensiva_permitida(self, accion: str) -> bool:
+        if not self.acciones_ofensivas:
+            return True
+        return accion in self.acciones_ofensivas
 
     @property
     def reglas(self) -> str:
@@ -89,6 +95,7 @@ class Reglamento:
             f"Una reacción defensiva por acción: {'sí' if self.una_reaccion_defensiva_por_accion else 'no'}",
             f"Pasa de turno sin respuesta: {self.pasa_turno_sin_respuesta}",
             f"Prob. falta oportunista/turno: {self.prob_falta_por_turno:.0%}",
+            f"Reacciones encadenables (robo/gambetear): {'sí' if self.reacciones_encadenables else 'no'}",
             f"Perfil motor: {self.motor_perfil}",
         ]
         return lineas
@@ -160,6 +167,7 @@ def _reglamento_desde_dict(data: dict) -> Reglamento:
         pasa_turno_sin_respuesta=reglas.get("pasa_turno_sin_respuesta", "nada"),
         prob_falta_por_turno=float(reglas.get("prob_falta_por_turno", 0.08)),
         reventar_habilitado=bool(reglas.get("reventar_habilitado", True)),
+        reacciones_encadenables=bool(reglas.get("reacciones_encadenables", False)),
         motor_perfil=data.get("motor_perfil", "v1"),
     )
 

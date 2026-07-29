@@ -62,6 +62,7 @@ python3 -m simulador variantes --partidos 500
 | `v0` | Reglamento original | [v0.json](../reglamentos/v0.json) | [reglamento-v0.md](./reglamento-v0.md) |
 | `v1` | Iteración 1 (playtesting) | [v1.json](../reglamentos/v1.json) | [reglamento-v1.md](./reglamento-v1.md) |
 | `v1.1` | Pasa al compañero *(extiende v1)* | [v1.1.json](../reglamentos/v1.1.json) | [reglamento-v1.1.md](./reglamento-v1.1.md) |
+| `v2` | Iteración 2 (playtesting) | [v2.json](../reglamentos/v2.json) | [reglamento-v2.md](./reglamento-v2.md) |
 
 **Diferencias clave:**
 

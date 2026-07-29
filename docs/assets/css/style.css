@@ -12,6 +12,7 @@
   --v0: #6b8f9e;
   --v1: #4ecb71;
   --v11: #7eb8e8;
+  --v2: #e8924f;
   --warn: #e8924f;
   --radius: 12px;
   --shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
@@ -418,6 +419,11 @@ td.v11 {
   color: var(--v11);
 }
 
+td.v2 {
+  color: var(--v2);
+  font-weight: 600;
+}
+
 /* Bar charts */
 .bar-chart {
   display: flex;
@@ -458,6 +464,10 @@ td.v11 {
 
 .bar-fill.v1 {
   background: linear-gradient(90deg, #2d8a4a, var(--v1));
+}
+
+.bar-fill.v2 {
+  background: linear-gradient(90deg, #c07030, var(--v2));
 }
 
 .bar-fill.gold {
@@ -515,6 +525,10 @@ td.v11 {
 
 .stat-box .val.v11 {
   color: var(--v11);
+}
+
+.stat-box .val.v2 {
+  color: var(--v2);
 }
 
 .stat-box .unit {

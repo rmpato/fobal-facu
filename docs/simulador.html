@@ -65,8 +65,9 @@ python3 -m simulador reglamentos show v1</code></pre>
         <p>¿Querés crear v1.2, v2 o v3? → <a href="crear-reglamento.html">Cómo crear un reglamento</a></p>
 
         <h3>Comparar versiones</h3>
-        <pre><code>python3 -m simulador compare-reglamentos --partidos 200
-python3 -m simulador compare --partidos 200</code></pre>
+        <pre><code>python3 -m simulador compare-reglamentos --partidos 200 --ia estrategica
+python3 -m simulador run --reglamento v2 --partidos 200</code></pre>
+        <p>Comparación en el sitio → <a href="resultados.html#compare-cli">Resultados · comparación v0–v2</a></p>
 
         <h3>Ver partido + replay web</h3>
         <pre><code>python3 -m simulador ver --semilla 42 --pausa 3
