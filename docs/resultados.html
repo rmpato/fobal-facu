@@ -40,14 +40,89 @@
     <div class="page-hero">
       <p class="breadcrumb"><a href="index.html">Inicio</a> / Resultados</p>
       <h1>📊 Resultados de simulación</h1>
-      <p class="lead">Partidos automáticos 3 vs 3. Usá estas tablas para comparar con lo que pasa en mesa.</p>
+      <p class="lead">Partidos automáticos 3v3 y 4v4 · reglamentos <strong>v1</strong> y <strong>v2</strong>. v0 solo histórico.</p>
     </div>
+
+    <!-- Comparación v1 vs v2 · formatos -->
+    <section id="compare-formatos">
+      <span class="tag new">Informe · jul 2026</span>
+      <h2>v1 vs v2 · 3v3 y 4v4</h2>
+      <p class="section-lead">200 partidos c/u · IA estratégica · <code>compare-formatos</code> · v0 excluido (solo histórico)</p>
+
+      <div class="card highlight">
+        <table>
+          <thead>
+            <tr>
+              <th>Reg</th>
+              <th>Formato</th>
+              <th class="num">Compl.</th>
+              <th class="num">Goles</th>
+              <th class="num">Turnos</th>
+              <th class="num">Pen.</th>
+              <th class="num">Pase%</th>
+              <th class="num">Trampa</th>
+              <th class="num">Marca</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>v1</strong></td><td>3v3</td>
+              <td class="num v1">99,0%</td><td class="num v1">4,03</td><td class="num v1">179</td>
+              <td class="num v1">35,0%</td><td class="num v1">40,3%</td><td class="num v1">4,38</td><td class="num v1">7,49</td>
+            </tr>
+            <tr>
+              <td><strong>v2</strong></td><td>3v3</td>
+              <td class="num v2 better">100%</td><td class="num v2">3,85</td><td class="num v2 better">151</td>
+              <td class="num v2 better">24,0%</td><td class="num v2">44,6%</td><td class="num v2">7,15</td><td class="num v2">11,95</td>
+            </tr>
+            <tr>
+              <td><strong>v1</strong></td><td>4v4</td>
+              <td class="num v1">98,0%</td><td class="num v1">3,86</td><td class="num v1">212</td>
+              <td class="num v1">26,0%</td><td class="num v1">40,6%</td><td class="num v1">5,55</td><td class="num v1">10,06</td>
+            </tr>
+            <tr>
+              <td><strong>v2</strong></td><td>4v4</td>
+              <td class="num v2">97,0%</td><td class="num v2">3,85</td><td class="num v2">219</td>
+              <td class="num v2">29,5%</td><td class="num v2">43,8%</td><td class="num v2 better">12,61</td><td class="num v2 better">20,93</td>
+            </tr>
+          </tbody>
+        </table>
+        <p><strong>3v3:</strong> v2 acorta ~16% los turnos vs v1, cierra siempre, menos penales. <strong>4v4:</strong> duración similar; v2 duplica Trampa+Marca (~34 vs ~16 colocaciones/partido).</p>
+        <p><small>Informe completo → <a href="comparacion-v1-v2-formatos.md">comparacion-v1-v2-formatos.md</a> · Comando: <code>python3 -m simulador compare-formatos --partidos 200</code></small></p>
+      </div>
+
+      <div class="compare-grid">
+        <div class="card">
+          <h3>v2 gana en 3v3</h3>
+          <ul class="findings">
+            <li>100% completados · ~151 turnos (−16% vs v1)</li>
+            <li>Penales 24% vs 35% (v1)</li>
+            <li>Trampa+Marca ~19/partido (al pase)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>v2 en 4v4 — cuidado</h3>
+          <ul class="findings">
+            <li>~219 turnos (pierde ventaja de ritmo)</li>
+            <li>97% completados · ~3% empates técnicos</li>
+            <li>Trampa+Marca ~34/partido — validar en mesa</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>3v3 vs 4v4 (v1)</h3>
+          <ul class="findings">
+            <li>+18% turnos en 4v4 (179 → 212)</li>
+            <li>Menos penales (35% → 26%)</li>
+            <li>Más robo, pase estable ~40%</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
     <!-- Comparación rápida (CLI) -->
     <section id="compare-cli">
-      <span class="tag new">Nuevo · v2 · jul 2026</span>
-      <h2>Comparación de reglamentos</h2>
-      <p class="section-lead">200 partidos c/u · 3 vs 3 · IA estratégica · <code>compare-reglamentos</code></p>
+      <h2>Comparación por reglamento (un formato)</h2>
+      <p class="section-lead">200 partidos · 3 vs 3 · IA estratégica · <code>compare-reglamentos</code></p>
 
       <div class="card highlight">
         <table>
@@ -65,16 +140,6 @@
           </thead>
           <tbody>
             <tr>
-              <td><strong>v0</strong> — original</td>
-              <td class="num v0">26,0%</td>
-              <td class="num v0">1,89</td>
-              <td class="num v0">392,1</td>
-              <td class="num v0">8,5%</td>
-              <td class="num v0">8,2%</td>
-              <td class="num v0">84,9%</td>
-              <td class="num v0">1,94</td>
-            </tr>
-            <tr>
               <td><strong>v1</strong> — playtesting</td>
               <td class="num v1">99,0%</td>
               <td class="num v1">4,03</td>
@@ -85,29 +150,18 @@
               <td class="num v1">4,38</td>
             </tr>
             <tr>
-              <td><strong>v1.1</strong> — pasa al compañero</td>
-              <td class="num v11">99,0%</td>
-              <td class="num v11">4,01</td>
-              <td class="num v11">168,9</td>
-              <td class="num v11">35,5%</td>
-              <td class="num v11">40,4%</td>
-              <td class="num v11">8,8%</td>
-              <td class="num v11">4,09</td>
-            </tr>
-            <tr>
               <td><strong>v2</strong> — sin pasa turno · trampa al pase</td>
               <td class="num v2 better">100%</td>
               <td class="num v2">3,85</td>
               <td class="num v2 better">151,3</td>
-              <td class="num v2">24,0%</td>
+              <td class="num v2 better">24,0%</td>
               <td class="num v2">44,6%</td>
               <td class="num v2">0%</td>
               <td class="num v2 better">7,15</td>
             </tr>
           </tbody>
         </table>
-        <p><strong>v2</strong> elimina pasa de turno, permite Trampa/Marca al reaccionar a un pase, y encadena robo ↔ gambetear. Partidos más cortos (~15% menos turnos que v1 en 3v3) con más pase y más Trampa/Marca (~19 colocaciones/partido).</p>
-        <p><small>Comando: <code>python3 -m simulador compare-reglamentos --partidos 200 --ia estrategica</code> · Reglas: <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v2.md">reglamento-v2.md</a></small></p>
+        <p><small>Solo reglamentos activos (v1, v2). v0 y v1.1 conservados como histórico.</small></p>
       </div>
     </section>
 
@@ -238,44 +292,16 @@
       </div>
     </section>
 
-    <!-- Comparación de reglamentos -->
+    <!-- Histórico -->
     <section id="historico">
-      <h2>Histórico: comparación de reglamentos</h2>
-      <p class="section-lead">200 partidos c/u · 3 vs 3 · IA estratégica · jul 2026</p>
-
-      <div class="card highlight">
-        <h3>IA estratégica (default)</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Métrica</th>
-              <th class="num">v0</th>
-              <th class="num">v1</th>
-              <th class="num">v1.1</th>
-              <th class="num">v2</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>Reglamento</td><td>Original</td><td>Playtesting</td><td>Pasa al compañero</td><td>Sin pasa turno</td></tr>
-            <tr><td>Partidos completados</td><td class="num v0">26,0%</td><td class="num v1">99,0%</td><td class="num v11">99,0%</td><td class="num v2 better">100%</td></tr>
-            <tr><td>Empates técnicos (&gt;500 turnos)</td><td class="num v0">74,0%</td><td class="num v1">1,0%</td><td class="num v11">1,0%</td><td class="num v2 better">0%</td></tr>
-            <tr><td>Goles promedio</td><td class="num v0">1,89</td><td class="num v1">4,03</td><td class="num v11">4,01</td><td class="num v2">3,85</td></tr>
-            <tr><td>Turnos promedio</td><td class="num v0">392</td><td class="num v1">179</td><td class="num v11">169</td><td class="num v2 better">151</td></tr>
-            <tr><td>Penales (2-2)</td><td class="num v0">8,5%</td><td class="num v1">35,0%</td><td class="num v11">35,5%</td><td class="num v2">24,0%</td></tr>
-            <tr><td>Pase (% acciones)</td><td class="num v0">8,2%</td><td class="num v1">40,3%</td><td class="num v11">40,4%</td><td class="num v2">44,6%</td></tr>
-            <tr><td>Despeje (% acciones)</td><td class="num v0">0%</td><td class="num v1">15,8%</td><td class="num v11">15,6%</td><td class="num v2">16,3%</td></tr>
-            <tr><td>Pasa de turno — decisión (% acciones)</td><td class="num v0">84,9%</td><td class="num v1">8,8%</td><td class="num v11">8,8%</td><td class="num v2">0%</td></tr>
-            <tr><td>Trampa colocada / partido</td><td class="num v0">1,94</td><td class="num v1">4,38</td><td class="num v11">4,09</td><td class="num v2 better">7,15</td></tr>
-            <tr><td>Marca colocada / partido</td><td class="num v0">3,23</td><td class="num v1">7,49</td><td class="num v11">7,28</td><td class="num v2 better">11,95</td></tr>
-          </tbody>
-        </table>
-        <p><strong>v1.1</strong> extiende v1: si nadie reacciona al pasa de turno, la pelota pasa a un compañero. En números es casi igual a v1.</p>
-        <p><strong>v2</strong> cambia el loop de juego: sin pasa de turno, Trampa/Marca al pase, robo/gambetear encadenables. Balance 48% / 52% victorias. Menos penales que v1 (~24% vs ~35%).</p>
-        <p><small>Comando: <code>python3 -m simulador compare-reglamentos --partidos 200</code></small></p>
+      <h2>Notas históricas</h2>
+      <div class="card">
+        <p><strong>v0</strong> y <strong>v1.1</strong> siguen en el repo (<a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v0.md">reglamento-v0.md</a>, <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v1.1.md">reglamento-v1.1.md</a>) pero ya no se incluyen en simulaciones batch ni en las tablas de arriba.</p>
+        <p>Corridas antiguas con 2v2 o v0 están en el historial de git; el análisis actual usa <strong>v1 vs v2</strong> en <strong>3v3 y 4v4</strong>.</p>
       </div>
 
       <div class="card">
-        <h3>IA simple (corrida histórica)</h3>
+        <h3>IA simple (referencia histórica · 2v2)</h3>
         <p>Primera generación de simulaciones, antes de la IA estratégica. Sirve para ver por qué v0 parecía irrecuperable y v1 mejoraba pero estancaba ~40%.</p>
         <table>
           <thead><tr><th>Métrica</th><th class="num">v0</th><th class="num">v1</th></tr></thead>
@@ -309,42 +335,29 @@
     <section id="hallazgos">
       <h2>Hallazgos</h2>
 
-      <div class="card">
-        <h3>v0 — no recomendado</h3>
+      <div class="card highlight">
+        <h3>v1 — baseline</h3>
         <ul class="findings">
-          <li>~74% de partidos no termina en 3 vs 3 (vs ~95% en 2v2 histórico).</li>
-          <li>Con IA estratégica el ataque spamea pasa de turno (~85% acciones) sin acercarse al arco.</li>
-          <li>Sin Reventar ni cambio de ritmo, el juego no cierra.</li>
+          <li><strong>3v3:</strong> ~99% completados · ~179 turnos · ~4 goles · pasa turno ~9%.</li>
+          <li><strong>4v4:</strong> ~98% completados · ~212 turnos · menos penales que en 3v3.</li>
         </ul>
       </div>
 
       <div class="card highlight">
-        <h3>v2 — candidato a playtesting (jul 2026)</h3>
+        <h3>v2 — candidato playtesting</h3>
         <ul class="findings">
-          <li><strong>100%</strong> de partidos termina · <strong>0</strong> empates técnicos · ~151 turnos (−15% vs v1 en 3v3).</li>
-          <li>~3,9 goles/partido · balance 48% / 52% victorias.</li>
-          <li>Trampa/Marca reactivas al <strong>pase</strong> (~19 colocaciones/partido vs ~12 en v1).</li>
-          <li>Sin pasa de turno: el ritmo viene de pase, robo encadenado y reventar.</li>
+          <li><strong>3v3:</strong> 100% · ~151 turnos · Trampa+Marca ~19/partido — mejor ritmo simulado.</li>
+          <li><strong>4v4:</strong> 97% · ~219 turnos · Trampa+Marca ~34/partido — validar en mesa.</li>
         </ul>
-        <p><a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v2.md">Reglas v2 (MD)</a> · <a href="reglas.html">Reglas en el sitio</a></p>
-      </div>
-
-      <div class="card highlight">
-        <h3>v1 / v1.1 — viable con IA estratégica</h3>
-        <ul class="findings">
-          <li><strong>v1:</strong> ~99% de partidos termina · ~4 goles/partido · ~179 turnos.</li>
-          <li><strong>v1.1</strong> (pasa al compañero): casi idéntico a v1 (~99% completados, ~169 turnos).</li>
-          <li>Despeje + robo mueven la pelota constantemente.</li>
-          <li>Trampa/Marca (cartas) se activan cuando el ataque elige <strong>pasa de turno</strong> — decisión, no carta.</li>
-        </ul>
+        <p><a href="comparacion-v1-v2-formatos.md">Informe completo v1 vs v2 · formatos</a></p>
       </div>
 
       <div class="card">
         <h3>Preguntas abiertas</h3>
         <ul class="checklist">
-          <li>¿Frecuencia real de acciones en mesa vs simulación?</li>
-          <li>¿v1.1 o v2 en mesa se siente mejor que v1?</li>
-          <li>¿Penales ~24–35% es demasiado frecuente?</li>
+          <li>¿v2 en 3v3 se siente bien en mesa (~151 turnos simulados)?</li>
+          <li>¿v2 en 4v4 es demasiado Trampa/Marca (~34/partido)?</li>
+          <li>¿Preferís 3v3 o 4v4 para el grupo?</li>
         </ul>
       </div>
     </section>

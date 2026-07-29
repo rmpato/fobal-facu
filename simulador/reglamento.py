@@ -231,12 +231,19 @@ def cargar_reglamento(reglamento_id: str, *, dir_path: Path | None = None) -> Re
     return _reglamento_desde_dict(resuelto)
 
 
-def listar_reglamentos(*, dir_path: Path | None = None) -> list[dict[str, str]]:
+def listar_reglamentos(
+    *,
+    dir_path: Path | None = None,
+    solo_simulacion: bool = False,
+) -> list[dict[str, str]]:
     dir_path = dir_path or REGLAMENTOS_DIR
     indice = dir_path / "indice.json"
     if indice.exists():
         data = _cargar_json(indice)
-        return list(data.get("reglamentos", []))
+        entradas = list(data.get("reglamentos", []))
+        if solo_simulacion:
+            entradas = [e for e in entradas if e.get("simulacion", True)]
+        return entradas
 
     entradas = []
     for path in sorted(dir_path.glob("*.json")):
@@ -267,16 +274,21 @@ def formatear_reglamento(reg: Reglamento) -> str:
 
 def formatear_lista_reglamentos() -> str:
     entradas = listar_reglamentos()
+    activos = listar_reglamentos(solo_simulacion=True)
+    ids_activos = {e["id"] for e in activos}
     lineas = ["=== Reglamentos disponibles ===", ""]
     for e in entradas:
         doc = e.get("documento") or ""
-        lineas.append(f"  {e['id']:<8} {e['nombre']}")
+        activo = e["id"] in ids_activos
+        tag = "" if activo else " (solo histórico — no en compare-reglamentos)"
+        lineas.append(f"  {e['id']:<8} {e['nombre']}{tag}")
         if doc:
             lineas.append(f"           → {doc}")
     lineas.extend(
         [
             "",
             "Simular:  python -m simulador run --reglamento v1",
+            "Comparar: python -m simulador compare-formatos --partidos 200",
             "Detalle:  python -m simulador reglamentos show v1",
             "Nuevo:    copiá reglamentos/_plantilla.json → reglamentos/vX.json",
         ]

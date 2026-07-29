@@ -18,7 +18,10 @@ python3 -m simulador reglamentos list
 # Correr 200 partidos con el reglamento actual (v1)
 python3 -m simulador run --reglamento v1 --partidos 200
 
-# Comparar v0, v1 y v1.1 entre sí
+# Comparar v1 y v2 en 3v3 y 4v4
+python3 -m simulador compare-formatos --partidos 200 --ia estrategica
+
+# Comparar v1 vs v2 en un solo formato (default 3v3)
 python3 -m simulador compare-reglamentos --partidos 200
 ```
 
@@ -32,9 +35,9 @@ Estos son los que el simulador puede correr hoy (`reglamentos/indice.json`):
 
 | Id | Nombre | Qué cambia respecto al anterior | Reglas en mesa | Motor |
 |----|--------|-----------------------------------|----------------|-------|
-| **`v0`** | Reglamento original | — | [reglamento-v0.md](docs/reglamento-v0.md) | [v0.json](reglamentos/v0.json) |
+| **`v0`** | Reglamento original | — *(histórico, no en simulación batch)* | [reglamento-v0.md](docs/reglamento-v0.md) | [v0.json](reglamentos/v0.json) |
 | **`v1`** | Iteración 1 (playtesting) | Robo unificado, Reventar, rebote/palo, reposición al cambio de equipo | [reglamento-v1.md](docs/reglamento-v1.md) | [v1.json](reglamentos/v1.json) |
-| **`v1.1`** | Pasa al compañero | Extiende **v1**: si nadie reacciona al pasa de turno → pelota a un compañero | [reglamento-v1.1.md](docs/reglamento-v1.1.md) | [v1.1.json](reglamentos/v1.1.json) |
+| **`v1.1`** | Pasa al compañero | *(histórico, no en simulación batch)* | [reglamento-v1.1.md](docs/reglamento-v1.1.md) | [v1.1.json](reglamentos/v1.1.json) |
 | **`v2`** | Iteración 2 (playtesting) | Sin pasa de turno; trampa/marca al pase; reacciones encadenables | [reglamento-v2.md](docs/reglamento-v2.md) | [v2.json](reglamentos/v2.json) |
 
 ```bash
@@ -50,11 +53,12 @@ Para crear uno nuevo: copiá [`reglamentos/_plantilla.json`](reglamentos/_planti
 
 | Querés saber… | Leé |
 |---------------|-----|
-| **Qué encontramos** (números, tablas) | [`docs/resultados-iniciales.md`](docs/resultados-iniciales.md) |
+| **v1 vs v2 · 3v3 y 4v4** | [`docs/comparacion-v1-v2-formatos.md`](docs/comparacion-v1-v2-formatos.md) |
+| **Qué encontramos** (histórico) | [`docs/resultados-iniciales.md`](docs/resultados-iniciales.md) |
 | **Qué probar next** (mazo, cartas, reglas trabadas) | [`docs/recomendaciones-diseno.md`](docs/recomendaciones-diseno.md) |
 | **Reglas para jugar en mesa** | [`docs/reglamento-v1.md`](docs/reglamento-v1.md) (actual) · [`docs/reglamento-v0.md`](docs/reglamento-v0.md) (original) |
 
-**Resumen en una frase:** v0 estanca en 3v3 (~74% empates técnicos); v1 cierra ~99% con IA estratégica; **v2** cierra todos los partidos, acorta duración y activa Trampa/Marca al pase. Simulaciones batch: **3 vs 3** por defecto.
+**Resumen en una frase:** simulaciones activas **v1 vs v2** en **3v3 y 4v4** — v2 gana ritmo en 3v3; en 4v4 Trampa/Marca escalan fuerte. Informe → [`docs/comparacion-v1-v2-formatos.md`](docs/comparacion-v1-v2-formatos.md).
 
 ---
 

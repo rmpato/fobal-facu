@@ -7,9 +7,11 @@ from pathlib import Path
 
 from simulador.config import ConfigSimulacion, cargar_variantes
 from simulador.estadisticas import (
+    formatear_comparacion_formatos,
     formatear_comparacion_reglamentos,
     formatear_comparacion_variantes,
     formatear_reporte,
+    simular_comparacion_formatos,
     simular_lote,
     simular_variantes,
 )
@@ -98,18 +100,33 @@ def main() -> None:
     )
     run.add_argument("--verbose", action="store_true")
 
-    compare = sub.add_parser("compare", help="Comparar v0 vs v1 (alias histórico)")
+    compare = sub.add_parser("compare", help="Comparar v1 vs v2 (alias rápido)")
     compare.add_argument("--partidos", type=int, default=200)
     compare.add_argument("--jugadores-por-equipo", type=int, default=3, help="Jugadores por equipo (default: 3)")
     _add_ia_args(compare)
 
     compare_reg = sub.add_parser(
         "compare-reglamentos",
-        help="Comparar todos los reglamentos del índice",
+        help="Comparar reglamentos activos en simulación (v1, v2)",
     )
     compare_reg.add_argument("--partidos", type=int, default=200)
     compare_reg.add_argument("--jugadores-por-equipo", type=int, default=3, help="Jugadores por equipo (default: 3)")
     _add_ia_args(compare_reg)
+
+    compare_fmt = sub.add_parser(
+        "compare-formatos",
+        help="Comparar v1 vs v2 en 3v3 y 4v4 (u otros formatos)",
+    )
+    compare_fmt.add_argument("--partidos", type=int, default=200)
+    compare_fmt.add_argument(
+        "--formatos",
+        type=int,
+        nargs="+",
+        default=[3, 4],
+        metavar="N",
+        help="Jugadores por equipo a probar (default: 3 4)",
+    )
+    _add_ia_args(compare_fmt)
 
     variantes = sub.add_parser("variantes", help="Comparar variantes de reglas desde JSON")
     variantes.add_argument("--partidos", type=int, default=500)
@@ -207,7 +224,7 @@ def main() -> None:
             print("\n".join(estado.log))
 
     elif args.comando == "compare":
-        for reg_id in ("v0", "v1"):
+        for reg_id in ("v1", "v2"):
             config = ConfigSimulacion(
                 reglamento=reg_id,
                 ia=args.ia,
@@ -224,10 +241,24 @@ def main() -> None:
                 ia=args.ia,
                 jugadores_por_equipo=args.jugadores_por_equipo,
             )
-            for e in listar_reglamentos()
+            for e in listar_reglamentos(solo_simulacion=True)
         ]
         resultados = simular_variantes(configs, partidos=args.partidos)
         print(formatear_comparacion_reglamentos(resultados))
+        print()
+        for res in resultados:
+            print(formatear_reporte(res))
+            print()
+
+    elif args.comando == "compare-formatos":
+        reg_ids = [e["id"] for e in listar_reglamentos(solo_simulacion=True)]
+        resultados = simular_comparacion_formatos(
+            reglamentos=reg_ids,
+            formatos=args.formatos,
+            partidos=args.partidos,
+            ia=args.ia,
+        )
+        print(formatear_comparacion_formatos(resultados))
         print()
         for res in resultados:
             print(formatear_reporte(res))

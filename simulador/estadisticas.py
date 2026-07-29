@@ -208,3 +208,58 @@ def formatear_comparacion_reglamentos(resultados: list[ResultadosSimulacion]) ->
             f"{100 * res.penales / res.partidos:4.1f}% {pct['pase']:5.1f}% {pct['pasa_turno']:6.1f}% {trampa:7.2f}"
         )
     return "\n".join(lineas)
+
+
+def simular_comparacion_formatos(
+    reglamentos: list[str],
+    formatos: list[int],
+    partidos: int,
+    ia: str = "estrategica",
+) -> list[ResultadosSimulacion]:
+    configs = [
+        ConfigSimulacion(reglamento=reg_id, jugadores_por_equipo=jpe, ia=ia)
+        for jpe in formatos
+        for reg_id in reglamentos
+    ]
+    return simular_variantes(configs, partidos=partidos)
+
+
+def formatear_comparacion_formatos(resultados: list[ResultadosSimulacion]) -> str:
+    if not resultados:
+        return "=== Comparación v1 vs v2 · formatos ===\n\n(sin resultados)"
+
+    partidos = resultados[0].partidos
+    lineas = [
+        "=== Comparación v1 vs v2 · formatos ===",
+        f"({partidos} partidos c/u · IA estratégica)",
+        "",
+    ]
+    header = (
+        f"{'Reg':<4} {'Fmt':>4} {'Compl.':>7} {'Goles':>6} {'Turnos':>7} "
+        f"{'Pen.':>5} {'Pase%':>6} {'Desp%':>6} {'Robo%':>6} "
+        f"{'Trampa':>7} {'Marca':>7}"
+    )
+    lineas.append(header)
+    lineas.append("-" * len(header))
+
+    for res in sorted(
+        resultados,
+        key=lambda r: (
+            r.config.jugadores_por_equipo if r.config else 0,
+            r.reglamento,
+        ),
+    ):
+        jpe = res.config.jugadores_por_equipo if res.config else 0
+        completados = res.partidos - res.empates_tecnicos
+        pct_compl = 100 * completados / res.partidos if res.partidos else 0
+        pct = res.pct_acciones()
+        trampa = res.acciones.get("trampa_colocada", 0) / res.partidos
+        marca = res.acciones.get("marca_colocada", 0) / res.partidos
+        fmt = f"{jpe}v{jpe}"
+        lineas.append(
+            f"{res.reglamento:<4} {fmt:>4} {pct_compl:6.1f}% {res.goles_promedio:6.2f} "
+            f"{res.turnos_promedio:7.1f} {100 * res.penales / res.partidos:4.1f}% "
+            f"{pct['pase']:5.1f}% {pct['despeje']:5.1f}% {pct['robo']:5.1f}% "
+            f"{trampa:7.2f} {marca:7.2f}"
+        )
+    return "\n".join(lineas)

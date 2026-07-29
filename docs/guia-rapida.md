@@ -43,11 +43,11 @@ python3 -m simulador reglamentos show v1.1
 ### Comparar versiones
 
 ```bash
-# Todos los reglamentos del índice (v0, v1, v1.1…)
-python3 -m simulador compare-reglamentos --partidos 200
+# Comparar v1 vs v2 (3v3 y 4v4)
+python3 -m simulador compare-formatos --partidos 200 --ia estrategica
 
-# Solo v0 vs v1
-python3 -m simulador compare --partidos 200
+# Solo v1 vs v2 en un formato (default 3v3)
+python3 -m simulador compare-reglamentos --partidos 200 --partidos 200
 
 # Variantes desde configs/variantes.json
 python3 -m simulador variantes --partidos 500

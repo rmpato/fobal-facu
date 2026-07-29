@@ -62,10 +62,10 @@ python3 --version   # 3.11+</code></pre>
             <tr><th>Id</th><th>Nombre</th><th>Qué cambia</th><th>Reglas mesa</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>v0</code></td><td>Original</td><td>Corta pase, Tackle, sin Reventar</td><td><a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v0.md">MD</a></td></tr>
-            <tr><td><code>v1</code></td><td>Playtesting</td><td>Robo unificado, Reventar, rebote/palo</td><td><a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v1.md">MD</a></td></tr>
-            <tr><td><code>v1.1</code></td><td>Pasa al compañero</td><td>Extiende v1: pasa turno sin respuesta → compañero</td><td><a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v1.1.md">MD</a></td></tr>
-            <tr><td><code>v2</code></td><td>Iteración 2</td><td>Sin pasa turno; Trampa/Marca al pase; robo↔gambetear encadenables</td><td><a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v2.md">MD</a> · <a href="reglas.html">sitio</a></td></tr>
+            <tr><td><code>v0</code></td><td>Original</td><td><em>histórico</em></td><td><a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v0.md">MD</a></td></tr>
+            <tr><td><code>v1</code></td><td>Playtesting</td><td><strong>activo</strong></td><td><a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v1.md">MD</a></td></tr>
+            <tr><td><code>v1.1</code></td><td>Pasa al compañero</td><td><em>histórico</em></td><td><a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v1.1.md">MD</a></td></tr>
+            <tr><td><code>v2</code></td><td>Iteración 2</td><td><strong>activo</strong></td><td><a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v2.md">MD</a></td></tr>
           </tbody>
         </table>
         <pre><code>python3 -m simulador reglamentos list
@@ -86,24 +86,25 @@ python3 -m simulador run --reglamento v1 --partidos 200 --ia estrategica
 # Un partido con detalle
 python3 -m simulador run --reglamento v2 --partidos 1 --verbose</code></pre>
 
-        <h3>Comparar todos los reglamentos</h3>
-        <pre><code>python3 -m simulador compare-reglamentos --partidos 200 --ia estrategica</code></pre>
-        <p>Tabla resumida en el sitio → <a href="resultados.html#compare-cli">Resultados · comparación v0–v2</a></p>
+        <h3>Comparar v1 vs v2 · formatos</h3>
+        <pre><code>python3 -m simulador compare-formatos --partidos 200 --ia estrategica
+python3 -m simulador compare-reglamentos --partidos 200 --jugadores-por-equipo 3</code></pre>
+        <p>Informe → <a href="comparacion-v1-v2-formatos.md">comparacion-v1-v2-formatos.md</a> · Sitio → <a href="resultados.html#compare-formatos">Resultados</a></p>
 
         <table>
           <thead>
             <tr>
-              <th>Reglamento</th><th class="num">Compl.</th><th class="num">Goles</th><th class="num">Turnos</th><th class="num">Pen.</th><th class="num">Pase%</th><th class="num">Trampa</th>
+              <th>Reg</th><th>Fmt</th><th class="num">Compl.</th><th class="num">Goles</th><th class="num">Turnos</th><th class="num">Pen.</th><th class="num">Trampa</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>v0</td><td class="num v0">26%</td><td class="num v0">1,89</td><td class="num v0">392</td><td class="num v0">8,5%</td><td class="num v0">8%</td><td class="num v0">1,9</td></tr>
-            <tr><td>v1</td><td class="num v1">99%</td><td class="num v1">4,03</td><td class="num v1">179</td><td class="num v1">35%</td><td class="num v1">40%</td><td class="num v1">4,4</td></tr>
-            <tr><td>v1.1</td><td class="num v11">99%</td><td class="num v11">4,01</td><td class="num v11">169</td><td class="num v11">35,5%</td><td class="num v11">40%</td><td class="num v11">4,1</td></tr>
-            <tr><td>v2</td><td class="num v2 better">100%</td><td class="num v2">3,85</td><td class="num v2 better">151</td><td class="num v2">24%</td><td class="num v2">45%</td><td class="num v2 better">7,2</td></tr>
+            <tr><td>v1</td><td>3v3</td><td class="num v1">99%</td><td class="num v1">4,03</td><td class="num v1">179</td><td class="num v1">35%</td><td class="num v1">4,4</td></tr>
+            <tr><td>v2</td><td>3v3</td><td class="num v2 better">100%</td><td class="num v2">3,85</td><td class="num v2 better">151</td><td class="num v2 better">24%</td><td class="num v2">7,2</td></tr>
+            <tr><td>v1</td><td>4v4</td><td class="num v1">98%</td><td class="num v1">3,86</td><td class="num v1">212</td><td class="num v1">26%</td><td class="num v1">5,6</td></tr>
+            <tr><td>v2</td><td>4v4</td><td class="num v2">97%</td><td class="num v2">3,85</td><td class="num v2">219</td><td class="num v2">30%</td><td class="num v2 better">12,6</td></tr>
           </tbody>
         </table>
-        <p><small>200 partidos · 3 vs 3 · IA estratégica · jul 2026</small></p>
+        <p><small>200 partidos · IA estratégica · v0/v1.1 excluidos (histórico)</small></p>
 
         <h3>Ver partido en terminal + replay web</h3>
         <pre><code>python3 -m simulador ver --reglamento v2 --semilla 42 --pausa 3
