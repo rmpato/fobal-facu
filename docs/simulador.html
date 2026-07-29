@@ -40,7 +40,7 @@
     <div class="page-hero">
       <p class="breadcrumb"><a href="index.html">Inicio</a> / Simulador</p>
       <h1>💻 Simulador</h1>
-      <p class="lead">Comandos esenciales. Documentación completa en el repo: <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/guia-rapida.md">guia-rapida.md</a>.</p>
+      <p class="lead">Comandos para correr partidos, comparar reglamentos (v0–v2) y ver un partido en terminal o replay web. Guía completa: <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/guia-rapida.md">guia-rapida.md</a>.</p>
     </div>
 
     <section>
@@ -49,6 +49,27 @@
         <pre><code>git clone https://github.com/rmpato/fobal-facu.git
 cd fobal-facu
 python3 --version   # 3.11+</code></pre>
+        <p>Solo biblioteca estándar. Opcional: <code>rich</code> / <code>textual</code> para espectador con mejor UI.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Reglamentos disponibles</h2>
+      <p class="section-lead">Todos corren con el mismo CLI — cambiá <code>--reglamento</code></p>
+      <div class="card">
+        <table>
+          <thead>
+            <tr><th>Id</th><th>Nombre</th><th>Qué cambia</th><th>Reglas mesa</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>v0</code></td><td>Original</td><td>Corta pase, Tackle, sin Reventar</td><td><a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v0.md">MD</a></td></tr>
+            <tr><td><code>v1</code></td><td>Playtesting</td><td>Robo unificado, Reventar, rebote/palo</td><td><a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v1.md">MD</a></td></tr>
+            <tr><td><code>v1.1</code></td><td>Pasa al compañero</td><td>Extiende v1: pasa turno sin respuesta → compañero</td><td><a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v1.1.md">MD</a></td></tr>
+            <tr><td><code>v2</code></td><td>Iteración 2</td><td>Sin pasa turno; Trampa/Marca al pase; robo↔gambetear encadenables</td><td><a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v2.md">MD</a> · <a href="reglas.html">sitio</a></td></tr>
+          </tbody>
+        </table>
+        <pre><code>python3 -m simulador reglamentos list
+python3 -m simulador reglamentos show v2</code></pre>
       </div>
     </section>
 
@@ -56,23 +77,44 @@ python3 --version   # 3.11+</code></pre>
       <h2>Comandos esenciales</h2>
       <div class="card">
         <h3>Correr partidos</h3>
-        <pre><code>python3 -m simulador run --reglamento v1 --partidos 200
-python3 -m simulador run --reglamento v1 --partidos 1 --verbose</code></pre>
+        <pre><code># Reglamento en playtesting (recomendado para mesa nueva)
+python3 -m simulador run --reglamento v2 --partidos 200 --ia estrategica
 
-        <h3>Reglamentos</h3>
-        <pre><code>python3 -m simulador reglamentos list
-python3 -m simulador reglamentos show v1</code></pre>
-        <p>¿Querés crear v1.2, v2 o v3? → <a href="crear-reglamento.html">Cómo crear un reglamento</a></p>
+# Baseline histórico
+python3 -m simulador run --reglamento v1 --partidos 200 --ia estrategica
 
-        <h3>Comparar versiones</h3>
-        <pre><code>python3 -m simulador compare-reglamentos --partidos 200 --ia estrategica
-python3 -m simulador run --reglamento v2 --partidos 200</code></pre>
-        <p>Comparación en el sitio → <a href="resultados.html#compare-cli">Resultados · comparación v0–v2</a></p>
+# Un partido con detalle
+python3 -m simulador run --reglamento v2 --partidos 1 --verbose</code></pre>
 
-        <h3>Ver partido + replay web</h3>
-        <pre><code>python3 -m simulador ver --semilla 42 --pausa 3
-python3 -m simulador ver --semilla 42 --sin-pausa --grabar docs/replays/mi-partido.json</code></pre>
-        <p>Reproducir en el navegador → <a href="replay.html">Replay</a> (GitHub Pages o local con <code>python3 -m http.server</code> en <code>docs/</code>).</p>
+        <h3>Comparar todos los reglamentos</h3>
+        <pre><code>python3 -m simulador compare-reglamentos --partidos 200 --ia estrategica</code></pre>
+        <p>Tabla resumida en el sitio → <a href="resultados.html#compare-cli">Resultados · comparación v0–v2</a></p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Reglamento</th><th class="num">Compl.</th><th class="num">Goles</th><th class="num">Turnos</th><th class="num">Pen.</th><th class="num">Pase%</th><th class="num">Trampa</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>v0</td><td class="num v0">5%</td><td class="num v0">0,91</td><td class="num v0">478</td><td class="num v0">0,5%</td><td class="num v0">4%</td><td class="num v0">1,2</td></tr>
+            <tr><td>v1</td><td class="num v1">96,5%</td><td class="num v1">4,02</td><td class="num v1">183</td><td class="num v1">36,5%</td><td class="num v1">35%</td><td class="num v1">3,7</td></tr>
+            <tr><td>v1.1</td><td class="num v11">97,5%</td><td class="num v11">3,98</td><td class="num v11">185</td><td class="num v11">32%</td><td class="num v11">35%</td><td class="num v11">3,4</td></tr>
+            <tr><td>v2</td><td class="num v2 better">100%</td><td class="num v2">4,11</td><td class="num v2 better">146</td><td class="num v2">38%</td><td class="num v2">42%</td><td class="num v2 better">5,4</td></tr>
+          </tbody>
+        </table>
+        <p><small>200 partidos · IA estratégica · jul 2026</small></p>
+
+        <h3>Ver partido en terminal + replay web</h3>
+        <pre><code>python3 -m simulador ver --reglamento v2 --semilla 42 --pausa 3
+python3 -m simulador ver --reglamento v2 --semilla 42 --sin-pausa --grabar docs/replays/mi-partido.json
+
+# Perfiles distintos por equipo
+python3 -m simulador ver --reglamento v2 --ia-equipo0 agresiva --ia-equipo1 conservador</code></pre>
+        <p>Reproducir JSON en el navegador → <a href="replay.html">Replay</a> (GitHub Pages o <code>python3 -m http.server</code> en <code>docs/</code>).</p>
+
+        <h3>Crear reglamento nuevo</h3>
+        <p>¿v1.2, v2.1 o v3? → <a href="crear-reglamento.html">Cómo crear un reglamento</a></p>
       </div>
     </section>
 
@@ -80,31 +122,41 @@ python3 -m simulador ver --semilla 42 --sin-pausa --grabar docs/replays/mi-parti
       <h2>Qué mirar en el reporte</h2>
       <div class="card">
         <ul class="findings">
-          <li><strong>Reglas aplicadas</strong> — qué interpretó el motor</li>
+          <li><strong>Reglas aplicadas</strong> — qué interpretó el motor para ese reglamento</li>
           <li><strong>Completados</strong> vs empates técnicos (&gt;500 turnos)</li>
-          <li><strong>Acciones %</strong> — pase, despeje, robo, disparo, pasa turno, falta</li>
+          <li><strong>Acciones %</strong> — pase, despeje, robo, disparo, pasa turno (0% en v2), falta</li>
+          <li><strong>Trampa / Marca</strong> — colocadas y efectivas (v1: al pasa turno · v2: al pase)</li>
           <li>Goles promedio · % penales · cartas jugadas</li>
         </ul>
-        <p>Conclusiones documentadas → <a href="resultados.html">resultados</a> · <a href="recomendaciones.html">recomendaciones</a>.</p>
+        <p>Conclusiones → <a href="resultados.html">resultados</a> · <a href="recomendaciones.html">recomendaciones</a>.</p>
       </div>
     </section>
 
     <section>
       <h2>IA</h2>
       <div class="card">
-        <p><strong>Clásicos</strong> (análisis original del repo): <code>estrategica</code> (Táctico, default) y <code>simple</code> (Directo).</p>
-        <p><strong>Nuevos:</strong> <code>agresiva</code>, <code>paciente</code>, <code>gambler</code>, <code>conservador</code>, <code>adaptativo</code>, <code>marcador</code>, <code>contragolpista</code>.</p>
+        <p><strong>Default para análisis:</strong> <code>estrategica</code> (Táctico). <strong>Baseline histórico:</strong> <code>simple</code> (Directo).</p>
+        <p><strong>Otros perfiles:</strong> <code>agresiva</code>, <code>paciente</code>, <code>gambler</code>, <code>conservador</code>, <code>adaptativo</code>, <code>marcador</code>, <code>contragolpista</code>.</p>
         <table>
           <thead><tr><th>Ejemplo</th><th>Flag</th></tr></thead>
           <tbody>
             <tr><td>Táctico (default)</td><td><code>--ia estrategica</code></td></tr>
             <tr><td>Directo (baseline)</td><td><code>--ia simple</code></td></tr>
-            <tr><td>Presionante</td><td><code>--ia agresiva</code></td></tr>
+            <tr><td>Comparar v1 vs v2</td><td><code>compare-reglamentos --ia estrategica</code></td></tr>
             <tr><td>Mix en espectador</td><td><code>--ia-equipo0 agresiva --ia-equipo1 conservador</code></td></tr>
           </tbody>
         </table>
-        <p>Documentación completa → <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/perfiles-ia.md">perfiles-ia.md</a></p>
+        <p>Documentación → <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/perfiles-ia.md">perfiles-ia.md</a></p>
         <p><small>Usá el mismo perfil al comparar reglamentos en batch.</small></p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Variantes (sin reglamento nuevo)</h2>
+      <div class="card">
+        <p>Ajustes en <code>configs/variantes.json</code> sobre un reglamento base — útil para experimentos rápidos:</p>
+        <pre><code>python3 -m simulador variantes --partidos 200 --ia estrategica</code></pre>
+        <p>Reglas formales (v1.1, v2) preferí registrarlas como reglamento en <code>reglamentos/</code>.</p>
       </div>
     </section>
   </main>

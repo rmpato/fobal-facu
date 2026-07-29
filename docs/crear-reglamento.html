@@ -31,6 +31,7 @@
         <a href="recomendaciones.html" data-page="recomendaciones.html">Recomendaciones</a>
         <a href="como-funciona.html" data-page="como-funciona.html">Cómo funciona</a>
         <a href="simulador.html" data-page="simulador.html">Simulador</a>
+        <a href="replay.html" data-page="replay.html">Replay</a>
         <a href="crear-reglamento.html" data-page="crear-reglamento.html">Crear reglamento</a>
       </nav>
     </div>
@@ -41,8 +42,8 @@
       <p class="breadcrumb"><a href="index.html">Inicio</a> / Crear reglamento</p>
       <h1>📝 Crear un reglamento nuevo</h1>
       <p class="lead">
-        Para correr partidos con <strong>v1.2</strong>, <strong>v2</strong> o <strong>v3</strong> no hace falta “promptear para que pushee solo”.
-        Editás archivos en el repo, corrés el simulador en tu máquina y, si querés publicar, hacés <strong>commit + push</strong>.
+        Para correr partidos con <strong>v1.2</strong>, <strong>v2.1</strong> o <strong>v3</strong> editás archivos en el repo, corrés el simulador en tu máquina y, si querés publicar, hacés <strong>commit + push</strong>.
+        El reglamento <strong>v2</strong> ya existe como ejemplo de iteración grande.
       </p>
     </div>
 
@@ -93,6 +94,18 @@
           · plantilla:
           <a href="https://github.com/rmpato/fobal-facu/blob/main/reglamentos/_plantilla.json">_plantilla.json</a>
         </p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Ejemplo real: v2 (cambio mediano + motor)</h2>
+      <p class="section-lead">Playtesting jul 2026 — sin pasa turno, Trampa/Marca al pase, reacciones encadenables</p>
+      <div class="card highlight">
+        <p>Archivos: <code>docs/reglamento-v2.md</code> · <code>reglamentos/v2.json</code> (extiende v1) · entrada en <code>indice.json</code>.</p>
+        <p>Parte del cambio entró en JSON; otras reglas requirieron tocar <code>simulador/motor.py</code> e <code>simulador/ia.py</code> (reacciones al pase, encadenamiento robo/gambetear).</p>
+        <pre><code>python3 -m simulador reglamentos show v2
+python3 -m simulador compare-reglamentos --partidos 200 --ia estrategica</code></pre>
+        <p>Resultados publicados → <a href="resultados.html#compare-cli">comparación v0–v2</a></p>
       </div>
     </section>
 
@@ -183,9 +196,9 @@
       <h2>Comandos útiles</h2>
       <div class="card">
         <pre><code>python3 -m simulador reglamentos list
-python3 -m simulador reglamentos show v1.2
-python3 -m simulador run --reglamento v1.2 --partidos 200
-python3 -m simulador compare-reglamentos --partidos 200</code></pre>
+python3 -m simulador reglamentos show v2
+python3 -m simulador run --reglamento v2 --partidos 200 --ia estrategica
+python3 -m simulador compare-reglamentos --partidos 200 --ia estrategica</code></pre>
         <p>Más contexto → <a href="simulador.html">Simulador</a> · <a href="como-funciona.html">Cómo funciona el motor</a></p>
       </div>
     </section>

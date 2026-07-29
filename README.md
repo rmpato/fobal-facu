@@ -54,7 +54,7 @@ Para crear uno nuevo: copiá [`reglamentos/_plantilla.json`](reglamentos/_planti
 | **Qué probar next** (mazo, cartas, reglas trabadas) | [`docs/recomendaciones-diseno.md`](docs/recomendaciones-diseno.md) |
 | **Reglas para jugar en mesa** | [`docs/reglamento-v1.md`](docs/reglamento-v1.md) (actual) · [`docs/reglamento-v0.md`](docs/reglamento-v0.md) (original) |
 
-**Resumen en una frase:** v0 estanca (~99% partidos sin terminar); v1 funciona bien con IA estratégica (~97% completados, ~4 goles/partido). Trampa/Marca solo tienen sentido si el ataque pasa de turno a propósito.
+**Resumen en una frase:** v0 estanca (~95% partidos sin terminar); v1 funciona bien con IA estratégica (~97% completados); **v2** cierra todos los partidos, acorta duración y activa Trampa/Marca al pase.
 
 ---
 

@@ -30,6 +30,7 @@
         <a href="recomendaciones.html" data-page="recomendaciones.html">Recomendaciones</a>
         <a href="como-funciona.html" data-page="como-funciona.html">Cómo funciona</a>
         <a href="simulador.html" data-page="simulador.html">Simulador</a>
+        <a href="replay.html" data-page="replay.html">Replay</a>
         <a href="crear-reglamento.html" data-page="crear-reglamento.html">Crear reglamento</a>
       </nav>
     </div>
@@ -46,13 +47,30 @@
       <h2>Reglamentos</h2>
       <div class="tabs-group">
         <div class="tabs">
-          <button class="tab-btn active" data-tab="panel-v1">v1</button>
-          <button class="tab-btn" data-tab="panel-v2">v2 — Playtesting</button>
+          <button class="tab-btn active" data-tab="panel-v2">v2 — Playtesting</button>
+          <button class="tab-btn" data-tab="panel-v1">v1</button>
           <button class="tab-btn" data-tab="panel-v11">v1.1</button>
           <button class="tab-btn" data-tab="panel-v0">v0 — Original</button>
         </div>
 
-        <div id="panel-v1" class="tab-panel active">
+        <div id="panel-v2" class="tab-panel active">
+          <div class="card highlight">
+            <h3>v2 — Iteración 2 (playtesting)</h3>
+            <p>Extiende <strong>v1</strong>. Mismo mazo (108 cartas).</p>
+            <table>
+              <thead><tr><th>Cambio vs v1</th><th>v2</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Pasa de turno</strong></td><td>❌ Eliminado — solo <strong>Reventar</strong> si no hay pase/disparo</td></tr>
+                <tr><td>Trampa / Marca</td><td>Se juegan al <strong>reaccionar a un pase</strong> (además de robo)</td></tr>
+                <tr><td>Reacciones defensivas</td><td>Una carta por acción del ataque</td></tr>
+                <tr><td>Robo ↔ Gambetear</td><td><strong>Encadenables</strong> mientras haya cartas</td></tr>
+              </tbody>
+            </table>
+            <p>Simulación: <a href="resultados.html#compare-cli">comparación v0–v2</a> · <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v2.md">reglamento-v2.md</a></p>
+          </div>
+        </div>
+
+        <div id="panel-v1" class="tab-panel">
           <div class="card">
             <h3>Objetivo</h3>
             <p>Partido al mejor de 5 goles. Marcador <strong>2-2</strong> → penales inmediatos.</p>
@@ -133,23 +151,6 @@
                 <tr><td>Pasó de turno</td><td><em>Tackle</em>, <em>Trampa</em>, <em>Marca personal</em></td></tr>
               </tbody>
             </table>
-          </div>
-        </div>
-
-        <div id="panel-v2" class="tab-panel">
-          <div class="card highlight">
-            <h3>v2 — Iteración 2 (playtesting)</h3>
-            <p>Extiende <strong>v1</strong>. Mismo mazo (108 cartas).</p>
-            <table>
-              <thead><tr><th>Cambio vs v1</th><th>v2</th></tr></thead>
-              <tbody>
-                <tr><td><strong>Pasa de turno</strong></td><td>❌ Eliminado — solo <strong>Reventar</strong> si no hay pase/disparo</td></tr>
-                <tr><td>Trampa / Marca</td><td>Se juegan al <strong>reaccionar a un pase</strong> (además de robo)</td></tr>
-                <tr><td>Reacciones defensivas</td><td>Una carta por acción del ataque</td></tr>
-                <tr><td>Robo ↔ Gambetear</td><td><strong>Encadenables</strong> mientras haya cartas</td></tr>
-              </tbody>
-            </table>
-            <p>Simulación: <a href="resultados.html#compare-cli">comparación v0–v2</a> · <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v2.md">reglamento-v2.md</a></p>
           </div>
         </div>
 

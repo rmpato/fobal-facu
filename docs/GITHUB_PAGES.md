@@ -32,11 +32,11 @@ El sitio está en la carpeta `docs/` (`index.html` + assets).
 | Página | Qué muestra |
 |--------|-------------|
 | `index.html` | Inicio, reglas confirmadas, resumen reciente |
-| `reglas.html` | Reglamentos v0/v1, mazos, dados |
+| `reglas.html` | Reglamentos v0–v2, mazos, dados |
 | `resultados.html` | IA estratégica, acciones %, variantes, comparación v0–v2 |
 | `como-funciona.html` | Motor, IA, dados, métricas, limitaciones |
-| `simulador.html` | Comandos CLI, perfiles IA, variantes JSON |
-| `crear-reglamento.html` | Cómo crear v1.2 / v2 / v3 — JSON, push, cuándo tocar código |
+| `simulador.html` | Comandos CLI, reglamentos v0–v2, IA, espectador, replay |
+| `crear-reglamento.html` | Cómo crear v1.2 / v2.1 / v3 — JSON, push, cuándo tocar código (v2 como ejemplo) |
 
 Los `.md` del repo siguen disponibles como links directos (ej. `resultados-iniciales.md`).
 

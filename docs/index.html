@@ -56,8 +56,8 @@
         <pre><code>git clone https://github.com/rmpato/fobal-facu.git
 cd fobal-facu
 python3 -m simulador reglamentos list
-python3 -m simulador run --reglamento v1 --partidos 200
-python3 -m simulador compare-reglamentos --partidos 200</code></pre>
+python3 -m simulador run --reglamento v2 --partidos 200 --ia estrategica
+python3 -m simulador compare-reglamentos --partidos 200 --ia estrategica</code></pre>
         <p>Guía completa en el repo: <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/guia-rapida.md">guia-rapida.md</a></p>
       </div>
     </section>
@@ -71,12 +71,12 @@ python3 -m simulador compare-reglamentos --partidos 200</code></pre>
       <a class="nav-card" href="recomendaciones.html">
         <div class="icon">💡</div>
         <h3>Recomendaciones</h3>
-        <p>Mazo, cartas nuevas, reglas trabadas, qué probar en v1.2.</p>
+        <p>Mazo, cartas nuevas, reglas trabadas — v2 ya simulado, próximo: v1.2 / mesa.</p>
       </a>
       <a class="nav-card" href="simulador.html">
         <div class="icon">💻</div>
         <h3>Simulador</h3>
-        <p>Comandos para correr y comparar reglamentos.</p>
+        <p>Comandos, reglamentos v0–v2, espectador y replay.</p>
       </a>
       <a class="nav-card" href="crear-reglamento.html">
         <div class="icon">📝</div>
@@ -86,7 +86,7 @@ python3 -m simulador compare-reglamentos --partidos 200</code></pre>
       <a class="nav-card" href="reglas.html">
         <div class="icon">📋</div>
         <h3>Reglas de mesa</h3>
-        <p>Reglamento v0 y v1 para jugar con amigos.</p>
+        <p>v0, v1, v1.1 y <strong>v2</strong> (playtesting) para jugar con amigos.</p>
       </a>
       <a class="nav-card" href="como-funciona.html">
         <div class="icon">⚙️</div>
@@ -104,7 +104,7 @@ python3 -m simulador compare-reglamentos --partidos 200</code></pre>
             <tr><td>Equipos</td><td>Mínimo <strong>2 jugadores por equipo</strong></td></tr>
             <tr><td>Marcador 2-2</td><td>Penales <strong>inmediatos</strong></td></tr>
             <tr><td>Trampa / Marca personal</td><td>Solo cuando el ataque <strong>pasa de turno</strong> (v1) · al <strong>pase</strong> en v2</td></tr>
-            <tr><td>Pasa de turno / Reventar</td><td>Decisiones del jugador — <strong>no</strong> son cartas del mazo</td></tr>
+            <tr><td>Pasa de turno / Reventar</td><td>Decisiones del jugador — <strong>no</strong> son cartas del mazo (<strong>v2</strong> elimina pasa de turno)</td></tr>
             <tr><td>Reventarla</td><td>Cada equipo elige quién tira el dado (no el que reventó)</td></tr>
           </tbody>
         </table>
@@ -142,8 +142,9 @@ python3 -m simulador compare-reglamentos --partidos 200</code></pre>
       <h2>❓ Para validar en mesa</h2>
       <div class="card">
         <ul class="checklist">
-          <li>¿La frecuencia de pase / despeje / robo se parece a la simulación?</li>
-          <li>¿Penales ~32–36% es demasiado frecuente? (v1.1 un poco menos que v1)</li>
+          <li>¿v2 en mesa se siente más dinámico que v1 (~146 turnos vs ~183)?</li>
+          <li>¿Trampa/Marca al pase (v2) es demasiado fuerte (~14 colocaciones/partido)?</li>
+          <li>¿Penales ~32–38% es demasiado frecuente?</li>
         </ul>
       </div>
     </section>

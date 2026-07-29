@@ -30,6 +30,7 @@
         <a href="recomendaciones.html" data-page="recomendaciones.html">Recomendaciones</a>
         <a href="como-funciona.html" data-page="como-funciona.html">Cómo funciona</a>
         <a href="simulador.html" data-page="simulador.html">Simulador</a>
+        <a href="replay.html" data-page="replay.html">Replay</a>
         <a href="crear-reglamento.html" data-page="crear-reglamento.html">Crear reglamento</a>
       </nav>
     </div>
@@ -61,7 +62,7 @@
         <div class="flow-steps">
           <div class="flow-step"><span class="flow-num">1</span><div><strong>Setup</strong><br>Mazo barajado, 6 cartas por jugador, sorteo de pelota inicial.</div></div>
           <div class="flow-arrow">↓</div>
-          <div class="flow-step"><span class="flow-num">2</span><div><strong>Turno</strong><br>El portador juega carta (pase, disparo) o toma una <strong>decisión</strong> (pasa de turno, reventar en v1). La defensa reacciona.</div></div>
+          <div class="flow-step"><span class="flow-num">2</span><div><strong>Turno</strong><br>El portador juega carta (pase, disparo) o toma una <strong>decisión</strong> (pasa de turno en v1, reventar). La defensa reacciona con una carta por acción.</div></div>
           <div class="flow-arrow">↓</div>
           <div class="flow-step"><span class="flow-num">3</span><div><strong>¿Fin?</strong><br>≥3 goles → gana alguien. 2-2 → penales. &gt;500 turnos → empate técnico.</div></div>
           <div class="flow-arrow">↓</div>
@@ -87,6 +88,27 @@
               → ¿marca al receptor? → pierde pelota
               → defensa: Robo pelota → ¿Gambetear?
               → pase OK → nuevo portador (+1 pase en jugada)</pre>
+      </div>
+    </section>
+
+    <section>
+      <h2>Un turno v2 (detalle)</h2>
+      <p class="section-lead">Extiende v1 · sin pasa de turno · Trampa/Marca reactivas al pase · robo↔gambetear encadenables</p>
+      <div class="card highlight">
+        <pre class="flow-diagram">Portador elige (IA)
+    │
+    ├─ ¿Falta? (8% prob.) → pases = 0, fin turno
+    │
+    ├─ Disparo al arco → 🎲 vs arquero → ¿gol?
+    │
+    ├─ Reventar (decisión, sin carta) → 🎲 duelo
+    │
+    └─ Pase → ¿trampa offside activa? → pierde pelota
+              → ¿marca al receptor? → pierde pelota
+              → defensa (una carta): Robo / Trampa / Marca
+                    → Robo → ¿Gambetear? → ¿otro Robo? … (encadenable)
+              → pase OK → nuevo portador (+1 pase en jugada)</pre>
+        <p>Reglas completas → <a href="reglas.html">Reglas v2</a> · <a href="resultados.html#acciones-v2">Resultados v2</a></p>
       </div>
     </section>
 
@@ -144,7 +166,8 @@
         <p>Ver distribución actual en <a href="resultados.html">Resultados</a>.</p>
 
         <h3>Trampa / Marca</h3>
-        <p>Colocadas cuando la defensa reacciona al <strong>pasa de turno</strong> (decisión del atacante).</p>
+        <p><strong>v1:</strong> colocadas cuando la defensa reacciona al <strong>pasa de turno</strong> (decisión).</p>
+        <p><strong>v2:</strong> colocadas al <strong>reaccionar a un pase</strong> (junto con Robo pelota). ~14 colocaciones/partido vs ~9,5 en v1.</p>
 
         <h3>Partido</h3>
         <p>Goles, turnos, penales, cartas jugadas, empates técnicos (&gt;500 turnos).</p>
@@ -160,6 +183,7 @@
           <tbody>
             <tr><td><code>baseline</code> (= reglamento <strong>v1</strong>)</td><td>Pasa de turno sin respuesta → pelota queda igual</td></tr>
             <tr><td><code>pasa_companero</code> (= reglamento <strong>v1.1</strong>)</td><td>Sin respuesta → pelota pasa a un compañero</td></tr>
+            <tr><td><code>v2</code> (reglamento formal)</td><td>Sin pasa turno; Trampa/Marca al pase; reacciones encadenables</td></tr>
           </tbody>
         </table>
         <p><a href="simulador.html">Ver comandos para correr variantes →</a></p>
@@ -178,7 +202,8 @@
           <thead><tr><th>Señal en sim</th><th>Posible lectura</th></tr></thead>
           <tbody>
             <tr><td>Muchos empates técnicos</td><td>Reglas o IA estancan el juego</td></tr>
-            <tr><td>Trampa/Marca ~0</td><td>IA no pasa de turno → no evalúa esas cartas</td></tr>
+            <tr><td>Trampa/Marca ~0 (v1, IA simple)</td><td>IA no pasa de turno → no evalúa esas cartas</td></tr>
+            <tr><td>v2 · 100% completados</td><td>Partidos más cortos; validar ritmo en mesa</td></tr>
             <tr><td>Penales &gt;30%</td><td>Muchos 2-2 — verificar en mesa</td></tr>
           </tbody>
         </table>
