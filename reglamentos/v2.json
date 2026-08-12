@@ -1,28 +1,23 @@
 {
   "id": "v2",
-  "nombre": "Iteración 2 (playtesting)",
-  "version": "2.0",
-  "documento": "docs/reglamento-v2.md",
-  "descripcion": "Sin pasa de turno; trampa/marca reactivas al pase; una reacción defensiva por acción; robo/gambetear encadenables.",
+  "nombre": "Iteración 2",
   "extends": "v1",
+  "version": "2.0",
+  "descripcion": "Saca el pasa de turno: sin Pase en la mano hay que reventar. Trampa de offside y Marca personal pasan a jugarse como respuesta a un pase, y Robo pelota contra Gambetear se puede encadenar mientras queden cartas.",
+  "documento": "docs/reglamento-v2.md",
+  "activo": true,
   "acciones_ofensivas": ["pase", "disparo", "reventar"],
   "reacciones": {
     "pase": {
       "cartas": ["Robo pelota", "Trampa de offside", "Marca personal"],
-      "contra": {
-        "Robo pelota": "Gambetear"
-      }
+      "contra": { "Robo pelota": "Gambetear" }
     },
     "pasa_turno": {
       "cartas": [],
-      "contra": {},
-      "permitir_tackle": false
+      "contra": {}
     }
   },
   "reglas": {
-    "trampa_marca_solo_en_pasa_turno": false,
-    "una_reaccion_defensiva_por_accion": true,
-    "reacciones_encadenables": true,
-    "reventar_habilitado": true
+    "reacciones_encadenables": true
   }
 }

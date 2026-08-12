@@ -1,371 +1,195 @@
 <!DOCTYPE html>
-<html lang="es-AR">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <base id="site-base" href="./">
-  <script>
-    (function () {
-      var el = document.getElementById("site-base");
-      if (location.hostname.endsWith("github.io")) {
-        var repo = location.pathname.split("/").filter(Boolean)[0];
-        if (repo) el.href = "/" + repo + "/";
-      }
-    })();
-  </script>
-  <title>Resultados — Fobal Facu</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resultados — Fobal Facu</title>
+<meta name="description" content="Qué pasó al simular miles de partidos de Fobal Facu: comparación entre versiones, formatos y composiciones de mazo.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚽</text></svg>">
+<link rel="stylesheet" href="assets/css/estilo.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="header-inner">
-      <a class="logo" href="index.html">
-        <span class="logo-icon">⚽</span>
-        <span>Fobal Facu</span>
-      </a>
-      <nav>
-        <a href="index.html" data-page="index.html">Inicio</a>
-        <a href="reglas.html" data-page="reglas.html">Reglas</a>
-        <a href="resultados.html" data-page="resultados.html">Resultados</a>
-        <a href="recomendaciones.html" data-page="recomendaciones.html">Recomendaciones</a>
-        <a href="como-funciona.html" data-page="como-funciona.html">Cómo funciona</a>
-        <a href="simulador.html" data-page="simulador.html">Simulador</a>
-        <a href="replay.html" data-page="replay.html">Replay</a>
-        <a href="crear-reglamento.html" data-page="crear-reglamento.html">Crear reglamento</a>
-      </nav>
-    </div>
-  </header>
 
-  <main>
-    <div class="page-hero">
-      <p class="breadcrumb"><a href="index.html">Inicio</a> / Resultados</p>
-      <h1>📊 Resultados de simulación</h1>
-      <p class="lead">Partidos automáticos 3v3 y 4v4 · reglamentos <strong>v1</strong> y <strong>v2</strong>. v0 solo histórico.</p>
-    </div>
+<header class="cabecera">
+  <div class="cabecera-interna">
+    <a class="logo" href="index.html">⚽ Fobal Facu</a>
+    <nav>
+      <a href="index.html" data-pagina="index.html">Inicio</a>
+      <a href="reglas.html" data-pagina="reglas.html">Reglas</a>
+      <a href="resultados.html" data-pagina="resultados.html">Resultados</a>
+      <a href="como-funciona.html" data-pagina="como-funciona.html">Cómo funciona</a>
+      <a href="simulador.html" data-pagina="simulador.html">Simulador</a>
+      <a href="replay.html" data-pagina="replay.html">Un partido</a>
+    </nav>
+  </div>
+</header>
 
-    <!-- Comparación v1 vs v2 · formatos -->
-    <section id="compare-formatos">
-      <span class="tag new">Informe · jul 2026</span>
-      <h2>v1 vs v2 · 3v3 y 4v4</h2>
-      <p class="section-lead">200 partidos c/u · IA estratégica · <code>compare-formatos</code> · v0 excluido (solo histórico)</p>
+<main>
 
-      <div class="card highlight">
-        <table>
-          <thead>
-            <tr>
-              <th>Reg</th>
-              <th>Formato</th>
-              <th class="num">Compl.</th>
-              <th class="num">Goles</th>
-              <th class="num">Turnos</th>
-              <th class="num">Pen.</th>
-              <th class="num">Pase%</th>
-              <th class="num">Trampa</th>
-              <th class="num">Marca</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>v1</strong></td><td>3v3</td>
-              <td class="num v1">99,0%</td><td class="num v1">4,03</td><td class="num v1">179</td>
-              <td class="num v1">35,0%</td><td class="num v1">40,3%</td><td class="num v1">4,38</td><td class="num v1">7,49</td>
-            </tr>
-            <tr>
-              <td><strong>v2</strong></td><td>3v3</td>
-              <td class="num v2 better">100%</td><td class="num v2">3,85</td><td class="num v2 better">151</td>
-              <td class="num v2 better">24,0%</td><td class="num v2">44,6%</td><td class="num v2">7,15</td><td class="num v2">11,95</td>
-            </tr>
-            <tr>
-              <td><strong>v1</strong></td><td>4v4</td>
-              <td class="num v1">98,0%</td><td class="num v1">3,86</td><td class="num v1">212</td>
-              <td class="num v1">26,0%</td><td class="num v1">40,6%</td><td class="num v1">5,55</td><td class="num v1">10,06</td>
-            </tr>
-            <tr>
-              <td><strong>v2</strong></td><td>4v4</td>
-              <td class="num v2">97,0%</td><td class="num v2">3,85</td><td class="num v2">219</td>
-              <td class="num v2">29,5%</td><td class="num v2">43,8%</td><td class="num v2 better">12,61</td><td class="num v2 better">20,93</td>
-            </tr>
-          </tbody>
-        </table>
-        <p><strong>3v3:</strong> v2 acorta ~16% los turnos vs v1, cierra siempre, menos penales. <strong>4v4:</strong> duración similar; v2 duplica Trampa+Marca (~34 vs ~16 colocaciones/partido).</p>
-        <p><small>Informe completo → <a href="comparacion-v1-v2-formatos.md">comparacion-v1-v2-formatos.md</a> · Comando: <code>python3 -m simulador compare-formatos --partidos 200</code></small></p>
-      </div>
+<div class="entrada">
+  <p class="migas"><a href="index.html">Inicio</a> / Resultados</p>
+  <h1>Qué dicen las simulaciones</h1>
+  <p class="bajada">
+    Quinientos partidos por escenario, con las mismas condiciones para todos.
+    Sirven para comparar una versión de las reglas con otra, no para predecir cómo
+    va a salir una partida.
+  </p>
+</div>
 
-      <div class="compare-grid">
-        <div class="card">
-          <h3>v2 gana en 3v3</h3>
-          <ul class="findings">
-            <li>100% completados · ~151 turnos (−16% vs v1)</li>
-            <li>Penales 24% vs 35% (v1)</li>
-            <li>Trampa+Marca ~19/partido (al pase)</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>v2 en 4v4 — cuidado</h3>
-          <ul class="findings">
-            <li>~219 turnos (pierde ventaja de ritmo)</li>
-            <li>97% completados · ~3% empates técnicos</li>
-            <li>Trampa+Marca ~34/partido — validar en mesa</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>3v3 vs 4v4 (v1)</h3>
-          <ul class="findings">
-            <li>+18% turnos en 4v4 (179 → 212)</li>
-            <li>Menos penales (35% → 26%)</li>
-            <li>Más robo, pase estable ~40%</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+<section>
+  <h2>v1 contra v2</h2>
+  <div class="desplaza">
+    <table>
+      <thead>
+        <tr>
+          <th>Versión</th><th>Formato</th>
+          <th class="num">Se definen</th><th class="num">Goles</th>
+          <th class="num">Turnos</th><th class="num">Penales</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>v1</td><td>3 vs 3</td><td class="num">98,4 %</td><td class="num">3,98</td><td class="num">189</td><td class="num">32,4 %</td></tr>
+        <tr class="resaltada"><td><strong>v2</strong></td><td>3 vs 3</td><td class="num">99,6 %</td><td class="num">3,87</td><td class="num">171</td><td class="num">26,8 %</td></tr>
+        <tr><td>v1</td><td>4 vs 4</td><td class="num">96,2 %</td><td class="num">3,88</td><td class="num">230</td><td class="num">27,6 %</td></tr>
+        <tr><td>v2</td><td>4 vs 4</td><td class="num">95,8 %</td><td class="num">3,84</td><td class="num">232</td><td class="num">26,4 %</td></tr>
+      </tbody>
+    </table>
+  </div>
 
-    <!-- Comparación rápida (CLI) -->
-    <section id="compare-cli">
-      <h2>Comparación por reglamento (un formato)</h2>
-      <p class="section-lead">200 partidos · 3 vs 3 · IA estratégica · <code>compare-reglamentos</code></p>
+  <h3>En 3 contra 3, v2 es más ágil</h3>
+  <p>
+    Dura un 10 % menos, casi nunca queda trabada y llega a penales bastante menos
+    seguido, con los mismos goles. Sacar el pasa de turno —que en v1 se llevaba
+    casi una de cada diez jugadas— empujó ese tiempo hacia el pase y el robo: se
+    juega más y se espera menos.
+  </p>
 
-      <div class="card highlight">
-        <table>
-          <thead>
-            <tr>
-              <th>Reglamento</th>
-              <th class="num">Compl.</th>
-              <th class="num">Goles</th>
-              <th class="num">Turnos</th>
-              <th class="num">Pen.</th>
-              <th class="num">Pase%</th>
-              <th class="num">PasaT%</th>
-              <th class="num">Trampa</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>v1</strong> — playtesting</td>
-              <td class="num v1">99,0%</td>
-              <td class="num v1">4,03</td>
-              <td class="num v1">179,0</td>
-              <td class="num v1">35,0%</td>
-              <td class="num v1">40,3%</td>
-              <td class="num v1">8,8%</td>
-              <td class="num v1">4,38</td>
-            </tr>
-            <tr>
-              <td><strong>v2</strong> — sin pasa turno · trampa al pase</td>
-              <td class="num v2 better">100%</td>
-              <td class="num v2">3,85</td>
-              <td class="num v2 better">151,3</td>
-              <td class="num v2 better">24,0%</td>
-              <td class="num v2">44,6%</td>
-              <td class="num v2">0%</td>
-              <td class="num v2 better">7,15</td>
-            </tr>
-          </tbody>
-        </table>
-        <p><small>Solo reglamentos activos (v1, v2). v0 y v1.1 conservados como histórico.</small></p>
-      </div>
-    </section>
+  <h3>En 4 contra 4 la ventaja desaparece</h3>
+  <p>
+    Con cuatro por equipo las dos versiones dan lo mismo, y las dos empeoran: los
+    partidos se alargan un 35 % y empiezan a aparecer empates por límite de turnos.
+    Con más jugadores hay más manos en juego y más formas de cortar cada avance.
+    En 5 contra 5 el efecto se dispara: 299 turnos y solo el 85 % de los partidos
+    se define.
+  </p>
+  <div class="tarjeta destacada">
+    <p style="margin:0">
+      <strong>Para la mesa:</strong> 3 contra 3 es el formato en el que el juego
+      está afinado. Si se juega de a cuatro o cinco, conviene subir los goles
+      necesarios o achicar la mano, porque el partido se hace largo.
+    </p>
+  </div>
+</section>
 
-    <!-- IA estratégica -->
-    <section id="ia-estrategica">
-      <span class="tag new">Nuevo · jul 2026</span>
-      <h2>IA estratégica vs simple (v1 · 3 vs 3)</h2>
-      <p class="section-lead">200 partidos · v1 · 3 vs 3 · la estratégica usa más pasa de turno y Trampa/Marca</p>
+<section>
+  <h2>La marca personal casi nunca recupera la pelota</h2>
+  <p>
+    Es el hallazgo más útil para el diseño del mazo. Contra un ataque atento, la
+    marca <strong>no roba ninguna pelota</strong>: alcanza con pasarle a otro.
+  </p>
+  <div class="desplaza">
+    <table>
+      <thead>
+        <tr><th>Escenario</th><th class="num">Marcas puestas</th><th class="num">Recuperan</th><th class="num">Desvían un pase</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>v2 · 3 vs 3</td><td class="num">14,8</td><td class="num">0,00</td><td class="num">13,4</td></tr>
+        <tr><td>v1 · 3 vs 3</td><td class="num">8,7</td><td class="num">0,00</td><td class="num">8,9</td></tr>
+        <tr><td>v2 · 2 vs 2</td><td class="num">12,2</td><td class="num">2,52</td><td class="num">—</td></tr>
+        <tr><td>v2 · 3 vs 3, buscando al marcado</td><td class="num">20,4</td><td class="num">11,81</td><td class="num">2,2</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    En 3 contra 3 siempre hay un compañero libre, así que marcar equivale a tapar
+    una de las dos opciones de pase. La carta solo se cobra cuando el ataque se
+    queda sin alternativas (2 contra 2) o cuando alguien insiste en pasarle al
+    marcado.
+  </p>
+  <p>
+    Eso no la vuelve inútil: desvía trece pases por partido hacia el receptor que
+    la defensa eligió dejar libre. Pero es una carta de <em>condicionamiento</em>,
+    no de robo, y el reglamento la presenta como si recuperara la pelota. La
+    trampa de offside, en cambio, sí se cobra: se ponen 8,8 por partido y 4,7
+    terminan en offside.
+  </p>
+</section>
 
-      <div class="compare-grid">
-        <div class="stat-box">
-          <div class="label">Completados</div>
-          <div class="values"><span class="val v0">99,5%</span><span class="val v1">99,0%</span></div>
-          <div class="unit">IA simple → estratégica</div>
-        </div>
-        <div class="stat-box">
-          <div class="label">Goles / partido</div>
-          <div class="values"><span class="val v0">4,08</span><span class="val v1">4,03</span></div>
-        </div>
-        <div class="stat-box">
-          <div class="label">Turnos / partido</div>
-          <div class="values"><span class="val v0">180</span><span class="val v1">179</span></div>
-        </div>
-        <div class="stat-box">
-          <div class="label">Penales (2-2)</div>
-          <div class="values"><span class="val v1">35,0%</span></div>
-        </div>
-      </div>
+<section>
+  <h2>Por qué existe la v1: la v0 no terminaba nunca</h2>
+  <p>
+    De 300 partidos simulados con las reglas originales, <strong>ninguno se
+    definió</strong>: todos llegaron al límite de turnos, con 0,38 goles de
+    promedio y el 96 % de las jugadas siendo «pasar de turno».
+  </p>
+  <p>
+    El motivo es la combinación de dos reglas: en v0 solo se reponían cartas
+    cuando alguien se quedaba sin ninguna, y pasar de turno no gasta carta. Un
+    jugador sin <code>Pase</code> podía quedarse quieto para siempre: nunca vaciaba
+    la mano, nunca reponía y el partido no avanzaba. Es exactamente el problema que
+    v1 resolvió al reponer en cada cambio de equipo y agregar reventar la pelota.
+  </p>
+</section>
 
-      <div class="card highlight">
-        <h3>Trampa y Marca — más uso con IA estratégica</h3>
-        <table>
-          <thead><tr><th>Carta / evento</th><th class="num">IA simple</th><th class="num">IA estratégica</th></tr></thead>
-          <tbody>
-            <tr><td>Pasa de turno (decisión) / partido</td><td class="num v0">~8</td><td class="num better">19</td></tr>
-            <tr><td>Trampa colocada</td><td class="num v0">~1,8</td><td class="num better">4,38</td></tr>
-            <tr><td>Marca colocada</td><td class="num v0">~3,0</td><td class="num better">7,49</td></tr>
-            <tr><td>Offside efectivo</td><td class="num">~1,4</td><td class="num">3,61</td></tr>
-          </tbody>
-        </table>
-        <p><small>En 3 vs 3 ambas IAs cierran casi todos los partidos. La diferencia está en cuánto se evalúan Trampa/Marca (vía pasa de turno en v1).</small></p>
-      </div>
-    </section>
+<section>
+  <h2>Qué le hace cada palanca al juego</h2>
+  <p>
+    Todos estos cambios se hacen editando el mazo o un número, sin programar nada.
+    Base: v2, 3 contra 3, 300 partidos.
+  </p>
+  <div class="desplaza">
+    <table>
+      <thead>
+        <tr><th>Cambio</th><th class="num">Turnos</th><th class="num">Goles</th><th class="num">Penales</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><em>v2 sin cambios</em></td><td class="num">172</td><td class="num">3,88</td><td class="num">27,0 %</td></tr>
+        <tr><td><code>Falta</code> 7 → 3 copias</td><td class="num">142</td><td class="num">3,91</td><td class="num">27,3 %</td></tr>
+        <tr><td><code>Robo pelota</code> 24 → 18</td><td class="num">145</td><td class="num">3,97</td><td class="num">31,0 %</td></tr>
+        <tr><td><code>Disparo al arco</code> 12 → 18</td><td class="num">149</td><td class="num">3,89</td><td class="num">26,7 %</td></tr>
+        <tr><td>Mano de 6 → 8 cartas</td><td class="num">197</td><td class="num">3,81</td><td class="num">23,3 %</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <ul>
+    <li><strong>Sacar cuatro faltas es el cambio más efectivo para acortar:</strong> 30 turnos menos sin tocar nada más. Cada falta corta la jugada y borra los pases acumulados, así que cuesta más de lo que parece.</li>
+    <li><strong>Más disparos acortan sin subir el marcador:</strong> se remata más seguido, pero con jugadas más cortas, que la tabla del dado castiga.</li>
+    <li><strong>Menos robos acortan y empatan más:</strong> los dos equipos llegan mejor, convierten más y el 2 a 2 aparece antes.</li>
+    <li><strong>Manos más grandes alargan el partido:</strong> con ocho cartas siempre hay con qué responder y cada avance cuesta más.</li>
+  </ul>
+</section>
 
-    <!-- Acciones v2 -->
-    <section id="acciones-v2">
-      <h2>Distribución de acciones — v2</h2>
-      <p class="section-lead">Porcentaje sobre el total de acciones · v2 · 3 vs 3 · IA estratégica · 200 partidos</p>
+<section>
+  <h2>Qué conviene probar ahora</h2>
+  <div class="tarjeta">
+    <ol>
+      <li><strong>Anotar en la mesa cuántas veces sirve la marca personal.</strong> Es la única forma de saber si el problema es de la carta o del modelo.</li>
+      <li><strong>Probar el mazo con menos faltas</strong>, que es lo que más acorta.</li>
+      <li><strong>Decidir cómo termina el partido:</strong> hoy uno de cada cuatro se define por penales, que es mucha definición fuera del juego.</li>
+      <li><strong>Definir qué pasa cuando juegan cuatro o cinco por equipo</strong>, en vez de dejarlo librado al azar.</li>
+    </ol>
+  </div>
+  <p><a href="recomendaciones.md">La lista completa, con las razones de cada cambio →</a></p>
+</section>
 
-      <div class="action-legend">
-        <span class="legend-pase">Pase 44,6%</span>
-        <span class="legend-robo">Robo 22,4%</span>
-        <span class="legend-despeje">Despeje 16,3%</span>
-        <span class="legend-disparo">Disparo 8,8%</span>
-        <span class="legend-falta">Falta 8,0%</span>
-      </div>
+<section>
+  <h2>Cómo se reproduce todo esto</h2>
+  <pre><code>python3 -m simulador comparar v1 v2 --formatos 3 4 --partidos 500
+python3 -m simulador simular v0 --partidos 300
+python3 -m simulador simular v2 --partidos 300 --perfil marcador</code></pre>
+  <p class="nota">
+    Cada tanda usa las mismas semillas, así que da siempre el mismo resultado.
+    Cómo instalarlo: <a href="simulador.html">usar el simulador</a>.
+  </p>
+</section>
 
-      <div class="card">
-        <div class="bar-chart">
-          <div class="bar-row"><span class="bar-label">Pase</span><div class="bar-track"><div class="bar-fill v2" style="width:44.6%"></div></div><span class="bar-value">44,6%</span></div>
-          <div class="bar-row"><span class="bar-label">Robo</span><div class="bar-track"><div class="bar-fill gold" style="width:22.4%"></div></div><span class="bar-value">22,4%</span></div>
-          <div class="bar-row"><span class="bar-label">Despeje</span><div class="bar-track"><div class="bar-fill" style="width:16.3%;background:linear-gradient(90deg,#3a7ab0,#5a9fd4)"></div></div><span class="bar-value">16,3%</span></div>
-          <div class="bar-row"><span class="bar-label">Disparo</span><div class="bar-track"><div class="bar-fill gold" style="width:8.8%"></div></div><span class="bar-value">8,8%</span></div>
-          <div class="bar-row"><span class="bar-label">Falta</span><div class="bar-track"><div class="bar-fill v0" style="width:8.0%"></div></div><span class="bar-value">8,0%</span></div>
-          <div class="bar-row"><span class="bar-label">Pasa de turno <small>(decisión)</small></span><div class="bar-track"><div class="bar-fill" style="width:0%;background:linear-gradient(90deg,#8a5ab0,#b07ad4)"></div></div><span class="bar-value">0%</span></div>
-        </div>
-        <table>
-          <thead><tr><th>Trampa / Marca (v2)</th><th class="num">Por partido</th></tr></thead>
-          <tbody>
-            <tr><td>Trampa colocada</td><td class="num v2">7,15</td></tr>
-            <tr><td>Marca colocada</td><td class="num v2">11,95</td></tr>
-            <tr><td>Offside efectivo</td><td class="num">4,67</td></tr>
-          </tbody>
-        </table>
-        <p><strong>vs v1 (3v3):</strong> más pase (+4 pp), más robo (+3 pp), sin pasa de turno, Trampa/Marca ~60% más frecuentes (reactivas al pase).</p>
-      </div>
-    </section>
+</main>
 
-    <!-- Acciones -->
-    <section id="acciones">
-      <h2>Distribución de acciones</h2>
-      <p class="section-lead">Porcentaje sobre el total de acciones registradas · v1 · 3 vs 3 · IA estratégica · 200 partidos</p>
+<footer class="pie">
+  <p>Fobal Facu · juego de cartas y banco de pruebas</p>
+  <p><a id="enlace-repo" href="https://github.com/rmpato/fobal-facu">El código y las reglas en GitHub</a></p>
+</footer>
 
-      <div class="action-legend">
-        <span class="legend-pase">Pase 40,3%</span>
-        <span class="legend-robo">Robo 19,1%</span>
-        <span class="legend-despeje">Despeje 15,8%</span>
-        <span class="legend-disparo">Disparo 8,6%</span>
-        <span class="legend-pasat">Pasa turno (decisión) 8,8%</span>
-        <span class="legend-falta">Falta 7,4%</span>
-      </div>
-
-      <div class="card">
-        <div class="bar-chart">
-          <div class="bar-row"><span class="bar-label">Pase</span><div class="bar-track"><div class="bar-fill v1" style="width:40.3%"></div></div><span class="bar-value">40,3%</span></div>
-          <div class="bar-row"><span class="bar-label">Robo</span><div class="bar-track"><div class="bar-fill gold" style="width:19.1%"></div></div><span class="bar-value">19,1%</span></div>
-          <div class="bar-row"><span class="bar-label">Despeje</span><div class="bar-track"><div class="bar-fill" style="width:15.8%;background:linear-gradient(90deg,#3a7ab0,#5a9fd4)"></div></div><span class="bar-value">15,8%</span></div>
-          <div class="bar-row"><span class="bar-label">Disparo</span><div class="bar-track"><div class="bar-fill gold" style="width:8.6%"></div></div><span class="bar-value">8,6%</span></div>
-          <div class="bar-row"><span class="bar-label">Pasa de turno <small>(decisión)</small></span><div class="bar-track"><div class="bar-fill" style="width:8.8%;background:linear-gradient(90deg,#8a5ab0,#b07ad4)"></div></div><span class="bar-value">8,8%</span></div>
-          <div class="bar-row"><span class="bar-label">Falta</span><div class="bar-track"><div class="bar-fill v0" style="width:7.4%"></div></div><span class="bar-value">7,4%</span></div>
-        </div>
-        <p><strong>Para playtesting:</strong> en un partido real, contá cuántas veces pasa cada cosa y compará con esta tabla.</p>
-      </div>
-    </section>
-
-    <!-- Variantes -->
-    <section id="variantes">
-      <h2>Variantes de regla</h2>
-      <p class="section-lead">¿Qué pasa si nadie reacciona al pasa de turno? · 200 partidos c/u · 3 vs 3 · IA estratégica</p>
-
-      <div class="card">
-        <table>
-          <thead>
-            <tr><th>Variante</th><th class="num">Completados</th><th class="num">Goles</th><th class="num">Turnos</th><th class="num">Penales</th><th class="num">Pase %</th><th class="num">PasaT %</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>baseline</strong> — pelota queda igual</td>
-              <td class="num">99,0%</td><td class="num">4,03</td><td class="num">179</td><td class="num">35,0%</td><td class="num">40,3%</td><td class="num">8,8%</td>
-            </tr>
-            <tr>
-              <td><strong>pasa_companero</strong> — pasa al compañero</td>
-              <td class="num">99,0%</td><td class="num">4,01</td><td class="num">169</td><td class="num">35,5%</td><td class="num">40,4%</td><td class="num">8,8%</td>
-            </tr>
-          </tbody>
-        </table>
-        <p><strong>Conclusión:</strong> en 3 vs 3, <code>pasa_companero</code> acorta un poco el partido (~10 turnos) pero el balance es similar. Reglamento formal: <strong>v1.1</strong>.</p>
-      </div>
-    </section>
-
-    <!-- Histórico -->
-    <section id="historico">
-      <h2>Notas históricas</h2>
-      <div class="card">
-        <p><strong>v0</strong> y <strong>v1.1</strong> siguen en el repo (<a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v0.md">reglamento-v0.md</a>, <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v1.1.md">reglamento-v1.1.md</a>) pero ya no se incluyen en simulaciones batch ni en las tablas de arriba.</p>
-        <p>Corridas antiguas con 2v2 o v0 están en el historial de git; el análisis actual usa <strong>v1 vs v2</strong> en <strong>3v3 y 4v4</strong>.</p>
-      </div>
-
-      <div class="card">
-        <h3>IA simple (referencia histórica · 2v2)</h3>
-        <p>Primera generación de simulaciones, antes de la IA estratégica. Sirve para ver por qué v0 parecía irrecuperable y v1 mejoraba pero estancaba ~40%.</p>
-        <table>
-          <thead><tr><th>Métrica</th><th class="num">v0</th><th class="num">v1</th></tr></thead>
-          <tbody>
-            <tr><td>Partidos completados</td><td class="num v0">0,5%</td><td class="num v1">62,5%</td></tr>
-            <tr><td>Empates técnicos (&gt;500 turnos)</td><td class="num v0">99,5%</td><td class="num v1">37,5%</td></tr>
-            <tr><td>Goles promedio</td><td class="num v0">0,66</td><td class="num v1">3,23</td></tr>
-            <tr><td>Turnos promedio</td><td class="num v0">498</td><td class="num v1">301</td></tr>
-            <tr><td>Penales (2-2)</td><td class="num v0">0%</td><td class="num v1">23,5%</td></tr>
-            <tr><td>Trampa / Marca / partido</td><td class="num v0">~1 / ~1</td><td class="num v1">~1 / ~1</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="card warn">
-        <h3>Corrección importante: Trampa/Marca</h3>
-        <p>Una simulación temprana permitía Trampa/Marca "entre pases" (incorrecto). Eso inflaba goles y penales en v1:</p>
-        <table>
-          <thead><tr><th></th><th class="num">Lógica incorrecta</th><th class="num">Regla real (v1)</th></tr></thead>
-          <tbody>
-            <tr><td>Completados (IA simple, v1)</td><td class="num">94%</td><td class="num">62,5%</td></tr>
-            <tr><td>Goles / partido</td><td class="num">4,06</td><td class="num">3,25</td></tr>
-            <tr><td>Marca / partido</td><td class="num">~9,7</td><td class="num">~1,2</td></tr>
-          </tbody>
-        </table>
-        <p>Con <strong>IA estratégica</strong> y regla correcta en 3 vs 3, Marca/Trampa suman ~12 colocaciones/partido en v1 (vía pasa de turno).</p>
-      </div>
-    </section>
-
-    <!-- Hallazgos -->
-    <section id="hallazgos">
-      <h2>Hallazgos</h2>
-
-      <div class="card highlight">
-        <h3>v1 — baseline</h3>
-        <ul class="findings">
-          <li><strong>3v3:</strong> ~99% completados · ~179 turnos · ~4 goles · pasa turno ~9%.</li>
-          <li><strong>4v4:</strong> ~98% completados · ~212 turnos · menos penales que en 3v3.</li>
-        </ul>
-      </div>
-
-      <div class="card highlight">
-        <h3>v2 — candidato playtesting</h3>
-        <ul class="findings">
-          <li><strong>3v3:</strong> 100% · ~151 turnos · Trampa+Marca ~19/partido — mejor ritmo simulado.</li>
-          <li><strong>4v4:</strong> 97% · ~219 turnos · Trampa+Marca ~34/partido — validar en mesa.</li>
-        </ul>
-        <p><a href="comparacion-v1-v2-formatos.md">Informe completo v1 vs v2 · formatos</a></p>
-      </div>
-
-      <div class="card">
-        <h3>Preguntas abiertas</h3>
-        <ul class="checklist">
-          <li>¿v2 en 3v3 se siente bien en mesa (~151 turnos simulados)?</li>
-          <li>¿v2 en 4v4 es demasiado Trampa/Marca (~34/partido)?</li>
-          <li>¿Preferís 3v3 o 4v4 para el grupo?</li>
-        </ul>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <p><a href="index.html">← Inicio</a> · <a href="simulador.html">Cómo correr simulaciones</a> · <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/resultados-iniciales.md">MD completo</a></p>
-  </footer>
-  <script src="assets/js/main.js"></script>
+<script src="assets/js/sitio.js"></script>
 </body>
 </html>

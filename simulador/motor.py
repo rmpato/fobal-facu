@@ -1,713 +1,634 @@
-"""Motor de partido: lógica compartida y variantes v0/v1."""
+"""Motor de partido.
+
+Resuelve un partido turno a turno aplicando lo que dice el reglamento. No tiene
+reglas propias ni ramas por versión del juego: pregunta al reglamento qué es
+legal, al agente qué quiere hacer, y tira los dados.
+
+Un turno es siempre la misma secuencia:
+
+1. cualquiera puede cortar la jugada con ``Falta``;
+2. quien tiene la pelota elige entre las acciones que le permiten el reglamento
+   y su mano (pase, disparo, reventar, pasa de turno);
+3. las trampas puestas de antemano (offside, marca) se disparan;
+4. la defensa reacciona con una carta, y el ataque puede contrarrestarla;
+5. la pelota queda en alguien, y quien corresponda repone su mano.
+"""
 
 from __future__ import annotations
 
 import random
-from typing import Callable
+from typing import NamedTuple
 
-from simulador.cartas import (
-    Carta,
-    construir_mazo,
-    tabla_para_pases,
-)
-from simulador.config import ConfigSimulacion
-from simulador.modelo import EstadoPartido, Jugador, Marcador
+from simulador.cartas import Carta, INTERCEPCIONES, TRAMPAS
+from simulador.ia import Agente, AgenteIA
+from simulador.modelo import EstadoPartido, Jugador, Marcador, Observador
+from simulador.reglamento import Reglamento, cargar
 
-LIMITE_TURNOS = 500
-MANO_INICIAL = 6
-
-
-def etiqueta_equipo(estado: EstadoPartido, equipo: int) -> str:
-    return ", ".join(j.nombre for j in estado.jugadores_equipo(equipo))
-
-
-def formatear_marcador(estado: EstadoPartido) -> str:
-    g0, g1 = estado.marcador.goles
-    return f"{etiqueta_equipo(estado, 0)} {g0} - {g1} {etiqueta_equipo(estado, 1)}"
-
-
-def _log_gol(estado: EstadoPartido, goleador: Jugador) -> None:
-    estado.marcador.anota(goleador.equipo)
-    eq = etiqueta_equipo(estado, goleador.equipo)
-    estado.log_evento(
-        f"** GOL de {goleador.nombre} ({eq})! Marcador: {formatear_marcador(estado)}"
-    )
-
-
-def _mano_inicial(config: ConfigSimulacion) -> int:
-    return config.reglamento_resuelto.mano_inicial
+#: Tope de idas y vueltas defensa/ataque dentro de una misma acción.
+LIMITE_CADENA = 20
+#: Tope de repeticiones de una tirada empatada (palo, rebote, duelo).
+LIMITE_TIRADAS = 20
 
 
 def crear_partido(
-    config: ConfigSimulacion | None = None,
+    reglamento: Reglamento | str,
     *,
-    reglas: str | None = None,
-    reglamento: str | None = None,
-    jugadores_por_equipo: int | None = None,
+    jugadores_por_equipo: int = 3,
     semilla: int | None = None,
-    nombres_por_equipo: tuple[list[str], list[str]] | None = None,
+    nombres: list[str] | None = None,
+    observador: Observador | None = None,
 ) -> EstadoPartido:
-    if config is None:
-        config = ConfigSimulacion(
-            reglamento=reglamento or reglas or "v1",
-            jugadores_por_equipo=jugadores_por_equipo or 3,
-        )
-    elif reglas is not None or reglamento is not None or jugadores_por_equipo is not None:
-        data = config.to_dict()
-        if reglamento is not None:
-            data["reglamento"] = reglamento
-        elif reglas is not None:
-            data["reglamento"] = reglas
-        if jugadores_por_equipo is not None:
-            data["jugadores_por_equipo"] = jugadores_por_equipo
-        config = ConfigSimulacion.from_dict(data)
-
-    reg = config.reglamento_resuelto
-    if config.jugadores_por_equipo < reg.jugadores_minimo_por_equipo:
+    """Reparte las manos y sortea quién arranca con la pelota."""
+    reg = cargar(reglamento) if isinstance(reglamento, str) else reglamento
+    if jugadores_por_equipo < reg.jugadores_minimo_por_equipo:
         raise ValueError(
-            f"Se requieren al menos {reg.jugadores_minimo_por_equipo} jugadores por equipo"
+            f"El reglamento {reg.id} necesita al menos "
+            f"{reg.jugadores_minimo_por_equipo} jugadores por equipo"
         )
-    if semilla is not None:
-        random.seed(semilla)
+    total = jugadores_por_equipo * 2
+    if nombres and len(nombres) != total:
+        raise ValueError(f"Se esperaban {total} nombres y llegaron {len(nombres)}")
 
-    jugadores_por_equipo = config.jugadores_por_equipo
-    mazo = reg.construir_mazo()
-    random.shuffle(mazo)
-    mano_inicial = reg.mano_inicial
+    # Sin semilla se sortea una y se guarda: cualquier partido se puede repetir.
+    if semilla is None:
+        semilla = random.randrange(1_000_000)
+    rng = random.Random(semilla)
+    mazo = reg.cartas_del_mazo()
+    rng.shuffle(mazo)
 
-    jugadores: list[Jugador] = []
-    jid = 0
+    jugadores = []
     for equipo in (0, 1):
         for n in range(jugadores_por_equipo):
-            if nombres_por_equipo:
-                nombre = nombres_por_equipo[equipo][n]
-            else:
-                nombre = f"E{equipo}-J{n + 1}"
-            jugadores.append(Jugador(id=jid, equipo=equipo, nombre=nombre))
-            jid += 1
+            indice = equipo * jugadores_por_equipo + n
+            nombre = nombres[indice] if nombres else f"E{equipo + 1}-J{n + 1}"
+            jugadores.append(Jugador(id=indice, equipo=equipo, nombre=nombre))
 
-    for j in jugadores:
-        for _ in range(mano_inicial):
-            if mazo:
-                j.mano.append(mazo.pop())
-
-    equipo_inicio = random.randint(0, 1)
-    portador_id = random.choice([j.id for j in jugadores if j.equipo == equipo_inicio])
-    marcador = Marcador(
-        goles_para_ganar=reg.goles_para_ganar,
-        penales_si_marcador=reg.penales_si_marcador,
-    )
-    return EstadoPartido(
-        reglamento_id=reg.id,
-        jugadores_por_equipo=jugadores_por_equipo,
+    estado = EstadoPartido(
+        reglamento=reg,
         jugadores=jugadores,
         mazo=mazo,
-        descarte=[],
-        portador_id=portador_id,
-        marcador=marcador,
-        config=config,
-        reglamento=reg,
+        portador_id=0,
+        rng=rng,
+        semilla=semilla,
+        marcador=Marcador(
+            goles_para_ganar=reg.goles_para_ganar,
+            penales_si_marcador=reg.penales_si_marcador,
+        ),
+        observador=observador,
     )
+    for jugador in jugadores:
+        estado.robar(jugador, reg.mano_inicial)
 
-
-def _dado() -> int:
-    return random.randint(1, 6)
-
-
-def _es_gol(dado: int, pases: int) -> bool:
-    t = tabla_para_pases(pases)
-    return t.gol_min <= dado <= t.gol_max
-
-
-def _es_atajada(dado: int, pases: int) -> bool:
-    t = tabla_para_pases(pases)
-    return t.ataja_min <= dado <= t.ataja_max
-
-
-def fase_disparo(
-    estado: EstadoPartido,
-    pateador: Jugador,
-    arquero: Jugador,
-    pases: int,
-    rebote_palo: bool,
-) -> bool:
-    """Devuelve True si hubo gol."""
-    for _ in range(15):
-        d_p = _dado()
-        d_a = _dado()
-        estado.log_evento(
-            f"  Disparo: {pateador.nombre}={d_p}, arquero {arquero.nombre}={d_a} "
-            f"(pases={pases})"
-        )
-        gol = _es_gol(d_p, pases)
-        ataja = _es_atajada(d_a, pases)
-
-        if rebote_palo and gol and ataja:
-            estado.log_evento("  Rebote: se vuelve a patear")
-            continue
-        if rebote_palo and d_p == d_a:
-            estado.log_evento("  Palo: se vuelve a patear")
-            continue
-        if gol and not ataja:
-            return True
-        return False
-    return False
-
-
-def resolver_penales(estado: EstadoPartido, rebote_palo: bool) -> int:
-    """Devuelve índice del equipo ganador."""
-    n = estado.jugadores_por_equipo
-    estado.log_evento("--- Penales ---")
-
-    def ronda(cantidad: int) -> tuple[int, int]:
-        goles = [0, 0]
-        for i in range(cantidad):
-            for equipo in (0, 1):
-                pateadores = [j for j in estado.jugadores if j.equipo == equipo]
-                arqueros = [j for j in estado.jugadores if j.equipo != equipo]
-                p = pateadores[i % len(pateadores)]
-                a = arqueros[i % len(arqueros)]
-                if fase_disparo(estado, p, a, pases=0, rebote_palo=rebote_palo):
-                    goles[equipo] += 1
-                    eq = etiqueta_equipo(estado, equipo)
-                    estado.log_evento(f"  ** Penal convertido: {p.nombre} ({eq})")
-                else:
-                    estado.log_evento(f"  Penal atajado/errado: {p.nombre}")
-        return goles[0], goles[1]
-
-    g0, g1 = ronda(n)
-    estado.log_evento(f"  Serie: {etiqueta_equipo(estado, 0)} {g0} - {g1} {etiqueta_equipo(estado, 1)}")
-    if g0 != g1:
-        return 0 if g0 > g1 else 1
-
-    # Muerte súbita
-    intentos = 0
-    while intentos < 20:
-        intentos += 1
-        for equipo in (0, 1):
-            pateadores = [j for j in estado.jugadores if j.equipo == equipo]
-            arqueros = [j for j in estado.jugadores if j.equipo != equipo]
-            p = random.choice(pateadores)
-            a = random.choice(arqueros)
-            convierte = fase_disparo(estado, p, a, pases=0, rebote_palo=rebote_palo)
-            otro = 1 - equipo
-            p2 = random.choice([j for j in estado.jugadores if j.equipo == otro])
-            a2 = random.choice([j for j in estado.jugadores if j.equipo != otro])
-            convierte2 = fase_disparo(estado, p2, a2, pases=0, rebote_palo=rebote_palo)
-            if convierte and not convierte2:
-                return equipo
-            if convierte2 and not convierte:
-                return otro
-        estado.log_evento("  Muerte súbita: empate, otra ronda")
-    return random.randint(0, 1)
-
-
-def _transferir_pelota(
-    estado: EstadoPartido,
-    nuevo_portador: Jugador,
-    incrementar_pase: bool = False,
-    limpiar_trampas: bool = True,
-) -> None:
-    cambio_equipo = nuevo_portador.equipo != estado.equipo_ofensivo
-    if incrementar_pase and not cambio_equipo:
-        estado.pases_en_jugada += 1
-    if limpiar_trampas and not cambio_equipo:
-        estado.marca_sobre[estado.equipo_defensivo] = None
-    estado.cambiar_posesion(nuevo_portador.id, cambio_equipo=cambio_equipo)
-
-
-def _robo_pelota(estado: EstadoPartido, defensor: Jugador) -> None:
-    estado.registrar_accion("robo")
-    estado.log_evento(f"  {defensor.nombre} recupera la pelota")
-    estado.reset_pases()
-    _transferir_pelota(estado, defensor, incrementar_pase=False)
-
-
-def _intentar_falta(
-    estado: EstadoPartido,
-    candidatos: list[Jugador],
-    probabilidad: float,
-) -> bool:
-    """Si alguien juega Falta, resetea pases y termina la acción."""
-    for j in candidatos:
-        if j.tiene(Carta.FALTA) and random.random() < probabilidad:
-            j.jugar(Carta.FALTA)
-            estado.descartar(Carta.FALTA)
-            estado.registrar_carta(Carta.FALTA, j)
-            estado.registrar_accion("falta")
-            estado.reset_pases()
-            estado.log_evento(f"  Falta de {j.nombre}: pelota sigue en el mismo equipo")
-            return True
-    return False
-
-
-def _disparo_al_arco(estado: EstadoPartido, rebote_palo: bool) -> None:
-    portador = estado.portador
-    portador.jugar(Carta.DISPARO)
-    estado.descartar(Carta.DISPARO)
-    estado.registrar_carta(Carta.DISPARO, portador)
-    estado.registrar_accion("disparo")
-    arquero = random.choice(estado.defensores())
-    pases = estado.pases_en_jugada
-    estado.log_evento(f"{portador.nombre} dispara al arco")
-    if fase_disparo(estado, portador, arquero, pases, rebote_palo):
-        _log_gol(estado, portador)
-    else:
-        estado.log_evento("Atajada o fuera")
-    # Tras disparo: saque del arquero (equipo defensor)
-    nuevo = random.choice(estado.defensores())
-    estado.reset_pases()
-    _transferir_pelota(estado, nuevo)
-
-
-def _duelo_reventar(estado: EstadoPartido, portador: Jugador) -> None:
-    estado.registrar_accion("despeje")
-    estado.log_evento(f"{portador.nombre} revienta la pelota")
-    # Cada equipo elige quién tira; el reventor no puede tirar
-    tiradores_ataque = estado.companeros(portador)
-    tiradores_defensa = estado.defensores()
-    if not tiradores_ataque:
-        raise ValueError("Se requieren al menos 2 jugadores por equipo para reventar")
-    a = random.choice(tiradores_ataque)
-    d = random.choice(tiradores_defensa)
-    estado.log_evento(f"  Tiran el dado: {a.nombre} vs {d.nombre}")
-    for _ in range(20):
-        da = _dado()
-        dd = _dado()
-        estado.log_evento(f"  Despeje: {a.nombre}={da} vs {d.nombre}={dd}")
-        if da == dd:
-            continue
-        ganador = a if da > dd else d
-        mismo_equipo = ganador.equipo == portador.equipo
-        if mismo_equipo:
-            estado.pases_en_jugada += 1
-        estado.log_evento(f"  Gana {ganador.nombre}" + (" (cuenta como pase)" if mismo_equipo else ""))
-        _transferir_pelota(estado, ganador, incrementar_pase=False)
-        return
-    _transferir_pelota(estado, random.choice(tiradores_defensa))
-
-
-def _normalizar_accion_ofensiva(estado: EstadoPartido, portador: Jugador, accion: str) -> str:
-    reg = estado.reglamento
-    if reg is None or reg.accion_ofensiva_permitida(accion):
-        return accion
-    if accion != "pasa_turno":
-        return accion
-    if reg.reventar_habilitado:
-        return "reventar"
-    if portador.tiene(Carta.PASE):
-        return "pase"
-    if portador.tiene(Carta.DISPARO):
-        return "disparo"
-    return "reventar" if reg.reventar_habilitado else "pase"
-
-
-def _colocar_trampa_offside(estado: EstadoPartido, defensor: Jugador) -> None:
-    defensor.jugar(Carta.TRAMPA_OFFSIDE)
-    estado.descartar(Carta.TRAMPA_OFFSIDE)
-    estado.registrar_carta(Carta.TRAMPA_OFFSIDE, defensor)
-    estado.registrar_accion("trampa_colocada")
-    estado.offside_activo[estado.equipo_defensivo] = True
-    estado.log_evento(f"  {defensor.nombre} coloca Trampa de offside")
-
-
-def _colocar_marca_personal(
-    estado: EstadoPartido, defensor: Jugador, portador: Jugador, receptor: Jugador
-) -> None:
-    objetivo = random.choice(
-        estado.companeros(receptor) or estado.companeros(portador) or estado.jugadores
+    inicia = rng.randint(0, 1)
+    estado.portador_id = estado.elegir(estado.equipo(inicia)).id
+    estado.emitir(
+        "inicio",
+        f"Reglamento {reg.id} · {jugadores_por_equipo} vs {jugadores_por_equipo} · "
+        f"arranca {estado.portador.nombre}",
+        jugadores=(estado.portador.nombre,),
     )
-    defensor.jugar(Carta.MARCA_PERSONAL)
-    estado.descartar(Carta.MARCA_PERSONAL)
-    estado.registrar_carta(Carta.MARCA_PERSONAL, defensor)
-    estado.registrar_accion("marca_colocada")
-    estado.marca_sobre[estado.equipo_defensivo] = objetivo.id
-    estado.log_evento(f"  {defensor.nombre} marca a {objetivo.nombre}")
-
-
-def _resolver_reacciones_pase(
-    estado: EstadoPartido,
-    portador: Jugador,
-    receptor: Jugador,
-    elegir_defensa: Callable,
-) -> bool:
-    """Reacciones defensivas al pase. True = el pase llega al receptor."""
-    reg = estado.reglamento
-    encadenar = bool(reg and reg.reacciones_encadenables)
-    max_rondas = 24 if encadenar else 1
-
-    for _ in range(max_rondas):
-        defensor, carta_def = elegir_defensa(estado, contexto="pase")
-        if not defensor or not carta_def:
-            return True
-
-        if carta_def == Carta.TRAMPA_OFFSIDE:
-            _colocar_trampa_offside(estado, defensor)
-            return True
-
-        if carta_def == Carta.MARCA_PERSONAL:
-            _colocar_marca_personal(estado, defensor, portador, receptor)
-            return True
-
-        if carta_def == Carta.CORTA_PASE:
-            defensor.jugar(Carta.CORTA_PASE)
-            estado.descartar(Carta.CORTA_PASE)
-            estado.registrar_carta(Carta.CORTA_PASE, defensor)
-            if receptor.tiene(Carta.LA_DEJO_PASAR) and random.random() < 0.7:
-                receptor.jugar(Carta.LA_DEJO_PASAR)
-                estado.descartar(Carta.LA_DEJO_PASAR)
-                estado.registrar_carta(Carta.LA_DEJO_PASAR, receptor)
-                estado.log_evento(f"  {receptor.nombre}: La dejo pasar")
-                return True
-            _robo_pelota(estado, defensor)
-            return False
-
-        if carta_def == Carta.ROBO_PELOTA:
-            defensor.jugar(Carta.ROBO_PELOTA)
-            estado.descartar(Carta.ROBO_PELOTA)
-            estado.registrar_carta(Carta.ROBO_PELOTA, defensor)
-            contra = (
-                reg.reacciones_pase.contra.get(Carta.ROBO_PELOTA, Carta.GAMBETEAR)
-                if reg
-                else Carta.GAMBETEAR
-            )
-            if (
-                contra == Carta.GAMBETEAR
-                and portador.tiene(Carta.GAMBETEAR)
-                and random.random() < 0.55
-            ):
-                portador.jugar(Carta.GAMBETEAR)
-                estado.descartar(Carta.GAMBETEAR)
-                estado.registrar_carta(Carta.GAMBETEAR, portador)
-                estado.registrar_accion("gambetear")
-                estado.log_evento(f"  {portador.nombre} gambetea el robo")
-                if encadenar:
-                    continue
-                return True
-            _robo_pelota(estado, defensor)
-            return False
-
-        return True
-
-    return True
-
-
-def _resolver_pasa_de_turno(
-    estado: EstadoPartido,
-    portador: Jugador,
-    elegir_defensa: Callable,
-    *,
-    permitir_tackle: bool,
-) -> None:
-    """Ataque retiene la pelota sin pasar ni disparar. Defensa puede trampa/marca (y tackle en v0)."""
-    estado.registrar_accion("pasa_turno")
-    estado.log_evento(f"{portador.nombre} pasa de turno")
-    defensor, carta_def = elegir_defensa(estado, contexto="pasa_turno")
-    hubo_respuesta = False
-
-    if defensor and carta_def == Carta.TRAMPA_OFFSIDE:
-        hubo_respuesta = True
-        defensor.jugar(Carta.TRAMPA_OFFSIDE)
-        estado.descartar(Carta.TRAMPA_OFFSIDE)
-        estado.registrar_carta(Carta.TRAMPA_OFFSIDE, defensor)
-        estado.registrar_accion("trampa_colocada")
-        estado.offside_activo[estado.equipo_defensivo] = True
-        estado.log_evento(f"  {defensor.nombre} coloca Trampa de offside")
-        return
-
-    if defensor and carta_def == Carta.MARCA_PERSONAL:
-        hubo_respuesta = True
-        objetivo = random.choice(estado.companeros(portador) or estado.jugadores)
-        defensor.jugar(Carta.MARCA_PERSONAL)
-        estado.descartar(Carta.MARCA_PERSONAL)
-        estado.registrar_carta(Carta.MARCA_PERSONAL, defensor)
-        estado.registrar_accion("marca_colocada")
-        estado.marca_sobre[estado.equipo_defensivo] = objetivo.id
-        estado.log_evento(f"  {defensor.nombre} marca a {objetivo.nombre}")
-        return
-
-    if permitir_tackle and defensor and carta_def == Carta.TACKLE:
-        hubo_respuesta = True
-        defensor.jugar(Carta.TACKLE)
-        estado.descartar(Carta.TACKLE)
-        estado.registrar_carta(Carta.TACKLE, defensor)
-        if portador.tiene(Carta.GAMBETEAR) and random.random() < 0.6:
-            portador.jugar(Carta.GAMBETEAR)
-            estado.descartar(Carta.GAMBETEAR)
-            estado.registrar_carta(Carta.GAMBETEAR, portador)
-            estado.registrar_accion("gambetear")
-            estado.log_evento(f"  {portador.nombre} gambetea el tackle")
-            return
-        _robo_pelota(estado, defensor)
-        return
-
-    if not hubo_respuesta:
-        sin_respuesta = "nada"
-        if estado.reglamento:
-            sin_respuesta = estado.reglamento.pasa_turno_sin_respuesta
-        elif estado.config and estado.config.pasa_turno_sin_respuesta:
-            sin_respuesta = estado.config.pasa_turno_sin_respuesta
-        if sin_respuesta == "pasa_companero":
-            companeros = estado.companeros(portador)
-            if companeros:
-                siguiente = random.choice(companeros)
-                estado.log_evento(f"  Sin respuesta: la pelota pasa a {siguiente.nombre}")
-                _transferir_pelota(estado, siguiente, incrementar_pase=False, limpiar_trampas=False)
-
-
-# --- v0 ---
-
-
-def turno_v0(estado: EstadoPartido, elegir_accion: Callable, elegir_defensa: Callable) -> None:
-    portador = estado.portador
-    accion = elegir_accion(estado, portador)
-
-    # Falta oportunista
-    todos = estado.jugadores[:]
-    random.shuffle(todos)
-    if _intentar_falta(
-        estado,
-        todos,
-        probabilidad=estado.reglamento.prob_falta_por_turno if estado.reglamento else 0.08,
-    ):
-        return
-
-    if accion == "disparo":
-        if portador.tiene(Carta.DISPARO):
-            rebote = estado.reglamento.rebote_palo if estado.reglamento else False
-            _disparo_al_arco(estado, rebote_palo=rebote)
-        return
-
-    if accion == "pasa_turno":
-        permitir_tackle = (
-            estado.reglamento.reacciones_pasa_turno.permitir_tackle
-            if estado.reglamento
-            else True
-        )
-        _resolver_pasa_de_turno(estado, portador, elegir_defensa, permitir_tackle=permitir_tackle)
-        return
-
-    # Pase
-    if not portador.tiene(Carta.PASE):
-        rebote = estado.reglamento.rebote_palo if estado.reglamento else False
-        if portador.tiene(Carta.DISPARO):
-            _disparo_al_arco(estado, rebote_palo=rebote)
-        else:
-            permitir_tackle = (
-                estado.reglamento.reacciones_pasa_turno.permitir_tackle
-                if estado.reglamento
-                else True
-            )
-            _resolver_pasa_de_turno(estado, portador, elegir_defensa, permitir_tackle=permitir_tackle)
-        return
-
-    if estado.offside_activo.get(estado.equipo_defensivo):
-        estado.offside_activo[estado.equipo_defensivo] = False
-        estado.log_evento("  ¡Offside! Pierde la pelota")
-        estado.registrar_accion("offside_efectivo")
-        _robo_pelota(estado, random.choice(estado.defensores()))
-        return
-
-    receptor = elegir_accion(estado, portador, es_receptor=True)
-    portador.jugar(Carta.PASE)
-    estado.descartar(Carta.PASE)
-    estado.registrar_carta(Carta.PASE, portador)
-    estado.registrar_accion("pase")
-    estado.log_evento(f"{portador.nombre} pasa a {receptor.nombre}")
-
-    marca_id = estado.marca_sobre.get(estado.equipo_defensivo)
-    if marca_id is not None and receptor.id == marca_id:
-        estado.marca_sobre[estado.equipo_defensivo] = None
-        estado.registrar_accion("marca_efectiva")
-        if receptor.tiene(Carta.LA_DEJO_PASAR) and random.random() < 0.7:
-            receptor.jugar(Carta.LA_DEJO_PASAR)
-            estado.descartar(Carta.LA_DEJO_PASAR)
-            estado.registrar_carta(Carta.LA_DEJO_PASAR, receptor)
-            estado.log_evento(f"  {receptor.nombre}: La dejo pasar")
-        else:
-            d = random.choice(estado.defensores())
-            _robo_pelota(estado, d)
-            return
-
-    defensor, carta_def = elegir_defensa(estado, contexto="pase")
-    if defensor and carta_def == Carta.CORTA_PASE:
-        defensor.jugar(Carta.CORTA_PASE)
-        estado.descartar(Carta.CORTA_PASE)
-        estado.registrar_carta(Carta.CORTA_PASE, defensor)
-        if receptor.tiene(Carta.LA_DEJO_PASAR) and random.random() < 0.7:
-            receptor.jugar(Carta.LA_DEJO_PASAR)
-            estado.descartar(Carta.LA_DEJO_PASAR)
-            estado.registrar_carta(Carta.LA_DEJO_PASAR, receptor)
-            estado.log_evento(f"  {receptor.nombre}: La dejo pasar")
-            _transferir_pelota(estado, receptor, incrementar_pase=True)
-        else:
-            _robo_pelota(estado, defensor)
-        return
-
-    _transferir_pelota(estado, receptor, incrementar_pase=True)
-
-
-# --- v1 ---
-
-
-def turno_v1(estado: EstadoPartido, elegir_accion: Callable, elegir_defensa: Callable) -> None:
-    portador = estado.portador
-
-    todos = estado.jugadores[:]
-    random.shuffle(todos)
-    if _intentar_falta(
-        estado,
-        todos,
-        probabilidad=estado.reglamento.prob_falta_por_turno if estado.reglamento else 0.08,
-    ):
-        return
-
-    accion = elegir_accion(estado, portador)
-    accion = _normalizar_accion_ofensiva(estado, portador, accion)
-
-    rebote = estado.reglamento.rebote_palo if estado.reglamento else True
-    reventar = estado.reglamento.reventar_habilitado if estado.reglamento else True
-
-    if accion == "disparo":
-        if portador.tiene(Carta.DISPARO):
-            _disparo_al_arco(estado, rebote_palo=rebote)
-        return
-
-    if accion == "reventar" and reventar:
-        _duelo_reventar(estado, portador)
-        return
-
-    if accion == "pasa_turno":
-        permitir_tackle = (
-            estado.reglamento.reacciones_pasa_turno.permitir_tackle
-            if estado.reglamento
-            else False
-        )
-        _resolver_pasa_de_turno(estado, portador, elegir_defensa, permitir_tackle=permitir_tackle)
-        return
-
-    if not portador.tiene(Carta.PASE):
-        if portador.tiene(Carta.DISPARO):
-            _disparo_al_arco(estado, rebote_palo=rebote)
-        elif reventar:
-            _duelo_reventar(estado, portador)
-        return
-
-    if estado.offside_activo.get(estado.equipo_defensivo):
-        estado.offside_activo[estado.equipo_defensivo] = False
-        estado.log_evento("  ¡Offside! Pierde la pelota")
-        estado.registrar_accion("offside_efectivo")
-        _robo_pelota(estado, random.choice(estado.defensores()))
-        return
-
-    receptor = elegir_accion(estado, portador, es_receptor=True)
-    portador.jugar(Carta.PASE)
-    estado.descartar(Carta.PASE)
-    estado.registrar_carta(Carta.PASE, portador)
-    estado.registrar_accion("pase")
-    estado.log_evento(f"{portador.nombre} pasa a {receptor.nombre}")
-
-    marca_previa = estado.marca_sobre.get(estado.equipo_defensivo)
-    if marca_previa is not None and receptor.id == marca_previa:
-        estado.marca_sobre[estado.equipo_defensivo] = None
-        estado.registrar_accion("marca_efectiva")
-        d = random.choice(estado.defensores())
-        _robo_pelota(estado, d)
-        return
-
-    if _resolver_reacciones_pase(estado, portador, receptor, elegir_defensa):
-        marca_id = estado.marca_sobre.get(estado.equipo_defensivo)
-        if marca_id is not None and receptor.id == marca_id:
-            estado.marca_sobre[estado.equipo_defensivo] = None
-            estado.registrar_accion("marca_efectiva")
-            d = random.choice(estado.defensores())
-            _robo_pelota(estado, d)
-            return
-        _transferir_pelota(estado, receptor, incrementar_pase=True)
+    return estado
 
 
 def jugar_partido(
-    reglas: str = "v1",
-    reglamento: str | None = None,
+    reglamento: Reglamento | str = "v1",
+    *,
     jugadores_por_equipo: int = 3,
     semilla: int | None = None,
-    verbose: bool = False,
-    config: ConfigSimulacion | None = None,
-    elegir_accion=None,
-    elegir_defensa=None,
+    agente: Agente | None = None,
+    nombres: list[str] | None = None,
+    observador: Observador | None = None,
     estado: EstadoPartido | None = None,
 ) -> EstadoPartido:
-    from simulador.ia import crear_ia
-
-    if config is None:
-        config = ConfigSimulacion(
-            reglamento=reglamento or reglas,
-            jugadores_por_equipo=jugadores_por_equipo,
-        )
-    else:
-        jugadores_por_equipo = config.jugadores_por_equipo
-
-    reg = config.reglamento_resuelto
+    """Juega un partido completo y devuelve su estado final."""
     if estado is None:
-        estado = crear_partido(config, semilla=semilla)
-    if elegir_accion is None or elegir_defensa is None:
-        accion_fn, defensa_fn = crear_ia(config)
-        accion_fn = elegir_accion or accion_fn
-        defensa_fn = elegir_defensa or defensa_fn
-    else:
-        accion_fn, defensa_fn = elegir_accion, elegir_defensa
-
-    turno_fn = turno_v0 if reg.motor_perfil == "v0" else turno_v1
-    limite = config.limite_turnos
-
-    if verbose:
-        estado.log_evento(
-            f"Inicio reglamento={reg.id} ({reg.nombre}) [{config.nombre_variante}, ia={config.ia}]: "
-            f"{jugadores_por_equipo}v{jugadores_por_equipo}, portador={estado.portador.nombre}"
+        estado = crear_partido(
+            reglamento,
+            jugadores_por_equipo=jugadores_por_equipo,
+            semilla=semilla,
+            nombres=nombres,
+            observador=observador,
         )
+    agente = agente or AgenteIA(rng=estado.rng)
+    reg = estado.reglamento
 
-    while estado.turnos < limite:
-        if estado.abortar:
-            estado.log_evento("Partido detenido por el espectador (Q)")
-            break
-        ganador = estado.marcador.hay_ganador()
+    while not estado.terminado:
+        ganador = estado.marcador.ganador()
         if ganador is not None:
-            estado.log_evento(
-                f"Fin: gana {etiqueta_equipo(estado, ganador)} | {formatear_marcador(estado)}"
+            _terminar(estado, f"Gana {estado.nombre_equipo(ganador)}", "victoria")
+            break
+        if estado.marcador.va_a_penales():
+            _definir_por_penales(estado, agente)
+            break
+        if estado.turno >= reg.limite_turnos:
+            _terminar(
+                estado,
+                f"Empate técnico: se llegó al límite de {reg.limite_turnos} turnos",
+                "limite_turnos",
             )
             break
-        if estado.marcador.es_empate_penales():
-            g0, g1 = reg.penales_si_marcador
-            estado.log_evento(
-                f"Empate {g0}-{g1}: se define por penales | {formatear_marcador(estado)}"
-            )
-            ganador_penales = resolver_penales(estado, rebote_palo=reg.rebote_palo)
-            estado.definido_por_penales = True
-            estado.log_evento(
-                f"Fin en penales: gana {etiqueta_equipo(estado, ganador_penales)} | "
-                f"{formatear_marcador(estado)}"
-            )
-            g0, g1 = reg.penales_si_marcador
-            estado.marcador.goles = [
-                reg.goles_para_ganar if ganador_penales == 0 else g0,
-                reg.goles_para_ganar if ganador_penales == 1 else g1,
-            ]
-            break
 
-        estado.turnos += 1
-        if verbose or estado.on_evento:
-            estado.log_evento(
-                f"T{estado.turnos} | {estado.portador.nombre} | "
-                f"marcador {estado.marcador.goles[0]}-{estado.marcador.goles[1]} | "
-                f"pases={estado.pases_en_jugada}"
-            )
-        turno_fn(estado, accion_fn, defensa_fn)
-
-        if reg.reposicion == "mano_vacia":
-            for j in estado.jugadores:
-                estado.reposicion_v0_mano_vacia(j)
-
-    if estado.turnos >= limite:
-        estado.log_evento("Empate técnico: límite de turnos")
+        estado.turno += 1
+        estado.emitir(
+            "turno",
+            f"Turno {estado.turno} · pelota en {estado.portador.nombre} · "
+            f"{estado.marcador.goles[0]}-{estado.marcador.goles[1]} · "
+            f"{estado.pases} pases",
+            jugadores=(estado.portador.nombre,),
+        )
+        jugar_turno(estado, agente)
+        _reponer(estado, "fin_de_turno")
+        _reponer(estado, "mano_vacia")
 
     return estado
+
+
+def jugar_turno(estado: EstadoPartido, agente: Agente) -> None:
+    """Resuelve un turno: una acción del ataque y la respuesta de la defensa."""
+    if _falta_oportunista(estado):
+        return
+
+    posibles = acciones_posibles(estado)
+    accion = agente.accion(estado, posibles)
+    if accion not in posibles:
+        accion = posibles[0]
+
+    if accion == "pase":
+        _pase(estado, agente)
+    elif accion == "disparo":
+        _disparo(estado)
+    elif accion == "reventar":
+        _reventar(estado)
+    else:
+        _pasa_turno(estado, agente)
+
+
+def acciones_posibles(estado: EstadoPartido) -> list[str]:
+    """Acciones que el reglamento y la mano del portador permiten ahora."""
+    reg = estado.reglamento
+    portador = estado.portador
+    hay_companeros = bool(estado.companeros(portador))
+    posibles = []
+    if reg.permite("pase") and portador.tiene(Carta.PASE) and hay_companeros:
+        posibles.append("pase")
+    if reg.permite("disparo") and portador.tiene(Carta.DISPARO):
+        posibles.append("disparo")
+    if reg.permite("reventar") and hay_companeros:
+        posibles.append("reventar")
+    if reg.permite("pasa_turno"):
+        posibles.append("pasa_turno")
+    return posibles or ["pasa_turno"]
+
+
+# --- acciones del ataque --------------------------------------------------
+
+
+def _pase(estado: EstadoPartido, agente: Agente) -> None:
+    portador = estado.portador
+    defensa = estado.equipo_sin_pelota
+    candidatos = estado.companeros(portador)
+    marcado = estado.jugador_marcado_por(defensa)
+
+    receptor = agente.receptor(estado, candidatos)
+    if marcado in candidatos and receptor is not marcado:
+        estado.registrar("marca_evitada")
+
+    estado.jugar_carta(portador, Carta.PASE)
+    estado.registrar("pase")
+    _reponer(estado, "al_jugar_carta", jugador=portador)
+    estado.emitir(
+        "pase",
+        f"{portador.nombre} le pasa a {receptor.nombre}",
+        jugadores=(portador.nombre, receptor.nombre),
+        carta=Carta.PASE,
+    )
+
+    if estado.offside[defensa]:
+        estado.offside[defensa] = False
+        estado.registrar("offside_efectivo")
+        estado.emitir(
+            "offside",
+            f"  ¡Offside! {receptor.nombre} había picado antes: la pelota es de la defensa",
+            jugadores=(receptor.nombre,),
+        )
+        _recuperar(estado, estado.elegir(estado.defensores()))
+        return
+
+    if marcado is receptor:
+        estado.marca[defensa] = None
+        contra = estado.reglamento.reaccion("pase").contra_de(Carta.MARCA_PERSONAL)
+        anulada = bool(contra) and _jugar_contra(
+            estado, agente, portador, receptor, contra, Carta.MARCA_PERSONAL
+        )
+        if not anulada:
+            estado.registrar("marca_efectiva")
+            estado.emitir(
+                "marca",
+                f"  {receptor.nombre} estaba marcado: la defensa se queda con la pelota",
+                jugadores=(receptor.nombre,),
+                carta=Carta.MARCA_PERSONAL,
+            )
+            _recuperar(estado, estado.elegir(estado.defensores()))
+            return
+
+    if _reacciones(estado, agente, "pase", receptor=receptor).prospera:
+        _mover_pelota(estado, receptor, suma_pase=True)
+
+
+def _disparo(estado: EstadoPartido) -> None:
+    reg = estado.reglamento
+    portador = estado.portador
+    estado.jugar_carta(portador, Carta.DISPARO)
+    estado.registrar("disparo")
+    _reponer(estado, "al_jugar_carta", jugador=portador)
+
+    arquero = estado.elegir(estado.defensores())
+    franja = reg.tabla_disparo.para(estado.pases)
+    estado.emitir(
+        "disparo",
+        f"{portador.nombre} patea al arco (con {estado.pases} pases encadenados; "
+        f"es gol con {_rango(franja.gol)}, ataja con {_rango(franja.ataja)})",
+        jugadores=(portador.nombre, arquero.nombre),
+        carta=Carta.DISPARO,
+    )
+
+    gol = False
+    for _ in range(LIMITE_TIRADAS):
+        dado_pateador, dado_arquero = estado.dado(), estado.dado()
+        estado.emitir(
+            "dado",
+            f"  Dados: {portador.nombre} {dado_pateador}, {arquero.nombre} {dado_arquero}",
+            jugadores=(portador.nombre, arquero.nombre),
+            pateador=dado_pateador,
+            arquero=dado_arquero,
+        )
+        marca_gol = franja.es_gol(dado_pateador)
+        ataja = franja.es_atajada(dado_arquero)
+        if reg.rebote and marca_gol and ataja:
+            estado.emitir("dado", "  Rebote: se vuelve a patear")
+            continue
+        if reg.palo and dado_pateador == dado_arquero:
+            estado.emitir("dado", "  Pega en el palo: se vuelve a patear")
+            continue
+        gol = marca_gol and not ataja
+        break
+
+    if gol:
+        estado.marcador.anota(portador.equipo)
+        estado.registrar("gol")
+        estado.emitir(
+            "gol",
+            f"¡GOL de {portador.nombre}! {estado.marcador_texto()}",
+            jugadores=(portador.nombre,),
+        )
+    else:
+        estado.emitir(
+            "atajada",
+            f"  Ataja {arquero.nombre} (o se va afuera)",
+            jugadores=(arquero.nombre,),
+        )
+
+    estado.pases = 0
+    _mover_pelota(estado, estado.elegir(estado.defensores()))
+
+
+def _reventar(estado: EstadoPartido) -> None:
+    portador = estado.portador
+    estado.registrar("reventar")
+    estado.emitir(
+        "reventar",
+        f"{portador.nombre} la revienta",
+        jugadores=(portador.nombre,),
+    )
+    # El que reventó no puede disputar la pelota; cada equipo elige a otro.
+    ataque = estado.elegir(estado.companeros(portador))
+    defensa = estado.elegir(estado.defensores())
+
+    for _ in range(LIMITE_TIRADAS):
+        dado_ataque, dado_defensa = estado.dado(), estado.dado()
+        estado.emitir(
+            "dado",
+            f"  Disputa: {ataque.nombre} {dado_ataque} vs {defensa.nombre} {dado_defensa}",
+            jugadores=(ataque.nombre, defensa.nombre),
+        )
+        if dado_ataque == dado_defensa:
+            continue
+        gana = ataque if dado_ataque > dado_defensa else defensa
+        propio = gana.equipo == portador.equipo
+        estado.emitir(
+            "reventar",
+            f"  La agarra {gana.nombre}" + (" (cuenta como pase)" if propio else ""),
+            jugadores=(gana.nombre,),
+        )
+        _mover_pelota(estado, gana, suma_pase=propio)
+        return
+    _mover_pelota(estado, defensa)
+
+
+def _pasa_turno(estado: EstadoPartido, agente: Agente) -> None:
+    portador = estado.portador
+    estado.registrar("pasa_turno")
+    estado.emitir(
+        "pasa_turno",
+        f"{portador.nombre} pasa de turno y se queda con la pelota",
+        jugadores=(portador.nombre,),
+    )
+    respuesta = _reacciones(estado, agente, "pasa_turno")
+    if respuesta.prospera and not respuesta.hubo_carta:
+        if estado.reglamento.pasa_turno_sin_respuesta == "pasa_companero":
+            companeros = estado.companeros(portador)
+            if companeros:
+                siguiente = estado.elegir(companeros)
+                estado.emitir(
+                    "pase",
+                    f"  Sin respuesta de la defensa: la pelota queda en {siguiente.nombre}",
+                    jugadores=(siguiente.nombre,),
+                )
+                _mover_pelota(estado, siguiente)
+
+
+# --- respuestas de la defensa ---------------------------------------------
+
+
+class Respuesta(NamedTuple):
+    """Cómo terminó la reacción de la defensa a una acción del ataque."""
+
+    prospera: bool  # la acción del ataque sigue en pie
+    hubo_carta: bool  # la defensa llegó a jugar alguna carta
+
+
+def _reacciones(
+    estado: EstadoPartido,
+    agente: Agente,
+    contexto: str,
+    *,
+    receptor: Jugador | None = None,
+) -> Respuesta:
+    """Deja reaccionar a la defensa.
+
+    La defensa juega una sola carta por acción del ataque. Si el reglamento
+    permite encadenar, una contra del ataque le devuelve el turno a la defensa.
+    """
+    reaccion = estado.reglamento.reaccion(contexto)
+    if not reaccion.cartas:
+        return Respuesta(prospera=True, hubo_carta=False)
+    portador = estado.portador
+    hubo_carta = False
+
+    for _ in range(LIMITE_CADENA):
+        opciones = [
+            (defensor, carta)
+            for defensor in estado.defensores()
+            for carta in reaccion.cartas
+            if defensor.tiene(carta)
+        ]
+        elegida = agente.reaccion(estado, contexto, opciones) if opciones else None
+        if elegida is None:
+            return Respuesta(prospera=True, hubo_carta=hubo_carta)
+
+        defensor, carta = elegida
+        hubo_carta = True
+        estado.jugar_carta(defensor, carta)
+        _reponer(estado, "al_jugar_carta", jugador=defensor)
+
+        if carta in TRAMPAS:
+            _colocar_trampa(estado, defensor, carta, receptor)
+            return Respuesta(prospera=True, hubo_carta=True)
+
+        if carta in INTERCEPCIONES:
+            contra = reaccion.contra_de(carta)
+            if contra and _jugar_contra(estado, agente, portador, receptor, contra, carta):
+                if estado.reglamento.reacciones_encadenables:
+                    continue
+                return Respuesta(prospera=True, hubo_carta=True)
+            estado.emitir(
+                "robo",
+                f"  {defensor.nombre} corta con {carta.value}",
+                jugadores=(defensor.nombre,),
+                carta=carta,
+            )
+            _recuperar(estado, defensor)
+            return Respuesta(prospera=False, hubo_carta=True)
+
+        return Respuesta(prospera=True, hubo_carta=True)
+    return Respuesta(prospera=True, hubo_carta=hubo_carta)
+
+
+def _colocar_trampa(
+    estado: EstadoPartido, defensor: Jugador, carta: Carta, receptor: Jugador | None
+) -> None:
+    equipo = defensor.equipo
+    if carta is Carta.TRAMPA_OFFSIDE:
+        estado.offside[equipo] = True
+        estado.registrar("trampa_colocada")
+        estado.emitir(
+            "trampa",
+            f"  {defensor.nombre} arma la trampa de offside",
+            jugadores=(defensor.nombre,),
+            carta=carta,
+        )
+        return
+
+    # La marca se pone sobre un rival que todavía no tiene la pelota.
+    candidatos = [
+        j
+        for j in estado.equipo(1 - equipo)
+        if j is not estado.portador and j is not receptor
+    ] or [j for j in estado.equipo(1 - equipo) if j is not estado.portador]
+    objetivo = estado.elegir(candidatos)
+    estado.marca[equipo] = objetivo.id
+    estado.registrar("marca_colocada")
+    estado.emitir(
+        "marca",
+        f"  {defensor.nombre} marca a {objetivo.nombre}",
+        jugadores=(defensor.nombre, objetivo.nombre),
+        carta=carta,
+    )
+
+
+def _jugar_contra(
+    estado: EstadoPartido,
+    agente: Agente,
+    portador: Jugador,
+    receptor: Jugador | None,
+    contra: Carta,
+    ante: Carta,
+) -> bool:
+    """El ataque anula una carta defensiva si tiene la contra y quiere gastarla."""
+    candidatos = [j for j in (receptor, portador) if j is not None and j.tiene(contra)]
+    if not candidatos:
+        return False
+    quien = candidatos[0]
+    if not agente.contra(estado, quien, contra, ante):
+        return False
+    estado.jugar_carta(quien, contra)
+    estado.registrar("contra")
+    _reponer(estado, "al_jugar_carta", jugador=quien)
+    estado.emitir(
+        "gambeta",
+        f"  {quien.nombre} responde con {contra.value} y anula {ante.value}",
+        jugadores=(quien.nombre,),
+        carta=contra,
+    )
+    return True
+
+
+def _falta_oportunista(estado: EstadoPartido) -> bool:
+    """Cualquiera puede jugar Falta: la pelota no cambia de equipo y se cortan los pases.
+
+    No pasa por el agente: la frecuencia la fija el reglamento
+    (``prob_falta_por_jugador``), porque en la mesa la falta se juega por reflejo
+    y no como parte de un plan.
+    """
+    prob = estado.reglamento.prob_falta_por_jugador
+    if prob <= 0:
+        return False
+    jugadores = list(estado.jugadores)
+    estado.rng.shuffle(jugadores)
+    for jugador in jugadores:
+        if jugador.tiene(Carta.FALTA) and estado.rng.random() < prob:
+            estado.jugar_carta(jugador, Carta.FALTA)
+            estado.registrar("falta")
+            _reponer(estado, "al_jugar_carta", jugador=jugador)
+            estado.pases = 0
+            estado.emitir(
+                "falta",
+                f"Falta de {jugador.nombre}: la pelota sigue en el mismo equipo y "
+                f"la jugada arranca de cero",
+                jugadores=(jugador.nombre,),
+                carta=Carta.FALTA,
+            )
+            return True
+    return False
+
+
+# --- pelota y reposición ---------------------------------------------------
+
+
+def _mover_pelota(estado: EstadoPartido, nuevo: Jugador, *, suma_pase: bool = False) -> None:
+    cambia_de_equipo = nuevo.equipo != estado.equipo_con_pelota
+    if cambia_de_equipo:
+        estado.pases = 0
+        estado.offside = {0: False, 1: False}
+        estado.marca = {0: None, 1: None}
+        estado.portador_id = nuevo.id
+        estado.emitir(
+            "cambio_equipo",
+            f"  La pelota cambia de equipo: ataca {estado.nombre_equipo(nuevo.equipo)} "
+            f"con {nuevo.nombre}",
+            jugadores=(nuevo.nombre,),
+        )
+        _reponer(estado, "cambio_equipo", jugador=nuevo)
+        return
+    if suma_pase:
+        estado.pases += 1
+    estado.portador_id = nuevo.id
+
+
+def _recuperar(estado: EstadoPartido, defensor: Jugador) -> None:
+    estado.registrar("robo")
+    _mover_pelota(estado, defensor)
+
+
+def _reponer(estado: EstadoPartido, momento: str, *, jugador: Jugador | None = None) -> None:
+    """Levanta cartas si el reglamento repone en este momento."""
+    rep = estado.reglamento.reposicion
+    if rep.momento != momento:
+        return
+    objetivos = _alcanzados(estado, rep.quien, jugador)
+    if momento == "mano_vacia":
+        objetivos = [j for j in objetivos if not j.mano]
+    total = 0
+    for objetivo in objetivos:
+        total += estado.robar(objetivo, estado.reglamento.mano_maxima)
+    if total:
+        cartas = "1 carta" if total == 1 else f"{total} cartas"
+        estado.emitir(
+            "reposicion",
+            f"  Reposición: se levantan {cartas} (máximo {estado.reglamento.mano_maxima} en mano)",
+            cartas=total,
+        )
+
+
+def _alcanzados(estado: EstadoPartido, quien: str, jugador: Jugador | None) -> list[Jugador]:
+    if quien == "el_jugador":
+        return [jugador] if jugador else []
+    if quien == "equipo_con_pelota":
+        return estado.equipo(estado.equipo_con_pelota)
+    if quien == "equipo_sin_pelota":
+        return estado.equipo(estado.equipo_sin_pelota)
+    return list(estado.jugadores)
+
+
+# --- final del partido -----------------------------------------------------
+
+
+def _terminar(estado: EstadoPartido, texto: str, motivo: str) -> None:
+    estado.terminado = True
+    estado.motivo_fin = motivo
+    estado.emitir("fin", f"{texto} · {estado.marcador_texto()}")
+
+
+def _definir_por_penales(estado: EstadoPartido, agente: Agente) -> None:
+    reg = estado.reglamento
+    estado.definido_por_penales = True
+    estado.emitir(
+        "penales",
+        f"Marcador {'-'.join(map(str, reg.penales_si_marcador))}: se define por penales",
+    )
+    ganador = _tanda_de_penales(estado)
+    estado.marcador.goles = [
+        reg.goles_para_ganar if ganador == 0 else reg.penales_si_marcador[0],
+        reg.goles_para_ganar if ganador == 1 else reg.penales_si_marcador[1],
+    ]
+    _terminar(estado, f"Gana {estado.nombre_equipo(ganador)} por penales", "penales")
+
+
+def _tanda_de_penales(estado: EstadoPartido) -> int:
+    """Serie de tantos penales como jugadores por equipo, más muerte súbita."""
+    franja = estado.reglamento.tabla_disparo.para(0)
+    por_equipo = estado.jugadores_por_equipo
+
+    def patea(equipo: int, indice: int) -> bool:
+        pateadores = estado.equipo(equipo)
+        arqueros = estado.equipo(1 - equipo)
+        pateador = pateadores[indice % len(pateadores)]
+        arquero = arqueros[indice % len(arqueros)]
+        for _ in range(LIMITE_TIRADAS):
+            dado_pateador, dado_arquero = estado.dado(), estado.dado()
+            if estado.reglamento.rebote and franja.es_gol(dado_pateador) and franja.es_atajada(dado_arquero):
+                continue
+            if estado.reglamento.palo and dado_pateador == dado_arquero:
+                continue
+            convierte = franja.es_gol(dado_pateador) and not franja.es_atajada(dado_arquero)
+            break
+        else:
+            convierte = False
+        estado.emitir(
+            "penales",
+            f"  Penal de {pateador.nombre}: {'gol' if convierte else 'lo ataja ' + arquero.nombre}",
+            jugadores=(pateador.nombre, arquero.nombre),
+        )
+        return convierte
+
+    serie = [0, 0]
+    for indice in range(por_equipo):
+        for equipo in (0, 1):
+            serie[equipo] += int(patea(equipo, indice))
+    estado.emitir(
+        "penales",
+        f"  Serie: {estado.nombre_equipo(0)} {serie[0]} - {serie[1]} {estado.nombre_equipo(1)}",
+    )
+    if serie[0] != serie[1]:
+        return 0 if serie[0] > serie[1] else 1
+
+    estado.emitir("penales", "  Muerte súbita: patea uno cada equipo")
+    for ronda in range(LIMITE_TIRADAS):
+        primero, segundo = patea(0, ronda), patea(1, ronda)
+        if primero != segundo:
+            return 0 if primero else 1
+    return estado.rng.randint(0, 1)
+
+
+def _rango(rango: tuple[int, int]) -> str:
+    return str(rango[0]) if rango[0] == rango[1] else f"{rango[0]}-{rango[1]}"

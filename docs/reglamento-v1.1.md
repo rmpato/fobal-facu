@@ -21,6 +21,6 @@ Archivo: [`reglamentos/v1.1.json`](../reglamentos/v1.1.json) (extiende `v1`).
 ## Cómo probar
 
 ```bash
-python -m simulador run --reglamento v1.1 --partidos 200
-python -m simulador compare-reglamentos --partidos 200
+python3 -m simulador simular v1.1 --partidos 200
+python3 -m simulador comparar v1 v1.1 --partidos 200
 ```

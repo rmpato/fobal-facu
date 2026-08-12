@@ -2,51 +2,62 @@
   "id": "v0",
   "nombre": "Reglamento original",
   "version": "0.0",
+  "descripcion": "Versión previa al playtesting. Corta pase y Tackle son cartas distintas, La dejo pasar anula los cortes, se repone solo cuando alguien se queda sin cartas y no existe reventar la pelota.",
   "documento": "docs/reglamento-v0.md",
-  "descripcion": "Versión inicial antes del playtesting. Corta pase, Tackle, pasa de turno (decisión, no carta), La dejo pasar.",
+  "activo": false,
   "mazo": {
     "Pase": 42,
     "Corta pase": 12,
     "Tackle": 12,
     "Disparo al arco": 12,
-    "Falta": 7,
     "Gambetear": 8,
+    "Falta": 7,
     "La dejo pasar": 7,
     "Marca personal": 5,
     "Trampa de offside": 3
   },
   "partido": {
     "jugadores_minimo_por_equipo": 2,
-    "mano_inicial": 6,
     "goles_para_ganar": 3,
-    "penales_si_marcador": [2, 2]
+    "penales_si_marcador": [2, 2],
+    "limite_turnos": 500
   },
-  "reposicion": "mano_vacia",
+  "mano": {
+    "inicial": 6,
+    "maxima": 6
+  },
+  "reposicion": {
+    "momento": "mano_vacia",
+    "quien": "todos"
+  },
   "disparo": {
-    "rebote_palo": false
+    "rebote": false,
+    "palo": false,
+    "tabla": [
+      { "pases": 0, "gol": [1, 1], "ataja": [2, 6] },
+      { "pases": 1, "gol": [1, 2], "ataja": [3, 6] },
+      { "pases": 2, "gol": [1, 3], "ataja": [4, 6] },
+      { "pases": 3, "gol": [1, 4], "ataja": [5, 6] },
+      { "pases": 4, "gol": [1, 5], "ataja": [6, 6] }
+    ]
   },
   "acciones_ofensivas": ["pase", "disparo", "pasa_turno"],
   "reacciones": {
     "pase": {
       "cartas": ["Corta pase"],
       "contra": {
-        "Corta pase": "La dejo pasar"
+        "Corta pase": "La dejo pasar",
+        "Marca personal": "La dejo pasar"
       }
     },
     "pasa_turno": {
       "cartas": ["Tackle", "Trampa de offside", "Marca personal"],
-      "contra": {
-        "Tackle": "Gambetear"
-      },
-      "permitir_tackle": true
+      "contra": { "Tackle": "Gambetear" }
     }
   },
   "reglas": {
-    "trampa_marca_solo_en_pasa_turno": true,
-    "una_reaccion_defensiva_por_accion": false,
     "pasa_turno_sin_respuesta": "nada",
-    "prob_falta_por_turno": 0.08,
-    "reventar_habilitado": false
-  },
-  "motor_perfil": "v0"
+    "prob_falta_por_jugador": 0.08,
+    "reacciones_encadenables": false
+  }
 }

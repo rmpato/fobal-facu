@@ -1,106 +1,77 @@
-"""Tipos de carta y configuración de mazos (español argentino)."""
+"""Cartas del juego y armado del mazo.
+
+Los nombres coinciden con los de las cartas físicas: son la clave que usan los
+reglamentos JSON, las estadísticas y la interfaz web.
+"""
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from collections.abc import Mapping
 from enum import Enum
 
 
 class Carta(str, Enum):
     PASE = "Pase"
-    CORTA_PASE = "Corta pase"
-    ROBO_PELOTA = "Robo pelota"
-    TACKLE = "Tackle"
     DISPARO = "Disparo al arco"
-    FALTA = "Falta"
     GAMBETEAR = "Gambetear"
     LA_DEJO_PASAR = "La dejo pasar"
+    ROBO_PELOTA = "Robo pelota"
+    CORTA_PASE = "Corta pase"
+    TACKLE = "Tackle"
     MARCA_PERSONAL = "Marca personal"
     TRAMPA_OFFSIDE = "Trampa de offside"
+    FALTA = "Falta"
+
+    def __str__(self) -> str:  # pragma: no cover - azúcar para logs
+        return self.value
 
 
-# Roles para UI (mano del jugador, últimas cartas jugadas)
-CARTAS_OFENSIVAS: frozenset[Carta] = frozenset({Carta.PASE, Carta.DISPARO})
-CARTAS_DEFENSIVAS: frozenset[Carta] = frozenset(
+#: Cartas que juega el equipo con la pelota.
+OFENSIVAS: frozenset[Carta] = frozenset(
+    {Carta.PASE, Carta.DISPARO, Carta.GAMBETEAR, Carta.LA_DEJO_PASAR}
+)
+
+#: Cartas que juega el equipo sin la pelota.
+DEFENSIVAS: frozenset[Carta] = frozenset(
     {
         Carta.ROBO_PELOTA,
-        Carta.TRAMPA_OFFSIDE,
-        Carta.MARCA_PERSONAL,
-        Carta.GAMBETEAR,
         Carta.CORTA_PASE,
         Carta.TACKLE,
-        Carta.LA_DEJO_PASAR,
+        Carta.MARCA_PERSONAL,
+        Carta.TRAMPA_OFFSIDE,
     }
 )
 
+#: Cartas que corta una acción sin quedarse con la pelota.
+INTERCEPCIONES: frozenset[Carta] = frozenset(
+    {Carta.ROBO_PELOTA, Carta.CORTA_PASE, Carta.TACKLE}
+)
 
-def rol_carta(carta: Carta) -> str:
-    """ofensiva | defensiva | neutral"""
-    if carta in CARTAS_OFENSIVAS:
+#: Cartas que quedan en juego esperando el próximo pase.
+TRAMPAS: frozenset[Carta] = frozenset({Carta.MARCA_PERSONAL, Carta.TRAMPA_OFFSIDE})
+
+
+def rol(carta: Carta) -> str:
+    """Devuelve ``ofensiva``, ``defensiva`` o ``neutral``."""
+    if carta in OFENSIVAS:
         return "ofensiva"
-    if carta in CARTAS_DEFENSIVAS:
+    if carta in DEFENSIVAS:
         return "defensiva"
     return "neutral"
 
 
-def carta_por_nombre(nombre: str) -> Carta | None:
-    for carta in Carta:
-        if carta.value == nombre:
-            return carta
-    return None
+def desde_nombre(nombre: str) -> Carta:
+    """Convierte el nombre impreso en la carta. Lanza ``ValueError`` si no existe."""
+    try:
+        return Carta(nombre)
+    except ValueError:
+        conocidas = ", ".join(c.value for c in Carta)
+        raise ValueError(f"Carta desconocida: {nombre!r}. Conocidas: {conocidas}") from None
 
 
-MAZO_V0: dict[Carta, int] = {
-    Carta.PASE: 42,
-    Carta.CORTA_PASE: 12,
-    Carta.TACKLE: 12,
-    Carta.DISPARO: 12,
-    Carta.FALTA: 7,
-    Carta.GAMBETEAR: 8,
-    Carta.LA_DEJO_PASAR: 7,
-    Carta.MARCA_PERSONAL: 5,
-    Carta.TRAMPA_OFFSIDE: 3,
-}
-
-MAZO_V1: dict[Carta, int] = {
-    Carta.PASE: 42,
-    Carta.ROBO_PELOTA: 24,
-    Carta.DISPARO: 12,
-    Carta.FALTA: 7,
-    Carta.GAMBETEAR: 15,
-    Carta.MARCA_PERSONAL: 5,
-    Carta.TRAMPA_OFFSIDE: 3,
-}
-
-
-@dataclass(frozen=True)
-class TablaDisparo:
-    """Rangos de gol/atajada según pases en la jugada."""
-
-    pases: int
-    gol_min: int
-    gol_max: int
-    ataja_min: int
-    ataja_max: int
-
-
-TABLAS_DISPARO: list[TablaDisparo] = [
-    TablaDisparo(0, 1, 1, 2, 6),
-    TablaDisparo(1, 1, 2, 3, 6),
-    TablaDisparo(2, 1, 3, 4, 6),
-    TablaDisparo(3, 1, 4, 5, 6),
-    TablaDisparo(4, 1, 5, 6, 6),
-]
-
-
-def tabla_para_pases(pases: int) -> TablaDisparo:
-    if pases >= 4:
-        return TABLAS_DISPARO[4]
-    return TABLAS_DISPARO[pases]
-
-
-def construir_mazo(config: dict[Carta, int]) -> list[Carta]:
+def construir_mazo(composicion: Mapping[Carta, int]) -> list[Carta]:
+    """Expande ``{carta: cantidad}`` a la lista de cartas del mazo."""
     mazo: list[Carta] = []
-    for carta, cantidad in config.items():
+    for carta, cantidad in composicion.items():
         mazo.extend([carta] * cantidad)
     return mazo

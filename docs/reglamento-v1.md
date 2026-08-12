@@ -26,7 +26,7 @@ La pelota siempre la tiene un jugador específico de la ofensiva. Solo ese jugad
 
 ### Acciones ofensivas
 
-> **Pasa de turno** y **Reventar la pelota** son **decisiones del jugador**, no cartas del mazo. No necesitás una carta en la mano para hacerlas.
+> **Pasa de turno** y **Reventar la pelota** son **decisiones del jugador**, no cartas del mazo. No hace falta tener una carta en la mano para hacerlas.
 
 #### Con carta
 
@@ -79,7 +79,7 @@ Si la defensa robó la pelota y la ofensiva no respondió con otra carta, el jug
 
 | Carta | Efecto |
 |-------|--------|
-| **Robo pelota** | Interrumpe un pase; te quedás con la pelota |
+| **Robo pelota** | Interrumpe un pase; la pelota queda en poder de quien la jugó |
 | **Trampa de offside** | Solo cuando el ataque pasa de turno. Queda activa; si el ataque pasa, es offside y pierde la pelota |
 | **Marca personal** | Solo cuando el ataque pasa de turno. Se pone encima de un jugador adversario; si recibe el pase, recuperás la pelota |
 | **Falta** | La puede jugar cualquiera de los dos equipos. La pelota se queda en el equipo que la tenía. El contador de pases vuelve a cero |

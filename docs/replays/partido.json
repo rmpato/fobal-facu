@@ -1,0 +1,4587 @@
+{
+  "formato_grabacion": 2,
+  "reglamento": {
+    "id": "v2",
+    "nombre": "Iteración 2",
+    "version": "2.0"
+  },
+  "formato": "3v3",
+  "semilla": 118,
+  "perfiles": "Táctico",
+  "equipos": [
+    [
+      "Facu",
+      "Pato",
+      "Manu"
+    ],
+    [
+      "Colo",
+      "Ostu",
+      "Joaco"
+    ]
+  ],
+  "marcador_final": [
+    2,
+    3
+  ],
+  "turnos": 63,
+  "motivo_fin": "penales",
+  "definido_por_penales": true,
+  "eventos": [
+    {
+      "tipo": "inicio",
+      "texto": "Reglamento v2 · 3 vs 3 · arranca Manu",
+      "nivel": "clave",
+      "turno": 0,
+      "jugadores": [
+        "Manu"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 1 · pelota en Manu · 0-0 · 0 pases",
+      "nivel": "clave",
+      "turno": 1,
+      "jugadores": [
+        "Manu"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "falta",
+      "texto": "Falta de Pato: la pelota sigue en el mismo equipo y la jugada arranca de cero",
+      "nivel": "clave",
+      "turno": 1,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Falta"
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 2 · pelota en Manu · 0-0 · 0 pases",
+      "nivel": "clave",
+      "turno": 2,
+      "jugadores": [
+        "Manu"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "falta",
+      "texto": "Falta de Joaco: la pelota sigue en el mismo equipo y la jugada arranca de cero",
+      "nivel": "clave",
+      "turno": 2,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Falta"
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 3 · pelota en Manu · 0-0 · 0 pases",
+      "nivel": "clave",
+      "turno": 3,
+      "jugadores": [
+        "Manu"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Manu le pasa a Pato",
+      "nivel": "clave",
+      "turno": 3,
+      "jugadores": [
+        "Manu",
+        "Pato"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "marca",
+      "texto": "  Joaco marca a Facu",
+      "nivel": "clave",
+      "turno": 3,
+      "jugadores": [
+        "Joaco",
+        "Facu"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Marca personal"
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 4 · pelota en Pato · 0-0 · 1 pases",
+      "nivel": "clave",
+      "turno": 4,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Pato le pasa a Manu",
+      "nivel": "clave",
+      "turno": 4,
+      "jugadores": [
+        "Pato",
+        "Manu"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "gambeta",
+      "texto": "  Manu responde con Gambetear y anula Robo pelota",
+      "nivel": "clave",
+      "turno": 4,
+      "jugadores": [
+        "Manu"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Gambetear"
+    },
+    {
+      "tipo": "robo",
+      "texto": "  Joaco corta con Robo pelota",
+      "nivel": "clave",
+      "turno": 4,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Robo pelota"
+    },
+    {
+      "tipo": "cambio_equipo",
+      "texto": "  La pelota cambia de equipo: ataca Equipo 2 con Joaco",
+      "nivel": "detalle",
+      "turno": 4,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "reposicion",
+      "texto": "  Reposición: se levantan 8 cartas (máximo 6 en mano)",
+      "nivel": "detalle",
+      "turno": 4,
+      "jugadores": [],
+      "marcador": [
+        0,
+        0
+      ],
+      "datos": {
+        "cartas": 8
+      }
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 5 · pelota en Joaco · 0-0 · 0 pases",
+      "nivel": "clave",
+      "turno": 5,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Joaco le pasa a Colo",
+      "nivel": "clave",
+      "turno": 5,
+      "jugadores": [
+        "Joaco",
+        "Colo"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "gambeta",
+      "texto": "  Colo responde con Gambetear y anula Robo pelota",
+      "nivel": "clave",
+      "turno": 5,
+      "jugadores": [
+        "Colo"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Gambetear"
+    },
+    {
+      "tipo": "robo",
+      "texto": "  Manu corta con Robo pelota",
+      "nivel": "clave",
+      "turno": 5,
+      "jugadores": [
+        "Manu"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Robo pelota"
+    },
+    {
+      "tipo": "cambio_equipo",
+      "texto": "  La pelota cambia de equipo: ataca Equipo 1 con Manu",
+      "nivel": "detalle",
+      "turno": 5,
+      "jugadores": [
+        "Manu"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "reposicion",
+      "texto": "  Reposición: se levantan 4 cartas (máximo 6 en mano)",
+      "nivel": "detalle",
+      "turno": 5,
+      "jugadores": [],
+      "marcador": [
+        0,
+        0
+      ],
+      "datos": {
+        "cartas": 4
+      }
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 6 · pelota en Manu · 0-0 · 0 pases",
+      "nivel": "clave",
+      "turno": 6,
+      "jugadores": [
+        "Manu"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "reventar",
+      "texto": "Manu la revienta",
+      "nivel": "clave",
+      "turno": 6,
+      "jugadores": [
+        "Manu"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "dado",
+      "texto": "  Disputa: Pato 6 vs Colo 1",
+      "nivel": "detalle",
+      "turno": 6,
+      "jugadores": [
+        "Pato",
+        "Colo"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "reventar",
+      "texto": "  La agarra Pato (cuenta como pase)",
+      "nivel": "clave",
+      "turno": 6,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 7 · pelota en Pato · 0-0 · 1 pases",
+      "nivel": "clave",
+      "turno": 7,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Pato le pasa a Manu",
+      "nivel": "clave",
+      "turno": 7,
+      "jugadores": [
+        "Pato",
+        "Manu"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "robo",
+      "texto": "  Ostu corta con Robo pelota",
+      "nivel": "clave",
+      "turno": 7,
+      "jugadores": [
+        "Ostu"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Robo pelota"
+    },
+    {
+      "tipo": "cambio_equipo",
+      "texto": "  La pelota cambia de equipo: ataca Equipo 2 con Ostu",
+      "nivel": "detalle",
+      "turno": 7,
+      "jugadores": [
+        "Ostu"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "reposicion",
+      "texto": "  Reposición: se levantan 2 cartas (máximo 6 en mano)",
+      "nivel": "detalle",
+      "turno": 7,
+      "jugadores": [],
+      "marcador": [
+        0,
+        0
+      ],
+      "datos": {
+        "cartas": 2
+      }
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 8 · pelota en Ostu · 0-0 · 0 pases",
+      "nivel": "clave",
+      "turno": 8,
+      "jugadores": [
+        "Ostu"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Ostu le pasa a Joaco",
+      "nivel": "clave",
+      "turno": 8,
+      "jugadores": [
+        "Ostu",
+        "Joaco"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "gambeta",
+      "texto": "  Joaco responde con Gambetear y anula Robo pelota",
+      "nivel": "clave",
+      "turno": 8,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Gambetear"
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 9 · pelota en Joaco · 0-0 · 1 pases",
+      "nivel": "clave",
+      "turno": 9,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Joaco le pasa a Ostu",
+      "nivel": "clave",
+      "turno": 9,
+      "jugadores": [
+        "Joaco",
+        "Ostu"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "robo",
+      "texto": "  Manu corta con Robo pelota",
+      "nivel": "clave",
+      "turno": 9,
+      "jugadores": [
+        "Manu"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Robo pelota"
+    },
+    {
+      "tipo": "cambio_equipo",
+      "texto": "  La pelota cambia de equipo: ataca Equipo 1 con Manu",
+      "nivel": "detalle",
+      "turno": 9,
+      "jugadores": [
+        "Manu"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "reposicion",
+      "texto": "  Reposición: se levantan 5 cartas (máximo 6 en mano)",
+      "nivel": "detalle",
+      "turno": 9,
+      "jugadores": [],
+      "marcador": [
+        0,
+        0
+      ],
+      "datos": {
+        "cartas": 5
+      }
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 10 · pelota en Manu · 0-0 · 0 pases",
+      "nivel": "clave",
+      "turno": 10,
+      "jugadores": [
+        "Manu"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Manu le pasa a Pato",
+      "nivel": "clave",
+      "turno": 10,
+      "jugadores": [
+        "Manu",
+        "Pato"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "marca",
+      "texto": "  Ostu marca a Facu",
+      "nivel": "clave",
+      "turno": 10,
+      "jugadores": [
+        "Ostu",
+        "Facu"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Marca personal"
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 11 · pelota en Pato · 0-0 · 1 pases",
+      "nivel": "clave",
+      "turno": 11,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Pato le pasa a Manu",
+      "nivel": "clave",
+      "turno": 11,
+      "jugadores": [
+        "Pato",
+        "Manu"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "gambeta",
+      "texto": "  Manu responde con Gambetear y anula Robo pelota",
+      "nivel": "clave",
+      "turno": 11,
+      "jugadores": [
+        "Manu"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Gambetear"
+    },
+    {
+      "tipo": "gambeta",
+      "texto": "  Pato responde con Gambetear y anula Robo pelota",
+      "nivel": "clave",
+      "turno": 11,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Gambetear"
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 12 · pelota en Manu · 0-0 · 2 pases",
+      "nivel": "clave",
+      "turno": 12,
+      "jugadores": [
+        "Manu"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Manu le pasa a Pato",
+      "nivel": "clave",
+      "turno": 12,
+      "jugadores": [
+        "Manu",
+        "Pato"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "robo",
+      "texto": "  Joaco corta con Robo pelota",
+      "nivel": "clave",
+      "turno": 12,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Robo pelota"
+    },
+    {
+      "tipo": "cambio_equipo",
+      "texto": "  La pelota cambia de equipo: ataca Equipo 2 con Joaco",
+      "nivel": "detalle",
+      "turno": 12,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "reposicion",
+      "texto": "  Reposición: se levantan 9 cartas (máximo 6 en mano)",
+      "nivel": "detalle",
+      "turno": 12,
+      "jugadores": [],
+      "marcador": [
+        0,
+        0
+      ],
+      "datos": {
+        "cartas": 9
+      }
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 13 · pelota en Joaco · 0-0 · 0 pases",
+      "nivel": "clave",
+      "turno": 13,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "disparo",
+      "texto": "Joaco patea al arco (con 0 pases encadenados; es gol con 1, ataja con 2-6)",
+      "nivel": "clave",
+      "turno": 13,
+      "jugadores": [
+        "Joaco",
+        "Pato"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Disparo al arco"
+    },
+    {
+      "tipo": "dado",
+      "texto": "  Dados: Joaco 3, Pato 3",
+      "nivel": "detalle",
+      "turno": 13,
+      "jugadores": [
+        "Joaco",
+        "Pato"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "datos": {
+        "pateador": 3,
+        "arquero": 3
+      }
+    },
+    {
+      "tipo": "dado",
+      "texto": "  Pega en el palo: se vuelve a patear",
+      "nivel": "detalle",
+      "turno": 13,
+      "jugadores": [],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "dado",
+      "texto": "  Dados: Joaco 2, Pato 5",
+      "nivel": "detalle",
+      "turno": 13,
+      "jugadores": [
+        "Joaco",
+        "Pato"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "datos": {
+        "pateador": 2,
+        "arquero": 5
+      }
+    },
+    {
+      "tipo": "atajada",
+      "texto": "  Ataja Pato (o se va afuera)",
+      "nivel": "clave",
+      "turno": 13,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "cambio_equipo",
+      "texto": "  La pelota cambia de equipo: ataca Equipo 1 con Facu",
+      "nivel": "detalle",
+      "turno": 13,
+      "jugadores": [
+        "Facu"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "reposicion",
+      "texto": "  Reposición: se levantan 1 carta (máximo 6 en mano)",
+      "nivel": "detalle",
+      "turno": 13,
+      "jugadores": [],
+      "marcador": [
+        0,
+        0
+      ],
+      "datos": {
+        "cartas": 1
+      }
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 14 · pelota en Facu · 0-0 · 0 pases",
+      "nivel": "clave",
+      "turno": 14,
+      "jugadores": [
+        "Facu"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "disparo",
+      "texto": "Facu patea al arco (con 0 pases encadenados; es gol con 1, ataja con 2-6)",
+      "nivel": "clave",
+      "turno": 14,
+      "jugadores": [
+        "Facu",
+        "Ostu"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Disparo al arco"
+    },
+    {
+      "tipo": "dado",
+      "texto": "  Dados: Facu 4, Ostu 4",
+      "nivel": "detalle",
+      "turno": 14,
+      "jugadores": [
+        "Facu",
+        "Ostu"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "datos": {
+        "pateador": 4,
+        "arquero": 4
+      }
+    },
+    {
+      "tipo": "dado",
+      "texto": "  Pega en el palo: se vuelve a patear",
+      "nivel": "detalle",
+      "turno": 14,
+      "jugadores": [],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "dado",
+      "texto": "  Dados: Facu 2, Ostu 4",
+      "nivel": "detalle",
+      "turno": 14,
+      "jugadores": [
+        "Facu",
+        "Ostu"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "datos": {
+        "pateador": 2,
+        "arquero": 4
+      }
+    },
+    {
+      "tipo": "atajada",
+      "texto": "  Ataja Ostu (o se va afuera)",
+      "nivel": "clave",
+      "turno": 14,
+      "jugadores": [
+        "Ostu"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "cambio_equipo",
+      "texto": "  La pelota cambia de equipo: ataca Equipo 2 con Joaco",
+      "nivel": "detalle",
+      "turno": 14,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "reposicion",
+      "texto": "  Reposición: se levantan 1 carta (máximo 6 en mano)",
+      "nivel": "detalle",
+      "turno": 14,
+      "jugadores": [],
+      "marcador": [
+        0,
+        0
+      ],
+      "datos": {
+        "cartas": 1
+      }
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 15 · pelota en Joaco · 0-0 · 0 pases",
+      "nivel": "clave",
+      "turno": 15,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Joaco le pasa a Colo",
+      "nivel": "clave",
+      "turno": 15,
+      "jugadores": [
+        "Joaco",
+        "Colo"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "gambeta",
+      "texto": "  Colo responde con Gambetear y anula Robo pelota",
+      "nivel": "clave",
+      "turno": 15,
+      "jugadores": [
+        "Colo"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Gambetear"
+    },
+    {
+      "tipo": "trampa",
+      "texto": "  Pato arma la trampa de offside",
+      "nivel": "clave",
+      "turno": 15,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Trampa de offside"
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 16 · pelota en Colo · 0-0 · 1 pases",
+      "nivel": "clave",
+      "turno": 16,
+      "jugadores": [
+        "Colo"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "reventar",
+      "texto": "Colo la revienta",
+      "nivel": "clave",
+      "turno": 16,
+      "jugadores": [
+        "Colo"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "dado",
+      "texto": "  Disputa: Joaco 1 vs Pato 6",
+      "nivel": "detalle",
+      "turno": 16,
+      "jugadores": [
+        "Joaco",
+        "Pato"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "reventar",
+      "texto": "  La agarra Pato",
+      "nivel": "clave",
+      "turno": 16,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "cambio_equipo",
+      "texto": "  La pelota cambia de equipo: ataca Equipo 1 con Pato",
+      "nivel": "detalle",
+      "turno": 16,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "reposicion",
+      "texto": "  Reposición: se levantan 4 cartas (máximo 6 en mano)",
+      "nivel": "detalle",
+      "turno": 16,
+      "jugadores": [],
+      "marcador": [
+        0,
+        0
+      ],
+      "datos": {
+        "cartas": 4
+      }
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 17 · pelota en Pato · 0-0 · 0 pases",
+      "nivel": "clave",
+      "turno": 17,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Pato le pasa a Facu",
+      "nivel": "clave",
+      "turno": 17,
+      "jugadores": [
+        "Pato",
+        "Facu"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "robo",
+      "texto": "  Joaco corta con Robo pelota",
+      "nivel": "clave",
+      "turno": 17,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Robo pelota"
+    },
+    {
+      "tipo": "cambio_equipo",
+      "texto": "  La pelota cambia de equipo: ataca Equipo 2 con Joaco",
+      "nivel": "detalle",
+      "turno": 17,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "reposicion",
+      "texto": "  Reposición: se levantan 2 cartas (máximo 6 en mano)",
+      "nivel": "detalle",
+      "turno": 17,
+      "jugadores": [],
+      "marcador": [
+        0,
+        0
+      ],
+      "datos": {
+        "cartas": 2
+      }
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 18 · pelota en Joaco · 0-0 · 0 pases",
+      "nivel": "clave",
+      "turno": 18,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Joaco le pasa a Colo",
+      "nivel": "clave",
+      "turno": 18,
+      "jugadores": [
+        "Joaco",
+        "Colo"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "trampa",
+      "texto": "  Pato arma la trampa de offside",
+      "nivel": "clave",
+      "turno": 18,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Trampa de offside"
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 19 · pelota en Colo · 0-0 · 1 pases",
+      "nivel": "clave",
+      "turno": 19,
+      "jugadores": [
+        "Colo"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Colo le pasa a Ostu",
+      "nivel": "clave",
+      "turno": 19,
+      "jugadores": [
+        "Colo",
+        "Ostu"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "offside",
+      "texto": "  ¡Offside! Ostu había picado antes: la pelota es de la defensa",
+      "nivel": "clave",
+      "turno": 19,
+      "jugadores": [
+        "Ostu"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "cambio_equipo",
+      "texto": "  La pelota cambia de equipo: ataca Equipo 1 con Pato",
+      "nivel": "detalle",
+      "turno": 19,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "reposicion",
+      "texto": "  Reposición: se levantan 3 cartas (máximo 6 en mano)",
+      "nivel": "detalle",
+      "turno": 19,
+      "jugadores": [],
+      "marcador": [
+        0,
+        0
+      ],
+      "datos": {
+        "cartas": 3
+      }
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 20 · pelota en Pato · 0-0 · 0 pases",
+      "nivel": "clave",
+      "turno": 20,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "falta",
+      "texto": "Falta de Manu: la pelota sigue en el mismo equipo y la jugada arranca de cero",
+      "nivel": "clave",
+      "turno": 20,
+      "jugadores": [
+        "Manu"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Falta"
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 21 · pelota en Pato · 0-0 · 0 pases",
+      "nivel": "clave",
+      "turno": 21,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Pato le pasa a Facu",
+      "nivel": "clave",
+      "turno": 21,
+      "jugadores": [
+        "Pato",
+        "Facu"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "marca",
+      "texto": "  Joaco marca a Manu",
+      "nivel": "clave",
+      "turno": 21,
+      "jugadores": [
+        "Joaco",
+        "Manu"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Marca personal"
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 22 · pelota en Facu · 0-0 · 1 pases",
+      "nivel": "clave",
+      "turno": 22,
+      "jugadores": [
+        "Facu"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "falta",
+      "texto": "Falta de Joaco: la pelota sigue en el mismo equipo y la jugada arranca de cero",
+      "nivel": "clave",
+      "turno": 22,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Falta"
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 23 · pelota en Facu · 0-0 · 0 pases",
+      "nivel": "clave",
+      "turno": 23,
+      "jugadores": [
+        "Facu"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Facu le pasa a Pato",
+      "nivel": "clave",
+      "turno": 23,
+      "jugadores": [
+        "Facu",
+        "Pato"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "gambeta",
+      "texto": "  Pato responde con Gambetear y anula Robo pelota",
+      "nivel": "clave",
+      "turno": 23,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Gambetear"
+    },
+    {
+      "tipo": "trampa",
+      "texto": "  Colo arma la trampa de offside",
+      "nivel": "clave",
+      "turno": 23,
+      "jugadores": [
+        "Colo"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Trampa de offside"
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 24 · pelota en Pato · 0-0 · 1 pases",
+      "nivel": "clave",
+      "turno": 24,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Pato le pasa a Facu",
+      "nivel": "clave",
+      "turno": 24,
+      "jugadores": [
+        "Pato",
+        "Facu"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "offside",
+      "texto": "  ¡Offside! Facu había picado antes: la pelota es de la defensa",
+      "nivel": "clave",
+      "turno": 24,
+      "jugadores": [
+        "Facu"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "cambio_equipo",
+      "texto": "  La pelota cambia de equipo: ataca Equipo 2 con Colo",
+      "nivel": "detalle",
+      "turno": 24,
+      "jugadores": [
+        "Colo"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "reposicion",
+      "texto": "  Reposición: se levantan 9 cartas (máximo 6 en mano)",
+      "nivel": "detalle",
+      "turno": 24,
+      "jugadores": [],
+      "marcador": [
+        0,
+        0
+      ],
+      "datos": {
+        "cartas": 9
+      }
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 25 · pelota en Colo · 0-0 · 0 pases",
+      "nivel": "clave",
+      "turno": 25,
+      "jugadores": [
+        "Colo"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "reventar",
+      "texto": "Colo la revienta",
+      "nivel": "clave",
+      "turno": 25,
+      "jugadores": [
+        "Colo"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "dado",
+      "texto": "  Disputa: Joaco 6 vs Pato 2",
+      "nivel": "detalle",
+      "turno": 25,
+      "jugadores": [
+        "Joaco",
+        "Pato"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "reventar",
+      "texto": "  La agarra Joaco (cuenta como pase)",
+      "nivel": "clave",
+      "turno": 25,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 26 · pelota en Joaco · 0-0 · 1 pases",
+      "nivel": "clave",
+      "turno": 26,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "disparo",
+      "texto": "Joaco patea al arco (con 1 pases encadenados; es gol con 1-2, ataja con 3-6)",
+      "nivel": "clave",
+      "turno": 26,
+      "jugadores": [
+        "Joaco",
+        "Manu"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Disparo al arco"
+    },
+    {
+      "tipo": "dado",
+      "texto": "  Dados: Joaco 3, Manu 2",
+      "nivel": "detalle",
+      "turno": 26,
+      "jugadores": [
+        "Joaco",
+        "Manu"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "datos": {
+        "pateador": 3,
+        "arquero": 2
+      }
+    },
+    {
+      "tipo": "atajada",
+      "texto": "  Ataja Manu (o se va afuera)",
+      "nivel": "clave",
+      "turno": 26,
+      "jugadores": [
+        "Manu"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "cambio_equipo",
+      "texto": "  La pelota cambia de equipo: ataca Equipo 1 con Pato",
+      "nivel": "detalle",
+      "turno": 26,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "reposicion",
+      "texto": "  Reposición: se levantan 1 carta (máximo 6 en mano)",
+      "nivel": "detalle",
+      "turno": 26,
+      "jugadores": [],
+      "marcador": [
+        0,
+        0
+      ],
+      "datos": {
+        "cartas": 1
+      }
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 27 · pelota en Pato · 0-0 · 0 pases",
+      "nivel": "clave",
+      "turno": 27,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Pato le pasa a Manu",
+      "nivel": "clave",
+      "turno": 27,
+      "jugadores": [
+        "Pato",
+        "Manu"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 28 · pelota en Manu · 0-0 · 1 pases",
+      "nivel": "clave",
+      "turno": 28,
+      "jugadores": [
+        "Manu"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Manu le pasa a Facu",
+      "nivel": "clave",
+      "turno": 28,
+      "jugadores": [
+        "Manu",
+        "Facu"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "gambeta",
+      "texto": "  Facu responde con Gambetear y anula Robo pelota",
+      "nivel": "clave",
+      "turno": 28,
+      "jugadores": [
+        "Facu"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Gambetear"
+    },
+    {
+      "tipo": "robo",
+      "texto": "  Joaco corta con Robo pelota",
+      "nivel": "clave",
+      "turno": 28,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Robo pelota"
+    },
+    {
+      "tipo": "cambio_equipo",
+      "texto": "  La pelota cambia de equipo: ataca Equipo 2 con Joaco",
+      "nivel": "detalle",
+      "turno": 28,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "reposicion",
+      "texto": "  Reposición: se levantan 5 cartas (máximo 6 en mano)",
+      "nivel": "detalle",
+      "turno": 28,
+      "jugadores": [],
+      "marcador": [
+        0,
+        0
+      ],
+      "datos": {
+        "cartas": 5
+      }
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 29 · pelota en Joaco · 0-0 · 0 pases",
+      "nivel": "clave",
+      "turno": 29,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Joaco le pasa a Colo",
+      "nivel": "clave",
+      "turno": 29,
+      "jugadores": [
+        "Joaco",
+        "Colo"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "robo",
+      "texto": "  Manu corta con Robo pelota",
+      "nivel": "clave",
+      "turno": 29,
+      "jugadores": [
+        "Manu"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Robo pelota"
+    },
+    {
+      "tipo": "cambio_equipo",
+      "texto": "  La pelota cambia de equipo: ataca Equipo 1 con Manu",
+      "nivel": "detalle",
+      "turno": 29,
+      "jugadores": [
+        "Manu"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "reposicion",
+      "texto": "  Reposición: se levantan 2 cartas (máximo 6 en mano)",
+      "nivel": "detalle",
+      "turno": 29,
+      "jugadores": [],
+      "marcador": [
+        0,
+        0
+      ],
+      "datos": {
+        "cartas": 2
+      }
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 30 · pelota en Manu · 0-0 · 0 pases",
+      "nivel": "clave",
+      "turno": 30,
+      "jugadores": [
+        "Manu"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Manu le pasa a Pato",
+      "nivel": "clave",
+      "turno": 30,
+      "jugadores": [
+        "Manu",
+        "Pato"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 31 · pelota en Pato · 0-0 · 1 pases",
+      "nivel": "clave",
+      "turno": 31,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        0,
+        0
+      ]
+    },
+    {
+      "tipo": "disparo",
+      "texto": "Pato patea al arco (con 1 pases encadenados; es gol con 1-2, ataja con 3-6)",
+      "nivel": "clave",
+      "turno": 31,
+      "jugadores": [
+        "Pato",
+        "Joaco"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "carta": "Disparo al arco"
+    },
+    {
+      "tipo": "dado",
+      "texto": "  Dados: Pato 2, Joaco 1",
+      "nivel": "detalle",
+      "turno": 31,
+      "jugadores": [
+        "Pato",
+        "Joaco"
+      ],
+      "marcador": [
+        0,
+        0
+      ],
+      "datos": {
+        "pateador": 2,
+        "arquero": 1
+      }
+    },
+    {
+      "tipo": "gol",
+      "texto": "¡GOL de Pato! Equipo 1 1 - 0 Equipo 2",
+      "nivel": "clave",
+      "turno": 31,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "cambio_equipo",
+      "texto": "  La pelota cambia de equipo: ataca Equipo 2 con Joaco",
+      "nivel": "detalle",
+      "turno": 31,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "reposicion",
+      "texto": "  Reposición: se levantan 2 cartas (máximo 6 en mano)",
+      "nivel": "detalle",
+      "turno": 31,
+      "jugadores": [],
+      "marcador": [
+        1,
+        0
+      ],
+      "datos": {
+        "cartas": 2
+      }
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 32 · pelota en Joaco · 1-0 · 0 pases",
+      "nivel": "clave",
+      "turno": 32,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "reventar",
+      "texto": "Joaco la revienta",
+      "nivel": "clave",
+      "turno": 32,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "dado",
+      "texto": "  Disputa: Colo 2 vs Pato 4",
+      "nivel": "detalle",
+      "turno": 32,
+      "jugadores": [
+        "Colo",
+        "Pato"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "reventar",
+      "texto": "  La agarra Pato",
+      "nivel": "clave",
+      "turno": 32,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "cambio_equipo",
+      "texto": "  La pelota cambia de equipo: ataca Equipo 1 con Pato",
+      "nivel": "detalle",
+      "turno": 32,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 33 · pelota en Pato · 1-0 · 0 pases",
+      "nivel": "clave",
+      "turno": 33,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Pato le pasa a Manu",
+      "nivel": "clave",
+      "turno": 33,
+      "jugadores": [
+        "Pato",
+        "Manu"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 34 · pelota en Manu · 1-0 · 1 pases",
+      "nivel": "clave",
+      "turno": 34,
+      "jugadores": [
+        "Manu"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "disparo",
+      "texto": "Manu patea al arco (con 1 pases encadenados; es gol con 1-2, ataja con 3-6)",
+      "nivel": "clave",
+      "turno": 34,
+      "jugadores": [
+        "Manu",
+        "Ostu"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Disparo al arco"
+    },
+    {
+      "tipo": "dado",
+      "texto": "  Dados: Manu 4, Ostu 6",
+      "nivel": "detalle",
+      "turno": 34,
+      "jugadores": [
+        "Manu",
+        "Ostu"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "datos": {
+        "pateador": 4,
+        "arquero": 6
+      }
+    },
+    {
+      "tipo": "atajada",
+      "texto": "  Ataja Ostu (o se va afuera)",
+      "nivel": "clave",
+      "turno": 34,
+      "jugadores": [
+        "Ostu"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "cambio_equipo",
+      "texto": "  La pelota cambia de equipo: ataca Equipo 2 con Colo",
+      "nivel": "detalle",
+      "turno": 34,
+      "jugadores": [
+        "Colo"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "reposicion",
+      "texto": "  Reposición: se levantan 2 cartas (máximo 6 en mano)",
+      "nivel": "detalle",
+      "turno": 34,
+      "jugadores": [],
+      "marcador": [
+        1,
+        0
+      ],
+      "datos": {
+        "cartas": 2
+      }
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 35 · pelota en Colo · 1-0 · 0 pases",
+      "nivel": "clave",
+      "turno": 35,
+      "jugadores": [
+        "Colo"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Colo le pasa a Ostu",
+      "nivel": "clave",
+      "turno": 35,
+      "jugadores": [
+        "Colo",
+        "Ostu"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "gambeta",
+      "texto": "  Ostu responde con Gambetear y anula Robo pelota",
+      "nivel": "clave",
+      "turno": 35,
+      "jugadores": [
+        "Ostu"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Gambetear"
+    },
+    {
+      "tipo": "robo",
+      "texto": "  Manu corta con Robo pelota",
+      "nivel": "clave",
+      "turno": 35,
+      "jugadores": [
+        "Manu"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Robo pelota"
+    },
+    {
+      "tipo": "cambio_equipo",
+      "texto": "  La pelota cambia de equipo: ataca Equipo 1 con Manu",
+      "nivel": "detalle",
+      "turno": 35,
+      "jugadores": [
+        "Manu"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "reposicion",
+      "texto": "  Reposición: se levantan 4 cartas (máximo 6 en mano)",
+      "nivel": "detalle",
+      "turno": 35,
+      "jugadores": [],
+      "marcador": [
+        1,
+        0
+      ],
+      "datos": {
+        "cartas": 4
+      }
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 36 · pelota en Manu · 1-0 · 0 pases",
+      "nivel": "clave",
+      "turno": 36,
+      "jugadores": [
+        "Manu"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Manu le pasa a Pato",
+      "nivel": "clave",
+      "turno": 36,
+      "jugadores": [
+        "Manu",
+        "Pato"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "gambeta",
+      "texto": "  Manu responde con Gambetear y anula Robo pelota",
+      "nivel": "clave",
+      "turno": 36,
+      "jugadores": [
+        "Manu"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Gambetear"
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 37 · pelota en Pato · 1-0 · 1 pases",
+      "nivel": "clave",
+      "turno": 37,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Pato le pasa a Manu",
+      "nivel": "clave",
+      "turno": 37,
+      "jugadores": [
+        "Pato",
+        "Manu"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 38 · pelota en Manu · 1-0 · 2 pases",
+      "nivel": "clave",
+      "turno": 38,
+      "jugadores": [
+        "Manu"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Manu le pasa a Pato",
+      "nivel": "clave",
+      "turno": 38,
+      "jugadores": [
+        "Manu",
+        "Pato"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 39 · pelota en Pato · 1-0 · 3 pases",
+      "nivel": "clave",
+      "turno": 39,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "disparo",
+      "texto": "Pato patea al arco (con 3 pases encadenados; es gol con 1-4, ataja con 5-6)",
+      "nivel": "clave",
+      "turno": 39,
+      "jugadores": [
+        "Pato",
+        "Ostu"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Disparo al arco"
+    },
+    {
+      "tipo": "dado",
+      "texto": "  Dados: Pato 2, Ostu 2",
+      "nivel": "detalle",
+      "turno": 39,
+      "jugadores": [
+        "Pato",
+        "Ostu"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "datos": {
+        "pateador": 2,
+        "arquero": 2
+      }
+    },
+    {
+      "tipo": "dado",
+      "texto": "  Pega en el palo: se vuelve a patear",
+      "nivel": "detalle",
+      "turno": 39,
+      "jugadores": [],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "dado",
+      "texto": "  Dados: Pato 6, Ostu 1",
+      "nivel": "detalle",
+      "turno": 39,
+      "jugadores": [
+        "Pato",
+        "Ostu"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "datos": {
+        "pateador": 6,
+        "arquero": 1
+      }
+    },
+    {
+      "tipo": "atajada",
+      "texto": "  Ataja Ostu (o se va afuera)",
+      "nivel": "clave",
+      "turno": 39,
+      "jugadores": [
+        "Ostu"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "cambio_equipo",
+      "texto": "  La pelota cambia de equipo: ataca Equipo 2 con Joaco",
+      "nivel": "detalle",
+      "turno": 39,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "reposicion",
+      "texto": "  Reposición: se levantan 6 cartas (máximo 6 en mano)",
+      "nivel": "detalle",
+      "turno": 39,
+      "jugadores": [],
+      "marcador": [
+        1,
+        0
+      ],
+      "datos": {
+        "cartas": 6
+      }
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 40 · pelota en Joaco · 1-0 · 0 pases",
+      "nivel": "clave",
+      "turno": 40,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Joaco le pasa a Ostu",
+      "nivel": "clave",
+      "turno": 40,
+      "jugadores": [
+        "Joaco",
+        "Ostu"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "marca",
+      "texto": "  Manu marca a Colo",
+      "nivel": "clave",
+      "turno": 40,
+      "jugadores": [
+        "Manu",
+        "Colo"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Marca personal"
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 41 · pelota en Ostu · 1-0 · 1 pases",
+      "nivel": "clave",
+      "turno": 41,
+      "jugadores": [
+        "Ostu"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Ostu le pasa a Joaco",
+      "nivel": "clave",
+      "turno": 41,
+      "jugadores": [
+        "Ostu",
+        "Joaco"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "robo",
+      "texto": "  Facu corta con Robo pelota",
+      "nivel": "clave",
+      "turno": 41,
+      "jugadores": [
+        "Facu"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Robo pelota"
+    },
+    {
+      "tipo": "cambio_equipo",
+      "texto": "  La pelota cambia de equipo: ataca Equipo 1 con Facu",
+      "nivel": "detalle",
+      "turno": 41,
+      "jugadores": [
+        "Facu"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "reposicion",
+      "texto": "  Reposición: se levantan 4 cartas (máximo 6 en mano)",
+      "nivel": "detalle",
+      "turno": 41,
+      "jugadores": [],
+      "marcador": [
+        1,
+        0
+      ],
+      "datos": {
+        "cartas": 4
+      }
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 42 · pelota en Facu · 1-0 · 0 pases",
+      "nivel": "clave",
+      "turno": 42,
+      "jugadores": [
+        "Facu"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Facu le pasa a Pato",
+      "nivel": "clave",
+      "turno": 42,
+      "jugadores": [
+        "Facu",
+        "Pato"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "robo",
+      "texto": "  Joaco corta con Robo pelota",
+      "nivel": "clave",
+      "turno": 42,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Robo pelota"
+    },
+    {
+      "tipo": "cambio_equipo",
+      "texto": "  La pelota cambia de equipo: ataca Equipo 2 con Joaco",
+      "nivel": "detalle",
+      "turno": 42,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "reposicion",
+      "texto": "  Reposición: se levantan 2 cartas (máximo 6 en mano)",
+      "nivel": "detalle",
+      "turno": 42,
+      "jugadores": [],
+      "marcador": [
+        1,
+        0
+      ],
+      "datos": {
+        "cartas": 2
+      }
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 43 · pelota en Joaco · 1-0 · 0 pases",
+      "nivel": "clave",
+      "turno": 43,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Joaco le pasa a Colo",
+      "nivel": "clave",
+      "turno": 43,
+      "jugadores": [
+        "Joaco",
+        "Colo"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "gambeta",
+      "texto": "  Colo responde con Gambetear y anula Robo pelota",
+      "nivel": "clave",
+      "turno": 43,
+      "jugadores": [
+        "Colo"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Gambetear"
+    },
+    {
+      "tipo": "gambeta",
+      "texto": "  Colo responde con Gambetear y anula Robo pelota",
+      "nivel": "clave",
+      "turno": 43,
+      "jugadores": [
+        "Colo"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Gambetear"
+    },
+    {
+      "tipo": "marca",
+      "texto": "  Manu marca a Ostu",
+      "nivel": "clave",
+      "turno": 43,
+      "jugadores": [
+        "Manu",
+        "Ostu"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Marca personal"
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 44 · pelota en Colo · 1-0 · 1 pases",
+      "nivel": "clave",
+      "turno": 44,
+      "jugadores": [
+        "Colo"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "falta",
+      "texto": "Falta de Pato: la pelota sigue en el mismo equipo y la jugada arranca de cero",
+      "nivel": "clave",
+      "turno": 44,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Falta"
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 45 · pelota en Colo · 1-0 · 0 pases",
+      "nivel": "clave",
+      "turno": 45,
+      "jugadores": [
+        "Colo"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Colo le pasa a Joaco",
+      "nivel": "clave",
+      "turno": 45,
+      "jugadores": [
+        "Colo",
+        "Joaco"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "gambeta",
+      "texto": "  Joaco responde con Gambetear y anula Robo pelota",
+      "nivel": "clave",
+      "turno": 45,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Gambetear"
+    },
+    {
+      "tipo": "robo",
+      "texto": "  Facu corta con Robo pelota",
+      "nivel": "clave",
+      "turno": 45,
+      "jugadores": [
+        "Facu"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Robo pelota"
+    },
+    {
+      "tipo": "cambio_equipo",
+      "texto": "  La pelota cambia de equipo: ataca Equipo 1 con Facu",
+      "nivel": "detalle",
+      "turno": 45,
+      "jugadores": [
+        "Facu"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "reposicion",
+      "texto": "  Reposición: se levantan 11 cartas (máximo 6 en mano)",
+      "nivel": "detalle",
+      "turno": 45,
+      "jugadores": [],
+      "marcador": [
+        1,
+        0
+      ],
+      "datos": {
+        "cartas": 11
+      }
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 46 · pelota en Facu · 1-0 · 0 pases",
+      "nivel": "clave",
+      "turno": 46,
+      "jugadores": [
+        "Facu"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "disparo",
+      "texto": "Facu patea al arco (con 0 pases encadenados; es gol con 1, ataja con 2-6)",
+      "nivel": "clave",
+      "turno": 46,
+      "jugadores": [
+        "Facu",
+        "Colo"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Disparo al arco"
+    },
+    {
+      "tipo": "dado",
+      "texto": "  Dados: Facu 1, Colo 4",
+      "nivel": "detalle",
+      "turno": 46,
+      "jugadores": [
+        "Facu",
+        "Colo"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "datos": {
+        "pateador": 1,
+        "arquero": 4
+      }
+    },
+    {
+      "tipo": "dado",
+      "texto": "  Rebote: se vuelve a patear",
+      "nivel": "detalle",
+      "turno": 46,
+      "jugadores": [],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "dado",
+      "texto": "  Dados: Facu 5, Colo 5",
+      "nivel": "detalle",
+      "turno": 46,
+      "jugadores": [
+        "Facu",
+        "Colo"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "datos": {
+        "pateador": 5,
+        "arquero": 5
+      }
+    },
+    {
+      "tipo": "dado",
+      "texto": "  Pega en el palo: se vuelve a patear",
+      "nivel": "detalle",
+      "turno": 46,
+      "jugadores": [],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "dado",
+      "texto": "  Dados: Facu 6, Colo 4",
+      "nivel": "detalle",
+      "turno": 46,
+      "jugadores": [
+        "Facu",
+        "Colo"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "datos": {
+        "pateador": 6,
+        "arquero": 4
+      }
+    },
+    {
+      "tipo": "atajada",
+      "texto": "  Ataja Colo (o se va afuera)",
+      "nivel": "clave",
+      "turno": 46,
+      "jugadores": [
+        "Colo"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "cambio_equipo",
+      "texto": "  La pelota cambia de equipo: ataca Equipo 2 con Ostu",
+      "nivel": "detalle",
+      "turno": 46,
+      "jugadores": [
+        "Ostu"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "reposicion",
+      "texto": "  Reposición: se levantan 1 carta (máximo 6 en mano)",
+      "nivel": "detalle",
+      "turno": 46,
+      "jugadores": [],
+      "marcador": [
+        1,
+        0
+      ],
+      "datos": {
+        "cartas": 1
+      }
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 47 · pelota en Ostu · 1-0 · 0 pases",
+      "nivel": "clave",
+      "turno": 47,
+      "jugadores": [
+        "Ostu"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Ostu le pasa a Joaco",
+      "nivel": "clave",
+      "turno": 47,
+      "jugadores": [
+        "Ostu",
+        "Joaco"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "marca",
+      "texto": "  Manu marca a Colo",
+      "nivel": "clave",
+      "turno": 47,
+      "jugadores": [
+        "Manu",
+        "Colo"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Marca personal"
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 48 · pelota en Joaco · 1-0 · 1 pases",
+      "nivel": "clave",
+      "turno": 48,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Joaco le pasa a Ostu",
+      "nivel": "clave",
+      "turno": 48,
+      "jugadores": [
+        "Joaco",
+        "Ostu"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "gambeta",
+      "texto": "  Joaco responde con Gambetear y anula Robo pelota",
+      "nivel": "clave",
+      "turno": 48,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Gambetear"
+    },
+    {
+      "tipo": "robo",
+      "texto": "  Facu corta con Robo pelota",
+      "nivel": "clave",
+      "turno": 48,
+      "jugadores": [
+        "Facu"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Robo pelota"
+    },
+    {
+      "tipo": "cambio_equipo",
+      "texto": "  La pelota cambia de equipo: ataca Equipo 1 con Facu",
+      "nivel": "detalle",
+      "turno": 48,
+      "jugadores": [
+        "Facu"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "reposicion",
+      "texto": "  Reposición: se levantan 6 cartas (máximo 6 en mano)",
+      "nivel": "detalle",
+      "turno": 48,
+      "jugadores": [],
+      "marcador": [
+        1,
+        0
+      ],
+      "datos": {
+        "cartas": 6
+      }
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 49 · pelota en Facu · 1-0 · 0 pases",
+      "nivel": "clave",
+      "turno": 49,
+      "jugadores": [
+        "Facu"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Facu le pasa a Pato",
+      "nivel": "clave",
+      "turno": 49,
+      "jugadores": [
+        "Facu",
+        "Pato"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "gambeta",
+      "texto": "  Pato responde con Gambetear y anula Robo pelota",
+      "nivel": "clave",
+      "turno": 49,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Gambetear"
+    },
+    {
+      "tipo": "gambeta",
+      "texto": "  Pato responde con Gambetear y anula Robo pelota",
+      "nivel": "clave",
+      "turno": 49,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Gambetear"
+    },
+    {
+      "tipo": "robo",
+      "texto": "  Joaco corta con Robo pelota",
+      "nivel": "clave",
+      "turno": 49,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Robo pelota"
+    },
+    {
+      "tipo": "cambio_equipo",
+      "texto": "  La pelota cambia de equipo: ataca Equipo 2 con Joaco",
+      "nivel": "detalle",
+      "turno": 49,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "reposicion",
+      "texto": "  Reposición: se levantan 6 cartas (máximo 6 en mano)",
+      "nivel": "detalle",
+      "turno": 49,
+      "jugadores": [],
+      "marcador": [
+        1,
+        0
+      ],
+      "datos": {
+        "cartas": 6
+      }
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 50 · pelota en Joaco · 1-0 · 0 pases",
+      "nivel": "clave",
+      "turno": 50,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "reventar",
+      "texto": "Joaco la revienta",
+      "nivel": "clave",
+      "turno": 50,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "dado",
+      "texto": "  Disputa: Ostu 4 vs Facu 3",
+      "nivel": "detalle",
+      "turno": 50,
+      "jugadores": [
+        "Ostu",
+        "Facu"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "reventar",
+      "texto": "  La agarra Ostu (cuenta como pase)",
+      "nivel": "clave",
+      "turno": 50,
+      "jugadores": [
+        "Ostu"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 51 · pelota en Ostu · 1-0 · 1 pases",
+      "nivel": "clave",
+      "turno": 51,
+      "jugadores": [
+        "Ostu"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "reventar",
+      "texto": "Ostu la revienta",
+      "nivel": "clave",
+      "turno": 51,
+      "jugadores": [
+        "Ostu"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "dado",
+      "texto": "  Disputa: Joaco 5 vs Facu 4",
+      "nivel": "detalle",
+      "turno": 51,
+      "jugadores": [
+        "Joaco",
+        "Facu"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "reventar",
+      "texto": "  La agarra Joaco (cuenta como pase)",
+      "nivel": "clave",
+      "turno": 51,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 52 · pelota en Joaco · 1-0 · 2 pases",
+      "nivel": "clave",
+      "turno": 52,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Joaco le pasa a Colo",
+      "nivel": "clave",
+      "turno": 52,
+      "jugadores": [
+        "Joaco",
+        "Colo"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "gambeta",
+      "texto": "  Colo responde con Gambetear y anula Robo pelota",
+      "nivel": "clave",
+      "turno": 52,
+      "jugadores": [
+        "Colo"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Gambetear"
+    },
+    {
+      "tipo": "gambeta",
+      "texto": "  Colo responde con Gambetear y anula Robo pelota",
+      "nivel": "clave",
+      "turno": 52,
+      "jugadores": [
+        "Colo"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Gambetear"
+    },
+    {
+      "tipo": "trampa",
+      "texto": "  Pato arma la trampa de offside",
+      "nivel": "clave",
+      "turno": 52,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Trampa de offside"
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 53 · pelota en Colo · 1-0 · 3 pases",
+      "nivel": "clave",
+      "turno": 53,
+      "jugadores": [
+        "Colo"
+      ],
+      "marcador": [
+        1,
+        0
+      ]
+    },
+    {
+      "tipo": "disparo",
+      "texto": "Colo patea al arco (con 3 pases encadenados; es gol con 1-4, ataja con 5-6)",
+      "nivel": "clave",
+      "turno": 53,
+      "jugadores": [
+        "Colo",
+        "Pato"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "carta": "Disparo al arco"
+    },
+    {
+      "tipo": "dado",
+      "texto": "  Dados: Colo 1, Pato 2",
+      "nivel": "detalle",
+      "turno": 53,
+      "jugadores": [
+        "Colo",
+        "Pato"
+      ],
+      "marcador": [
+        1,
+        0
+      ],
+      "datos": {
+        "pateador": 1,
+        "arquero": 2
+      }
+    },
+    {
+      "tipo": "gol",
+      "texto": "¡GOL de Colo! Equipo 1 1 - 1 Equipo 2",
+      "nivel": "clave",
+      "turno": 53,
+      "jugadores": [
+        "Colo"
+      ],
+      "marcador": [
+        1,
+        1
+      ]
+    },
+    {
+      "tipo": "cambio_equipo",
+      "texto": "  La pelota cambia de equipo: ataca Equipo 1 con Facu",
+      "nivel": "detalle",
+      "turno": 53,
+      "jugadores": [
+        "Facu"
+      ],
+      "marcador": [
+        1,
+        1
+      ]
+    },
+    {
+      "tipo": "reposicion",
+      "texto": "  Reposición: se levantan 7 cartas (máximo 6 en mano)",
+      "nivel": "detalle",
+      "turno": 53,
+      "jugadores": [],
+      "marcador": [
+        1,
+        1
+      ],
+      "datos": {
+        "cartas": 7
+      }
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 54 · pelota en Facu · 1-1 · 0 pases",
+      "nivel": "clave",
+      "turno": 54,
+      "jugadores": [
+        "Facu"
+      ],
+      "marcador": [
+        1,
+        1
+      ]
+    },
+    {
+      "tipo": "falta",
+      "texto": "Falta de Colo: la pelota sigue en el mismo equipo y la jugada arranca de cero",
+      "nivel": "clave",
+      "turno": 54,
+      "jugadores": [
+        "Colo"
+      ],
+      "marcador": [
+        1,
+        1
+      ],
+      "carta": "Falta"
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 55 · pelota en Facu · 1-1 · 0 pases",
+      "nivel": "clave",
+      "turno": 55,
+      "jugadores": [
+        "Facu"
+      ],
+      "marcador": [
+        1,
+        1
+      ]
+    },
+    {
+      "tipo": "disparo",
+      "texto": "Facu patea al arco (con 0 pases encadenados; es gol con 1, ataja con 2-6)",
+      "nivel": "clave",
+      "turno": 55,
+      "jugadores": [
+        "Facu",
+        "Colo"
+      ],
+      "marcador": [
+        1,
+        1
+      ],
+      "carta": "Disparo al arco"
+    },
+    {
+      "tipo": "dado",
+      "texto": "  Dados: Facu 2, Colo 2",
+      "nivel": "detalle",
+      "turno": 55,
+      "jugadores": [
+        "Facu",
+        "Colo"
+      ],
+      "marcador": [
+        1,
+        1
+      ],
+      "datos": {
+        "pateador": 2,
+        "arquero": 2
+      }
+    },
+    {
+      "tipo": "dado",
+      "texto": "  Pega en el palo: se vuelve a patear",
+      "nivel": "detalle",
+      "turno": 55,
+      "jugadores": [],
+      "marcador": [
+        1,
+        1
+      ]
+    },
+    {
+      "tipo": "dado",
+      "texto": "  Dados: Facu 4, Colo 5",
+      "nivel": "detalle",
+      "turno": 55,
+      "jugadores": [
+        "Facu",
+        "Colo"
+      ],
+      "marcador": [
+        1,
+        1
+      ],
+      "datos": {
+        "pateador": 4,
+        "arquero": 5
+      }
+    },
+    {
+      "tipo": "atajada",
+      "texto": "  Ataja Colo (o se va afuera)",
+      "nivel": "clave",
+      "turno": 55,
+      "jugadores": [
+        "Colo"
+      ],
+      "marcador": [
+        1,
+        1
+      ]
+    },
+    {
+      "tipo": "cambio_equipo",
+      "texto": "  La pelota cambia de equipo: ataca Equipo 2 con Joaco",
+      "nivel": "detalle",
+      "turno": 55,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        1,
+        1
+      ]
+    },
+    {
+      "tipo": "reposicion",
+      "texto": "  Reposición: se levantan 2 cartas (máximo 6 en mano)",
+      "nivel": "detalle",
+      "turno": 55,
+      "jugadores": [],
+      "marcador": [
+        1,
+        1
+      ],
+      "datos": {
+        "cartas": 2
+      }
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 56 · pelota en Joaco · 1-1 · 0 pases",
+      "nivel": "clave",
+      "turno": 56,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        1,
+        1
+      ]
+    },
+    {
+      "tipo": "falta",
+      "texto": "Falta de Manu: la pelota sigue en el mismo equipo y la jugada arranca de cero",
+      "nivel": "clave",
+      "turno": 56,
+      "jugadores": [
+        "Manu"
+      ],
+      "marcador": [
+        1,
+        1
+      ],
+      "carta": "Falta"
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 57 · pelota en Joaco · 1-1 · 0 pases",
+      "nivel": "clave",
+      "turno": 57,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        1,
+        1
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Joaco le pasa a Colo",
+      "nivel": "clave",
+      "turno": 57,
+      "jugadores": [
+        "Joaco",
+        "Colo"
+      ],
+      "marcador": [
+        1,
+        1
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 58 · pelota en Colo · 1-1 · 1 pases",
+      "nivel": "clave",
+      "turno": 58,
+      "jugadores": [
+        "Colo"
+      ],
+      "marcador": [
+        1,
+        1
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Colo le pasa a Ostu",
+      "nivel": "clave",
+      "turno": 58,
+      "jugadores": [
+        "Colo",
+        "Ostu"
+      ],
+      "marcador": [
+        1,
+        1
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 59 · pelota en Ostu · 1-1 · 2 pases",
+      "nivel": "clave",
+      "turno": 59,
+      "jugadores": [
+        "Ostu"
+      ],
+      "marcador": [
+        1,
+        1
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Ostu le pasa a Joaco",
+      "nivel": "clave",
+      "turno": 59,
+      "jugadores": [
+        "Ostu",
+        "Joaco"
+      ],
+      "marcador": [
+        1,
+        1
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 60 · pelota en Joaco · 1-1 · 3 pases",
+      "nivel": "clave",
+      "turno": 60,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        1,
+        1
+      ]
+    },
+    {
+      "tipo": "disparo",
+      "texto": "Joaco patea al arco (con 3 pases encadenados; es gol con 1-4, ataja con 5-6)",
+      "nivel": "clave",
+      "turno": 60,
+      "jugadores": [
+        "Joaco",
+        "Manu"
+      ],
+      "marcador": [
+        1,
+        1
+      ],
+      "carta": "Disparo al arco"
+    },
+    {
+      "tipo": "dado",
+      "texto": "  Dados: Joaco 4, Manu 3",
+      "nivel": "detalle",
+      "turno": 60,
+      "jugadores": [
+        "Joaco",
+        "Manu"
+      ],
+      "marcador": [
+        1,
+        1
+      ],
+      "datos": {
+        "pateador": 4,
+        "arquero": 3
+      }
+    },
+    {
+      "tipo": "gol",
+      "texto": "¡GOL de Joaco! Equipo 1 1 - 2 Equipo 2",
+      "nivel": "clave",
+      "turno": 60,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        1,
+        2
+      ]
+    },
+    {
+      "tipo": "cambio_equipo",
+      "texto": "  La pelota cambia de equipo: ataca Equipo 1 con Pato",
+      "nivel": "detalle",
+      "turno": 60,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        1,
+        2
+      ]
+    },
+    {
+      "tipo": "reposicion",
+      "texto": "  Reposición: se levantan 5 cartas (máximo 6 en mano)",
+      "nivel": "detalle",
+      "turno": 60,
+      "jugadores": [],
+      "marcador": [
+        1,
+        2
+      ],
+      "datos": {
+        "cartas": 5
+      }
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 61 · pelota en Pato · 1-2 · 0 pases",
+      "nivel": "clave",
+      "turno": 61,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        1,
+        2
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Pato le pasa a Facu",
+      "nivel": "clave",
+      "turno": 61,
+      "jugadores": [
+        "Pato",
+        "Facu"
+      ],
+      "marcador": [
+        1,
+        2
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "marca",
+      "texto": "  Colo marca a Manu",
+      "nivel": "clave",
+      "turno": 61,
+      "jugadores": [
+        "Colo",
+        "Manu"
+      ],
+      "marcador": [
+        1,
+        2
+      ],
+      "carta": "Marca personal"
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 62 · pelota en Facu · 1-2 · 1 pases",
+      "nivel": "clave",
+      "turno": 62,
+      "jugadores": [
+        "Facu"
+      ],
+      "marcador": [
+        1,
+        2
+      ]
+    },
+    {
+      "tipo": "pase",
+      "texto": "Facu le pasa a Pato",
+      "nivel": "clave",
+      "turno": 62,
+      "jugadores": [
+        "Facu",
+        "Pato"
+      ],
+      "marcador": [
+        1,
+        2
+      ],
+      "carta": "Pase"
+    },
+    {
+      "tipo": "gambeta",
+      "texto": "  Pato responde con Gambetear y anula Robo pelota",
+      "nivel": "clave",
+      "turno": 62,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        1,
+        2
+      ],
+      "carta": "Gambetear"
+    },
+    {
+      "tipo": "trampa",
+      "texto": "  Joaco arma la trampa de offside",
+      "nivel": "clave",
+      "turno": 62,
+      "jugadores": [
+        "Joaco"
+      ],
+      "marcador": [
+        1,
+        2
+      ],
+      "carta": "Trampa de offside"
+    },
+    {
+      "tipo": "turno",
+      "texto": "Turno 63 · pelota en Pato · 1-2 · 2 pases",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        1,
+        2
+      ]
+    },
+    {
+      "tipo": "disparo",
+      "texto": "Pato patea al arco (con 2 pases encadenados; es gol con 1-3, ataja con 4-6)",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Pato",
+        "Joaco"
+      ],
+      "marcador": [
+        1,
+        2
+      ],
+      "carta": "Disparo al arco"
+    },
+    {
+      "tipo": "dado",
+      "texto": "  Dados: Pato 3, Joaco 2",
+      "nivel": "detalle",
+      "turno": 63,
+      "jugadores": [
+        "Pato",
+        "Joaco"
+      ],
+      "marcador": [
+        1,
+        2
+      ],
+      "datos": {
+        "pateador": 3,
+        "arquero": 2
+      }
+    },
+    {
+      "tipo": "gol",
+      "texto": "¡GOL de Pato! Equipo 1 2 - 2 Equipo 2",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Pato"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "cambio_equipo",
+      "texto": "  La pelota cambia de equipo: ataca Equipo 2 con Colo",
+      "nivel": "detalle",
+      "turno": 63,
+      "jugadores": [
+        "Colo"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "reposicion",
+      "texto": "  Reposición: se levantan 7 cartas (máximo 6 en mano)",
+      "nivel": "detalle",
+      "turno": 63,
+      "jugadores": [],
+      "marcador": [
+        2,
+        2
+      ],
+      "datos": {
+        "cartas": 7
+      }
+    },
+    {
+      "tipo": "penales",
+      "texto": "Marcador 2-2: se define por penales",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Facu: lo ataja Colo",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Facu",
+        "Colo"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Colo: lo ataja Facu",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Colo",
+        "Facu"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Pato: lo ataja Ostu",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Pato",
+        "Ostu"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Ostu: lo ataja Pato",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Ostu",
+        "Pato"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Manu: lo ataja Joaco",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Manu",
+        "Joaco"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Joaco: lo ataja Manu",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Joaco",
+        "Manu"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Serie: Equipo 1 0 - 0 Equipo 2",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Muerte súbita: patea uno cada equipo",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Facu: lo ataja Colo",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Facu",
+        "Colo"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Colo: lo ataja Facu",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Colo",
+        "Facu"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Pato: lo ataja Ostu",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Pato",
+        "Ostu"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Ostu: lo ataja Pato",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Ostu",
+        "Pato"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Manu: lo ataja Joaco",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Manu",
+        "Joaco"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Joaco: lo ataja Manu",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Joaco",
+        "Manu"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Facu: lo ataja Colo",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Facu",
+        "Colo"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Colo: lo ataja Facu",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Colo",
+        "Facu"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Pato: lo ataja Ostu",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Pato",
+        "Ostu"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Ostu: lo ataja Pato",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Ostu",
+        "Pato"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Manu: lo ataja Joaco",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Manu",
+        "Joaco"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Joaco: lo ataja Manu",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Joaco",
+        "Manu"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Facu: lo ataja Colo",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Facu",
+        "Colo"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Colo: lo ataja Facu",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Colo",
+        "Facu"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Pato: lo ataja Ostu",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Pato",
+        "Ostu"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Ostu: lo ataja Pato",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Ostu",
+        "Pato"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Manu: lo ataja Joaco",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Manu",
+        "Joaco"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Joaco: lo ataja Manu",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Joaco",
+        "Manu"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Facu: lo ataja Colo",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Facu",
+        "Colo"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Colo: lo ataja Facu",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Colo",
+        "Facu"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Pato: lo ataja Ostu",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Pato",
+        "Ostu"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Ostu: lo ataja Pato",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Ostu",
+        "Pato"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Manu: lo ataja Joaco",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Manu",
+        "Joaco"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Joaco: lo ataja Manu",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Joaco",
+        "Manu"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Facu: lo ataja Colo",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Facu",
+        "Colo"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Colo: lo ataja Facu",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Colo",
+        "Facu"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Pato: lo ataja Ostu",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Pato",
+        "Ostu"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Ostu: lo ataja Pato",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Ostu",
+        "Pato"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Manu: lo ataja Joaco",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Manu",
+        "Joaco"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Joaco: lo ataja Manu",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Joaco",
+        "Manu"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Facu: lo ataja Colo",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Facu",
+        "Colo"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Colo: lo ataja Facu",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Colo",
+        "Facu"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Pato: lo ataja Ostu",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Pato",
+        "Ostu"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Ostu: lo ataja Pato",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Ostu",
+        "Pato"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Manu: lo ataja Joaco",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Manu",
+        "Joaco"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Joaco: lo ataja Manu",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Joaco",
+        "Manu"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Facu: lo ataja Colo",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Facu",
+        "Colo"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Colo: lo ataja Facu",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Colo",
+        "Facu"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Pato: lo ataja Ostu",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Pato",
+        "Ostu"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "penales",
+      "texto": "  Penal de Ostu: lo ataja Pato",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [
+        "Ostu",
+        "Pato"
+      ],
+      "marcador": [
+        2,
+        2
+      ]
+    },
+    {
+      "tipo": "fin",
+      "texto": "Gana Equipo 2 por penales · Equipo 1 2 - 3 Equipo 2",
+      "nivel": "clave",
+      "turno": 63,
+      "jugadores": [],
+      "marcador": [
+        2,
+        3
+      ]
+    }
+  ]
+}

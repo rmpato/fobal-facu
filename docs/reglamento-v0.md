@@ -73,8 +73,8 @@ La pelota siempre la tiene un jugador específico de la ofensiva. Solo ese jugad
 
 | Carta | Efecto |
 |-------|--------|
-| **Corta pase** | Interrumpe un pase; te quedás con la pelota |
-| **Tackle** | Si el ataque cedió el turno sin pasar, le quitás la pelota |
+| **Corta pase** | Interrumpe un pase; la pelota queda en poder de quien la jugó |
+| **Tackle** | Si el ataque cedió el turno sin pasar, la defensa le saca la pelota |
 | **Trampa de offside** | Solo cuando el ataque pasa de turno. Queda activa; si el ataque pasa, es offside y pierde la pelota |
 | **Marca personal** | Solo cuando el ataque pasa de turno. Se pone encima de un jugador; si recibe el pase, recuperás la pelota (salvo `La dejo pasar`) |
 | **Falta** | La puede jugar cualquiera de los dos equipos. La pelota se queda en el equipo que la tenía. El contador de pases vuelve a cero |

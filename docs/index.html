@@ -1,163 +1,135 @@
 <!DOCTYPE html>
-<html lang="es-AR">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <base id="site-base" href="./">
-  <script>
-    (function () {
-      var el = document.getElementById("site-base");
-      if (location.hostname.endsWith("github.io")) {
-        var repo = location.pathname.split("/").filter(Boolean)[0];
-        if (repo) el.href = "/" + repo + "/";
-      }
-    })();
-  </script>
-  <meta name="description" content="Fobal Facu — juego de cartas de fútbol. Reglas, simulación y playtesting.">
-  <title>Fobal Facu — Inicio</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fobal Facu — un juego de cartas de fútbol</title>
+<meta name="description" content="Fobal Facu es un juego de cartas de fútbol. Acá están las reglas, los resultados de simular miles de partidos y el banco de pruebas que se usa para diseñarlo.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚽</text></svg>">
+<link rel="stylesheet" href="assets/css/estilo.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="header-inner">
-      <a class="logo" href="index.html">
-        <span class="logo-icon">⚽</span>
-        <span>Fobal Facu</span>
-      </a>
-      <nav>
-        <a href="index.html" data-page="index.html">Inicio</a>
-        <a href="reglas.html" data-page="reglas.html">Reglas</a>
-        <a href="resultados.html" data-page="resultados.html">Resultados</a>
-        <a href="recomendaciones.html" data-page="recomendaciones.html">Recomendaciones</a>
-        <a href="como-funciona.html" data-page="como-funciona.html">Cómo funciona</a>
-        <a href="simulador.html" data-page="simulador.html">Simulador</a>
-        <a href="replay.html" data-page="replay.html">Replay</a>
-        <a href="crear-reglamento.html" data-page="crear-reglamento.html">Crear reglamento</a>
-      </nav>
-    </div>
-  </header>
 
-  <main>
-    <div class="hero">
-      <h1>Fobal Facu</h1>
-      <p class="subtitle">
-        Simulador de partidos de cartas — correr miles de partidos, comparar reglamentos y ver conclusiones antes de jugar en mesa.
-      </p>
-      <div class="badges">
-        <span class="badge"><strong>python3 -m simulador run</strong></span>
-        <span class="badge">Reglamento <strong>v2</strong> en simulación</span>
-        <span class="badge"><strong>100%</strong> partidos completados (v2 · 3v3)</span>
-      </div>
-    </div>
+<header class="cabecera">
+  <div class="cabecera-interna">
+    <a class="logo" href="index.html">⚽ Fobal Facu</a>
+    <nav>
+      <a href="index.html" data-pagina="index.html">Inicio</a>
+      <a href="reglas.html" data-pagina="reglas.html">Reglas</a>
+      <a href="resultados.html" data-pagina="resultados.html">Resultados</a>
+      <a href="como-funciona.html" data-pagina="como-funciona.html">Cómo funciona</a>
+      <a href="simulador.html" data-pagina="simulador.html">Simulador</a>
+      <a href="replay.html" data-pagina="replay.html">Un partido</a>
+    </nav>
+  </div>
+</header>
 
-    <section id="quickstart">
-      <h2>Empezar rápido</h2>
-      <div class="card highlight">
-        <pre><code>git clone https://github.com/rmpato/fobal-facu.git
-cd fobal-facu
-python3 -m simulador reglamentos list
-python3 -m simulador run --reglamento v2 --partidos 200 --ia estrategica
-python3 -m simulador compare-formatos --partidos 200 --ia estrategica</code></pre>
-        <p>Guía completa en el repo: <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/guia-rapida.md">guia-rapida.md</a> · Informe → <a href="comparacion-v1-v2-formatos.md">comparacion-v1-v2-formatos.md</a></p>
-      </div>
-    </section>
+<main>
 
-    <div class="nav-cards">
-      <a class="nav-card" href="resultados.html">
-        <div class="icon">📊</div>
-        <h3>Resultados</h3>
-        <p>Conclusiones: v0, v1, v1.1, <strong>v2</strong> — acciones, Trampa/Marca, penales.</p>
-      </a>
-      <a class="nav-card" href="recomendaciones.html">
-        <div class="icon">💡</div>
-        <h3>Recomendaciones</h3>
-        <p>Mazo, cartas nuevas, reglas trabadas — v2 ya simulado, próximo: v1.2 / mesa.</p>
-      </a>
-      <a class="nav-card" href="simulador.html">
-        <div class="icon">💻</div>
-        <h3>Simulador</h3>
-        <p>Comandos, reglamentos v0–v2, espectador y replay.</p>
-      </a>
-      <a class="nav-card" href="crear-reglamento.html">
-        <div class="icon">📝</div>
-        <h3>Crear reglamento</h3>
-        <p>v1.2, v2, v3 — qué archivos tocar, JSON, push y cuándo editar código.</p>
-      </a>
-      <a class="nav-card" href="reglas.html">
-        <div class="icon">📋</div>
-        <h3>Reglas de mesa</h3>
-        <p>v0, v1, v1.1 y <strong>v2</strong> (playtesting) para jugar con amigos.</p>
-      </a>
-      <a class="nav-card" href="como-funciona.html">
-        <div class="icon">⚙️</div>
-        <h3>Cómo funciona</h3>
-        <p>Motor, IA, métricas y limitaciones.</p>
-      </a>
-    </div>
+<div class="entrada">
+  <h1>Un juego de cartas de fútbol</h1>
+  <p class="bajada">
+    Fobal Facu se juega en mesa, por equipos, con un mazo y un dado. Está en
+    desarrollo: cada versión de las reglas se prueba jugando y también simulando
+    miles de partidos, para ver qué se rompe antes de imprimir las cartas.
+  </p>
+</div>
 
-    <section id="confirmado">
-      <h2>✅ Reglas confirmadas</h2>
-      <div class="card highlight">
-        <table>
-          <thead><tr><th>Regla</th><th>Comportamiento</th></tr></thead>
-          <tbody>
-            <tr><td>Equipos</td><td>Mínimo <strong>2 jugadores por equipo</strong></td></tr>
-            <tr><td>Marcador 2-2</td><td>Penales <strong>inmediatos</strong></td></tr>
-            <tr><td>Trampa / Marca personal</td><td>Solo cuando el ataque <strong>pasa de turno</strong> (v1) · al <strong>pase</strong> en v2</td></tr>
-            <tr><td>Pasa de turno / Reventar</td><td>Decisiones del jugador — <strong>no</strong> son cartas del mazo (<strong>v2</strong> elimina pasa de turno)</td></tr>
-            <tr><td>Reventarla</td><td>Cada equipo elige quién tira el dado (no el que reventó)</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+<section>
+  <h2>Cómo se juega, en cinco frases</h2>
+  <div class="tarjeta">
+    <ul class="lista-limpia">
+      <li>Dos equipos, mínimo dos jugadores cada uno. Uno solo tiene la pelota.</li>
+      <li>El que la tiene puede pasarla, patear al arco, reventarla o quedársela.</li>
+      <li>El otro equipo responde con una carta: le roba, lo deja en offside o marca a un compañero.</li>
+      <li>Al patear, pateador y arquero tiran un dado: cuantos más pases traía la jugada, más fácil es el gol.</li>
+      <li>Gana el primero que llega a tres goles. Si el partido queda 2 a 2, se define por penales.</li>
+    </ul>
+    <p><a href="reglas.html">Las reglas completas, para jugar →</a></p>
+  </div>
+</section>
 
-    <section>
-      <h2>📈 Lo más reciente (v2 vs v1)</h2>
-      <p class="section-lead">200 partidos · 3 vs 3 · IA estratégica · jul 2026</p>
-      <div class="compare-grid">
-        <div class="stat-box">
-          <div class="label">Partidos completados</div>
-          <div class="values"><span class="val v1">99,0%</span><span class="val v2">100%</span></div>
-          <div class="unit">v1 → v2</div>
-        </div>
-        <div class="stat-box">
-          <div class="label">Turnos promedio</div>
-          <div class="values"><span class="val v1">179</span><span class="val v2">151</span></div>
-        </div>
-        <div class="stat-box">
-          <div class="label">Trampa + Marca / partido</div>
-          <div class="values"><span class="val v1">~11,9</span><span class="val v2">~19,1</span></div>
-          <div class="unit">colocadas (v2: al pase)</div>
-        </div>
-        <div class="stat-box">
-          <div class="label">Pasa de turno</div>
-          <div class="values"><span class="val v1">8,8%</span><span class="val v2">0%</span></div>
-          <div class="unit">decisión · v2 eliminada</div>
-        </div>
-      </div>
-      <p><a href="resultados.html#compare-formatos">Ver comparación v1 vs v2 · 3v3/4v4 →</a></p>
-    </section>
+<section>
+  <h2>Por qué hay un simulador</h2>
+  <p>
+    Cambiar una regla de un juego de cartas es fácil; saber qué le hizo al juego,
+    no. Una partida de prueba puede salir rara por suerte, y hacen falta muchas
+    para notar que una carta nunca sirve o que los partidos se están alargando.
+  </p>
+  <p>
+    Por eso las reglas están escritas también en un formato que una computadora
+    puede jugar. Se corren mil partidos en unos segundos y se mira qué cambió:
+    cuánto duran, cuántos goles caen, cuántas veces se usó cada carta, cuántos
+    partidos quedaron trabados sin definirse.
+  </p>
+  <div class="cifras">
+    <div class="cifra"><div class="rotulo">Partidos simulados por versión</div><div class="valor">500</div><div class="pie">en unos pocos segundos</div></div>
+    <div class="cifra"><div class="rotulo">Versiones de las reglas</div><div class="valor">4</div><div class="pie">de la v0 original a la v2</div></div>
+    <div class="cifra"><div class="rotulo">Cartas en el mazo</div><div class="valor">108</div><div class="pie">de siete tipos distintos</div></div>
+  </div>
+</section>
 
-    <section>
-      <h2>❓ Para validar en mesa</h2>
-      <div class="card">
-        <ul class="checklist">
-          <li>¿v2 en mesa se siente más dinámico que v1 (~151 turnos vs ~179 en 3v3)?</li>
-          <li>¿Trampa/Marca al pase (v2) es demasiado fuerte (~19 colocaciones/partido)?</li>
-          <li>¿Penales ~24–35% es demasiado frecuente?</li>
-        </ul>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <p>Fobal Facu · Simulador de cartas de fútbol</p>
+<section>
+  <h2>Lo que se aprendió</h2>
+  <div class="tarjeta">
+    <h3>La versión v2 es la más ágil en 3 contra 3</h3>
     <p>
-      <a id="repo-link" href="https://github.com/rmpato/fobal-facu">Ver código en GitHub</a>
-      · <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/guia-rapida.md">Guía rápida</a>
-      · <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/resultados-iniciales.md">Resultados (MD)</a>
+      Dura un 10 % menos que v1, casi nunca queda trabada y llega a penales menos
+      seguido. Sacar el «pasa de turno» liberó tiempo para jugar.
     </p>
-  </footer>
-  <script src="assets/js/main.js"></script>
+  </div>
+  <div class="tarjeta">
+    <h3>Con cuatro o cinco por equipo el partido se estira</h3>
+    <p>
+      Los mismos reglamentos que funcionan en 3 contra 3 dan partidos 35 % más
+      largos en 4 contra 4, y aparecen partidos que no se definen nunca. El juego
+      está afinado para tres.
+    </p>
+  </div>
+  <div class="tarjeta">
+    <h3>La marca personal casi nunca recupera la pelota</h3>
+    <p>
+      Se juega unas quince veces por partido y, contra un ataque atento, no roba
+      ninguna: alcanza con pasarle a otro. Funciona como amenaza, no como
+      recuperación. Es el próximo cambio a discutir.
+    </p>
+  </div>
+  <p><a href="resultados.html">Todos los números y cómo se obtuvieron →</a></p>
+</section>
+
+<section>
+  <h2>Para seguir</h2>
+  <div class="grilla-enlaces">
+    <a class="enlace-tarjeta" href="reglas.html">
+      <strong>Las reglas</strong>
+      <span>Todo lo que hace falta para jugar una partida.</span>
+    </a>
+    <a class="enlace-tarjeta" href="resultados.html">
+      <strong>Los resultados</strong>
+      <span>Qué dicen las simulaciones y qué conviene probar.</span>
+    </a>
+    <a class="enlace-tarjeta" href="como-funciona.html">
+      <strong>Cómo funciona</strong>
+      <span>Cómo juega un partido la computadora y qué mide.</span>
+    </a>
+    <a class="enlace-tarjeta" href="simulador.html">
+      <strong>Usar el simulador</strong>
+      <span>Cómo correrlo y cómo editar las reglas sin programar.</span>
+    </a>
+    <a class="enlace-tarjeta" href="replay.html">
+      <strong>Ver un partido</strong>
+      <span>Un partido simulado, jugada por jugada.</span>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer class="pie">
+  <p>Fobal Facu · juego de cartas y banco de pruebas</p>
+  <p><a id="enlace-repo" href="https://github.com/rmpato/fobal-facu">El código y las reglas en GitHub</a></p>
+</footer>
+
+<script src="assets/js/sitio.js"></script>
 </body>
 </html>

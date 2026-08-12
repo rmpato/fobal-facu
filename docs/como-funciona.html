@@ -1,219 +1,145 @@
 <!DOCTYPE html>
-<html lang="es-AR">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <base id="site-base" href="./">
-  <script>
-    (function () {
-      var el = document.getElementById("site-base");
-      if (location.hostname.endsWith("github.io")) {
-        var repo = location.pathname.split("/").filter(Boolean)[0];
-        if (repo) el.href = "/" + repo + "/";
-      }
-    })();
-  </script>
-  <title>Cómo funciona — Fobal Facu</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cómo funciona — Fobal Facu</title>
+<meta name="description" content="Cómo juega un partido el simulador de Fobal Facu, qué mide y qué cosas no puede modelar.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚽</text></svg>">
+<link rel="stylesheet" href="assets/css/estilo.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="header-inner">
-      <a class="logo" href="index.html">
-        <span class="logo-icon">⚽</span>
-        <span>Fobal Facu</span>
-      </a>
-      <nav>
-        <a href="index.html" data-page="index.html">Inicio</a>
-        <a href="reglas.html" data-page="reglas.html">Reglas</a>
-        <a href="resultados.html" data-page="resultados.html">Resultados</a>
-        <a href="recomendaciones.html" data-page="recomendaciones.html">Recomendaciones</a>
-        <a href="como-funciona.html" data-page="como-funciona.html">Cómo funciona</a>
-        <a href="simulador.html" data-page="simulador.html">Simulador</a>
-        <a href="replay.html" data-page="replay.html">Replay</a>
-        <a href="crear-reglamento.html" data-page="crear-reglamento.html">Crear reglamento</a>
-      </nav>
-    </div>
-  </header>
 
-  <main>
-    <div class="page-hero">
-      <p class="breadcrumb"><a href="index.html">Inicio</a> / Cómo funciona la simulación</p>
-      <h1>⚙️ Cómo funciona la simulación</h1>
-      <p class="lead">Qué hace el motor automático, qué decisiones toma la IA y cómo leer los números. Perfiles de IA → <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/perfiles-ia.md">perfiles-ia.md</a>. No reemplaza jugar en mesa — sirve para comparar reglas.</p>
-    </div>
+<header class="cabecera">
+  <div class="cabecera-interna">
+    <a class="logo" href="index.html">⚽ Fobal Facu</a>
+    <nav>
+      <a href="index.html" data-pagina="index.html">Inicio</a>
+      <a href="reglas.html" data-pagina="reglas.html">Reglas</a>
+      <a href="resultados.html" data-pagina="resultados.html">Resultados</a>
+      <a href="como-funciona.html" data-pagina="como-funciona.html">Cómo funciona</a>
+      <a href="simulador.html" data-pagina="simulador.html">Simulador</a>
+      <a href="replay.html" data-pagina="replay.html">Un partido</a>
+    </nav>
+  </div>
+</header>
 
-    <section>
-      <h2>Objetivo</h2>
-      <div class="card">
-        <p>Correr cientos de partidos en segundos para detectar:</p>
-        <ul class="findings">
-          <li>Partidos que no terminan o duran demasiado</li>
-          <li>Cartas dominantes o que nunca se usan</li>
-          <li>Efecto de cambiar una regla (variantes)</li>
-          <li>Distribución de acciones vs lo que pasa con humanos</li>
-        </ul>
-      </div>
-    </section>
+<main>
 
-    <section>
-      <h2>Ciclo de un partido</h2>
-      <div class="card">
-        <div class="flow-steps">
-          <div class="flow-step"><span class="flow-num">1</span><div><strong>Setup</strong><br>Mazo barajado, 6 cartas por jugador, sorteo de pelota inicial.</div></div>
-          <div class="flow-arrow">↓</div>
-          <div class="flow-step"><span class="flow-num">2</span><div><strong>Turno</strong><br>El portador juega carta (pase, disparo) o toma una <strong>decisión</strong> (pasa de turno en v1, reventar). La defensa reacciona con una carta por acción.</div></div>
-          <div class="flow-arrow">↓</div>
-          <div class="flow-step"><span class="flow-num">3</span><div><strong>¿Fin?</strong><br>≥3 goles → gana alguien. 2-2 → penales. &gt;500 turnos → empate técnico.</div></div>
-          <div class="flow-arrow">↓</div>
-          <div class="flow-step"><span class="flow-num">4</span><div><strong>Reposición</strong><br>v0: mano vacía → 6 cartas. v1: cambio de equipo → todos repone hasta 6.</div></div>
-        </div>
-      </div>
-    </section>
+<div class="entrada">
+  <p class="migas"><a href="index.html">Inicio</a> / Cómo funciona</p>
+  <h1>Cómo funciona</h1>
+  <p class="bajada">
+    El simulador juega partidos de verdad: reparte cartas, las gasta y tira los
+    dados. No estima con fórmulas. Por eso los números salen del juego y no de un
+    modelo aparte.
+  </p>
+</div>
 
-    <section>
-      <h2>Un turno v1 (detalle)</h2>
-      <div class="card">
-        <pre class="flow-diagram">Portador elige (IA)
-    │
-    ├─ ¿Falta? (8% prob.) → pases = 0, fin turno
-    │
-    ├─ Disparo al arco → 🎲 vs arquero → ¿gol?
-    │
-    ├─ Reventar (decisión, sin carta) → 🎲 duelo
-    │
-    ├─ Pasa de turno (decisión, sin carta) → defensa: Trampa / Marca
-    │
-    └─ Pase → ¿trampa offside activa? → pierde pelota
-              → ¿marca al receptor? → pierde pelota
-              → defensa: Robo pelota → ¿Gambetear?
-              → pase OK → nuevo portador (+1 pase en jugada)</pre>
-      </div>
-    </section>
+<section>
+  <h2>La idea</h2>
+  <div class="tarjeta">
+    <p style="margin:0">
+      <strong>Las reglas son datos.</strong> Cada versión del juego es un archivo
+      que describe el mazo, las manos, la tabla del dado y qué puede hacer cada
+      equipo. El programa no sabe qué es «v1» o «v2»: sabe jugar un turno
+      preguntándole al archivo qué está permitido. Por eso inventar una versión
+      nueva no requiere programar.
+    </p>
+  </div>
+  <pre><code>reglamento (archivo) → repartir → turno, turno, turno… → final → métricas</code></pre>
+</section>
 
-    <section>
-      <h2>Un turno v2 (detalle)</h2>
-      <p class="section-lead">Extiende v1 · sin pasa de turno · Trampa/Marca reactivas al pase · robo↔gambetear encadenables</p>
-      <div class="card highlight">
-        <pre class="flow-diagram">Portador elige (IA)
-    │
-    ├─ ¿Falta? (8% prob.) → pases = 0, fin turno
-    │
-    ├─ Disparo al arco → 🎲 vs arquero → ¿gol?
-    │
-    ├─ Reventar (decisión, sin carta) → 🎲 duelo
-    │
-    └─ Pase → ¿trampa offside activa? → pierde pelota
-              → ¿marca al receptor? → pierde pelota
-              → defensa (una carta): Robo / Trampa / Marca
-                    → Robo → ¿Gambetear? → ¿otro Robo? … (encadenable)
-              → pase OK → nuevo portador (+1 pase en jugada)</pre>
-        <p>Reglas completas → <a href="reglas.html">Reglas v2</a> · <a href="resultados.html#acciones-v2">Resultados v2</a></p>
-      </div>
-    </section>
+<section>
+  <h2>Un turno</h2>
+  <ol>
+    <li><strong>Falta.</strong> Cualquiera de los dos equipos puede cortar la jugada con esa carta.</li>
+    <li><strong>La acción del ataque.</strong> El que tiene la pelota elige entre lo que permite el reglamento y lo que tiene en la mano: pasar, patear, reventar o quedársela.</li>
+    <li><strong>Las trampas puestas de antes.</strong> Si había una trampa de offside armada, el pase es offside; si el receptor estaba marcado, la marca se cobra.</li>
+    <li><strong>La respuesta de la defensa.</strong> Una carta por acción, y el ataque puede anularla con <code>Gambetear</code>.</li>
+    <li><strong>Dónde queda la pelota.</strong> Si cambió de equipo, se limpian las trampas y el contador de pases vuelve a cero.</li>
+    <li><strong>Reposición.</strong> Se levantan cartas hasta el máximo de mano, cuando el reglamento lo indique.</li>
+  </ol>
+  <p>
+    El partido termina cuando un equipo llega a los goles necesarios, cuando el
+    marcador toca el valor que manda a penales, o cuando se agota el límite de
+    turnos.
+  </p>
+</section>
 
-    <section>
-      <h2>Dados 🎲</h2>
-      <div class="card">
-        <table>
-          <thead><tr><th>Situación</th><th>Quién tira</th><th>Resolución</th></tr></thead>
-          <tbody>
-            <tr><td>Disparo al arco</td><td>Pateador + arquero (1d6 c/u)</td><td>Tabla según pases en la jugada; v1: rebote y palo</td></tr>
-            <tr><td>Reventarla</td><td>1 por equipo (no el reventor)</td><td>Mayor dado gana la pelota</td></tr>
-            <tr><td>Penales</td><td>Pateador + arquero</td><td>Como disparo con 0 pases; muerte súbita si empatan</td></tr>
-          </tbody>
-        </table>
-        <p><small>Más pases antes del disparo = más números de dado válidos para gol.</small></p>
-      </div>
-    </section>
+<section>
+  <h2>Quién decide las jugadas</h2>
+  <p>
+    El programa calcula qué es legal; quién elige es un <strong>estilo de
+    juego</strong>: un conjunto de tendencias sobre cuánto le gusta rematar,
+    cuánto arriesga en defensa, cuánto guarda las contras. Hay nueve, desde el que
+    patea apenas puede hasta el que acumula pases sin rematar nunca.
+  </p>
+  <p>
+    Cambiar de estilo mueve los resultados tanto como cambiar una regla, así que
+    las comparaciones se corren siempre con el mismo estilo en los dos equipos.
+  </p>
+</section>
 
-    <section>
-      <h2>Perfiles de IA</h2>
-      <p class="section-lead">Dos perfiles <strong>clásicos</strong> (Directo / Táctico) + siete estilos nuevos. Detalle → <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/perfiles-ia.md">perfiles-ia.md</a></p>
-      <div class="compare-grid">
-        <div class="card">
-          <h3>Directo <small>(clásico)</small></h3>
-          <p><code>--ia simple</code></p>
-          <ul class="findings">
-            <li>Decisiones mayormente aleatorias</li>
-            <li>Casi no usa pasa de turno</li>
-            <li>Baseline del análisis histórico</li>
-          </ul>
-        </div>
-        <div class="card highlight">
-          <h3>Táctico <small>(clásico, default)</small></h3>
-          <p><code>--ia estrategica</code></p>
-          <ul class="findings">
-            <li>Cadena de pases antes de disparar</li>
-            <li>Pasa de turno a propósito</li>
-            <li>Defensa activa con Trampa/Marca</li>
-            <li>Usado en resultados-iniciales.md</li>
-          </ul>
-        </div>
-      </div>
-      <div class="card" style="margin-top:1rem">
-        <h3>Otros perfiles</h3>
-        <p>Presionante, Posicional, Arriesgado, Conservador, Adaptativo, Marcador, Contragolpista — ver <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/perfiles-ia.md">perfiles-ia.md</a>.</p>
-        <p>Modo espectador: <code>python3 -m simulador ver --ia-equipo0 agresiva --ia-equipo1 paciente</code></p>
-      </div>
-    </section>
+<section>
+  <h2>Por qué los números son repetibles</h2>
+  <p>
+    Cada partido tiene un número —una semilla— del que sale todo su azar: la
+    mezcla del mazo, los dados, las decisiones. Con la misma semilla, el partido se
+    repite jugada por jugada.
+  </p>
+  <p>
+    Una tanda usa semillas consecutivas, y todos los escenarios de una comparación
+    usan las mismas. Cuando dos versiones dan números distintos, la diferencia es
+    la regla y no la suerte.
+  </p>
+</section>
 
-    <section>
-      <h2>Métricas que registra</h2>
-      <div class="card">
-        <h3>Acciones (para comparar con mesa)</h3>
-        <p>Pase · Disparo · Robo · Reventar (decisión) · Pasa de turno (decisión) · Falta</p>
-        <p>Ver distribución actual en <a href="resultados.html">Resultados</a>.</p>
+<section>
+  <h2>Qué mide</h2>
+  <div class="desplaza">
+    <table>
+      <thead><tr><th>Métrica</th><th>Qué significa</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Partidos que se definen</strong></td><td>Los que terminaron antes del límite de turnos. Si baja, hay una regla que traba el juego.</td></tr>
+        <tr><td><strong>Goles por partido</strong></td><td>Los dos equipos juntos, sin contar penales.</td></tr>
+        <tr><td><strong>Turnos por partido</strong></td><td>La medida de ritmo más directa.</td></tr>
+        <tr><td><strong>Definidos por penales</strong></td><td>Cuántos se resolvieron afuera del juego.</td></tr>
+        <tr><td><strong>Reparto de acciones</strong></td><td>Cuánto pase, robo, remate, falta. El retrato del juego.</td></tr>
+        <tr><td><strong>Trampas y marcas</strong></td><td>Cuántas se pusieron y cuántas sirvieron de algo.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
 
-        <h3>Trampa / Marca</h3>
-        <p><strong>v1:</strong> colocadas cuando la defensa reacciona al <strong>pasa de turno</strong> (decisión).</p>
-        <p><strong>v2:</strong> colocadas al <strong>reaccionar a un pase</strong> (junto con Robo pelota). ~14 colocaciones/partido vs ~9,5 en v1.</p>
+<section>
+  <h2>Qué no puede saber</h2>
+  <p>
+    Conviene tenerlo presente antes de decidir algo mirando solo estos números:
+  </p>
+  <ul>
+    <li><strong>No hay engaño.</strong> Nadie guarda una carta para el momento justo ni hace como que no la tiene.</li>
+    <li><strong>No hay lectura del rival.</strong> Los estilos no aprenden ni se adaptan al otro equipo.</li>
+    <li><strong>No hay charla.</strong> En la mesa se pasa de turno por presión o para hacer tiempo; acá solo por probabilidad.</li>
+    <li><strong>No hay errores.</strong> Nadie se olvida una regla ni juega mal una carta, cosa que en la mesa pasa siempre.</li>
+  </ul>
+  <p>
+    Y sobre todo: ninguna simulación va a decir si el juego es divertido. Sirve
+    para descartar reglas rotas y comparar variantes; el resto se decide jugando.
+  </p>
+  <p class="nota">
+    Los supuestos que hubo que tomar donde la regla escrita no alcanzaba están
+    anotados uno por uno en <a href="ambiguedades.md">ambigüedades</a>.
+  </p>
+</section>
 
-        <h3>Partido</h3>
-        <p>Goles, turnos, penales, cartas jugadas, empates técnicos (&gt;500 turnos).</p>
-      </div>
-    </section>
+</main>
 
-    <section>
-      <h2>Variantes configurables</h2>
-      <div class="card">
-        <p>Se pueden probar reglas alternativas sin tocar código — archivo <code>configs/variantes.json</code>:</p>
-        <table>
-          <thead><tr><th>Variante</th><th>Efecto</th></tr></thead>
-          <tbody>
-            <tr><td><code>baseline</code> (= reglamento <strong>v1</strong>)</td><td>Pasa de turno sin respuesta → pelota queda igual</td></tr>
-            <tr><td><code>pasa_companero</code> (= reglamento <strong>v1.1</strong>)</td><td>Sin respuesta → pelota pasa a un compañero</td></tr>
-            <tr><td><code>v2</code> (reglamento formal)</td><td>Sin pasa turno; Trampa/Marca al pase; reacciones encadenables</td></tr>
-          </tbody>
-        </table>
-        <p><a href="simulador.html">Ver comandos para correr variantes →</a></p>
-      </div>
-    </section>
+<footer class="pie">
+  <p>Fobal Facu · juego de cartas y banco de pruebas</p>
+  <p><a id="enlace-repo" href="https://github.com/rmpato/fobal-facu">El código y las reglas en GitHub</a></p>
+</footer>
 
-    <section>
-      <h2>Limitaciones</h2>
-      <div class="card warn">
-        <ul class="findings">
-          <li><strong>No modela</strong> bluff, charla, estrategia de equipo coordinada.</li>
-          <li>La IA no juega como un humano experto — los % son <em>comparativos</em> entre reglas.</li>
-          <li>Algunas reglas tienen supuestos — ver <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/ambiguedades.md">ambiguedades.md</a>.</li>
-        </ul>
-        <table>
-          <thead><tr><th>Señal en sim</th><th>Posible lectura</th></tr></thead>
-          <tbody>
-            <tr><td>Muchos empates técnicos</td><td>Reglas o IA estancan el juego</td></tr>
-            <tr><td>Trampa/Marca ~0 (v1, IA simple)</td><td>IA no pasa de turno → no evalúa esas cartas</td></tr>
-            <tr><td>v2 · 100% completados</td><td>Partidos más cortos; validar ritmo en mesa</td></tr>
-            <tr><td>Penales &gt;30%</td><td>Muchos 2-2 — verificar en mesa</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <p><a href="index.html">← Inicio</a> · <a href="simulador.html">Correr simulaciones</a> · <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/como-funciona-simulacion.md">Versión MD</a></p>
-  </footer>
-  <script src="assets/js/main.js"></script>
+<script src="assets/js/sitio.js"></script>
 </body>
 </html>

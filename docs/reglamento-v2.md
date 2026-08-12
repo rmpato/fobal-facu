@@ -47,9 +47,9 @@ Igual que v1 (108 cartas). Ver tabla en [reglamento-v1.md](./reglamento-v1.md).
 ## Simulador
 
 ```bash
-python3 -m simulador reglamentos show v2
-python3 -m simulador run --reglamento v2 --partidos 200 --ia estrategica
-python3 -m simulador compare-reglamentos --partidos 200 --ia estrategica
+python3 -m simulador reglamentos v2
+python3 -m simulador simular v2 --partidos 500
+python3 -m simulador comparar v1 v2 --partidos 500
 ```
 
 Simulaciones batch: **3 vs 3** por defecto (`--jugadores-por-equipo 3`).

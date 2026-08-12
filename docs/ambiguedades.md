@@ -1,81 +1,119 @@
-# Ambigüedades y supuestos del simulador
+# Reglas sin cerrar y supuestos del motor
 
-Reglas confirmadas en playtesting y supuestos que aún faltan cerrar.
+Las reglas escritas no siempre alcanzan para simular: en la mesa se resuelven
+mirándose y siguiendo. El simulador tiene que tomar una decisión sí o sí, y acá
+quedan anotadas todas.
 
-## Confirmado por el grupo
+Si alguna no coincide con cómo se juega, se ajusta: casi todas son un campo del
+reglamento ([reglamentos-json.md](reglamentos-json.md)) o unas líneas de
+`motor.py`.
 
-### Equipos
+---
 
-- Mínimo **2 jugadores por equipo**.
+## Confirmado en playtesting
 
-### Marcador 2-2
+Esto ya está decidido y el simulador lo respeta:
 
-- Si el marcador llega a **2-2**, el partido va **inmediatamente a penales** (sin seguir jugando).
+- **Mínimo 2 jugadores por equipo.**
+- **El 2-2 va directo a penales**, sin seguir jugando.
+- **Reventar la pelota:** cada equipo elige quién tira el dado, y no puede ser el
+  que reventó. El simulador elige al azar entre los que pueden.
+- **Pasar de turno y reventar no son cartas**, son decisiones: no hace falta tener
+  nada en la mano para hacerlas.
+- **Trampa de offside y marca personal se ponen y quedan esperando**: surten
+  efecto en el próximo pase del ataque. En v1 se juegan cuando el ataque pasa de
+  turno; en v2, como respuesta a un pase.
 
-### Trampa de offside y Marca personal
+---
 
-- **Solo** se pueden jugar cuando el ataque **pasa de turno** (cede el turno / retiene la pelota sin pasar ni disparar).
-- **No** se juegan en respuesta a un pase.
-- Una vez colocadas, surten efecto en el **próximo pase** del ataque (offside o marca al receptor).
+## Supuestos que tomó el simulador
 
-### Reventarla — quién tira el dado
+### Cómo se gana
 
-- Cada equipo **elige** quién tira — **cualquier jugador**, salvo el que reventó la pelota.
-- El simulador elige al azar entre los compañeros del reventor (equipo atacante) y cualquier defensor (equipo rival).
+**La regla dice:** «partido al mejor de 5 goles; si empatan 2-2, van a penales».
 
-### Pasa de turno — no es una carta
+**El simulador asume:** gana el primero que llega a **3 goles**; si el marcador
+llega a **2-2**, penales inmediatos.
 
-- **Pasa de turno** (v0: ceder el turno) es una **decisión** del portador: retener la pelota sin jugar `Pase` ni `Disparo al arco`.
-- No existe carta “Pasa de turno” en el mazo. La regla **habilita** la acción, igual que **Reventar la pelota** en v1.
-- Trampa de offside y Marca personal solo se juegan cuando la defensa **reacciona** a esa decisión.
+«Al mejor de 5» admite otra lectura (jugar cinco goles completos). Si en la mesa
+se juega distinto, son dos números en **Reglas → Partido**.
 
-## Objetivo del partido
+### Los penales
 
-**Texto:** "Partido al mejor de 5 goles, si empatan 2-2 va a penales."
+**La regla dice:** una ronda de tres penales por equipo; si siguen iguales, uno
+por equipo y el que erra pierde.
 
-**Supuesto del simulador:**
+**El simulador asume:** tantos penales como jugadores por equipo (tres en 3 vs 3),
+resueltos con la tabla de cero pases, y después muerte súbita de a un penal por
+lado. También aplica el rebote y el palo si el reglamento los tiene, igual que en
+el juego.
 
-- Si un equipo llega a **3 goles** → gana el partido (3-0, 3-1, 3-2, etc.).
-- Si el marcador llega a **2-2** → **penales inmediatos**.
+### Cuándo se juega la `Falta`
 
-> ⚠️ "Mejor de 5" puede interpretarse distinto. Si en la mesa juegan otro criterio, avisen y lo ajustamos.
+**El simulador asume:** en cualquier momento del turno, por cualquiera de los dos
+equipos, antes de resolver la acción. Efecto: la pelota se queda en el mismo
+equipo y el contador de pases vuelve a cero.
 
-## Penales
+La frecuencia es un número del reglamento: la chance de que alguien que tiene la
+carta la juegue en ese turno (8 % por defecto). Es el supuesto más difícil de
+calibrar sin datos de mesa, y el que más afecta la duración del partido.
 
-**Texto:** ronda de 3 penales por equipo; si empatan, un penal y el que erra pierde.
+### A quién se marca
 
-**Supuesto:**
+**El simulador asume:** la marca se pone sobre un rival que **no** tiene la
+pelota. Si después le pasan a ese jugador, la defensa recupera.
 
-- Cada penal = un dado del pateador vs un dado del arquero, con tabla de 0 pases en la jugada.
-- Serie de 3: anota quien gana más de los 3.
-- Empate en la serie → **muerte súbita**: un penal por ronda hasta que uno anote y el otro no.
+Queda abierto si debería poder marcarse al que tiene la pelota, y si la marca
+tendría que durar más de un pase. Ver
+[recomendaciones.md](recomendaciones.md#ajustar-la-marca-personal).
 
-## Marca personal — receptor
+### Cuántas cartas responde la defensa
 
-**Supuesto:** el pase va a un compañero **elegido** por el atacante. Si ese compañero está marcado, la defensa recupera (salvo `La dejo pasar` en v0).
+**El simulador asume:** una carta por acción del ataque, en todo el equipo. Si el
+reglamento permite encadenar (v2), después de una gambeta la defensa puede volver
+a responder mientras le queden cartas.
 
-## Falta — cuándo se puede jugar
+### En qué orden se resuelve un pase
 
-**Supuesto:** en cualquier momento del turno, por cualquier jugador de cualquier equipo, **antes** de resolver la acción ofensiva o como interrupción. Efecto: pelota no cambia de equipo, contador de pases = 0.
+Cuando hay varias cosas en juego a la vez, el orden es:
 
-## Robo vs Gambetear — orden de respuesta
+1. las trampas puestas de antes (offside, marca);
+2. la reacción de la defensa (robo, o poner una trampa nueva);
+3. la contra del ataque;
+4. la pelota llega al receptor.
 
-**Supuesto:** defensa juega robo → atacante puede responder Gambetear **inmediatamente** si tiene la carta. Si no, pierde la pelota.
+Consecuencia: si el pase ya estaba condenado por una trampa, la defensa no gasta
+además una carta de robo.
 
-## Reventarla (v1)
+### Quién juega la contra
 
-Ver regla confirmada arriba. El motor elige tiradores al azar entre los jugadores elegibles (equivalente a una elección libre en mesa).
+**El simulador asume:** la juega quien la tenga en la mano, y si la tienen los
+dos, prefiere al receptor del pase. `Gambetear` la juega normalmente el que tiene
+la pelota; `La dejo pasar`, el que la recibe.
 
-## Reposición v1
+### La reposición
 
-**Texto:** "cuando la pelota pasa de un equipo al otro"
+**La regla dice (v1):** «cuando la pelota pasa de un equipo al otro».
 
-**Supuesto:** **todos** los jugadores del juego repone hasta 6, no solo el equipo que ganó la pelota.
+**El simulador asume:** reponen **todos** los jugadores, no solo el equipo que
+recuperó. Es configurable en **Reglas → Manos y reposición**.
 
-## Fin del mazo
+### Cuando se termina el mazo
 
-**Supuesto:** al repone, si el mazo está vacío se baraja el descarte y sigue. Si no hay descarte, ese jugador repone menos cartas.
+**El simulador asume:** se baraja el descarte y se sigue repartiendo. Si tampoco
+hay descarte, ese jugador levanta menos cartas y el partido continúa.
 
-## Límite de turnos
+### Partidos que no terminan
 
-**Supuesto:** si un partido supera **500 turnos** sin definirse, se declara empate técnico y se registra en estadísticas (señal de posible loop de reglas).
+**El simulador asume:** a los 500 turnos corta y lo registra como partido **sin
+definir**. No es una regla de mesa: es el detector de reglas que traban el juego.
+Cuando ese número sube, hay algo que permite dar vueltas sin avanzar (le pasaba a
+v0: ningún partido terminaba).
+
+---
+
+## Lo que el simulador no puede responder
+
+Ninguna simulación va a decir si el juego es divertido, si una carta se entiende
+sin explicarla o si la mesa se ríe. Los números sirven para descartar reglas rotas
+y comparar variantes; el resto se decide jugando.

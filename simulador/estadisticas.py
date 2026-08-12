@@ -1,265 +1,312 @@
-"""Agregación de estadísticas de simulaciones."""
+"""Simulación en lote y métricas.
+
+Un escenario es una combinación de reglamento, formato (jugadores por equipo) y
+perfiles de juego. Simular un escenario muchas veces con semillas consecutivas
+da números repetibles: la misma orden produce siempre el mismo resultado.
+"""
 
 from __future__ import annotations
 
+from collections import Counter
 from dataclasses import dataclass, field
+from typing import Any, Callable, Iterable
 
-from simulador.config import ConfigSimulacion
-from simulador.motor import jugar_partido
+from simulador.ia import AgenteIA, perfil
+from simulador.motor import crear_partido, jugar_partido
+from simulador.reglamento import Reglamento, cargar
 
-ACCIONES_REPORTE = ("pase", "disparo", "robo", "despeje", "pasa_turno", "falta")
-ETIQUETAS_ACCION = {
+#: Acciones del ataque y de la defensa que suman al reparto porcentual.
+ACCIONES = ("pase", "disparo", "reventar", "pasa_turno", "robo", "falta")
+
+#: Eventos de trampa y marca, que se informan aparte.
+TRAMPAS = (
+    "trampa_colocada",
+    "offside_efectivo",
+    "marca_colocada",
+    "marca_efectiva",
+    "marca_evitada",
+)
+
+ETIQUETAS = {
+    "pase": "pase",
+    "disparo": "disparo al arco",
+    "reventar": "reventar (decisión)",
     "pasa_turno": "pasa de turno (decisión)",
-    "despeje": "reventar / despeje (decisión)",
+    "robo": "recuperación de la defensa",
+    "falta": "falta",
+    "trampa_colocada": "trampas de offside puestas",
+    "offside_efectivo": "offsides cobrados",
+    "marca_colocada": "marcas personales puestas",
+    "marca_efectiva": "marcas que recuperaron la pelota",
+    "marca_evitada": "pases desviados por la marca",
+    "contra": "contras del ataque (Gambetear / La dejo pasar)",
+    "gol": "goles en juego",
 }
-ACCIONES_TRAMPA = ("trampa_colocada", "marca_colocada", "offside_efectivo", "marca_efectiva")
+
+
+@dataclass(frozen=True)
+class Escenario:
+    """Qué se simula: un reglamento, un formato y unos perfiles."""
+
+    reglamento: str = "v1"
+    jugadores_por_equipo: int = 3
+    perfil: str = "estrategica"
+    perfil_equipo1: str | None = None
+    perfil_equipo2: str | None = None
+
+    @property
+    def formato(self) -> str:
+        return f"{self.jugadores_por_equipo}v{self.jugadores_por_equipo}"
+
+    @property
+    def etiqueta(self) -> str:
+        nombre = lambda p: perfil(p).nombre  # noqa: E731
+        perfiles = nombre(self.perfil)
+        if self.perfil_equipo1 or self.perfil_equipo2:
+            perfiles = (
+                f"{nombre(self.perfil_equipo1 or self.perfil)} vs "
+                f"{nombre(self.perfil_equipo2 or self.perfil)}"
+            )
+        return f"{self.reglamento} · {self.formato} · {perfiles}"
+
+    def a_dict(self) -> dict[str, Any]:
+        return {
+            "reglamento": self.reglamento,
+            "jugadores_por_equipo": self.jugadores_por_equipo,
+            "perfil": self.perfil,
+            "perfil_equipo1": self.perfil_equipo1,
+            "perfil_equipo2": self.perfil_equipo2,
+            "formato": self.formato,
+            "etiqueta": self.etiqueta,
+        }
+
+    @classmethod
+    def desde_dict(cls, data: dict[str, Any]) -> Escenario:
+        return cls(
+            reglamento=str(data.get("reglamento", "v1")),
+            jugadores_por_equipo=int(data.get("jugadores_por_equipo", 3)),
+            perfil=str(data.get("perfil", "estrategica")),
+            perfil_equipo1=data.get("perfil_equipo1") or None,
+            perfil_equipo2=data.get("perfil_equipo2") or None,
+        )
 
 
 @dataclass
-class ResultadosSimulacion:
-    reglamento: str
-    partidos: int
-    config: ConfigSimulacion | None = None
-    victorias: list[int] = field(default_factory=lambda: [0, 0])
-    empates_tecnicos: int = 0
-    penales: int = 0
-    turnos_total: int = 0
-    goles_total: int = 0
-    barajadas_total: int = 0
-    cartas_jugadas: dict[str, int] = field(default_factory=dict)
-    acciones: dict[str, int] = field(default_factory=dict)
+class Resultado:
+    """Lo que dejó una tanda de partidos."""
 
-    @property
-    def reglas(self) -> str:
-        """Alias histórico."""
-        return self.reglamento
+    escenario: Escenario
+    partidos: int = 0
+    victorias: list[int] = field(default_factory=lambda: [0, 0])
+    sin_definir: int = 0
+    penales: int = 0
+    turnos: int = 0
+    goles: int = 0
+    barajadas: int = 0
+    acciones: Counter[str] = field(default_factory=Counter)
+    cartas: Counter[str] = field(default_factory=Counter)
 
     @property
     def turnos_promedio(self) -> float:
-        return self.turnos_total / self.partidos if self.partidos else 0
+        return self.turnos / self.partidos if self.partidos else 0.0
 
     @property
     def goles_promedio(self) -> float:
-        return self.goles_total / self.partidos if self.partidos else 0
+        return self.goles / self.partidos if self.partidos else 0.0
 
     @property
-    def limite_turnos(self) -> int:
-        return self.config.limite_turnos if self.config else 500
+    def pct_completados(self) -> float:
+        if not self.partidos:
+            return 0.0
+        return 100 * (self.partidos - self.sin_definir) / self.partidos
 
-    def pct_acciones(self) -> dict[str, float]:
-        total = sum(self.acciones.get(a, 0) for a in ACCIONES_REPORTE)
-        if total == 0:
-            return {a: 0.0 for a in ACCIONES_REPORTE}
-        return {a: 100 * self.acciones.get(a, 0) / total for a in ACCIONES_REPORTE}
+    @property
+    def pct_penales(self) -> float:
+        return 100 * self.penales / self.partidos if self.partidos else 0.0
+
+    def por_partido(self, clave: str) -> float:
+        return self.acciones.get(clave, 0) / self.partidos if self.partidos else 0.0
+
+    def reparto_acciones(self) -> dict[str, float]:
+        """Porcentaje de cada acción sobre el total de acciones."""
+        total = sum(self.acciones.get(a, 0) for a in ACCIONES)
+        if not total:
+            return {a: 0.0 for a in ACCIONES}
+        return {a: 100 * self.acciones.get(a, 0) / total for a in ACCIONES}
+
+    def a_dict(self) -> dict[str, Any]:
+        return {
+            "escenario": self.escenario.a_dict(),
+            "partidos": self.partidos,
+            "victorias": self.victorias,
+            "sin_definir": self.sin_definir,
+            "penales": self.penales,
+            "pct_completados": round(self.pct_completados, 1),
+            "pct_penales": round(self.pct_penales, 1),
+            "turnos_promedio": round(self.turnos_promedio, 1),
+            "goles_promedio": round(self.goles_promedio, 2),
+            "barajadas_por_partido": round(
+                self.barajadas / self.partidos if self.partidos else 0, 2
+            ),
+            "reparto_acciones": {k: round(v, 1) for k, v in self.reparto_acciones().items()},
+            "por_partido": {
+                clave: round(self.por_partido(clave), 2)
+                for clave in (*ACCIONES, *TRAMPAS, "contra", "gol")
+            },
+            "cartas": dict(self.cartas.most_common()),
+        }
 
 
-def simular_lote(
-    reglas: str = "v1",
-    reglamento: str | None = None,
-    partidos: int = 100,
-    jugadores_por_equipo: int = 3,
-    verbose: bool = False,
-    config: ConfigSimulacion | None = None,
-) -> ResultadosSimulacion:
-    if config is None:
-        config = ConfigSimulacion(
-            reglamento=reglamento or reglas,
-            jugadores_por_equipo=jugadores_por_equipo,
-        )
-    reglamento_id = config.reglamento
-    res = ResultadosSimulacion(reglamento=reglamento_id, partidos=partidos, config=config)
+def simular(
+    escenario: Escenario,
+    partidos: int = 200,
+    *,
+    semilla_base: int = 0,
+    progreso: Callable[[int, int], None] | None = None,
+) -> Resultado:
+    """Corre ``partidos`` partidos del escenario con semillas consecutivas."""
+    reg = cargar(escenario.reglamento)
+    res = Resultado(escenario=escenario, partidos=partidos)
 
     for i in range(partidos):
-        estado = jugar_partido(config=config, semilla=i, verbose=verbose)
-        goles = estado.marcador.goles
-        res.goles_total += sum(goles)
-        res.turnos_total += estado.turnos
-        res.barajadas_total += estado.barajadas_descarte
+        estado = crear_partido(
+            reg,
+            jugadores_por_equipo=escenario.jugadores_por_equipo,
+            semilla=semilla_base + i,
+        )
+        jugar_partido(estado=estado, agente=agente_de(escenario, rng=estado.rng))
+        _acumular(res, estado, reg)
+        if progreso and (i + 1) % 25 == 0:
+            progreso(i + 1, partidos)
 
-        if estado.definido_por_penales:
-            res.penales += 1
-
-        if estado.turnos >= config.limite_turnos:
-            res.empates_tecnicos += 1
-        else:
-            if goles[0] > goles[1]:
-                res.victorias[0] += 1
-            elif goles[1] > goles[0]:
-                res.victorias[1] += 1
-
-        for carta, n in estado.cartas_jugadas.items():
-            res.cartas_jugadas[carta] = res.cartas_jugadas.get(carta, 0) + n
-        for accion, n in estado.acciones.items():
-            res.acciones[accion] = res.acciones.get(accion, 0) + n
-
+    if progreso:
+        progreso(partidos, partidos)
     return res
 
 
-def simular_variantes(
-    configs: list[ConfigSimulacion],
-    partidos: int,
-) -> list[ResultadosSimulacion]:
-    return [simular_lote(partidos=partidos, config=c) for c in configs]
+def _acumular(res: Resultado, estado, reg: Reglamento) -> None:
+    goles = estado.marcador.goles
+    res.goles += sum(goles)
+    res.turnos += estado.turno
+    res.barajadas += estado.barajadas
+    res.acciones.update(estado.acciones)
+    res.cartas.update(estado.cartas_jugadas)
+    if estado.definido_por_penales:
+        res.penales += 1
+    if estado.motivo_fin == "limite_turnos":
+        res.sin_definir += 1
+    elif goles[0] != goles[1]:
+        res.victorias[0 if goles[0] > goles[1] else 1] += 1
 
 
-def formatear_reporte(res: ResultadosSimulacion) -> str:
-    reg = res.config.reglamento_resuelto if res.config else None
-    titulo = f"=== Simulación · reglamento {res.reglamento}"
-    if reg:
-        titulo += f" · {reg.nombre}"
-    titulo += f" ({res.partidos} partidos)"
-    if res.config:
-        titulo += (
-            f" · {res.config.jugadores_por_equipo}v{res.config.jugadores_por_equipo}"
-            f" · {res.config.nombre_variante} · ia={res.config.ia}"
-        )
-    titulo += " ==="
+def simular_varios(
+    escenarios: Iterable[Escenario],
+    partidos: int = 200,
+    *,
+    semilla_base: int = 0,
+    progreso: Callable[[int, int], None] | None = None,
+) -> list[Resultado]:
+    return [
+        simular(e, partidos, semilla_base=semilla_base, progreso=progreso)
+        for e in escenarios
+    ]
 
-    lineas = [titulo]
-    if reg:
-        if reg.documento:
-            lineas.append(f"Documento: {reg.documento}")
-        lineas.extend(["Reglas aplicadas:"])
-        for item in reg.resumen_reglas()[1:]:  # omitir doc duplicado
-            lineas.append(f"  · {item}")
+
+# --- salida de texto -------------------------------------------------------
+
+
+def formatear_resultado(res: Resultado, *, con_reglas: bool = True) -> str:
+    reg = cargar(res.escenario.reglamento)
+    lineas = [
+        f"=== {reg.nombre} ({reg.id}) · {res.escenario.formato} · "
+        f"{res.partidos} partidos · perfil {perfil(res.escenario.perfil).nombre} ===",
+    ]
+    if con_reglas:
         lineas.append("")
+        lineas.append("Reglas aplicadas:")
+        lineas += [f"  · {linea}" for linea in reg.resumen()]
 
-    lineas.extend(
-        [
-            f"Victorias equipo 0: {res.victorias[0]} ({100 * res.victorias[0] / res.partidos:.1f}%)",
-            f"Victorias equipo 1: {res.victorias[1]} ({100 * res.victorias[1] / res.partidos:.1f}%)",
-            f"Empates técnicos (>{res.limite_turnos} turnos): {res.empates_tecnicos}",
-            f"Partidos definidos por penales: {res.penales}",
-            f"Turnos promedio: {res.turnos_promedio:.1f}",
-            f"Goles promedio: {res.goles_promedio:.2f}",
-            f"Barajadas de descarte (total): {res.barajadas_total}",
-            "",
-            "Acciones (% del total):",
-        ]
-    )
-    pct = res.pct_acciones()
-    for accion in ACCIONES_REPORTE:
-        n = res.acciones.get(accion, 0)
-        por_partido = n / res.partidos if res.partidos else 0
-        etiqueta = ETIQUETAS_ACCION.get(accion, accion)
-        lineas.append(f"  {etiqueta}: {pct[accion]:5.1f}%  ({por_partido:.2f}/partido)")
-
-    trampa_total = sum(res.acciones.get(a, 0) for a in ACCIONES_TRAMPA)
-    if trampa_total:
-        lineas.extend(["", "Trampa / Marca:"])
-        for accion in ACCIONES_TRAMPA:
-            n = res.acciones.get(accion, 0)
-            if n:
-                lineas.append(f"  {accion}: {n} ({n / res.partidos:.2f}/partido)")
-
-    lineas.extend(["", "Cartas jugadas (top):"])
-    top = sorted(res.cartas_jugadas.items(), key=lambda x: -x[1])
-    for carta, n in top:
-        por_partido = n / res.partidos
-        lineas.append(f"  {carta}: {n} ({por_partido:.2f}/partido)")
-    return "\n".join(lineas)
-
-
-def formatear_comparacion_variantes(resultados: list[ResultadosSimulacion]) -> str:
-    jpe = resultados[0].config.jugadores_por_equipo if resultados and resultados[0].config else 3
-    lineas = [
-        "=== Comparación de variantes ===",
-        f"({jpe} vs {jpe} · {resultados[0].partidos if resultados else 0} partidos c/u)",
-        "",
-    ]
-    header = f"{'Variante':<18} {'Compl.':>7} {'Goles':>6} {'Turnos':>7} {'Pen.':>5} {'Pase%':>6} {'PasaT%':>7} {'Trampa':>7}"
-    lineas.append(header)
-    lineas.append("-" * len(header))
-
-    for res in resultados:
-        completados = res.partidos - res.empates_tecnicos
-        pct_compl = 100 * completados / res.partidos if res.partidos else 0
-        pct = res.pct_acciones()
-        trampa = res.acciones.get("trampa_colocada", 0) / res.partidos
-        nombre = res.config.nombre_variante if res.config else "?"
-        lineas.append(
-            f"{nombre:<18} {pct_compl:6.1f}% {res.goles_promedio:6.2f} {res.turnos_promedio:7.1f} "
-            f"{100 * res.penales / res.partidos:4.1f}% {pct['pase']:5.1f}% {pct['pasa_turno']:6.1f}% {trampa:7.2f}"
+    total_victorias = sum(res.victorias)
+    reparto_victorias = ""
+    if total_victorias:
+        reparto_victorias = (
+            f"  ({100 * res.victorias[0] / total_victorias:.0f}% / "
+            f"{100 * res.victorias[1] / total_victorias:.0f}%)"
         )
-    return "\n".join(lineas)
-
-
-def formatear_comparacion_reglamentos(resultados: list[ResultadosSimulacion]) -> str:
-    jpe = resultados[0].config.jugadores_por_equipo if resultados and resultados[0].config else 3
-    lineas = [
-        "=== Comparación de reglamentos ===",
-        f"({jpe} vs {jpe} · {resultados[0].partidos if resultados else 0} partidos c/u)",
+    lineas += [
         "",
+        f"Partidos definidos      {res.pct_completados:5.1f}%  "
+        f"({res.partidos - res.sin_definir} de {res.partidos})",
+        f"Definidos por penales   {res.pct_penales:5.1f}%",
+        f"Goles por partido       {res.goles_promedio:5.2f}",
+        f"Turnos por partido      {res.turnos_promedio:5.1f}",
+        f"Victorias equipo 1 / 2  {res.victorias[0]} / {res.victorias[1]}{reparto_victorias}",
+        f"Barajadas del descarte  {res.barajadas / res.partidos:5.2f} por partido"
+        if res.partidos
+        else "Barajadas del descarte  —",
+        "",
+        "Acciones (reparto y frecuencia por partido):",
     ]
-    header = (
-        f"{'Reglamento':<10} {'Compl.':>7} {'Goles':>6} {'Turnos':>7} "
-        f"{'Pen.':>5} {'Pase%':>6} {'PasaT%':>7} {'Trampa':>7}"
-    )
-    lineas.append(header)
-    lineas.append("-" * len(header))
-
-    for res in resultados:
-        completados = res.partidos - res.empates_tecnicos
-        pct_compl = 100 * completados / res.partidos if res.partidos else 0
-        pct = res.pct_acciones()
-        trampa = res.acciones.get("trampa_colocada", 0) / res.partidos
+    reparto = res.reparto_acciones()
+    for accion in ACCIONES:
         lineas.append(
-            f"{res.reglamento:<10} {pct_compl:6.1f}% {res.goles_promedio:6.2f} {res.turnos_promedio:7.1f} "
-            f"{100 * res.penales / res.partidos:4.1f}% {pct['pase']:5.1f}% {pct['pasa_turno']:6.1f}% {trampa:7.2f}"
+            f"  {ETIQUETAS[accion]:<28} {reparto[accion]:5.1f}%   "
+            f"{res.por_partido(accion):6.2f} por partido"
         )
+
+    trampas = [t for t in TRAMPAS if res.acciones.get(t)]
+    if trampas:
+        lineas += ["", "Trampa de offside y marca personal:"]
+        for clave in trampas:
+            lineas.append(f"  {ETIQUETAS[clave]:<38} {res.por_partido(clave):6.2f} por partido")
+
+    lineas += ["", "Cartas jugadas por partido:"]
+    for carta, veces in res.cartas.most_common():
+        lineas.append(f"  {carta:<20} {veces / res.partidos:6.2f}")
     return "\n".join(lineas)
 
 
-def simular_comparacion_formatos(
-    reglamentos: list[str],
-    formatos: list[int],
-    partidos: int,
-    ia: str = "estrategica",
-) -> list[ResultadosSimulacion]:
-    configs = [
-        ConfigSimulacion(reglamento=reg_id, jugadores_por_equipo=jpe, ia=ia)
-        for jpe in formatos
-        for reg_id in reglamentos
-    ]
-    return simular_variantes(configs, partidos=partidos)
+COLUMNAS = (
+    ("Reglamento", 12, lambda r: r.escenario.reglamento),
+    ("Formato", 8, lambda r: r.escenario.formato),
+    ("Definidos", 10, lambda r: f"{r.pct_completados:.1f}%"),
+    ("Goles", 7, lambda r: f"{r.goles_promedio:.2f}"),
+    ("Turnos", 8, lambda r: f"{r.turnos_promedio:.1f}"),
+    ("Penales", 8, lambda r: f"{r.pct_penales:.1f}%"),
+    ("Pase", 7, lambda r: f"{r.reparto_acciones()['pase']:.0f}%"),
+    ("Robo", 7, lambda r: f"{r.reparto_acciones()['robo']:.0f}%"),
+    ("Disparo", 8, lambda r: f"{r.reparto_acciones()['disparo']:.0f}%"),
+    ("Trampas", 9, lambda r: f"{r.por_partido('trampa_colocada'):.1f}"),
+    ("Marcas", 8, lambda r: f"{r.por_partido('marca_colocada'):.1f}"),
+    ("Marcas OK", 10, lambda r: f"{r.por_partido('marca_efectiva'):.1f}"),
+)
 
 
-def formatear_comparacion_formatos(resultados: list[ResultadosSimulacion]) -> str:
+def formatear_tabla(resultados: list[Resultado], titulo: str = "Comparación") -> str:
+    """Tabla de una fila por escenario, para comparar de un vistazo."""
     if not resultados:
-        return "=== Comparación v1 vs v2 · formatos ===\n\n(sin resultados)"
-
-    partidos = resultados[0].partidos
+        return f"{titulo}: sin resultados"
+    encabezado = "".join(nombre.ljust(ancho) for nombre, ancho, _ in COLUMNAS)
     lineas = [
-        "=== Comparación v1 vs v2 · formatos ===",
-        f"({partidos} partidos c/u · IA estratégica)",
+        f"=== {titulo} ({resultados[0].partidos} partidos por escenario) ===",
         "",
+        encabezado,
+        "-" * len(encabezado),
     ]
-    header = (
-        f"{'Reg':<4} {'Fmt':>4} {'Compl.':>7} {'Goles':>6} {'Turnos':>7} "
-        f"{'Pen.':>5} {'Pase%':>6} {'Desp%':>6} {'Robo%':>6} "
-        f"{'Trampa':>7} {'Marca':>7}"
-    )
-    lineas.append(header)
-    lineas.append("-" * len(header))
-
-    for res in sorted(
-        resultados,
-        key=lambda r: (
-            r.config.jugadores_por_equipo if r.config else 0,
-            r.reglamento,
-        ),
-    ):
-        jpe = res.config.jugadores_por_equipo if res.config else 0
-        completados = res.partidos - res.empates_tecnicos
-        pct_compl = 100 * completados / res.partidos if res.partidos else 0
-        pct = res.pct_acciones()
-        trampa = res.acciones.get("trampa_colocada", 0) / res.partidos
-        marca = res.acciones.get("marca_colocada", 0) / res.partidos
-        fmt = f"{jpe}v{jpe}"
-        lineas.append(
-            f"{res.reglamento:<4} {fmt:>4} {pct_compl:6.1f}% {res.goles_promedio:6.2f} "
-            f"{res.turnos_promedio:7.1f} {100 * res.penales / res.partidos:4.1f}% "
-            f"{pct['pase']:5.1f}% {pct['despeje']:5.1f}% {pct['robo']:5.1f}% "
-            f"{trampa:7.2f} {marca:7.2f}"
-        )
+    for res in resultados:
+        lineas.append("".join(str(valor(res)).ljust(ancho) for _, ancho, valor in COLUMNAS))
+    lineas += [
+        "",
+        "Definidos = partidos que terminaron antes del límite de turnos.",
+        "Marcas OK = marcas personales que efectivamente recuperaron la pelota.",
+    ]
     return "\n".join(lineas)
+
+
+def agente_de(escenario: Escenario, rng=None) -> AgenteIA:
+    return AgenteIA(
+        escenario.perfil,
+        equipo0=escenario.perfil_equipo1,
+        equipo1=escenario.perfil_equipo2,
+        rng=rng,
+    )

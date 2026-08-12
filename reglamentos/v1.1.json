@@ -1,10 +1,11 @@
 {
   "id": "v1.1",
   "nombre": "Iteración 1.1 — pasa al compañero",
-  "version": "1.1",
-  "documento": "docs/reglamento-v1.1.md",
-  "descripcion": "Igual que v1, pero si nadie reacciona al pasa de turno la pelota pasa a un compañero (variante de playtesting).",
   "extends": "v1",
+  "version": "1.1",
+  "descripcion": "Igual que v1, pero si el ataque pasa de turno y la defensa no responde, la pelota queda en un compañero en lugar de quedarse en el mismo jugador.",
+  "documento": "docs/reglamento-v1.1.md",
+  "activo": false,
   "reglas": {
     "pasa_turno_sin_respuesta": "pasa_companero"
   }

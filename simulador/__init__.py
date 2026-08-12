@@ -1,3 +1,10 @@
-"""Simulador de partidos para el juego de cartas fobal-facu."""
+"""Simulador de partidos del juego de cartas Fobal Facu.
 
-__version__ = "0.1.0"
+El motor lee un reglamento (``reglamentos/*.json``), juega partidos y devuelve
+métricas. Todo lo que cambia entre versiones del juego vive en el reglamento,
+no en el código.
+"""
+
+__version__ = "2.0"
+
+__all__ = ["__version__"]
