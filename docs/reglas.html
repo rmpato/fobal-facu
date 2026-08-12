@@ -1,217 +1,238 @@
 <!DOCTYPE html>
-<html lang="es-AR">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <base id="site-base" href="./">
-  <script>
-    (function () {
-      var el = document.getElementById("site-base");
-      if (location.hostname.endsWith("github.io")) {
-        var repo = location.pathname.split("/").filter(Boolean)[0];
-        if (repo) el.href = "/" + repo + "/";
-      }
-    })();
-  </script>
-  <title>Reglas — Fobal Facu</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reglas — Fobal Facu</title>
+<meta name="description" content="Las reglas completas de Fobal Facu: mano, acciones, reacciones de la defensa, disparo al arco, reventar la pelota y penales.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚽</text></svg>">
+<link rel="stylesheet" href="assets/css/estilo.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="header-inner">
-      <a class="logo" href="index.html">
-        <span class="logo-icon">⚽</span>
-        <span>Fobal Facu</span>
-      </a>
-      <nav>
-        <a href="index.html" data-page="index.html">Inicio</a>
-        <a href="reglas.html" data-page="reglas.html">Reglas</a>
-        <a href="resultados.html" data-page="resultados.html">Resultados</a>
-        <a href="recomendaciones.html" data-page="recomendaciones.html">Recomendaciones</a>
-        <a href="como-funciona.html" data-page="como-funciona.html">Cómo funciona</a>
-        <a href="simulador.html" data-page="simulador.html">Simulador</a>
-        <a href="replay.html" data-page="replay.html">Replay</a>
-        <a href="crear-reglamento.html" data-page="crear-reglamento.html">Crear reglamento</a>
-      </nav>
+
+<svg style="display:none" aria-hidden="true">
+  <symbol id="i-pelota" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="9.2"/><path d="M12 7.2l4 2.9-1.5 4.7h-5L8 10.1z"/>
+    <path d="M12 2.8v4.4M20.7 9.9l-4.7.2M18.2 20l-3.7-5.2M5.8 20l3.7-5.2M3.3 9.9l4.7.2"/>
+  </symbol>
+</svg>
+
+<header class="barra">
+  <div class="contenedor">
+    <a class="marca" href="index.html">
+      <svg class="pelota" aria-hidden="true"><use href="#i-pelota"/></svg>
+      Fobal Facu
+    </a>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="index.html#mazo" class="opcional">El mazo</a>
+      <a href="index.html#dado" class="opcional">El dado</a>
+      <a href="reglas.html">Reglas</a>
+    </nav>
+  </div>
+</header>
+
+<main class="contenedor">
+  <section>
+    <p class="rotulo">Reglamento v1 · con los cambios de v2 marcados</p>
+    <h1 style="font-size:clamp(2.2rem,5vw,3.2rem)">Cómo se juega</h1>
+    <p class="bajada">
+      Todo lo que hace falta para una partida. Lo que dice <strong>v2</strong> es
+      lo que se está probando ahora y todavía no es definitivo.
+    </p>
+
+    <div class="indice">
+      <strong>En esta página</strong>
+      <ol>
+        <li><a href="#preparacion">Preparación</a></li>
+        <li><a href="#objetivo">Cómo se gana</a></li>
+        <li><a href="#turno">El turno</a></li>
+        <li><a href="#defensa">Las respuestas de la defensa</a></li>
+        <li><a href="#disparo">El disparo al arco</a></li>
+        <li><a href="#reventar">Reventar la pelota</a></li>
+        <li><a href="#penales">Penales</a></li>
+        <li><a href="#cartas">Las cartas, una por una</a></li>
+      </ol>
     </div>
-  </header>
 
-  <main>
-    <div class="page-hero">
-      <p class="breadcrumb"><a href="index.html">Inicio</a> / Reglas</p>
-      <h1>📋 Reglas y mazos</h1>
-      <p class="lead">Reglamentos implementados: <strong>v0</strong> · <strong>v1</strong> · <strong>v1.1</strong> · <strong>v2</strong> (playtesting). Reglas de mesa + mazos.</p>
+    <div class="prosa">
+      <h2 id="preparacion">Preparación</h2>
+      <ul>
+        <li>Dos equipos de <strong>al menos dos jugadores</strong>. Lo habitual, y lo que mejor funciona, es <strong>3 contra 3</strong>.</li>
+        <li>Se mezclan las <strong>108 cartas</strong> y se reparten <strong>6 a cada uno</strong>.</li>
+        <li>Se tira una moneda: el equipo que gana elige quién de los suyos arranca con la pelota.</li>
+        <li>Cada vez que la pelota <strong>cambia de equipo</strong>, todos completan su mano hasta seis.</li>
+        <li>Si se acaba el mazo, se baraja el descarte y se sigue.</li>
+      </ul>
+
+      <h2 id="objetivo">Cómo se gana</h2>
+      <p>
+        Gana el primer equipo que llega a <strong>tres goles</strong>. Pero si el
+        marcador queda <strong>2 a 2</strong>, el partido se define enseguida por
+        penales, sin seguir jugando.
+      </p>
+
+      <h2 id="turno">El turno</h2>
+      <p>
+        La pelota siempre la tiene un jugador concreto. Solo ese jugador actúa: su
+        equipo está en ataque y el otro, en defensa. En su turno elige una de estas
+        cuatro cosas.
+      </p>
+      <table>
+        <thead><tr><th>Acción</th><th>Qué gasta</th><th>Qué pasa</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Pasar la pelota</strong></td>
+            <td><code>Pase</code></td>
+            <td>Elige a un compañero y le pasa. La jugada suma un pase, que hace más fácil el gol.</td>
+          </tr>
+          <tr>
+            <td><strong>Patear al arco</strong></td>
+            <td><code>Disparo al arco</code></td>
+            <td>Se resuelve con los dados. Después la pelota sale del arco para el equipo rival.</td>
+          </tr>
+          <tr>
+            <td><strong>Reventarla</strong></td>
+            <td>nada</td>
+            <td>Un jugador de cada equipo se disputa la pelota con un dado.</td>
+          </tr>
+          <tr>
+            <td><strong>Pasar de turno</strong></td>
+            <td>nada</td>
+            <td>Se queda con la pelota sin hacer nada, y le da a la defensa la chance de armar trampas.</td>
+          </tr>
+        </tbody>
+      </table>
+      <blockquote>
+        <strong>En v2 no existe pasar de turno.</strong> El que tiene la pelota está
+        obligado a jugar: si no tiene <code>Pase</code> ni <code>Disparo al arco</code>,
+        la revienta.
+      </blockquote>
+
+      <h2 id="defensa">Las respuestas de la defensa</h2>
+      <p>
+        Cuando el ataque hace algo, la defensa puede contestar con
+        <strong>una sola carta en todo el equipo</strong>. No se acumulan respuestas.
+      </p>
+      <table>
+        <thead><tr><th>Carta</th><th>Cuándo se juega</th><th>Qué hace</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><code>Robo pelota</code></td>
+            <td>cuando el ataque pasa</td>
+            <td>Corta el pase. La pelota queda en el jugador que la jugó y su equipo pasa a atacar.</td>
+          </tr>
+          <tr>
+            <td><code>Trampa de offside</code></td>
+            <td>v1: cuando el ataque pasa de turno<br>v2: cuando el ataque pasa la pelota</td>
+            <td>Queda armada sobre la mesa. El próximo pase del ataque es offside y pierde la pelota.</td>
+          </tr>
+          <tr>
+            <td><code>Marca personal</code></td>
+            <td>v1: cuando el ataque pasa de turno<br>v2: cuando el ataque pasa la pelota</td>
+            <td>Se pone sobre un rival. Si el ataque le pasa justo a ese jugador, la defensa recupera.</td>
+          </tr>
+          <tr>
+            <td><code>Falta</code></td>
+            <td>en cualquier momento, cualquiera de los dos equipos</td>
+            <td>Corta la jugada: la pelota se queda en el mismo equipo y los pases acumulados vuelven a cero.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>La respuesta del ataque</h3>
+      <p>
+        Si te juegan <code>Robo pelota</code> y tenés <code>Gambetear</code>, podés
+        anularlo: la jugada sigue como si nada hubiera pasado.
+      </p>
+      <blockquote>
+        <strong>En v2 se encadena.</strong> Después de tu gambeta, la defensa puede
+        volver a intentar el robo con otra carta, y vos volver a gambetear, hasta
+        que a alguno se le acaben.
+      </blockquote>
+
+      <h2 id="disparo">El disparo al arco</h2>
+      <p>
+        El que patea y un arquero del equipo rival tiran un dado cada uno al mismo
+        tiempo. Cuantos más pases traía la jugada, con más números entra la pelota.
+      </p>
+      <table>
+        <thead><tr><th>Pases encadenados</th><th>Es gol con</th><th>Ataja con</th></tr></thead>
+        <tbody>
+          <tr><td>0</td><td>1</td><td>2 a 6</td></tr>
+          <tr><td>1</td><td>1 a 2</td><td>3 a 6</td></tr>
+          <tr><td>2</td><td>1 a 3</td><td>4 a 6</td></tr>
+          <tr><td>3</td><td>1 a 4</td><td>5 a 6</td></tr>
+          <tr><td>4 o más</td><td>1 a 5</td><td>6</td></tr>
+        </tbody>
+      </table>
+      <ul>
+        <li><strong>Rebote:</strong> si el que patea saca número de gol <em>y</em> el arquero saca número de atajada, la pelota rebota y se vuelve a patear.</li>
+        <li><strong>Palo:</strong> si los dos dados salen iguales, pega en el palo y se vuelve a patear.</li>
+      </ul>
+      <p>
+        El contador de pases vuelve a cero cada vez que la pelota cambia de equipo o
+        cuando alguien juega <code>Falta</code>. La tabla se puede probar en la
+        <a href="index.html#dado">página principal</a>.
+      </p>
+
+      <h2 id="reventar">Reventar la pelota</h2>
+      <p>
+        El que la tiene puede decir «la reviento». Entonces cada equipo elige quién
+        tira el dado —cualquiera menos el que reventó— y el número más alto se queda
+        con la pelota. Si la conserva el mismo equipo, cuenta como un pase completado.
+      </p>
+
+      <h2 id="penales">Penales</h2>
+      <p>
+        Si el partido queda 2 a 2, patean tantos penales como jugadores tenga cada
+        equipo. Si la serie termina igual, se patea uno por lado y el que erra pierde.
+        Después de la primera serie se puede cambiar de arquero. Cada penal se
+        resuelve como un disparo sin pases acumulados.
+      </p>
+
+      <h2 id="cartas">Las cartas, una por una</h2>
+      <table>
+        <thead><tr><th>Carta</th><th>Copias</th><th>Qué hace</th></tr></thead>
+        <tbody>
+          <tr><td><code>Pase</code></td><td>42</td><td>Le pasás la pelota a un compañero y la jugada suma un pase.</td></tr>
+          <tr><td><code>Robo pelota</code></td><td>24</td><td>Cortás un pase rival y te quedás con la pelota.</td></tr>
+          <tr><td><code>Gambetear</code></td><td>15</td><td>Anulás un <code>Robo pelota</code> y seguís con la pelota.</td></tr>
+          <tr><td><code>Disparo al arco</code></td><td>12</td><td>Pateás al arco. Es la única forma de hacer un gol.</td></tr>
+          <tr><td><code>Falta</code></td><td>7</td><td>Cortás la jugada. La pelota no cambia de equipo y los pases vuelven a cero.</td></tr>
+          <tr><td><code>Marca personal</code></td><td>5</td><td>Marcás a un rival. Si recibe el pase, recuperás la pelota.</td></tr>
+          <tr><td><code>Trampa de offside</code></td><td>3</td><td>Queda armada: el próximo pase del rival es offside.</td></tr>
+        </tbody>
+      </table>
+      <p style="color:var(--tinta-3);font-size:.9rem">
+        La primera versión del juego (v0) tenía además <code>Corta pase</code>,
+        <code>Tackle</code> y <code>La dejo pasar</code>. En v1 esas tres se
+        reemplazaron por <code>Robo pelota</code> y <code>Gambetear</code>: menos
+        reglas para acordarse y el mismo juego.
+      </p>
+
+      <h2>Lo que todavía no está cerrado</h2>
+      <ul>
+        <li>¿Se gana con 3 goles o hay que jugar los cinco?</li>
+        <li>¿Cuántas veces se puede jugar <code>Falta</code> en una misma jugada?</li>
+        <li>¿La marca personal debería durar más de un pase?</li>
+        <li>Con la tabla actual, <a href="index.html#dado">un penal no se puede convertir</a>: hay que decidir cómo se patean.</li>
+      </ul>
     </div>
+  </section>
+</main>
 
-    <section>
-      <h2>Reglamentos</h2>
-      <div class="tabs-group">
-        <div class="tabs">
-          <button class="tab-btn active" data-tab="panel-v2">v2 — Playtesting</button>
-          <button class="tab-btn" data-tab="panel-v1">v1</button>
-          <button class="tab-btn" data-tab="panel-v11">v1.1</button>
-          <button class="tab-btn" data-tab="panel-v0">v0 — Original</button>
-        </div>
+<footer class="pie">
+  <div class="contenedor">
+    <p>Fobal Facu · juego de cartas de fútbol</p>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a id="enlace-repo" href="https://github.com/rmpato/fobal-facu">Código</a>
+    </nav>
+  </div>
+</footer>
 
-        <div id="panel-v2" class="tab-panel active">
-          <div class="card highlight">
-            <h3>v2 — Iteración 2 (playtesting)</h3>
-            <p>Extiende <strong>v1</strong>. Mismo mazo (108 cartas).</p>
-            <table>
-              <thead><tr><th>Cambio vs v1</th><th>v2</th></tr></thead>
-              <tbody>
-                <tr><td><strong>Pasa de turno</strong></td><td>❌ Eliminado — solo <strong>Reventar</strong> si no hay pase/disparo</td></tr>
-                <tr><td>Trampa / Marca</td><td>Se juegan al <strong>reaccionar a un pase</strong> (además de robo)</td></tr>
-                <tr><td>Reacciones defensivas</td><td>Una carta por acción del ataque</td></tr>
-                <tr><td>Robo ↔ Gambetear</td><td><strong>Encadenables</strong> mientras haya cartas</td></tr>
-              </tbody>
-            </table>
-            <p>Simulación: <a href="resultados.html#compare-cli">comparación v0–v2</a> · <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v2.md">reglamento-v2.md</a></p>
-          </div>
-        </div>
-
-        <div id="panel-v1" class="tab-panel">
-          <div class="card">
-            <h3>Objetivo</h3>
-            <p>Partido al mejor de 5 goles. Marcador <strong>2-2</strong> → penales inmediatos.</p>
-
-            <h3>Acciones ofensivas</h3>
-            <p><small><strong>Pasa de turno</strong> y <strong>Reventar</strong> son decisiones del jugador — no cartas del mazo.</small></p>
-            <table>
-              <thead><tr><th>Acción</th><th>¿Carta?</th><th>Descripción</th></tr></thead>
-              <tbody>
-                <tr><td><strong>Patear al arco</strong></td><td><em>Disparo al arco</em></td><td>Dados vs arquero</td></tr>
-                <tr><td><strong>Pasar</strong></td><td><em>Pase</em></td><td>A un compañero</td></tr>
-                <tr><td><strong>Pasa de turno</strong></td><td>—</td><td>Decisión: retener la pelota sin pasar ni disparar</td></tr>
-                <tr><td><strong>Reventar</strong></td><td>—</td><td>Decisión: despeje — duelo de dados</td></tr>
-              </tbody>
-            </table>
-
-            <h3>Reacciones defensivas</h3>
-            <table>
-              <thead><tr><th>Si el ataque…</th><th>Defensa puede…</th></tr></thead>
-              <tbody>
-                <tr><td>Pasó</td><td><em>Robo pelota</em> (anulable con <em>Gambetear</em>)</td></tr>
-                <tr><td>Pasó de turno</td><td><em>Trampa de offside</em>, <em>Marca personal</em></td></tr>
-              </tbody>
-            </table>
-            <p><small>Una sola carta defensiva por <strong>acción del ataque</strong> (carta o decisión).</small></p>
-
-            <h3>Disparo al arco 🎲</h3>
-            <p>Pateador y arquero tiran un dado cada uno. Más pases en la jugada = más chances de gol.</p>
-            <table>
-              <thead><tr><th>Pases</th><th>Gol con</th><th>Ataja con</th></tr></thead>
-              <tbody>
-                <tr><td>0</td><td>1</td><td>2–6</td></tr>
-                <tr><td>1</td><td>1–2</td><td>3–6</td></tr>
-                <tr><td>2</td><td>1–3</td><td>4–6</td></tr>
-                <tr><td>3</td><td>1–4</td><td>5–6</td></tr>
-                <tr><td>4+</td><td>1–5</td><td>6</td></tr>
-              </tbody>
-            </table>
-            <p><small><strong>Rebote:</strong> gol y atajada a la vez → se repite. <strong>Palo:</strong> mismo número → se repite.</small></p>
-
-            <h3>Reventarla 🎲</h3>
-            <ol>
-              <li>Cada equipo <strong>elige</strong> quién tira — cualquier jugador, <strong>excepto</strong> el que reventó.</li>
-              <li>El dado más alto gana la pelota.</li>
-              <li>Si gana el mismo equipo, cuenta como un pase completado.</li>
-            </ol>
-          </div>
-        </div>
-
-        <div id="panel-v0" class="tab-panel">
-          <div class="card">
-            <h3>Objetivo</h3>
-            <p>Partido al mejor de 5 goles. Marcador <strong>2-2</strong> → penales inmediatos.</p>
-
-            <h3>Acciones ofensivas</h3>
-            <p><small><strong>Pasa de turno</strong> es una decisión del jugador — no hay carta en el mazo.</small></p>
-            <table>
-              <thead><tr><th>Acción</th><th>¿Carta?</th><th>Descripción</th></tr></thead>
-              <tbody>
-                <tr><td><strong>Patear al arco</strong></td><td><em>Disparo al arco</em></td><td>Dados vs arquero</td></tr>
-                <tr><td><strong>Pasar</strong></td><td><em>Pase</em></td><td>A un compañero</td></tr>
-                <tr><td><strong>Pasa de turno</strong></td><td>—</td><td>Decisión: retener la pelota sin pasar ni disparar</td></tr>
-              </tbody>
-            </table>
-
-            <h3>Diferencias clave vs v1</h3>
-            <ul class="findings">
-              <li><strong>Pasa de turno</strong> (decisión, no carta) en lugar de reventar</li>
-              <li><em>Corta pase</em> + <em>Tackle</em> en lugar de <em>Robo pelota</em></li>
-              <li><em>La dejo pasar</em> contra corte de pase</li>
-              <li>Reposición al quedarse sin cartas (no al cambiar de equipo)</li>
-            </ul>
-            <h3>Reacciones defensivas</h3>
-            <table>
-              <thead><tr><th>Si el ataque…</th><th>Defensa puede…</th></tr></thead>
-              <tbody>
-                <tr><td>Pasó</td><td><em>Corta pase</em> (anulable con <em>La dejo pasar</em>)</td></tr>
-                <tr><td>Pasó de turno</td><td><em>Tackle</em>, <em>Trampa</em>, <em>Marca personal</em></td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div id="panel-v11" class="tab-panel">
-          <div class="card">
-            <h3>v1.1 — Pasa al compañero</h3>
-            <p>Extiende <strong>v1</strong>. Mismo mazo y mismas cartas.</p>
-            <p><strong>Único cambio:</strong> si el atacante <strong>pasa de turno</strong> (decisión, sin carta) y la defensa no juega Trampa ni Marca, la pelota pasa a un compañero del mismo equipo.</p>
-            <p>En simulación es casi igual a v1 → ver <a href="resultados.html#historico">comparación de reglamentos</a>.</p>
-            <p><small>Texto: <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v1.1.md">reglamento-v1.1.md</a></small></p>
-          </div>
-        </div>
-      </div>
-      <p><small>Texto completo: <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v1.md">reglamento-v1.md</a> · <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v2.md">reglamento-v2.md</a> · <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v1.1.md">reglamento-v1.1.md</a> · <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/reglamento-v0.md">reglamento-v0.md</a></small></p>
-    </section>
-
-    <section>
-      <h2>🃏 Mazos</h2>
-      <div class="tabs-group">
-        <div class="tabs">
-          <button class="tab-btn active" data-tab="mazo-v1">Mazo v1 (108)</button>
-          <button class="tab-btn" data-tab="mazo-v0">Mazo v0 (108)</button>
-        </div>
-        <div id="mazo-v1" class="tab-panel active">
-          <div class="deck-grid card">
-            <div class="deck-item"><span>Pase</span><span class="count">×42</span></div>
-            <div class="deck-item"><span>Robo pelota</span><span class="count">×24</span></div>
-            <div class="deck-item"><span>Disparo al arco</span><span class="count">×12</span></div>
-            <div class="deck-item"><span>Gambetear</span><span class="count">×15</span></div>
-            <div class="deck-item"><span>Falta</span><span class="count">×7</span></div>
-            <div class="deck-item"><span>Marca personal</span><span class="count">×5</span></div>
-            <div class="deck-item"><span>Trampa de offside</span><span class="count">×3</span></div>
-          </div>
-        </div>
-        <div id="mazo-v0" class="tab-panel">
-          <div class="deck-grid card">
-            <div class="deck-item"><span>Pase</span><span class="count">×42</span></div>
-            <div class="deck-item"><span>Corta pase</span><span class="count">×12</span></div>
-            <div class="deck-item"><span>Tackle</span><span class="count">×12</span></div>
-            <div class="deck-item"><span>Disparo al arco</span><span class="count">×12</span></div>
-            <div class="deck-item"><span>Gambetear</span><span class="count">×8</span></div>
-            <div class="deck-item"><span>La dejo pasar</span><span class="count">×7</span></div>
-            <div class="deck-item"><span>Falta</span><span class="count">×7</span></div>
-            <div class="deck-item"><span>Marca personal</span><span class="count">×5</span></div>
-            <div class="deck-item"><span>Trampa de offside</span><span class="count">×3</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h2>¿Versión nueva?</h2>
-      <div class="card highlight">
-        <p>Para proponer v1.2, v2 o v3 en el simulador: qué archivos editar, cuándo tocar código y cómo publicar → <a href="crear-reglamento.html">Crear un reglamento</a>.</p>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <p><a href="index.html">← Inicio</a> · <a id="repo-link" href="https://github.com/rmpato/fobal-facu">GitHub</a></p>
-  </footer>
-  <script src="assets/js/main.js"></script>
+<script src="assets/js/sitio.js"></script>
 </body>
 </html>

@@ -1,0 +1,4427 @@
+{
+ "v": 1,
+ "semilla": 138,
+ "reglamento": "v2",
+ "equipos": [
+  [
+   "Facu",
+   "Pato",
+   "Manu"
+  ],
+  [
+   "Colo",
+   "Ostu",
+   "Joaco"
+  ]
+ ],
+ "comando": "python3 -m simulador ver --reglamento v2 --semilla 138",
+ "marcador_final": [
+  3,
+  2
+ ],
+ "turnos": 61,
+ "definido_por_penales": true,
+ "eventos": [
+  {
+   "texto": "Inicio reglamento=v2 (Iteración 2 (playtesting)) [default, ia=estrategica]: 3v3, portador=Ostu",
+   "tier": "moment",
+   "tipo": "otro",
+   "turno": 0,
+   "jugadores": [
+    "Inicio",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "T1 | Ostu | marcador 0-0 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 1,
+   "jugadores": [
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Ostu pasa a Joaco",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 1,
+   "jugadores": [
+    "Ostu",
+    "Joaco"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "  Manu marca a Ostu",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 1,
+   "jugadores": [
+    "Manu",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "T2 | Joaco | marcador 0-0 | pases=1",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 2,
+   "jugadores": [
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Joaco pasa a Colo",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 2,
+   "jugadores": [
+    "Joaco",
+    "Colo"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "  Facu recupera la pelota",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 2,
+   "jugadores": [
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": ">> Cambio de equipo: reposicion de manos (hasta 6 cartas)",
+   "tier": "moment",
+   "tipo": "cambio_equipo",
+   "turno": 2,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "T3 | Facu | marcador 0-0 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 3,
+   "jugadores": [
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Facu pasa a Manu",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 3,
+   "jugadores": [
+    "Facu",
+    "Manu"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "  Joaco recupera la pelota",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 3,
+   "jugadores": [
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": ">> Cambio de equipo: reposicion de manos (hasta 6 cartas)",
+   "tier": "moment",
+   "tipo": "cambio_equipo",
+   "turno": 3,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "T4 | Joaco | marcador 0-0 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 4,
+   "jugadores": [
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Joaco revienta la pelota",
+   "tier": "moment",
+   "tipo": "reventar",
+   "turno": 4,
+   "jugadores": [
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Tiran el dado: Ostu vs Manu",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 4,
+   "jugadores": [
+    "Tiran",
+    "Ostu",
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Despeje: Ostu=2 vs Manu=2",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 4,
+   "jugadores": [
+    "Despeje",
+    "Ostu",
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Despeje: Ostu=5 vs Manu=6",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 4,
+   "jugadores": [
+    "Despeje",
+    "Ostu",
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Gana Manu",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 4,
+   "jugadores": [
+    "Gana Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": ">> Cambio de equipo: reposicion de manos (hasta 6 cartas)",
+   "tier": "moment",
+   "tipo": "cambio_equipo",
+   "turno": 4,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "T5 | Manu | marcador 0-0 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 5,
+   "jugadores": [
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Manu pasa a Pato",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 5,
+   "jugadores": [
+    "Manu",
+    "Pato"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "  Manu gambetea el robo",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 5,
+   "jugadores": [
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Joaco recupera la pelota",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 5,
+   "jugadores": [
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": ">> Cambio de equipo: reposicion de manos (hasta 6 cartas)",
+   "tier": "moment",
+   "tipo": "cambio_equipo",
+   "turno": 5,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "T6 | Joaco | marcador 0-0 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 6,
+   "jugadores": [
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Joaco revienta la pelota",
+   "tier": "moment",
+   "tipo": "reventar",
+   "turno": 6,
+   "jugadores": [
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Tiran el dado: Ostu vs Pato",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 6,
+   "jugadores": [
+    "Tiran",
+    "Ostu",
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Despeje: Ostu=5 vs Pato=1",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 6,
+   "jugadores": [
+    "Despeje",
+    "Ostu",
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Gana Ostu (cuenta como pase)",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 6,
+   "jugadores": [
+    "Gana Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "T7 | Ostu | marcador 0-0 | pases=1",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 7,
+   "jugadores": [
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Ostu pasa a Joaco",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 7,
+   "jugadores": [
+    "Ostu",
+    "Joaco"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "  Facu recupera la pelota",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 7,
+   "jugadores": [
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": ">> Cambio de equipo: reposicion de manos (hasta 6 cartas)",
+   "tier": "moment",
+   "tipo": "cambio_equipo",
+   "turno": 7,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "T8 | Facu | marcador 0-0 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 8,
+   "jugadores": [
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Facu pasa a Pato",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 8,
+   "jugadores": [
+    "Facu",
+    "Pato"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "  Joaco marca a Facu",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 8,
+   "jugadores": [
+    "Joaco",
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "T9 | Pato | marcador 0-0 | pases=1",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 9,
+   "jugadores": [
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Pato dispara al arco",
+   "tier": "moment",
+   "tipo": "disparo",
+   "turno": 9,
+   "jugadores": [
+    "Pato"
+   ],
+   "carta": "Disparo al arco"
+  },
+  {
+   "texto": "  Disparo: Pato=2, arquero Ostu=1 (pases=1)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 9,
+   "jugadores": [
+    "Disparo",
+    "Pato",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "** GOL de Pato (Facu, Pato, Manu)! Marcador: Facu, Pato, Manu 1 - 0 Colo, Ostu, Joaco",
+   "tier": "moment",
+   "tipo": "gol",
+   "turno": 9,
+   "jugadores": [
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": ">> Cambio de equipo: reposicion de manos (hasta 6 cartas)",
+   "tier": "moment",
+   "tipo": "cambio_equipo",
+   "turno": 9,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "T10 | Colo | marcador 1-0 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 10,
+   "jugadores": [
+    "Colo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Colo pasa a Joaco",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 10,
+   "jugadores": [
+    "Colo",
+    "Joaco"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "  Manu recupera la pelota",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 10,
+   "jugadores": [
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": ">> Cambio de equipo: reposicion de manos (hasta 6 cartas)",
+   "tier": "moment",
+   "tipo": "cambio_equipo",
+   "turno": 10,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "T11 | Manu | marcador 1-0 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 11,
+   "jugadores": [
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Falta de Facu: pelota sigue en el mismo equipo",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 11,
+   "jugadores": [
+    "Falta",
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "T12 | Manu | marcador 1-0 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 12,
+   "jugadores": [
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Manu pasa a Facu",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 12,
+   "jugadores": [
+    "Manu",
+    "Facu"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "  Joaco recupera la pelota",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 12,
+   "jugadores": [
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": ">> Cambio de equipo: reposicion de manos (hasta 6 cartas)",
+   "tier": "moment",
+   "tipo": "cambio_equipo",
+   "turno": 12,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "T13 | Joaco | marcador 1-0 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 13,
+   "jugadores": [
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Joaco pasa a Colo",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 13,
+   "jugadores": [
+    "Joaco",
+    "Colo"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "  Manu marca a Ostu",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 13,
+   "jugadores": [
+    "Manu",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "T14 | Colo | marcador 1-0 | pases=1",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 14,
+   "jugadores": [
+    "Colo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Colo revienta la pelota",
+   "tier": "moment",
+   "tipo": "reventar",
+   "turno": 14,
+   "jugadores": [
+    "Colo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Tiran el dado: Ostu vs Manu",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 14,
+   "jugadores": [
+    "Tiran",
+    "Ostu",
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Despeje: Ostu=4 vs Manu=1",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 14,
+   "jugadores": [
+    "Despeje",
+    "Ostu",
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Gana Ostu (cuenta como pase)",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 14,
+   "jugadores": [
+    "Gana Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "T15 | Ostu | marcador 1-0 | pases=2",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 15,
+   "jugadores": [
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Ostu pasa a Colo",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 15,
+   "jugadores": [
+    "Ostu",
+    "Colo"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "  Pato recupera la pelota",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 15,
+   "jugadores": [
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": ">> Cambio de equipo: reposicion de manos (hasta 6 cartas)",
+   "tier": "moment",
+   "tipo": "cambio_equipo",
+   "turno": 15,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "T16 | Pato | marcador 1-0 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 16,
+   "jugadores": [
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Pato pasa a Manu",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 16,
+   "jugadores": [
+    "Pato",
+    "Manu"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "  Joaco coloca Trampa de offside",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 16,
+   "jugadores": [
+    "Joaco",
+    "Trampa"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "T17 | Manu | marcador 1-0 | pases=1",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 17,
+   "jugadores": [
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Falta de Joaco: pelota sigue en el mismo equipo",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 17,
+   "jugadores": [
+    "Falta",
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "T18 | Manu | marcador 1-0 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 18,
+   "jugadores": [
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  ¡Offside! Pierde la pelota",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 18,
+   "jugadores": [
+    "Offside",
+    "Pierde"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Ostu recupera la pelota",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 18,
+   "jugadores": [
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": ">> Cambio de equipo: reposicion de manos (hasta 6 cartas)",
+   "tier": "moment",
+   "tipo": "cambio_equipo",
+   "turno": 18,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "T19 | Ostu | marcador 1-0 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 19,
+   "jugadores": [
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Ostu pasa a Joaco",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 19,
+   "jugadores": [
+    "Ostu",
+    "Joaco"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "  Manu recupera la pelota",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 19,
+   "jugadores": [
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": ">> Cambio de equipo: reposicion de manos (hasta 6 cartas)",
+   "tier": "moment",
+   "tipo": "cambio_equipo",
+   "turno": 19,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "T20 | Manu | marcador 1-0 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 20,
+   "jugadores": [
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Manu pasa a Pato",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 20,
+   "jugadores": [
+    "Manu",
+    "Pato"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "  Joaco recupera la pelota",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 20,
+   "jugadores": [
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": ">> Cambio de equipo: reposicion de manos (hasta 6 cartas)",
+   "tier": "moment",
+   "tipo": "cambio_equipo",
+   "turno": 20,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "T21 | Joaco | marcador 1-0 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 21,
+   "jugadores": [
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Joaco pasa a Colo",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 21,
+   "jugadores": [
+    "Joaco",
+    "Colo"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "  Manu coloca Trampa de offside",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 21,
+   "jugadores": [
+    "Manu",
+    "Trampa"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "T22 | Colo | marcador 1-0 | pases=1",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 22,
+   "jugadores": [
+    "Colo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  ¡Offside! Pierde la pelota",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 22,
+   "jugadores": [
+    "Offside",
+    "Pierde"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Facu recupera la pelota",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 22,
+   "jugadores": [
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": ">> Cambio de equipo: reposicion de manos (hasta 6 cartas)",
+   "tier": "moment",
+   "tipo": "cambio_equipo",
+   "turno": 22,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "T23 | Facu | marcador 1-0 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 23,
+   "jugadores": [
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Facu pasa a Manu",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 23,
+   "jugadores": [
+    "Facu",
+    "Manu"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "  Facu gambetea el robo",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 23,
+   "jugadores": [
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "T24 | Manu | marcador 1-0 | pases=1",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 24,
+   "jugadores": [
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Manu pasa a Pato",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 24,
+   "jugadores": [
+    "Manu",
+    "Pato"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "  Manu gambetea el robo",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 24,
+   "jugadores": [
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Manu gambetea el robo",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 24,
+   "jugadores": [
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "T25 | Pato | marcador 1-0 | pases=2",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 25,
+   "jugadores": [
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Pato pasa a Facu",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 25,
+   "jugadores": [
+    "Pato",
+    "Facu"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "T26 | Facu | marcador 1-0 | pases=3",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 26,
+   "jugadores": [
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Facu dispara al arco",
+   "tier": "moment",
+   "tipo": "disparo",
+   "turno": 26,
+   "jugadores": [
+    "Facu"
+   ],
+   "carta": "Disparo al arco"
+  },
+  {
+   "texto": "  Disparo: Facu=5, arquero Joaco=4 (pases=3)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 26,
+   "jugadores": [
+    "Disparo",
+    "Facu",
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Atajada o fuera",
+   "tier": "detail",
+   "tipo": "disparo",
+   "turno": 26,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": ">> Cambio de equipo: reposicion de manos (hasta 6 cartas)",
+   "tier": "moment",
+   "tipo": "cambio_equipo",
+   "turno": 26,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "T27 | Ostu | marcador 1-0 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 27,
+   "jugadores": [
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Ostu pasa a Colo",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 27,
+   "jugadores": [
+    "Ostu",
+    "Colo"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "  Ostu gambetea el robo",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 27,
+   "jugadores": [
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "T28 | Colo | marcador 1-0 | pases=1",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 28,
+   "jugadores": [
+    "Colo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Colo pasa a Ostu",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 28,
+   "jugadores": [
+    "Colo",
+    "Ostu"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "  Manu recupera la pelota",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 28,
+   "jugadores": [
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": ">> Cambio de equipo: reposicion de manos (hasta 6 cartas)",
+   "tier": "moment",
+   "tipo": "cambio_equipo",
+   "turno": 28,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "T29 | Manu | marcador 1-0 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 29,
+   "jugadores": [
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Manu revienta la pelota",
+   "tier": "moment",
+   "tipo": "reventar",
+   "turno": 29,
+   "jugadores": [
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Tiran el dado: Facu vs Joaco",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 29,
+   "jugadores": [
+    "Tiran",
+    "Facu",
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Despeje: Facu=5 vs Joaco=5",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 29,
+   "jugadores": [
+    "Despeje",
+    "Facu",
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Despeje: Facu=5 vs Joaco=2",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 29,
+   "jugadores": [
+    "Despeje",
+    "Facu",
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Gana Facu (cuenta como pase)",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 29,
+   "jugadores": [
+    "Gana Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "T30 | Facu | marcador 1-0 | pases=1",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 30,
+   "jugadores": [
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Facu pasa a Manu",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 30,
+   "jugadores": [
+    "Facu",
+    "Manu"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "  Facu gambetea el robo",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 30,
+   "jugadores": [
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Ostu recupera la pelota",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 30,
+   "jugadores": [
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": ">> Cambio de equipo: reposicion de manos (hasta 6 cartas)",
+   "tier": "moment",
+   "tipo": "cambio_equipo",
+   "turno": 30,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "T31 | Ostu | marcador 1-0 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 31,
+   "jugadores": [
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Ostu pasa a Joaco",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 31,
+   "jugadores": [
+    "Ostu",
+    "Joaco"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "T32 | Joaco | marcador 1-0 | pases=1",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 32,
+   "jugadores": [
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Joaco pasa a Ostu",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 32,
+   "jugadores": [
+    "Joaco",
+    "Ostu"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "T33 | Ostu | marcador 1-0 | pases=2",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 33,
+   "jugadores": [
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Ostu pasa a Colo",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 33,
+   "jugadores": [
+    "Ostu",
+    "Colo"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "  Ostu gambetea el robo",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 33,
+   "jugadores": [
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Manu recupera la pelota",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 33,
+   "jugadores": [
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": ">> Cambio de equipo: reposicion de manos (hasta 6 cartas)",
+   "tier": "moment",
+   "tipo": "cambio_equipo",
+   "turno": 33,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "T34 | Manu | marcador 1-0 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 34,
+   "jugadores": [
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Manu pasa a Pato",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 34,
+   "jugadores": [
+    "Manu",
+    "Pato"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "  Ostu recupera la pelota",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 34,
+   "jugadores": [
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": ">> Cambio de equipo: reposicion de manos (hasta 6 cartas)",
+   "tier": "moment",
+   "tipo": "cambio_equipo",
+   "turno": 34,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "T35 | Ostu | marcador 1-0 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 35,
+   "jugadores": [
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Ostu pasa a Joaco",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 35,
+   "jugadores": [
+    "Ostu",
+    "Joaco"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "T36 | Joaco | marcador 1-0 | pases=1",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 36,
+   "jugadores": [
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Falta de Ostu: pelota sigue en el mismo equipo",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 36,
+   "jugadores": [
+    "Falta",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "T37 | Joaco | marcador 1-0 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 37,
+   "jugadores": [
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Joaco revienta la pelota",
+   "tier": "moment",
+   "tipo": "reventar",
+   "turno": 37,
+   "jugadores": [
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Tiran el dado: Colo vs Pato",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 37,
+   "jugadores": [
+    "Tiran",
+    "Colo",
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Despeje: Colo=5 vs Pato=1",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 37,
+   "jugadores": [
+    "Despeje",
+    "Colo",
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Gana Colo (cuenta como pase)",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 37,
+   "jugadores": [
+    "Gana Colo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "T38 | Colo | marcador 1-0 | pases=1",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 38,
+   "jugadores": [
+    "Colo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Colo pasa a Ostu",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 38,
+   "jugadores": [
+    "Colo",
+    "Ostu"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "T39 | Ostu | marcador 1-0 | pases=2",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 39,
+   "jugadores": [
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Ostu dispara al arco",
+   "tier": "moment",
+   "tipo": "disparo",
+   "turno": 39,
+   "jugadores": [
+    "Ostu"
+   ],
+   "carta": "Disparo al arco"
+  },
+  {
+   "texto": "  Disparo: Ostu=4, arquero Pato=4 (pases=2)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 39,
+   "jugadores": [
+    "Disparo",
+    "Ostu",
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Palo: se vuelve a patear",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 39,
+   "jugadores": [
+    "Palo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Ostu=2, arquero Pato=3 (pases=2)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 39,
+   "jugadores": [
+    "Disparo",
+    "Ostu",
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "** GOL de Ostu (Colo, Ostu, Joaco)! Marcador: Facu, Pato, Manu 1 - 1 Colo, Ostu, Joaco",
+   "tier": "moment",
+   "tipo": "gol",
+   "turno": 39,
+   "jugadores": [
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": ">> Cambio de equipo: reposicion de manos (hasta 6 cartas)",
+   "tier": "moment",
+   "tipo": "cambio_equipo",
+   "turno": 39,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "T40 | Facu | marcador 1-1 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 40,
+   "jugadores": [
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Falta de Manu: pelota sigue en el mismo equipo",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 40,
+   "jugadores": [
+    "Falta",
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "T41 | Facu | marcador 1-1 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 41,
+   "jugadores": [
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Falta de Colo: pelota sigue en el mismo equipo",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 41,
+   "jugadores": [
+    "Falta",
+    "Colo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "T42 | Facu | marcador 1-1 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 42,
+   "jugadores": [
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Facu pasa a Manu",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 42,
+   "jugadores": [
+    "Facu",
+    "Manu"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "  Ostu recupera la pelota",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 42,
+   "jugadores": [
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": ">> Cambio de equipo: reposicion de manos (hasta 6 cartas)",
+   "tier": "moment",
+   "tipo": "cambio_equipo",
+   "turno": 42,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "T43 | Ostu | marcador 1-1 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 43,
+   "jugadores": [
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Ostu revienta la pelota",
+   "tier": "moment",
+   "tipo": "reventar",
+   "turno": 43,
+   "jugadores": [
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Tiran el dado: Joaco vs Facu",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 43,
+   "jugadores": [
+    "Tiran",
+    "Joaco",
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Despeje: Joaco=1 vs Facu=5",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 43,
+   "jugadores": [
+    "Despeje",
+    "Joaco",
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Gana Facu",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 43,
+   "jugadores": [
+    "Gana Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": ">> Cambio de equipo: reposicion de manos (hasta 6 cartas)",
+   "tier": "moment",
+   "tipo": "cambio_equipo",
+   "turno": 43,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "T44 | Facu | marcador 1-1 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 44,
+   "jugadores": [
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Facu pasa a Manu",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 44,
+   "jugadores": [
+    "Facu",
+    "Manu"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "  Ostu marca a Pato",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 44,
+   "jugadores": [
+    "Ostu",
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "T45 | Manu | marcador 1-1 | pases=1",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 45,
+   "jugadores": [
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Manu pasa a Facu",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 45,
+   "jugadores": [
+    "Manu",
+    "Facu"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "  Ostu recupera la pelota",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 45,
+   "jugadores": [
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": ">> Cambio de equipo: reposicion de manos (hasta 6 cartas)",
+   "tier": "moment",
+   "tipo": "cambio_equipo",
+   "turno": 45,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "T46 | Ostu | marcador 1-1 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 46,
+   "jugadores": [
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Ostu revienta la pelota",
+   "tier": "moment",
+   "tipo": "reventar",
+   "turno": 46,
+   "jugadores": [
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Tiran el dado: Joaco vs Manu",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 46,
+   "jugadores": [
+    "Tiran",
+    "Joaco",
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Despeje: Joaco=2 vs Manu=4",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 46,
+   "jugadores": [
+    "Despeje",
+    "Joaco",
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Gana Manu",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 46,
+   "jugadores": [
+    "Gana Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": ">> Cambio de equipo: reposicion de manos (hasta 6 cartas)",
+   "tier": "moment",
+   "tipo": "cambio_equipo",
+   "turno": 46,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "T47 | Manu | marcador 1-1 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 47,
+   "jugadores": [
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Manu revienta la pelota",
+   "tier": "moment",
+   "tipo": "reventar",
+   "turno": 47,
+   "jugadores": [
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Tiran el dado: Facu vs Colo",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 47,
+   "jugadores": [
+    "Tiran",
+    "Facu",
+    "Colo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Despeje: Facu=1 vs Colo=1",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 47,
+   "jugadores": [
+    "Despeje",
+    "Facu",
+    "Colo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Despeje: Facu=2 vs Colo=1",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 47,
+   "jugadores": [
+    "Despeje",
+    "Facu",
+    "Colo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Gana Facu (cuenta como pase)",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 47,
+   "jugadores": [
+    "Gana Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "T48 | Facu | marcador 1-1 | pases=1",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 48,
+   "jugadores": [
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Facu pasa a Manu",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 48,
+   "jugadores": [
+    "Facu",
+    "Manu"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "  Ostu recupera la pelota",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 48,
+   "jugadores": [
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": ">> Cambio de equipo: reposicion de manos (hasta 6 cartas)",
+   "tier": "moment",
+   "tipo": "cambio_equipo",
+   "turno": 48,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "T49 | Ostu | marcador 1-1 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 49,
+   "jugadores": [
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Ostu dispara al arco",
+   "tier": "moment",
+   "tipo": "disparo",
+   "turno": 49,
+   "jugadores": [
+    "Ostu"
+   ],
+   "carta": "Disparo al arco"
+  },
+  {
+   "texto": "  Disparo: Ostu=6, arquero Facu=1 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 49,
+   "jugadores": [
+    "Disparo",
+    "Ostu",
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Atajada o fuera",
+   "tier": "detail",
+   "tipo": "disparo",
+   "turno": 49,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": ">> Cambio de equipo: reposicion de manos (hasta 6 cartas)",
+   "tier": "moment",
+   "tipo": "cambio_equipo",
+   "turno": 49,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "T50 | Facu | marcador 1-1 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 50,
+   "jugadores": [
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Facu pasa a Pato",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 50,
+   "jugadores": [
+    "Facu",
+    "Pato"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "  Ostu marca a Manu",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 50,
+   "jugadores": [
+    "Ostu",
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "T51 | Pato | marcador 1-1 | pases=1",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 51,
+   "jugadores": [
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Pato pasa a Facu",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 51,
+   "jugadores": [
+    "Pato",
+    "Facu"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "  Ostu recupera la pelota",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 51,
+   "jugadores": [
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": ">> Cambio de equipo: reposicion de manos (hasta 6 cartas)",
+   "tier": "moment",
+   "tipo": "cambio_equipo",
+   "turno": 51,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "T52 | Ostu | marcador 1-1 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 52,
+   "jugadores": [
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Ostu revienta la pelota",
+   "tier": "moment",
+   "tipo": "reventar",
+   "turno": 52,
+   "jugadores": [
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Tiran el dado: Colo vs Pato",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 52,
+   "jugadores": [
+    "Tiran",
+    "Colo",
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Despeje: Colo=2 vs Pato=3",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 52,
+   "jugadores": [
+    "Despeje",
+    "Colo",
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Gana Pato",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 52,
+   "jugadores": [
+    "Gana Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": ">> Cambio de equipo: reposicion de manos (hasta 6 cartas)",
+   "tier": "moment",
+   "tipo": "cambio_equipo",
+   "turno": 52,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "T53 | Pato | marcador 1-1 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 53,
+   "jugadores": [
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Pato pasa a Manu",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 53,
+   "jugadores": [
+    "Pato",
+    "Manu"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "  Ostu recupera la pelota",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 53,
+   "jugadores": [
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": ">> Cambio de equipo: reposicion de manos (hasta 6 cartas)",
+   "tier": "moment",
+   "tipo": "cambio_equipo",
+   "turno": 53,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "T54 | Ostu | marcador 1-1 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 54,
+   "jugadores": [
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Ostu pasa a Joaco",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 54,
+   "jugadores": [
+    "Ostu",
+    "Joaco"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "  Pato marca a Colo",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 54,
+   "jugadores": [
+    "Pato",
+    "Colo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "T55 | Joaco | marcador 1-1 | pases=1",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 55,
+   "jugadores": [
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Joaco revienta la pelota",
+   "tier": "moment",
+   "tipo": "reventar",
+   "turno": 55,
+   "jugadores": [
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Tiran el dado: Colo vs Facu",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 55,
+   "jugadores": [
+    "Tiran",
+    "Colo",
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Despeje: Colo=5 vs Facu=2",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 55,
+   "jugadores": [
+    "Despeje",
+    "Colo",
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Gana Colo (cuenta como pase)",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 55,
+   "jugadores": [
+    "Gana Colo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "T56 | Colo | marcador 1-1 | pases=2",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 56,
+   "jugadores": [
+    "Colo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Colo pasa a Joaco",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 56,
+   "jugadores": [
+    "Colo",
+    "Joaco"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "  Facu coloca Trampa de offside",
+   "tier": "detail",
+   "tipo": "defensa",
+   "turno": 56,
+   "jugadores": [
+    "Facu",
+    "Trampa"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "T57 | Joaco | marcador 1-1 | pases=3",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 57,
+   "jugadores": [
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Joaco dispara al arco",
+   "tier": "moment",
+   "tipo": "disparo",
+   "turno": 57,
+   "jugadores": [
+    "Joaco"
+   ],
+   "carta": "Disparo al arco"
+  },
+  {
+   "texto": "  Disparo: Joaco=1, arquero Manu=3 (pases=3)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 57,
+   "jugadores": [
+    "Disparo",
+    "Joaco",
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "** GOL de Joaco (Colo, Ostu, Joaco)! Marcador: Facu, Pato, Manu 1 - 2 Colo, Ostu, Joaco",
+   "tier": "moment",
+   "tipo": "gol",
+   "turno": 57,
+   "jugadores": [
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": ">> Cambio de equipo: reposicion de manos (hasta 6 cartas)",
+   "tier": "moment",
+   "tipo": "cambio_equipo",
+   "turno": 57,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "T58 | Manu | marcador 1-2 | pases=0",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 58,
+   "jugadores": [
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Manu pasa a Pato",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 58,
+   "jugadores": [
+    "Manu",
+    "Pato"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "T59 | Pato | marcador 1-2 | pases=1",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 59,
+   "jugadores": [
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Pato pasa a Facu",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 59,
+   "jugadores": [
+    "Pato",
+    "Facu"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "T60 | Facu | marcador 1-2 | pases=2",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 60,
+   "jugadores": [
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Facu pasa a Pato",
+   "tier": "moment",
+   "tipo": "pase",
+   "turno": 60,
+   "jugadores": [
+    "Facu",
+    "Pato"
+   ],
+   "carta": "Pase"
+  },
+  {
+   "texto": "T61 | Pato | marcador 1-2 | pases=3",
+   "tier": "moment",
+   "tipo": "turno",
+   "turno": 61,
+   "jugadores": [
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Pato dispara al arco",
+   "tier": "moment",
+   "tipo": "disparo",
+   "turno": 61,
+   "jugadores": [
+    "Pato"
+   ],
+   "carta": "Disparo al arco"
+  },
+  {
+   "texto": "  Disparo: Pato=4, arquero Ostu=2 (pases=3)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Pato",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "** GOL de Pato (Facu, Pato, Manu)! Marcador: Facu, Pato, Manu 2 - 2 Colo, Ostu, Joaco",
+   "tier": "moment",
+   "tipo": "gol",
+   "turno": 61,
+   "jugadores": [
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": ">> Cambio de equipo: reposicion de manos (hasta 6 cartas)",
+   "tier": "moment",
+   "tipo": "cambio_equipo",
+   "turno": 61,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "Empate 2-2: se define por penales | Facu, Pato, Manu 2 - 2 Colo, Ostu, Joaco",
+   "tier": "moment",
+   "tipo": "empate",
+   "turno": 61,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "--- Penales ---",
+   "tier": "moment",
+   "tipo": "penales",
+   "turno": 61,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Facu=6, arquero Colo=3 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Facu",
+    "Colo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Penal atajado/errado: Facu",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Penal",
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Colo=5, arquero Facu=5 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Colo",
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Palo: se vuelve a patear",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Palo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Colo=1, arquero Facu=2 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Colo",
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Rebote: se vuelve a patear",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Rebote"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Colo=6, arquero Facu=5 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Colo",
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Penal atajado/errado: Colo",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Penal",
+    "Colo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Pato=3, arquero Ostu=4 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Pato",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Penal atajado/errado: Pato",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Penal",
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Ostu=5, arquero Pato=2 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Ostu",
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Penal atajado/errado: Ostu",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Penal",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Manu=5, arquero Joaco=4 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Manu",
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Penal atajado/errado: Manu",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Penal",
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Joaco=6, arquero Manu=1 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Joaco",
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Penal atajado/errado: Joaco",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Penal",
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Serie: Facu, Pato, Manu 0 - 0 Colo, Ostu, Joaco",
+   "tier": "detail",
+   "tipo": "otro",
+   "turno": 61,
+   "jugadores": [],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Facu=4, arquero Ostu=6 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Facu",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Colo=3, arquero Manu=3 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Colo",
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Palo: se vuelve a patear",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Palo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Colo=2, arquero Manu=3 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Colo",
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Ostu=1, arquero Pato=6 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Ostu",
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Rebote: se vuelve a patear",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Rebote"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Ostu=3, arquero Pato=3 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Ostu",
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Palo: se vuelve a patear",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Palo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Ostu=5, arquero Pato=6 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Ostu",
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Manu=5, arquero Joaco=3 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Manu",
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Muerte súbita: empate, otra ronda",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Muerte"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Facu=3, arquero Ostu=1 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Facu",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Joaco=6, arquero Facu=2 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Joaco",
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Colo=6, arquero Manu=3 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Colo",
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Pato=4, arquero Ostu=6 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Pato",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Muerte súbita: empate, otra ronda",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Muerte"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Pato=4, arquero Colo=3 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Pato",
+    "Colo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Ostu=1, arquero Facu=5 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Ostu",
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Rebote: se vuelve a patear",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Rebote"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Ostu=5, arquero Facu=3 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Ostu",
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Joaco=5, arquero Pato=3 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Joaco",
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Pato=1, arquero Joaco=1 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Pato",
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Palo: se vuelve a patear",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Palo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Pato=5, arquero Joaco=3 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Pato",
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Muerte súbita: empate, otra ronda",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Muerte"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Manu=2, arquero Ostu=4 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Manu",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Ostu=5, arquero Facu=2 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Ostu",
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Joaco=5, arquero Manu=5 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Joaco",
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Palo: se vuelve a patear",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Palo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Joaco=6, arquero Manu=6 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Joaco",
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Palo: se vuelve a patear",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Palo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Joaco=5, arquero Manu=2 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Joaco",
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Manu=3, arquero Ostu=6 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Manu",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Muerte súbita: empate, otra ronda",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Muerte"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Pato=5, arquero Ostu=3 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Pato",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Joaco=6, arquero Pato=6 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Joaco",
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Palo: se vuelve a patear",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Palo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Joaco=4, arquero Pato=6 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Joaco",
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Colo=2, arquero Pato=3 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Colo",
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Facu=2, arquero Ostu=3 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Facu",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Muerte súbita: empate, otra ronda",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Muerte"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Pato=2, arquero Colo=4 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Pato",
+    "Colo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Ostu=3, arquero Facu=2 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Ostu",
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Ostu=5, arquero Manu=1 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Ostu",
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Manu=3, arquero Colo=2 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Manu",
+    "Colo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Muerte súbita: empate, otra ronda",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Muerte"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Facu=5, arquero Joaco=1 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Facu",
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Joaco=5, arquero Pato=2 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Joaco",
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Joaco=5, arquero Pato=4 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Joaco",
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Pato=5, arquero Joaco=5 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Pato",
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Palo: se vuelve a patear",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Palo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Pato=6, arquero Joaco=5 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Pato",
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Muerte súbita: empate, otra ronda",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Muerte"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Manu=4, arquero Colo=6 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Manu",
+    "Colo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Colo=2, arquero Facu=5 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Colo",
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Joaco=4, arquero Manu=5 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Joaco",
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Pato=6, arquero Ostu=1 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Pato",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Muerte súbita: empate, otra ronda",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Muerte"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Facu=6, arquero Ostu=1 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Facu",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Ostu=4, arquero Pato=2 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Ostu",
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Ostu=3, arquero Facu=1 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Ostu",
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Facu=1, arquero Ostu=1 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Facu",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Palo: se vuelve a patear",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Palo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Facu=5, arquero Ostu=5 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Facu",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Palo: se vuelve a patear",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Palo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Facu=3, arquero Ostu=1 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Facu",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Muerte súbita: empate, otra ronda",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Muerte"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Facu=3, arquero Ostu=3 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Facu",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Palo: se vuelve a patear",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Palo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Facu=2, arquero Ostu=5 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Facu",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Ostu=4, arquero Pato=3 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Ostu",
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Joaco=2, arquero Pato=5 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Joaco",
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Manu=4, arquero Joaco=2 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Manu",
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Muerte súbita: empate, otra ronda",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Muerte"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Pato=6, arquero Joaco=6 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Pato",
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Palo: se vuelve a patear",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Palo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Pato=2, arquero Joaco=3 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Pato",
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Ostu=3, arquero Facu=2 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Ostu",
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Joaco=1, arquero Facu=4 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Joaco",
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Rebote: se vuelve a patear",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Rebote"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Joaco=3, arquero Facu=1 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Joaco",
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Facu=5, arquero Joaco=3 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Facu",
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Muerte súbita: empate, otra ronda",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Muerte"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Pato=2, arquero Joaco=2 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Pato",
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Palo: se vuelve a patear",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Palo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Pato=4, arquero Joaco=6 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Pato",
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Ostu=2, arquero Manu=1 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Ostu",
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Colo=6, arquero Pato=4 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Colo",
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Manu=2, arquero Colo=4 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Manu",
+    "Colo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Muerte súbita: empate, otra ronda",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Muerte"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Manu=6, arquero Ostu=2 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Manu",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Colo=6, arquero Manu=2 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Colo",
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Colo=6, arquero Pato=6 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Colo",
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Palo: se vuelve a patear",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Palo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Colo=4, arquero Pato=3 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Colo",
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Pato=3, arquero Joaco=5 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Pato",
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Muerte súbita: empate, otra ronda",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Muerte"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Pato=5, arquero Ostu=4 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Pato",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Ostu=6, arquero Pato=4 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Ostu",
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Joaco=4, arquero Pato=2 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Joaco",
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Facu=4, arquero Joaco=6 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Facu",
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Muerte súbita: empate, otra ronda",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Muerte"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Pato=6, arquero Ostu=4 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Pato",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Ostu=1, arquero Facu=5 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Ostu",
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Rebote: se vuelve a patear",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Rebote"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Ostu=6, arquero Facu=6 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Ostu",
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Palo: se vuelve a patear",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Palo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Ostu=2, arquero Facu=3 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Ostu",
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Colo=2, arquero Pato=4 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Colo",
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Facu=5, arquero Ostu=5 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Facu",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Palo: se vuelve a patear",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Palo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Facu=3, arquero Ostu=5 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Facu",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Muerte súbita: empate, otra ronda",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Muerte"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Pato=4, arquero Joaco=3 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Pato",
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Ostu=1, arquero Facu=3 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Ostu",
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Rebote: se vuelve a patear",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Rebote"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Ostu=2, arquero Facu=6 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Ostu",
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Colo=4, arquero Facu=2 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Colo",
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Facu=3, arquero Colo=2 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Facu",
+    "Colo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Muerte súbita: empate, otra ronda",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Muerte"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Facu=1, arquero Ostu=4 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Facu",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Rebote: se vuelve a patear",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Rebote"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Facu=6, arquero Ostu=3 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Facu",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Colo=5, arquero Facu=2 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Colo",
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Colo=5, arquero Pato=6 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Colo",
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Pato=1, arquero Colo=1 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Pato",
+    "Colo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Palo: se vuelve a patear",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Palo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Pato=4, arquero Colo=5 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Pato",
+    "Colo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Muerte súbita: empate, otra ronda",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Muerte"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Facu=4, arquero Joaco=5 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Facu",
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Colo=4, arquero Facu=6 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Colo",
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Joaco=4, arquero Facu=4 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Joaco",
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Palo: se vuelve a patear",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Palo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Joaco=5, arquero Facu=4 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Joaco",
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Pato=1, arquero Ostu=3 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Pato",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Rebote: se vuelve a patear",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Rebote"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Pato=3, arquero Ostu=5 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Pato",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Muerte súbita: empate, otra ronda",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Muerte"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Facu=4, arquero Colo=1 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Facu",
+    "Colo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Ostu=4, arquero Facu=6 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Ostu",
+    "Facu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Joaco=1, arquero Manu=1 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Joaco",
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Palo: se vuelve a patear",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Palo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Joaco=3, arquero Manu=4 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Joaco",
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Manu=2, arquero Joaco=2 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Manu",
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Palo: se vuelve a patear",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Palo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Manu=3, arquero Joaco=5 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Manu",
+    "Joaco"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Muerte súbita: empate, otra ronda",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Muerte"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Pato=1, arquero Ostu=1 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Pato",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Palo: se vuelve a patear",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Palo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Pato=2, arquero Ostu=4 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Pato",
+    "Ostu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Joaco=2, arquero Manu=3 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Joaco",
+    "Manu"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Joaco=5, arquero Pato=3 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Joaco",
+    "Pato"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Facu=2, arquero Colo=2 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Facu",
+    "Colo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Palo: se vuelve a patear",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Palo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Disparo: Facu=5, arquero Colo=4 (pases=0)",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Disparo",
+    "Facu",
+    "Colo"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "  Muerte súbita: empate, otra ronda",
+   "tier": "detail",
+   "tipo": "dado",
+   "turno": 61,
+   "jugadores": [
+    "Muerte"
+   ],
+   "carta": null
+  },
+  {
+   "texto": "Fin en penales: gana Facu, Pato, Manu | Facu, Pato, Manu 2 - 2 Colo, Ostu, Joaco",
+   "tier": "moment",
+   "tipo": "fin",
+   "turno": 61,
+   "jugadores": [],
+   "carta": null
+  }
+ ]
+}

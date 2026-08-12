@@ -1,163 +1,469 @@
 <!DOCTYPE html>
-<html lang="es-AR">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <base id="site-base" href="./">
-  <script>
-    (function () {
-      var el = document.getElementById("site-base");
-      if (location.hostname.endsWith("github.io")) {
-        var repo = location.pathname.split("/").filter(Boolean)[0];
-        if (repo) el.href = "/" + repo + "/";
-      }
-    })();
-  </script>
-  <meta name="description" content="Fobal Facu — juego de cartas de fútbol. Reglas, simulación y playtesting.">
-  <title>Fobal Facu — Inicio</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fobal Facu — un juego de cartas de fútbol</title>
+<meta name="description" content="Fobal Facu es un juego de cartas de fútbol para jugar en mesa. Las reglas, el mazo, la tabla del dado y lo que aprendimos simulando miles de partidos.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚽</text></svg>">
+<link rel="stylesheet" href="assets/css/estilo.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="header-inner">
-      <a class="logo" href="index.html">
-        <span class="logo-icon">⚽</span>
-        <span>Fobal Facu</span>
-      </a>
-      <nav>
-        <a href="index.html" data-page="index.html">Inicio</a>
-        <a href="reglas.html" data-page="reglas.html">Reglas</a>
-        <a href="resultados.html" data-page="resultados.html">Resultados</a>
-        <a href="recomendaciones.html" data-page="recomendaciones.html">Recomendaciones</a>
-        <a href="como-funciona.html" data-page="como-funciona.html">Cómo funciona</a>
-        <a href="simulador.html" data-page="simulador.html">Simulador</a>
-        <a href="replay.html" data-page="replay.html">Replay</a>
-        <a href="crear-reglamento.html" data-page="crear-reglamento.html">Crear reglamento</a>
-      </nav>
-    </div>
-  </header>
 
-  <main>
-    <div class="hero">
-      <h1>Fobal Facu</h1>
-      <p class="subtitle">
-        Simulador de partidos de cartas — correr miles de partidos, comparar reglamentos y ver conclusiones antes de jugar en mesa.
+<svg style="display:none" aria-hidden="true">
+  <symbol id="i-pase" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="17" cy="12" r="4"/><path d="M2 12h7M4 8h4M4 16h4"/>
+  </symbol>
+  <symbol id="i-disparo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 19V8h18v11"/><path d="M7 19v-7h10v7"/><circle cx="12" cy="4" r="2.2"/>
+  </symbol>
+  <symbol id="i-gambeta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 20c3 0 3-5 6-5s3 5 6 5"/><path d="M14 4l4 3-4 3"/><path d="M6 7h12"/>
+  </symbol>
+  <symbol id="i-robo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="8" cy="9" r="3.4"/><path d="M20 18H9a4 4 0 0 1-4-4"/><path d="M17 15l3 3-3 3"/>
+  </symbol>
+  <symbol id="i-falta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 9h9l5-3v9l-5-3H5z"/><circle cx="8" cy="16" r="3"/>
+  </symbol>
+  <symbol id="i-marca" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="8" cy="7" r="2.6"/><path d="M3.5 19c0-3 2-4.5 4.5-4.5S12.5 16 12.5 19"/>
+    <circle cx="17" cy="7" r="2.6"/><path d="M12.5 19c0-3 2-4.5 4.5-4.5s4.5 1.5 4.5 4.5"/>
+  </symbol>
+  <symbol id="i-offside" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 21V4"/><path d="M6 5h12l-3 4 3 4H6"/>
+  </symbol>
+  <symbol id="i-pelota" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="9.2"/><path d="M12 7.2l4 2.9-1.5 4.7h-5L8 10.1z"/>
+    <path d="M12 2.8v4.4M20.7 9.9l-4.7.2M18.2 20l-3.7-5.2M5.8 20l3.7-5.2M3.3 9.9l4.7.2"/>
+  </symbol>
+</svg>
+
+<header class="barra">
+  <div class="contenedor">
+    <a class="marca" href="index.html">
+      <svg class="pelota" aria-hidden="true"><use href="#i-pelota"/></svg>
+      Fobal Facu
+    </a>
+    <nav>
+      <a href="#juego">El juego</a>
+      <a href="#mazo" class="opcional">El mazo</a>
+      <a href="#dado">El dado</a>
+      <a href="#partido" class="opcional">Un partido</a>
+      <a href="#datos">Los datos</a>
+      <a href="reglas.html">Reglas</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ════════════ portada ════════════ -->
+<section class="portada">
+  <div class="contenedor portada-grilla">
+    <div>
+      <p class="rotulo">Juego de cartas · en desarrollo</p>
+      <h1>Fútbol de <em>mesa</em>, con un mazo y un dado.</h1>
+      <p class="bajada">
+        Dos equipos, una pelota y 108 cartas. Pasás, gambeteás, te la roban.
+        Cuando pateás al arco, la cantidad de pases que encadenaste decide con
+        cuántos números entra la pelota.
       </p>
-      <div class="badges">
-        <span class="badge"><strong>python3 -m simulador run</strong></span>
-        <span class="badge">Reglamento <strong>v2</strong> en simulación</span>
-        <span class="badge"><strong>100%</strong> partidos completados (v2 · 3v3)</span>
+      <div class="acciones">
+        <a class="boton" href="reglas.html">
+          <svg width="17" height="17" aria-hidden="true"><use href="#i-pelota"/></svg>
+          Aprender a jugar
+        </a>
+        <a class="boton fantasma" href="#partido">Ver un partido</a>
+      </div>
+      <div class="datos-portada">
+        <div><strong>3 vs 3</strong><span>el formato afinado</span></div>
+        <div><strong>~155</strong><span>turnos por partido</span></div>
+        <div><strong>3,9</strong><span>goles por partido</span></div>
       </div>
     </div>
 
-    <section id="quickstart">
-      <h2>Empezar rápido</h2>
-      <div class="card highlight">
-        <pre><code>git clone https://github.com/rmpato/fobal-facu.git
-cd fobal-facu
-python3 -m simulador reglamentos list
-python3 -m simulador run --reglamento v2 --partidos 200 --ia estrategica
-python3 -m simulador compare-formatos --partidos 200 --ia estrategica</code></pre>
-        <p>Guía completa en el repo: <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/guia-rapida.md">guia-rapida.md</a> · Informe → <a href="comparacion-v1-v2-formatos.md">comparacion-v1-v2-formatos.md</a></p>
-      </div>
-    </section>
+    <div class="abanico" aria-hidden="true">
+      <article class="carta">
+        <span class="copias">×24</span>
+        <div class="dibujo"><svg viewBox="0 0 24 24"><use href="#i-robo"/></svg></div>
+        <div class="nombre">Robo pelota</div>
+        <div class="efecto">Cortás el pase</div>
+      </article>
+      <article class="carta">
+        <span class="copias">×15</span>
+        <div class="dibujo"><svg viewBox="0 0 24 24"><use href="#i-gambeta"/></svg></div>
+        <div class="nombre">Gambetear</div>
+        <div class="efecto">Anula el robo</div>
+      </article>
+      <article class="carta">
+        <span class="copias">×42</span>
+        <div class="dibujo"><svg viewBox="0 0 24 24"><use href="#i-pase"/></svg></div>
+        <div class="nombre">Pase</div>
+        <div class="efecto">La jugada sigue</div>
+      </article>
+      <article class="carta">
+        <span class="copias">×12</span>
+        <div class="dibujo"><svg viewBox="0 0 24 24"><use href="#i-disparo"/></svg></div>
+        <div class="nombre">Disparo al arco</div>
+        <div class="efecto">Momento de la verdad</div>
+      </article>
+      <article class="carta">
+        <span class="copias">×3</span>
+        <div class="dibujo"><svg viewBox="0 0 24 24"><use href="#i-offside"/></svg></div>
+        <div class="nombre">Trampa de offside</div>
+        <div class="efecto">Queda armada</div>
+      </article>
+    </div>
+  </div>
+</section>
 
-    <div class="nav-cards">
-      <a class="nav-card" href="resultados.html">
-        <div class="icon">📊</div>
-        <h3>Resultados</h3>
-        <p>Conclusiones: v0, v1, v1.1, <strong>v2</strong> — acciones, Trampa/Marca, penales.</p>
-      </a>
-      <a class="nav-card" href="recomendaciones.html">
-        <div class="icon">💡</div>
-        <h3>Recomendaciones</h3>
-        <p>Mazo, cartas nuevas, reglas trabadas — v2 ya simulado, próximo: v1.2 / mesa.</p>
-      </a>
-      <a class="nav-card" href="simulador.html">
-        <div class="icon">💻</div>
-        <h3>Simulador</h3>
-        <p>Comandos, reglamentos v0–v2, espectador y replay.</p>
-      </a>
-      <a class="nav-card" href="crear-reglamento.html">
-        <div class="icon">📝</div>
-        <h3>Crear reglamento</h3>
-        <p>v1.2, v2, v3 — qué archivos tocar, JSON, push y cuándo editar código.</p>
-      </a>
-      <a class="nav-card" href="reglas.html">
-        <div class="icon">📋</div>
-        <h3>Reglas de mesa</h3>
-        <p>v0, v1, v1.1 y <strong>v2</strong> (playtesting) para jugar con amigos.</p>
-      </a>
-      <a class="nav-card" href="como-funciona.html">
-        <div class="icon">⚙️</div>
-        <h3>Cómo funciona</h3>
-        <p>Motor, IA, métricas y limitaciones.</p>
-      </a>
+<!-- ════════════ el juego ════════════ -->
+<section id="juego" class="seccion-alt">
+  <div class="contenedor">
+    <div class="encabezado-seccion">
+      <p class="rotulo">Cómo se juega</p>
+      <h2>Un turno son cuatro decisiones</h2>
+      <p>La pelota siempre la tiene un jugador. Solo ese jugador actúa, y el equipo rival contesta con una carta.</p>
+    </div>
+    <div class="pasos">
+      <div class="paso">
+        <h3>Elegís qué hacer</h3>
+        <p>Pasar, patear al arco, reventarla o quedártela. Pasar y patear gastan carta; las otras dos son decisiones.</p>
+      </div>
+      <div class="paso">
+        <h3>La defensa contesta</h3>
+        <p>Una sola carta en todo el equipo: te roba la pelota, te marca a un compañero o te arma la trampa de offside.</p>
+      </div>
+      <div class="paso">
+        <h3>Podés anularla</h3>
+        <p>Si te roban y tenés <code>Gambetear</code>, seguís con la pelota. En v2 la defensa puede volver a intentarlo.</p>
+      </div>
+      <div class="paso">
+        <h3>Se define en el arco</h3>
+        <p>Pateador y arquero tiran un dado. Cuantos más pases traía la jugada, más números hacen gol.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ el mazo ════════════ -->
+<section id="mazo">
+  <div class="contenedor">
+    <div class="encabezado-seccion">
+      <p class="rotulo">El mazo</p>
+      <h2>Siete cartas, 108 copias</h2>
+      <p>Cuatro de cada diez cartas son un <code>Pase</code>: el juego es de posesión. Las cartas raras son las que arman trampas.</p>
     </div>
 
-    <section id="confirmado">
-      <h2>✅ Reglas confirmadas</h2>
-      <div class="card highlight">
-        <table>
-          <thead><tr><th>Regla</th><th>Comportamiento</th></tr></thead>
-          <tbody>
-            <tr><td>Equipos</td><td>Mínimo <strong>2 jugadores por equipo</strong></td></tr>
-            <tr><td>Marcador 2-2</td><td>Penales <strong>inmediatos</strong></td></tr>
-            <tr><td>Trampa / Marca personal</td><td>Solo cuando el ataque <strong>pasa de turno</strong> (v1) · al <strong>pase</strong> en v2</td></tr>
-            <tr><td>Pasa de turno / Reventar</td><td>Decisiones del jugador — <strong>no</strong> son cartas del mazo (<strong>v2</strong> elimina pasa de turno)</td></tr>
-            <tr><td>Reventarla</td><td>Cada equipo elige quién tira el dado (no el que reventó)</td></tr>
-          </tbody>
+    <div class="mazo">
+      <article class="carta">
+        <span class="copias">×42</span>
+        <div class="dibujo"><svg viewBox="0 0 24 24"><use href="#i-pase"/></svg></div>
+        <div class="nombre">Pase</div>
+        <div class="efecto">La pelota va a un compañero y la jugada suma un pase.</div>
+      </article>
+      <article class="carta defensiva">
+        <span class="copias">×24</span>
+        <div class="dibujo"><svg viewBox="0 0 24 24"><use href="#i-robo"/></svg></div>
+        <div class="nombre">Robo pelota</div>
+        <div class="efecto">Corta un pase. La pelota cambia de equipo.</div>
+      </article>
+      <article class="carta">
+        <span class="copias">×15</span>
+        <div class="dibujo"><svg viewBox="0 0 24 24"><use href="#i-gambeta"/></svg></div>
+        <div class="nombre">Gambetear</div>
+        <div class="efecto">Anula un robo y la jugada sigue como si nada.</div>
+      </article>
+      <article class="carta">
+        <span class="copias">×12</span>
+        <div class="dibujo"><svg viewBox="0 0 24 24"><use href="#i-disparo"/></svg></div>
+        <div class="nombre">Disparo al arco</div>
+        <div class="efecto">La única forma de hacer un gol.</div>
+      </article>
+      <article class="carta defensiva">
+        <span class="copias">×7</span>
+        <div class="dibujo"><svg viewBox="0 0 24 24"><use href="#i-falta"/></svg></div>
+        <div class="nombre">Falta</div>
+        <div class="efecto">La juega cualquiera: la pelota se queda y los pases vuelven a cero.</div>
+      </article>
+      <article class="carta defensiva">
+        <span class="copias">×5</span>
+        <div class="dibujo"><svg viewBox="0 0 24 24"><use href="#i-marca"/></svg></div>
+        <div class="nombre">Marca personal</div>
+        <div class="efecto">Tapás a un rival. Si le pasan a ese, recuperás.</div>
+      </article>
+      <article class="carta defensiva">
+        <span class="copias">×3</span>
+        <div class="dibujo"><svg viewBox="0 0 24 24"><use href="#i-offside"/></svg></div>
+        <div class="nombre">Trampa de offside</div>
+        <div class="efecto">Queda armada: el próximo pase del rival es offside.</div>
+      </article>
+    </div>
+
+    <div class="barra-composicion" role="img" aria-label="Composición del mazo: 42 Pase, 24 Robo pelota, 15 Gambetear, 12 Disparo al arco, 7 Falta, 5 Marca personal, 3 Trampa de offside">
+      <span style="width:38.9%;background:var(--cesped)"></span>
+      <span style="width:22.2%;background:var(--robo)"></span>
+      <span style="width:13.9%;background:var(--dato-1)"></span>
+      <span style="width:11.1%;background:var(--gol)"></span>
+      <span style="width:6.5%;background:var(--tinta-3)"></span>
+      <span style="width:4.6%;background:var(--borde-fuerte)"></span>
+      <span style="width:2.8%;background:var(--tinta-2)"></span>
+    </div>
+    <div class="pie-mazo">
+      <span><strong>108</strong> cartas en total</span>
+      <span><strong>6</strong> en la mano de cada uno</span>
+      <span>Se repone cada vez que la pelota cambia de equipo</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ el dado ════════════ -->
+<section id="dado" class="seccion-alt">
+  <div class="contenedor">
+    <div class="encabezado-seccion">
+      <p class="rotulo">El corazón del juego</p>
+      <h2>Cuantos más pases, más grande el arco</h2>
+      <p>Pateador y arquero tiran un dado al mismo tiempo. Probá cuánto cambia según los pases que traiga la jugada.</p>
+    </div>
+
+    <div class="laboratorio">
+      <div class="panel">
+        <strong>Pases encadenados antes del remate</strong>
+        <div class="segmentado" id="selector-pases" role="group" aria-label="Pases encadenados"></div>
+
+        <div class="dados">
+          <div>
+            <div class="dado" id="dado-pateador"></div>
+            <p class="quien">pateador</p>
+          </div>
+          <div>
+            <div class="dado" id="dado-arquero"></div>
+            <p class="quien">arquero</p>
+          </div>
+        </div>
+
+        <p class="resultado-tiro" id="resultado-tiro">Tirá los dados</p>
+        <div class="controles">
+          <button class="principal" id="tirar">Tirar los dados</button>
+          <button id="tirar-diez">Tirar 10 veces</button>
+        </div>
+        <p class="quien" id="conteo-tiros" style="margin-top:.7rem">&nbsp;</p>
+      </div>
+
+      <div class="panel">
+        <strong>La tabla completa</strong>
+        <table class="tabla-dado" id="tabla-dado">
+          <thead>
+            <tr><th>Pases</th><th>Es gol con</th><th>Ataja con</th><th style="text-align:right">Gol</th></tr>
+          </thead>
+          <tbody></tbody>
         </table>
+        <p class="quien" style="text-align:left;margin-top:.8rem">
+          <strong>Rebote:</strong> si los dos aciertan, se vuelve a patear.
+          <strong>Palo:</strong> si sale el mismo número, también.
+        </p>
       </div>
-    </section>
+    </div>
 
-    <section>
-      <h2>📈 Lo más reciente (v2 vs v1)</h2>
-      <p class="section-lead">200 partidos · 3 vs 3 · IA estratégica · jul 2026</p>
-      <div class="compare-grid">
-        <div class="stat-box">
-          <div class="label">Partidos completados</div>
-          <div class="values"><span class="val v1">99,0%</span><span class="val v2">100%</span></div>
-          <div class="unit">v1 → v2</div>
+    <div class="hallazgo">
+      <h3>Un dato que encontró el simulador</h3>
+      <p>
+        Con cero pases <strong>el gol es imposible</strong>, no improbable: para
+        convertir hay que sacar 1 y que el arquero no saque de 2 a 6 —o sea, que
+        saque 1 también—, pero dos dados iguales son palo y se vuelve a patear.
+        Ninguna de las 36 combinaciones termina en gol.
+      </p>
+      <p>
+        Eso alcanza a los penales, que se patean como un disparo sin pases: tal
+        como está escrito el reglamento, <strong>una tanda de penales no se puede
+        definir</strong>. Es de las cosas que se ven en mil partidos simulados y no
+        en una partida en la mesa.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ un partido ════════════ -->
+<section id="partido">
+  <div class="contenedor">
+    <div class="encabezado-seccion">
+      <p class="rotulo">Un partido de verdad</p>
+      <h2>Facu, Pato y Manu contra Colo, Ostu y Joaco</h2>
+      <p>Un partido completo jugado por el simulador, jugada por jugada. Terminó 3 a 2, definido por penales.</p>
+    </div>
+
+    <div class="partido">
+      <ol class="relato" id="relato"></ol>
+      <div class="panel tablero">
+        <p class="equipos" id="equipo-1">Facu, Pato, Manu</p>
+        <p class="marcador" id="marcador">0 – 0</p>
+        <p class="equipos" id="equipo-2">Colo, Ostu, Joaco</p>
+        <p class="minuto" id="minuto">turno 0</p>
+        <div class="controles">
+          <button class="principal" id="reproducir">Reproducir</button>
+          <button id="pausar">Pausa</button>
         </div>
-        <div class="stat-box">
-          <div class="label">Turnos promedio</div>
-          <div class="values"><span class="val v1">179</span><span class="val v2">151</span></div>
+        <div class="controles">
+          <button id="siguiente">Siguiente</button>
+          <button id="reiniciar">Reiniciar</button>
         </div>
-        <div class="stat-box">
-          <div class="label">Trampa + Marca / partido</div>
-          <div class="values"><span class="val v1">~11,9</span><span class="val v2">~19,1</span></div>
-          <div class="unit">colocadas (v2: al pase)</div>
-        </div>
-        <div class="stat-box">
-          <div class="label">Pasa de turno</div>
-          <div class="values"><span class="val v1">8,8%</span><span class="val v2">0%</span></div>
-          <div class="unit">decisión · v2 eliminada</div>
+        <div class="opciones-partido">
+          <label for="velocidad">Velocidad</label>
+          <input type="range" id="velocidad" min="1" max="6" value="4">
+          <label><input type="checkbox" id="detalles"> Mostrar las tiradas de dado</label>
         </div>
       </div>
-      <p><a href="resultados.html#compare-formatos">Ver comparación v1 vs v2 · 3v3/4v4 →</a></p>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <section>
-      <h2>❓ Para validar en mesa</h2>
-      <div class="card">
-        <ul class="checklist">
-          <li>¿v2 en mesa se siente más dinámico que v1 (~151 turnos vs ~179 en 3v3)?</li>
-          <li>¿Trampa/Marca al pase (v2) es demasiado fuerte (~19 colocaciones/partido)?</li>
-          <li>¿Penales ~24–35% es demasiado frecuente?</li>
+<!-- ════════════ los datos ════════════ -->
+<section id="datos" class="seccion-alt">
+  <div class="contenedor">
+    <div class="encabezado-seccion">
+      <p class="rotulo">1.200 partidos simulados</p>
+      <h2>Qué le hace cada regla al juego</h2>
+      <p>
+        Las reglas están escritas también en un formato que una computadora puede
+        jugar. Antes de imprimir cartas nuevas se corren cientos de partidos y se
+        mira qué cambió.
+      </p>
+    </div>
+
+    <div class="cifras">
+      <div class="cifra">
+        <div class="valor">100 %</div>
+        <div class="rotulo-cifra">de los partidos se definen</div>
+        <div class="pie-cifra">con v2 en 3 vs 3</div>
+      </div>
+      <div class="cifra">
+        <div class="valor">−12 %</div>
+        <div class="rotulo-cifra">de duración contra v1</div>
+        <div class="pie-cifra">155 turnos contra 177</div>
+      </div>
+      <div class="cifra">
+        <div class="valor">1 de 4</div>
+        <div class="rotulo-cifra">termina en penales</div>
+        <div class="pie-cifra">el 2-2 define ahí mismo</div>
+      </div>
+      <div class="cifra">
+        <div class="valor">+35 %</div>
+        <div class="rotulo-cifra">más largo en 4 vs 4</div>
+        <div class="pie-cifra">el juego está afinado para tres</div>
+      </div>
+    </div>
+
+    <div class="comparacion">
+      <div class="metrica">
+        <h3>Turnos por partido</h3>
+        <p class="aclaracion">Cuánto dura. Menos es más ágil.</p>
+        <div class="fila-barra"><span>v1 · 3 vs 3</span><div class="pista"><div class="relleno" style="width:83.9%"></div></div><span class="cifra-barra">177</span></div>
+        <div class="fila-barra"><span>v2 · 3 vs 3</span><div class="pista"><div class="relleno v2" style="width:73.6%"></div></div><span class="cifra-barra">155</span></div>
+        <div class="fila-barra"><span>v1 · 4 vs 4</span><div class="pista"><div class="relleno" style="width:99.6%"></div></div><span class="cifra-barra">210</span></div>
+        <div class="fila-barra"><span>v2 · 4 vs 4</span><div class="pista"><div class="relleno v2" style="width:100%"></div></div><span class="cifra-barra">211</span></div>
+      </div>
+
+      <div class="metrica">
+        <h3>Partidos que llegan a penales</h3>
+        <p class="aclaracion">El 2-2 manda a penales enseguida.</p>
+        <div class="fila-barra"><span>v1 · 3 vs 3</span><div class="pista"><div class="relleno" style="width:100%"></div></div><span class="cifra-barra">33 %</span></div>
+        <div class="fila-barra"><span>v2 · 3 vs 3</span><div class="pista"><div class="relleno v2" style="width:77.2%"></div></div><span class="cifra-barra">26 %</span></div>
+        <div class="fila-barra"><span>v1 · 4 vs 4</span><div class="pista"><div class="relleno" style="width:75.1%"></div></div><span class="cifra-barra">25 %</span></div>
+        <div class="fila-barra"><span>v2 · 4 vs 4</span><div class="pista"><div class="relleno v2" style="width:78.1%"></div></div><span class="cifra-barra">26 %</span></div>
+      </div>
+
+      <div class="leyenda">
+        <span><i style="background:var(--dato-1)"></i> v1</span>
+        <span><i style="background:var(--dato-2)"></i> v2</span>
+        <span>300 partidos por escenario, en las mismas condiciones</span>
+      </div>
+    </div>
+
+    <div class="hallazgo">
+      <h3>La marca personal se pone mucho y sirve poco</h3>
+      <p>
+        En v2 se juega unas doce veces por partido, pero contra un ataque atento
+        casi nunca recupera la pelota: alcanza con pasarle a otro. Es una carta que
+        condiciona, no que roba. Es lo próximo a discutir en la mesa.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ versiones ════════════ -->
+<section id="versiones">
+  <div class="contenedor">
+    <div class="encabezado-seccion">
+      <p class="rotulo">El juego cambia</p>
+      <h2>Tres versiones de las reglas</h2>
+      <p>Cada una salió de jugar, anotar qué molestaba y probar el cambio antes de imprimirlo.</p>
+    </div>
+    <div class="versiones">
+      <div class="version">
+        <div class="etiqueta-version">v0</div>
+        <div class="estado">Archivo</div>
+        <ul>
+          <li><code>Corta pase</code> y <code>Tackle</code> como cartas distintas</li>
+          <li>Se reponía solo al quedarse sin cartas</li>
+          <li>Los partidos se trababan y no terminaban</li>
         </ul>
       </div>
-    </section>
-  </main>
+      <div class="version">
+        <div class="etiqueta-version">v1</div>
+        <div class="estado">En uso</div>
+        <ul>
+          <li><code>Robo pelota</code> unifica los cortes</li>
+          <li>Aparece reventar la pelota</li>
+          <li>Se repone al cambiar de equipo</li>
+          <li>Rebote y palo en los disparos</li>
+        </ul>
+      </div>
+      <div class="version actual">
+        <div class="etiqueta-version">v2</div>
+        <div class="estado">A prueba</div>
+        <ul>
+          <li>Sin pasar de turno</li>
+          <li>Trampa y marca se juegan contra el pase</li>
+          <li>Robo y gambeta se encadenan</li>
+          <li>Más corta y siempre se define</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <footer class="site-footer">
-    <p>Fobal Facu · Simulador de cartas de fútbol</p>
-    <p>
-      <a id="repo-link" href="https://github.com/rmpato/fobal-facu">Ver código en GitHub</a>
-      · <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/guia-rapida.md">Guía rápida</a>
-      · <a href="https://github.com/rmpato/fobal-facu/blob/main/docs/resultados-iniciales.md">Resultados (MD)</a>
-    </p>
-  </footer>
-  <script src="assets/js/main.js"></script>
+<!-- ════════════ probarlo ════════════ -->
+<section id="probar" class="seccion-alt">
+  <div class="contenedor">
+    <div class="encabezado-seccion">
+      <p class="rotulo">Para curiosos</p>
+      <h2>Correr los partidos en tu máquina</h2>
+      <p>El simulador es un programa chico en Python, sin dependencias. Sirve para probar una regla antes de llevarla a la mesa.</p>
+    </div>
+    <pre><code>git clone https://github.com/rmpato/fobal-facu.git
+cd fobal-facu
+
+python3 -m simulador reglamentos list
+python3 -m simulador run --reglamento v2 --partidos 300
+python3 -m simulador compare-formatos --partidos 300
+python3 -m simulador ver --reglamento v2 --semilla 138</code></pre>
+  </div>
+</section>
+
+</main>
+
+<footer class="pie">
+  <div class="contenedor">
+    <p>Fobal Facu · juego de cartas de fútbol</p>
+    <nav>
+      <a href="reglas.html">Reglas</a>
+      <a id="enlace-repo" href="https://github.com/rmpato/fobal-facu">Código</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="assets/js/sitio.js"></script>
 </body>
 </html>

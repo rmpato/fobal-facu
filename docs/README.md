@@ -10,11 +10,11 @@ Guía de qué leer según lo que necesites. El README del repo tiene el [quickst
 |----------|-----------|
 | **Elegir / comparar perfiles de IA** | [perfiles-ia.md](./perfiles-ia.md) |
 | **Correr simulaciones ya** | [guia-rapida.md](./guia-rapida.md) |
-| **Comparar v1 vs v2 (3v3 / 4v4)** | [comparacion-v1-v2-formatos.md](./comparacion-v1-v2-formatos.md) · [resultados.html](./resultados.html#compare-formatos) |
+| **Comparar v1 vs v2 (3v3 / 4v4)** | [comparacion-v1-v2-formatos.md](./comparacion-v1-v2-formatos.md) |
 | **Ver conclusiones y números** | [resultados-iniciales.md](./resultados-iniciales.md) |
 | **Saber qué cambiar en el juego** | [recomendaciones-diseno.md](./recomendaciones-diseno.md) |
 | **Entender el motor por dentro** | [como-funciona-simulacion.md](./como-funciona-simulacion.md) |
-| **Crear reglamento v1.2 / v2** | [reglamentos-guia.md](./reglamentos-guia.md) · [crear-reglamento.html](./crear-reglamento.html) |
+| **Crear reglamento v1.2 / v2** | [reglamentos-guia.md](./reglamentos-guia.md) |
 | **Jugar en mesa (reglas humanas)** | [reglamento-v1.md](./reglamento-v1.md) · [reglamento-v0.md](./reglamento-v0.md) |
 | **Reglas ambiguas / supuestos** | [ambiguedades.md](./ambiguedades.md) |
 | **Publicar el sitio web** | [GITHUB_PAGES.md](./GITHUB_PAGES.md) *(opcional)* |

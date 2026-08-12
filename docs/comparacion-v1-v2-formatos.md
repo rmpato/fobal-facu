@@ -119,4 +119,4 @@ python3 -m simulador compare-reglamentos --partidos 200 --jugadores-por-equipo 3
 python3 -m simulador run --reglamento v2 --jugadores-por-equipo 4 --partidos 200
 ```
 
-Sitio: [resultados.html](./resultados.html#compare-formatos) · Reglas: [reglamento-v1.md](./reglamento-v1.md) · [reglamento-v2.md](./reglamento-v2.md)
+Reglas: [reglamento-v1.md](./reglamento-v1.md) · [reglamento-v2.md](./reglamento-v2.md)

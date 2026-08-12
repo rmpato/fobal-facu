@@ -1,53 +1,37 @@
-# Publicar en GitHub Pages
+# Publicar el sitio
 
-El sitio está en la carpeta `docs/` (`index.html` + assets).
+El sitio público sale de esta carpeta: **Settings → Pages → rama `Fobal3`,
+carpeta `/docs`**. Cada push actualiza el sitio en un par de minutos.
 
-## Pasos
+## Qué hay
 
-1. **Subí el repo a GitHub** (si todavía no está):
+| Archivo | Qué es |
+|---|---|
+| `index.html` | La página principal: el juego, el mazo, la tabla del dado, un partido y los datos |
+| `reglas.html` | Las reglas completas para jugar |
+| `assets/css/estilo.css` · `assets/js/sitio.js` | Todo el diseño y la interacción, sin dependencias |
+| `replays/partido.json` | El partido que se reproduce en la página |
 
-   ```bash
-   git init
-   git add .
-   git commit -m "Sitio y simulador fobal-facu"
-   git branch -M main
-   git remote add origin https://github.com/TU_USUARIO/fobal-facu.git
-   git push -u origin main
-   ```
+## Actualizar el partido de ejemplo
 
-2. **Activá GitHub Pages** en el repo:
-   - GitHub → **Settings** → **Pages**
-   - **Source:** Deploy from a branch
-   - **Branch:** `main` → carpeta **`/docs`**
-   - Save
+```bash
+python3 -m simulador ver --reglamento v2 --semilla 138 --sin-pausa \
+    --equipo1 Facu Pato Manu --equipo2 Colo Ostu Joaco \
+    --grabar docs/replays/partido.json
+```
 
-3. **Esperá 1–2 minutos.** El sitio queda en:
+## Actualizar los números
 
-   ```
-   https://TU_USUARIO.github.io/fobal-facu/
-   ```
+Los de la sección «Los datos» salen de:
 
-## Contenido del sitio
+```bash
+python3 -m simulador compare-formatos --partidos 300
+```
 
-| Página | Qué muestra |
-|--------|-------------|
-| `index.html` | Inicio, reglas confirmadas, resumen reciente |
-| `reglas.html` | Reglamentos v0–v2, mazos, dados |
-| `resultados.html` | IA estratégica, acciones %, variantes, comparación v0–v2 |
-| `como-funciona.html` | Motor, IA, dados, métricas, limitaciones |
-| `simulador.html` | Comandos CLI, reglamentos v0–v2, IA, espectador, replay |
-| `crear-reglamento.html` | Cómo crear v1.2 / v2.1 / v3 — JSON, push, cuándo tocar código (v2 como ejemplo) |
+Están escritos a mano en `index.html`: si se vuelven a correr las
+simulaciones, hay que actualizarlos ahí.
 
-Los `.md` del repo siguen disponibles como links directos (ej. `resultados-iniciales.md`).
+## No aparece en buscadores
 
-## Actualizar resultados
-
-1. Corré simulaciones: `python3 -m simulador compare`
-2. Actualizá `docs/resultados-iniciales.md`
-3. Actualizá los números en `docs/resultados.html` (y opcionalmente `index.html`)
-4. Commit + push → GitHub Pages se actualiza solo
-
-## Notas
-
-- El archivo `docs/.nojekyll` evita que Jekyll procese el sitio (HTML estático puro).
-- No hace falta GitHub Actions para este setup.
+Todas las páginas llevan `noindex`. La dirección es pública, pero hay que
+conocerla.

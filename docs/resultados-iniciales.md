@@ -276,6 +276,6 @@ Cambios vs v1: sin pasa de turno; Trampa/Marca al reaccionar a un pase; robo ↔
 
 **Conclusión:** v2 cierra todos los partidos, acorta la duración (~15% menos turnos que v1 en 3v3), sube pase y uso de Trampa/Marca (reactivas al pase). Menos penales que v1 (~24% vs ~35%). Balance 48% / 52% victorias.
 
-Reglas → [reglamento-v2.md](./reglamento-v2.md). Sitio → [resultados.html](./resultados.html#compare-cli).
+Reglas → [reglamento-v2.md](./reglamento-v2.md).
 
 > Corridas anteriores en **2 vs 2** quedaron obsoletas; el simulador usa **3 vs 3** por defecto desde jul 2026.
