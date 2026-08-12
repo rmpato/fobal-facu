@@ -133,7 +133,7 @@ def jugar_partido(
             "turno",
             f"Turno {estado.turno} · pelota en {estado.portador.nombre} · "
             f"{estado.marcador.goles[0]}-{estado.marcador.goles[1]} · "
-            f"{estado.pases} pases",
+            f"{_pases(estado.pases)}",
             jugadores=(estado.portador.nombre,),
         )
         jugar_turno(estado, agente)
@@ -246,7 +246,7 @@ def _disparo(estado: EstadoPartido) -> None:
     franja = reg.tabla_disparo.para(estado.pases)
     estado.emitir(
         "disparo",
-        f"{portador.nombre} patea al arco (con {estado.pases} pases encadenados; "
+        f"{portador.nombre} patea al arco ({_pases(estado.pases)} en la jugada; "
         f"es gol con {_rango(franja.gol)}, ataja con {_rango(franja.ataja)})",
         jugadores=(portador.nombre, arquero.nombre),
         carta=Carta.DISPARO,
@@ -632,3 +632,9 @@ def _tanda_de_penales(estado: EstadoPartido) -> int:
 
 def _rango(rango: tuple[int, int]) -> str:
     return str(rango[0]) if rango[0] == rango[1] else f"{rango[0]}-{rango[1]}"
+
+
+def _pases(cantidad: int) -> str:
+    if cantidad == 0:
+        return "sin pases"
+    return "1 pase" if cantidad == 1 else f"{cantidad} pases"

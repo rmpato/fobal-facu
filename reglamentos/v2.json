@@ -5,12 +5,21 @@
   "version": "2.0",
   "descripcion": "Saca el pasa de turno: sin Pase en la mano hay que reventar. Trampa de offside y Marca personal pasan a jugarse como respuesta a un pase, y Robo pelota contra Gambetear se puede encadenar mientras queden cartas.",
   "documento": "docs/reglamento-v2.md",
-  "activo": true,
-  "acciones_ofensivas": ["pase", "disparo", "reventar"],
+  "acciones_ofensivas": [
+    "pase",
+    "disparo",
+    "reventar"
+  ],
   "reacciones": {
     "pase": {
-      "cartas": ["Robo pelota", "Trampa de offside", "Marca personal"],
-      "contra": { "Robo pelota": "Gambetear" }
+      "cartas": [
+        "Robo pelota",
+        "Marca personal",
+        "Trampa de offside"
+      ],
+      "contra": {
+        "Robo pelota": "Gambetear"
+      }
     },
     "pasa_turno": {
       "cartas": [],
