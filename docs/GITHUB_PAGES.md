@@ -1,6 +1,6 @@
 # Publicar el sitio
 
-El sitio público sale de esta carpeta: **Settings → Pages → rama `Fobal3`,
+El sitio público sale de esta carpeta: **Settings → Pages → rama `main`,
 carpeta `/docs`**. Cada push actualiza el sitio en un par de minutos.
 
 ## Qué hay

@@ -283,7 +283,7 @@
     var enlaceRepo = document.getElementById("enlace-repo");
     if (enlaceRepo) enlaceRepo.href = base;
     document.querySelectorAll('a[href$=".md"]').forEach(function (enlace) {
-      enlace.href = base + "/blob/Fobal3/docs/" + enlace.getAttribute("href").replace(/^\.\//, "");
+      enlace.href = base + "/blob/main/docs/" + enlace.getAttribute("href").replace(/^\.\//, "");
     });
   }
 
