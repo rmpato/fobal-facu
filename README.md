@@ -29,6 +29,64 @@ Cada corrida imprime métricas y **qué reglas aplicó** ese reglamento. Para en
 
 ---
 
+## Ver un partido en la terminal
+
+El modo espectador muestra el partido jugada por jugada, con la mano de cada
+jugador, las últimas cartas y el marcador arriba. Es la forma más rápida de
+entender qué hace una regla nueva.
+
+```bash
+# Un partido con el reglamento que se está probando
+python3 -m simulador ver --reglamento v2 --equipo1 Facu Pato Manu --equipo2 Colo Ostu Joaco
+```
+
+**Para que se vea lindo**, conviene instalar dos bibliotecas opcionales. Sin
+ellas funciona igual, pero con paneles más básicos:
+
+```bash
+pip install rich textual
+```
+
+Este repositorio ya trae un entorno con las dos instaladas, así que también sirve:
+
+```bash
+.venv/bin/python -m simulador ver --reglamento v2 --equipo1 Facu Pato Manu --equipo2 Colo Ostu Joaco
+```
+
+### Mientras corre
+
+| Tecla | Qué hace |
+|-------|----------|
+| **Espacio** | avanzar ya a la próxima jugada |
+| **+** / **−** | acelerar o frenar el relato |
+| **P** | pausa automática sí / no |
+| **Q** | salir del partido |
+
+### Opciones que valen la pena
+
+```bash
+# Repetir exactamente el mismo partido (el de la página web)
+python3 -m simulador ver --reglamento v2 --semilla 138 --equipo1 Facu Pato Manu --equipo2 Colo Ostu Joaco
+
+# Elegir la interfaz: textual (la más completa), rich, curses o simple
+python3 -m simulador ver --reglamento v2 --ui textual
+
+# Ritmo del relato y segundos entre jugadas
+python3 -m simulador ver --reglamento v2 --velocidad rapido --pausa 2
+
+# Enfrentar dos estilos de juego distintos
+python3 -m simulador ver --reglamento v2 --ia-equipo0 agresiva --ia-equipo1 conservador
+
+# Guardar el partido y generar una página para volver a verlo
+python3 -m simulador ver --reglamento v2 --semilla 138 --grabar partido.json --exportar-html
+```
+
+Todas las opciones: `python3 -m simulador ver --help`. Necesita una terminal de
+verdad: si la salida se manda a un archivo, cae al modo simple y no responde al
+teclado.
+
+---
+
 ## Reglamentos implementados
 
 Estos son los que el simulador puede correr hoy (`reglamentos/indice.json`):
@@ -101,9 +159,17 @@ docs/            Reglamentos humanos, resultados, guías
 
 ---
 
-## Sitio web (opcional)
+## Sitio web
 
-Hay una versión HTML de resultados y reglas en [`docs/`](docs/) (GitHub Pages). No hace falta para correr simulaciones. Publicación: [`docs/GITHUB_PAGES.md`](docs/GITHUB_PAGES.md).
+**[rmpato.github.io/fobal-facu](https://rmpato.github.io/fobal-facu/)** — el juego
+contado para alguien que no lo conoce: el mazo, la tabla del dado para probar
+tirando, un partido que se reproduce solo y los números de las simulaciones. Las
+reglas completas para jugar están en
+[reglas.html](https://rmpato.github.io/fobal-facu/reglas.html).
+
+Sale de la carpeta [`docs/`](docs/) de esta rama. No hace falta para correr
+simulaciones. Cómo se publica y cómo se actualiza el partido de ejemplo:
+[`docs/GITHUB_PAGES.md`](docs/GITHUB_PAGES.md).
 
 ---
 
