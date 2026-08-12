@@ -65,3 +65,10 @@ todos los archivos tal cual.
 
 El sitio no corre simulaciones: para eso hay que levantar el banco de pruebas en
 la propia computadora con `python3 -m simulador web`.
+
+**No es para buscadores.** Todas las páginas llevan `noindex`, así que Google y
+compañía no las listan: la dirección es pública, pero hay que conocerla. También
+hay un `robots.txt`, aunque para un sitio de proyecto (uno que cuelga de
+`usuario.github.io/repositorio/`) los buscadores solo leen el `robots.txt` de la
+raíz del dominio: lo que hace el trabajo de verdad es la etiqueta `noindex` de
+cada página.

@@ -1,0 +1,3 @@
+# Este sitio es para el grupo que juega y prueba el juego, no para buscadores.
+User-agent: *
+Disallow: /
