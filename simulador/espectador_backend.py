@@ -14,6 +14,15 @@ def tty_disponible() -> bool:
     )
 
 
+def curses_disponible() -> bool:
+    """curses no viene con Python en Windows."""
+    try:
+        import curses  # noqa: F401
+    except ImportError:
+        return False
+    return True
+
+
 def rich_disponible() -> bool:
     from simulador.espectador_rich import disponible
 
@@ -35,7 +44,9 @@ def resolver_ui(preferencia: str = "auto") -> str:
             return "textual"
         if rich_disponible():
             return "rich"
-        return "curses"
+        if curses_disponible():
+            return "curses"
+        return "simple"
     if rich_disponible():
         return "rich"
     return "simple"
@@ -46,6 +57,11 @@ def validar_ui(elegido: str) -> str:
         raise SystemExit("Textual no instalado. Prueba: pip install textual")
     if elegido == "rich" and not rich_disponible():
         raise SystemExit("Rich no instalado. Prueba: pip install rich")
+    if elegido == "curses" and not curses_disponible():
+        raise SystemExit(
+            "curses no esta disponible en este sistema (pasa en Windows). "
+            "Proba: pip install textual  y despues --ui textual"
+        )
     if elegido == "curses" and not tty_disponible():
         raise SystemExit("Curses requiere una terminal interactiva.")
     return elegido

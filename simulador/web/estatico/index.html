@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fobal Facu · simulaciones</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚽</text></svg>">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+<header class="barra">
+  <div class="barra-interna">
+    <div class="marca">⚽ Fobal Facu <small>simulaciones</small></div>
+    <nav class="pestanas" id="pestanas" role="tablist">
+      <button type="button" data-vista="equipos" role="tab" aria-selected="true">1 · Equipos</button>
+      <button type="button" data-vista="reglas" role="tab" aria-selected="false">2 · Reglas</button>
+      <button type="button" data-vista="simular" role="tab" aria-selected="false">3 · Simular</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ═══════════ equipos ═══════════ -->
+<section id="vista-equipos" class="vista activa">
+  <div class="intro">
+    <h2>¿Quiénes juegan?</h2>
+    <p>
+      Los nombres se usan para mirar los partidos: hacen que el relato se entienda.
+      Para las estadísticas da igual cómo se llamen, pero <strong>cuántos son</strong>
+      cambia mucho el juego.
+    </p>
+  </div>
+
+  <div class="equipos" id="equipos"></div>
+
+  <div class="panel">
+    <div class="botonera">
+      <button type="button" class="accion" id="guardar-equipos">Guardar equipos</button>
+      <button type="button" class="accion suave" id="ir-a-reglas">Seguir a las reglas →</button>
+      <span class="estado" id="estado-equipos"></span>
+    </div>
+    <p class="nota" style="margin-top:.7rem">
+      Se guardan en <code>configs/equipos.json</code>, así que quedan para la próxima vez.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════ reglas ═══════════ -->
+<section id="vista-reglas" class="vista">
+  <div class="intro">
+    <h2>Las reglas del juego</h2>
+    <p>
+      Cada reglamento es una versión del juego. Se puede editar el mazo, cuántos
+      goles hacen falta para ganar y qué cartas puede jugar cada equipo. Al
+      guardar, queda listo para simular.
+    </p>
+  </div>
+
+  <div class="editor">
+    <aside class="panel">
+      <h3>Reglamentos</h3>
+      <p class="ayuda">El punto lleno entra en las comparaciones.</p>
+      <ul class="lista" id="lista-reglamentos"></ul>
+      <div class="botonera">
+        <button type="button" class="accion suave" id="btn-nuevo">+ Nuevo</button>
+        <button type="button" class="accion suave" id="btn-copiar">Duplicar</button>
+      </div>
+      <div class="botonera" style="margin-top:.5rem">
+        <button type="button" class="accion riesgo" id="btn-borrar">Borrar este</button>
+      </div>
+    </aside>
+
+    <form id="formulario" autocomplete="off">
+      <div class="problemas" id="problemas" hidden></div>
+
+      <fieldset>
+        <legend>Identidad</legend>
+        <div class="grilla">
+          <label>Id <small>nombre del archivo</small>
+            <input id="r-id" required placeholder="v3">
+          </label>
+          <label>Nombre
+            <input id="r-nombre" required placeholder="Iteración 3">
+          </label>
+          <label>Versión
+            <input id="r-version" placeholder="3.0">
+          </label>
+          <label class="ancho">Descripción <small>qué cambia respecto de la versión anterior</small>
+            <textarea id="r-descripcion" rows="2"></textarea>
+          </label>
+          <label class="casilla ancho">
+            <input type="checkbox" id="r-activo"> Entra en las comparaciones por defecto
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>El mazo</legend>
+        <p class="ayuda">
+          Cuántas copias de cada carta. Es lo que más cambia el ritmo del juego:
+          más <code>Disparo al arco</code> acorta los partidos, menos
+          <code>Falta</code> los hace más fluidos.
+        </p>
+        <div class="mazo" id="mazo"></div>
+        <div class="total-mazo">
+          <span>Total: <strong id="total-mazo">0</strong> cartas</span>
+          <label class="en-linea">Agregar carta
+            <select id="agregar-carta"><option value="">elegir…</option></select>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>El partido</legend>
+        <div class="grilla">
+          <label>Goles para ganar
+            <input type="number" id="p-goles" min="1" max="20">
+          </label>
+          <label>Va a penales con
+            <span class="en-linea" style="margin-top:.25rem">
+              <input type="number" id="p-penales-0" min="0" max="20">–
+              <input type="number" id="p-penales-1" min="0" max="20">
+            </span>
+          </label>
+          <label>Cartas en la mano
+            <input type="number" id="p-mano" min="1" max="20">
+          </label>
+          <label>Mínimo de jugadores por equipo
+            <input type="number" id="p-minimo" min="2" max="8">
+          </label>
+          <label class="ancho">Cuándo se levantan cartas
+            <select id="p-reposicion">
+              <option value="cambio_equipo">cuando la pelota cambia de equipo</option>
+              <option value="mano_vacia">cuando alguien se queda sin cartas</option>
+            </select>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Qué puede hacer el que tiene la pelota</legend>
+        <div class="casillas" id="acciones"></div>
+        <p class="nota" style="margin-top:.6rem">
+          Pasar y patear gastan carta. Reventar y pasar de turno son decisiones:
+          tiene que quedar habilitada al menos una de las dos.
+        </p>
+      </fieldset>
+
+      <fieldset>
+        <legend>Cómo responde la defensa</legend>
+        <div class="dos-columnas">
+          <div>
+            <h3>Cuando el ataque pasa la pelota</h3>
+            <div class="casillas" id="reac-pase"></div>
+            <div class="contras" id="contra-pase"></div>
+          </div>
+          <div>
+            <h3>Cuando el ataque pasa de turno</h3>
+            <div class="casillas" id="reac-pasa_turno"></div>
+            <div class="contras" id="contra-pasa_turno"></div>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Otras reglas</legend>
+        <div class="grilla">
+          <label>Chance de falta <small>por jugador y por turno</small>
+            <span class="en-linea" style="margin-top:.25rem">
+              <input type="range" id="r-falta" min="0" max="50" step="1" style="width:9rem">
+              <output id="r-falta-valor"></output>
+            </span>
+          </label>
+          <label>Si el ataque pasa de turno y nadie responde
+            <select id="r-sin-respuesta">
+              <option value="nada">no pasa nada: se queda con la pelota</option>
+              <option value="pasa_companero">la pelota pasa a un compañero</option>
+            </select>
+          </label>
+          <label class="casilla ancho"><input type="checkbox" id="r-rebote"> Rebote y palo en los disparos: si los dos aciertan o sale el mismo número, se vuelve a patear</label>
+          <label class="casilla ancho"><input type="checkbox" id="r-reventar"> Se puede reventar la pelota</label>
+          <label class="casilla ancho"><input type="checkbox" id="r-encadenables"> Robo y gambeta se pueden encadenar mientras queden cartas</label>
+        </div>
+
+        <details class="avanzado">
+          <summary>Opciones avanzadas</summary>
+          <div class="grilla">
+            <label class="casilla ancho"><input type="checkbox" id="r-una-reaccion"> Una sola reacción defensiva por acción del ataque</label>
+            <label class="casilla ancho"><input type="checkbox" id="r-trampa-solo"> Trampa y marca solo cuando el ataque pasa de turno</label>
+            <label>Perfil del motor <small>cómo resuelve el turno</small>
+              <select id="r-motor">
+                <option value="v1">v1 — con reventar (recomendado)</option>
+                <option value="v0">v0 — el turno original</option>
+              </select>
+            </label>
+            <label>Documento de reglas <small>opcional</small>
+              <input id="r-documento" placeholder="docs/reglamento-v3.md">
+            </label>
+          </div>
+        </details>
+      </fieldset>
+
+      <fieldset>
+        <legend>La tabla del dado</legend>
+        <p class="ayuda">
+          Con cuántos números entra la pelota según los pases encadenados. Esta
+          tabla es fija en el motor: para cambiarla hay que tocar el código.
+        </p>
+        <table class="referencia">
+          <thead><tr><th>Pases</th><th>Es gol con</th><th>Ataja con</th></tr></thead>
+          <tbody id="tabla-disparo"></tbody>
+        </table>
+      </fieldset>
+
+      <div class="botonera">
+        <button type="button" class="accion" id="btn-guardar">Guardar reglamento</button>
+        <button type="button" class="accion suave" id="btn-guardar-simular">Guardar y simular</button>
+        <button type="button" class="accion suave" id="btn-descartar">Descartar cambios</button>
+        <span class="estado" id="estado-reglas"></span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ═══════════ simular ═══════════ -->
+<section id="vista-simular" class="vista">
+  <div class="intro">
+    <h2>Simular</h2>
+    <p>
+      Correr muchos partidos de una o más versiones del juego y comparar qué pasó.
+      Todos usan las mismas condiciones, así que la diferencia es la regla y no la suerte.
+    </p>
+  </div>
+
+  <div class="panel">
+    <h3>Qué comparar</h3>
+    <p class="ayuda">Cada fila es un reglamento con su formato y su estilo de juego.</p>
+    <div id="escenarios"></div>
+    <div class="botonera" style="margin-top:.7rem">
+      <button type="button" class="accion suave" id="btn-escenario">+ Agregar comparación</button>
+      <label class="en-linea">Partidos de cada uno
+        <input type="number" id="partidos" value="200" min="10" max="3000" step="10">
+      </label>
+      <button type="button" class="accion" id="btn-correr">Correr simulación</button>
+      <span class="estado" id="estado-simulacion"></span>
+    </div>
+  </div>
+
+  <div id="resultados"></div>
+
+  <div class="panel">
+    <h3>Ver un partido</h3>
+    <p class="ayuda">
+      Un partido completo jugada por jugada, con la mano del que tiene la pelota.
+      Sirve para entender de dónde salen los números.
+    </p>
+    <div class="botonera">
+      <label class="en-linea">Reglamento <select id="v-reglamento"></select></label>
+      <label class="en-linea">Estilo <select id="v-perfil"></select></label>
+      <label class="en-linea">Jugadores por equipo <input type="number" id="v-jugadores" min="2" max="8" value="3"></label>
+      <label class="en-linea">Semilla <input id="v-semilla" placeholder="al azar" style="width:7rem"></label>
+      <button type="button" class="accion" id="btn-jugar">Jugar partido</button>
+      <span class="estado" id="estado-partido"></span>
+    </div>
+
+    <div class="partido" id="panel-partido" hidden style="margin-top:1.2rem">
+      <ol class="relato" id="relato"></ol>
+      <div>
+        <div class="marcador-vivo">
+          <div class="equipos-linea">
+            <span class="nombre-equipo" id="nombre-equipo-1"></span>
+            <span class="tanteador" id="tanteador">0 – 0</span>
+            <span class="nombre-equipo" id="nombre-equipo-2"></span>
+          </div>
+          <div class="minuto" id="minuto"></div>
+        </div>
+
+        <h3>En la mesa</h3>
+        <div class="mesa" id="mesa"></div>
+
+        <h3 id="titulo-mano">La mano</h3>
+        <div class="mano" id="mano"></div>
+
+        <div class="botonera" style="margin-top:1rem">
+          <button type="button" class="accion" id="btn-reproducir">Reproducir</button>
+          <button type="button" class="accion suave" id="btn-pausar">Pausa</button>
+        </div>
+        <div class="botonera" style="margin-top:.4rem">
+          <button type="button" class="accion suave" id="btn-siguiente">Siguiente</button>
+          <button type="button" class="accion suave" id="btn-reiniciar">Reiniciar</button>
+        </div>
+        <label style="margin-top:.8rem">Velocidad
+          <input type="range" id="v-velocidad" min="1" max="6" value="4">
+        </label>
+        <label class="casilla" style="margin-top:.5rem">
+          <input type="checkbox" id="v-detalles"> Mostrar las tiradas de dado
+        </label>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div id="aviso" class="aviso" hidden></div>
+<script src="app.js"></script>
+</body>
+</html>

@@ -2,11 +2,15 @@
 
 from __future__ import annotations
 
-import curses
 import random
 import sys
 import textwrap
 from pathlib import Path
+
+try:  # curses no viene con Python en Windows
+    import curses
+except ImportError:  # pragma: no cover - depende del sistema
+    curses = None
 
 from simulador.config import ConfigSimulacion
 from simulador.cartas import Carta, carta_por_nombre, rol_carta
@@ -49,15 +53,10 @@ from simulador.grabar_espectador import escribir_grabacion, exportar_html_replay
 
 NOMBRES_DEFAULT = ["Facu", "Pato", "Manu", "Colo", "Ostu", "Joaco"]
 
-# Colores de jugador: solo foreground brillante, sin fondo (evita bloques negros)
-_PALETA_FG = [
-    curses.COLOR_CYAN,
-    curses.COLOR_GREEN,
-    curses.COLOR_YELLOW,
-    curses.COLOR_MAGENTA,
-    curses.COLOR_RED,
-    curses.COLOR_WHITE,
-]
+# Colores de jugador: solo foreground brillante, sin fondo (evita bloques negros).
+# Los valores son los mismos que define curses; se escriben acá para que el
+# modulo se pueda importar aunque curses no exista (Windows).
+_PALETA_FG = [6, 2, 3, 5, 1, 7]  # cyan, verde, amarillo, magenta, rojo, blanco
 
 _ANSI_NOMBRE = [
     "\033[1;96m",  # bright cyan

@@ -86,6 +86,14 @@ def main() -> None:
     )
     sub = parser.add_subparsers(dest="comando", required=True)
 
+    web = sub.add_parser(
+        "web", help="Abrir la interfaz para armar equipos, editar reglas y simular"
+    )
+    web.add_argument("--puerto", type=int, default=8000, help="Puerto (default: 8000)")
+    web.add_argument(
+        "--sin-navegador", action="store_true", help="No abrir el navegador solo"
+    )
+
     run = sub.add_parser("run", help="Correr simulaciones en lote")
     _add_reglamento_arg(run)
     run.add_argument("--partidos", type=int, default=100)
@@ -212,7 +220,12 @@ def main() -> None:
 
     args = parser.parse_args()
 
-    if args.comando == "run":
+    if args.comando == "web":
+        from simulador.web import servir
+
+        servir(puerto=args.puerto, abrir_navegador=not args.sin_navegador)
+
+    elif args.comando == "run":
         if args.jugadores_por_equipo < 2:
             parser.error("Se requieren al menos 2 jugadores por equipo")
         config = _config_desde_args(args)

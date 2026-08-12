@@ -2,16 +2,67 @@
 
 Simulador de partidos para un juego de cartas de fútbol (familia). Corre miles de partidos en segundos para comparar reglamentos y ver si el juego cierra, estanca o se desbalancea.
 
-**Requisito:** Python 3.11+ (solo biblioteca estándar).
+**Requisito:** Python 3.11 o más nuevo. Nada más.
 
 ---
 
-## Empezar en 2 minutos
+## Instalación
 
-```bash
+Los scripts revisan que Python esté, preparan un entorno propio en la carpeta
+`.venv` y dejan todo listo. No tocan nada del sistema.
+
+### macOS y Linux
+
+En la Terminal (funciona igual en zsh, bash o sh):
+
+```sh
 git clone https://github.com/rmpato/fobal-facu.git
 cd fobal-facu
+./instalar.sh --web
+```
 
+### Windows
+
+En PowerShell o en el Símbolo del sistema:
+
+```bat
+git clone https://github.com/rmpato/fobal-facu.git
+cd fobal-facu
+.\instalar.bat --web
+```
+
+Con `--web` abre la interfaz al terminar; con `--ver` muestra un partido en la
+terminal; sin nada, deja todo instalado y explica cómo seguir.
+
+Si no tenés `git`, el repositorio se puede bajar como ZIP desde el botón verde
+**Code** de GitHub.
+
+---
+
+## La interfaz
+
+```sh
+.venv/bin/python -m simulador web            # macOS y Linux
+.venv\Scripts\python -m simulador web        # Windows
+```
+
+Abre `http://localhost:8000` con tres pasos, pensados para no tocar la terminal:
+
+| Pantalla | Para qué |
+|---|---|
+| **1 · Equipos** | Los nombres de los dos equipos y de sus jugadores. Se guardan en `configs/equipos.json`. |
+| **2 · Reglas** | Editar el mazo carta por carta, cuántos goles hacen falta, qué puede hacer el ataque y con qué responde la defensa. Se puede crear un reglamento nuevo, duplicar uno existente o borrarlo. Avisa en el momento si algo no cierra. |
+| **3 · Simular** | Correr cientos de partidos de una o varias versiones y comparar los resultados con gráficos. Abajo, un partido completo jugada por jugada, con **la mano del que tiene la pelota** y cuántas cartas le quedan a cada uno. |
+
+Lo que se guarda desde la interfaz son los mismos archivos que lee la línea de
+comandos: un reglamento creado ahí se puede simular después con `run` o
+`compare-formatos`.
+
+---
+
+## Desde la terminal
+
+```bash
 # Ver reglamentos disponibles
 python3 -m simulador reglamentos list
 
@@ -24,6 +75,8 @@ python3 -m simulador compare-formatos --partidos 200 --ia estrategica
 # Comparar v1 vs v2 en un solo formato (default 3v3)
 python3 -m simulador compare-reglamentos --partidos 200
 ```
+
+En Windows, donde dice `python3` va `.venv\Scripts\python` (o `py -3`).
 
 Cada corrida imprime métricas y **qué reglas aplicó** ese reglamento. Para entender los comandos y el flujo completo → [`docs/guia-rapida.md`](docs/guia-rapida.md).
 
@@ -40,18 +93,19 @@ entender qué hace una regla nueva.
 python3 -m simulador ver --reglamento v2 --equipo1 Facu Pato Manu --equipo2 Colo Ostu Joaco
 ```
 
-**Para que se vea lindo**, conviene instalar dos bibliotecas opcionales. Sin
-ellas funciona igual, pero con paneles más básicos:
+**Para que se vea lindo** hacen falta dos bibliotecas opcionales, `rich` y
+`textual`. El script de instalación ya las deja puestas en `.venv`, así que el
+comando de todos los días es:
 
 ```bash
-pip install rich textual
+.venv/bin/python -m simulador ver --reglamento v2          # macOS y Linux
+.venv\Scripts\python -m simulador ver --reglamento v2 --ui textual   # Windows
 ```
 
-Este repositorio ya trae un entorno con las dos instaladas, así que también sirve:
-
-```bash
-.venv/bin/python -m simulador ver --reglamento v2 --equipo1 Facu Pato Manu --equipo2 Colo Ostu Joaco
-```
+**En Windows conviene agregar `--ui textual`:** `curses`, que es lo que usa la
+interfaz por defecto en macOS y Linux, no viene con Python en Windows. Con
+`textual` instalado se ve igual o mejor; sin ninguna de las dos, el simulador
+cae a un modo simple que imprime el relato sin paneles.
 
 ### Mientras corre
 
@@ -103,7 +157,10 @@ python3 -m simulador run --reglamento v1 --partidos 200   # default actual
 python3 -m simulador reglamentos show v1.1                # detalle de reglas aplicadas
 ```
 
-Para crear uno nuevo: copiá [`reglamentos/_plantilla.json`](reglamentos/_plantilla.json) → [`docs/reglamentos-guia.md`](docs/reglamentos-guia.md).
+Para crear uno nuevo, lo más cómodo es la interfaz: **2 · Reglas → + Nuevo**,
+o duplicar uno que ya exista. A mano también se puede: copiá
+[`reglamentos/_plantilla.json`](reglamentos/_plantilla.json) →
+[`docs/reglamentos-guia.md`](docs/reglamentos-guia.md).
 
 ---
 
@@ -152,9 +209,12 @@ Reglamento (JSON + MD)  →  Simulador  →  Métricas  →  Comparar versiones
 
 ```
 reglamentos/     Reglas que el motor aplica (JSON)
-simulador/       Motor Python + CLI
-configs/         Variantes de simulación (JSON)
-docs/            Reglamentos humanos, resultados, guías
+simulador/       Motor Python + línea de comandos
+  web/           Interfaz gráfica: servidor y página
+configs/         Equipos y variantes de simulación (JSON)
+docs/            Reglamentos humanos, resultados y el sitio publicado
+instalar.sh      Instalación en macOS y Linux
+instalar.bat     Instalación en Windows
 ```
 
 ---
