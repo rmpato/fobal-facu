@@ -19,16 +19,53 @@ Reglamento (JSON)  →  motor  →  1000 partidos  →  métricas  →  decidir 
 
 ---
 
-## Empezar
+## Instalación
 
-```bash
+Lo único que hace falta es **Python 3.11 o más nuevo**. No hay dependencias que
+instalar: el simulador usa solo la biblioteca estándar, así que no lleva `pip`, ni
+entornos virtuales, ni nada que actualizar.
+
+Los scripts de abajo comprueban que Python esté y sea suficientemente nuevo,
+explican cómo instalarlo si falta, corren las pruebas y muestran cómo seguir.
+
+### macOS y Linux
+
+En la Terminal (funciona igual en zsh, bash o sh):
+
+```sh
 git clone https://github.com/rmpato/fobal-facu.git
 cd fobal-facu
-
-python3 -m simulador web
+./instalar.sh
 ```
 
-Eso abre una página en `http://localhost:8000` con tres pestañas:
+### Windows
+
+En PowerShell o en el Símbolo del sistema:
+
+```bat
+git clone https://github.com/rmpato/fobal-facu.git
+cd fobal-facu
+.\instalar.bat
+```
+
+Si `git` no está instalado, se puede bajar el repositorio como ZIP desde el botón
+verde **Code** de GitHub, descomprimirlo y entrar a la carpeta con `cd`.
+
+Para instalar y abrir la interfaz de una sola vez: `./instalar.sh --web` o
+`.\instalar.bat --web`.
+
+---
+
+## Cómo se usa
+
+### La interfaz
+
+```sh
+python3 -m simulador web          # macOS y Linux
+py -3 -m simulador web            # Windows
+```
+
+Abre `http://localhost:8000` con tres pestañas:
 
 | Pestaña | Para qué |
 |---|---|
@@ -36,14 +73,33 @@ Eso abre una página en `http://localhost:8000` con tres pestañas:
 | **Simular** | Correr cientos de partidos de dos o más reglamentos y compararlos en la misma pantalla. |
 | **Ver un partido** | Mirar un partido jugada por jugada, para entender por qué salieron esos números. |
 
-Todo lo que hace la página se puede hacer también desde la terminal:
+Se cierra con Ctrl+C en la terminal.
 
-```bash
-python3 -m simulador reglamentos          # qué reglamentos hay
-python3 -m simulador simular v2 --partidos 500
-python3 -m simulador comparar v1 v2 --formatos 3 4
-python3 -m simulador ver v2 --semilla 42  # un partido, jugada por jugada
+### La terminal
+
+Todo lo que hace la página se puede hacer también con comandos. En Windows,
+cambiar `python3` por `py -3`:
+
+```sh
+python3 -m simulador reglamentos                      # qué versiones del juego hay
+python3 -m simulador reglamentos v2                   # qué reglas aplica una versión
+python3 -m simulador simular v2 --partidos 500        # correr 500 partidos y ver las métricas
+python3 -m simulador comparar v1 v2 --formatos 3 4    # comparar dos versiones y dos formatos
+python3 -m simulador ver v2 --semilla 42              # un partido, jugada por jugada
+python3 -m simulador ver v2 --grabar partido.html     # y guardarlo para compartir
+python3 -m simulador perfiles                         # los estilos de juego disponibles
+python3 -m simulador --help                           # todos los comandos
 ```
+
+### Las pruebas
+
+```sh
+python3 -m unittest discover
+```
+
+Ochenta pruebas, un segundo y medio. Conviene correrlas después de tocar el
+código: verifican que los partidos terminen, que no se pierdan cartas y que la
+misma semilla dé siempre el mismo partido.
 
 Guía completa de comandos: [`docs/guia-cli.md`](docs/guia-cli.md).
 
@@ -139,20 +195,10 @@ caso está explicado paso a paso en [`docs/codigo.md`](docs/codigo.md).
 | [docs/recomendaciones.md](docs/recomendaciones.md) | Qué conviene probar después |
 | [docs/ambiguedades.md](docs/ambiguedades.md) | Reglas sin cerrar y supuestos del motor |
 
-Hay además una versión navegable en [`docs/`](docs/index.html), pensada para
-compartir con quien no va a abrir la terminal.
-
----
-
-## Pruebas
-
-```bash
-python3 -m unittest discover
-```
-
-Ochenta pruebas que cubren la carga de reglamentos, las invariantes del motor
-(que no se pierdan cartas, que los partidos terminen, que la misma semilla dé el
-mismo partido), las métricas, la línea de comandos y la interfaz web.
+Hay además una versión navegable en
+[rmpato.github.io/fobal-facu](https://rmpato.github.io/fobal-facu/), pensada para
+compartir con quien no va a abrir la terminal. Las mismas páginas están en
+[`docs/`](docs/index.html) para leerlas sin conexión.
 
 ---
 

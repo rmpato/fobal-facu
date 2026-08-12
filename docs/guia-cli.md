@@ -1,7 +1,10 @@
 # Comandos
 
 Todo se corre desde la carpeta del repositorio, con Python 3.11 o más nuevo. No
-hay que instalar nada.
+hay que instalar nada: `./instalar.sh` (macOS y Linux) o `instalar.bat` (Windows)
+comprueban que esté todo en orden y explican cómo seguir.
+
+En Windows, donde estos ejemplos dicen `python3` suele ir `py -3`.
 
 ```bash
 python3 -m simulador --help          # la lista completa

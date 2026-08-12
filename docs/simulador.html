@@ -38,20 +38,31 @@
 
 <section>
   <h2>Ponerlo a andar</h2>
+  <h3>macOS y Linux</h3>
   <div class="tarjeta destacada">
     <pre><code>git clone https://github.com/rmpato/fobal-facu.git
 cd fobal-facu
-python3 -m simulador web</code></pre>
-    <p style="margin-bottom:0">
-      Se abre solo en <code>http://localhost:8000</code>. Todo pasa en la propia
-      máquina: no manda nada a internet y los cambios quedan como archivos del
-      repositorio.
-    </p>
+./instalar.sh --web</code></pre>
   </div>
+
+  <h3>Windows</h3>
+  <div class="tarjeta destacada">
+    <pre><code>git clone https://github.com/rmpato/fobal-facu.git
+cd fobal-facu
+.\instalar.bat --web</code></pre>
+  </div>
+
+  <p>
+    El script comprueba que Python esté y sea suficientemente nuevo, avisa cómo
+    instalarlo si falta, corre las pruebas y abre la interfaz en
+    <code>http://localhost:8000</code>. Todo pasa en la propia máquina: no manda
+    nada a internet y los cambios quedan como archivos del repositorio.
+  </p>
   <p class="nota">
-    Quien no tenga Python: en Windows y macOS se instala desde
-    <a href="https://www.python.org/downloads/">python.org</a>; en Linux suele
-    venir puesto. Para bajar el repositorio sin usar <code>git</code>, GitHub
+    Sin el <code>--web</code>, el script deja todo listo y muestra los comandos
+    disponibles. Quien no tenga Python lo encuentra en
+    <a href="https://www.python.org/downloads/">python.org</a> (en Linux suele
+    venir puesto). Para bajar el repositorio sin usar <code>git</code>, GitHub
     ofrece un ZIP en el botón «Code».
   </p>
 </section>
