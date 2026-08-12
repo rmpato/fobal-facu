@@ -2,16 +2,46 @@
   "id": "v2",
   "nombre": "Iteración 2 (playtesting)",
   "version": "2.0",
-  "documento": "docs/reglamento-v2.md",
   "descripcion": "Sin pasa de turno; trampa/marca reactivas al pase; una reacción defensiva por acción; robo/gambetear encadenables.",
-  "extends": "v1",
-  "acciones_ofensivas": ["pase", "disparo", "reventar"],
+  "documento": "docs/reglamento-v2.md",
+  "mazo": {
+    "Pase": 42,
+    "Robo pelota": 24,
+    "Disparo al arco": 12,
+    "Falta": 7,
+    "Gambetear": 15,
+    "Marca personal": 5,
+    "Trampa de offside": 3
+  },
+  "partido": {
+    "jugadores_minimo_por_equipo": 2,
+    "mano_inicial": 6,
+    "goles_para_ganar": 3,
+    "penales_si_marcador": [
+      2,
+      2
+    ]
+  },
+  "reposicion": "cambio_equipo",
+  "disparo": {
+    "rebote_palo": true
+  },
+  "acciones_ofensivas": [
+    "pase",
+    "disparo",
+    "reventar"
+  ],
   "reacciones": {
     "pase": {
-      "cartas": ["Robo pelota", "Trampa de offside", "Marca personal"],
+      "cartas": [
+        "Robo pelota",
+        "Marca personal",
+        "Trampa de offside"
+      ],
       "contra": {
         "Robo pelota": "Gambetear"
-      }
+      },
+      "permitir_tackle": false
     },
     "pasa_turno": {
       "cartas": [],
@@ -22,7 +52,10 @@
   "reglas": {
     "trampa_marca_solo_en_pasa_turno": false,
     "una_reaccion_defensiva_por_accion": true,
-    "reacciones_encadenables": true,
-    "reventar_habilitado": true
-  }
+    "pasa_turno_sin_respuesta": "nada",
+    "prob_falta_por_turno": 0.08,
+    "reventar_habilitado": true,
+    "reacciones_encadenables": true
+  },
+  "motor_perfil": "v1"
 }
